@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Ansible Playbook Examples - Sample Ansible Playbooks | Devops Junction</title>
+<meta name="description" content="Ansible Playbook Examples. Sample Ansible playbooks and how to use Ansible Playbook. How to write ansible playbook what is ansible playbook and how to use ansible playbook. Ansible playbook example with explanation what is play and playbook in ansible. difference between ansible ad hoc and playbook with examples" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible Playbook Examples - Sample Ansible Playbooks | Devops Junction" />
+<meta property="og:description" content="Ansible Playbook Examples. Sample Ansible playbooks and how to use Ansible Playbook. How to write ansible playbook what is ansible playbook and how to use ansible playbook. Ansible playbook example with explanation what is play and playbook in ansible. difference between ansible ad hoc and playbook with examples" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-playbook-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-07-20T11:26:00+00:00" />
+<meta property="article:modified_time" content="2022-12-07T18:04:32+00:00" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM.png" />
+<meta property="og:image:width" content="1418" />
+<meta property="og:image:height" content="796" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#primaryimage","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM.png","width":1418,"height":796,"caption":"Ansible Playbook Examples"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-playbook-example/","name":"Ansible Playbook Examples - Sample Ansible Playbooks | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#primaryimage"},"datePublished":"2019-07-20T11:26:00+00:00","dateModified":"2022-12-07T18:04:32+00:00","description":"Ansible Playbook Examples. Sample Ansible playbooks and how to use Ansible Playbook. How to write ansible playbook what is ansible playbook and how to use ansible playbook. Ansible playbook example with explanation what is play and playbook in ansible. difference between ansible ad hoc and playbook with examples","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-playbook-example/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction","datePublished":"2019-07-20T11:26:00+00:00","dateModified":"2022-12-07T18:04:32+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-playbook-example/#primaryimage"},"keywords":"Ansible Playbook,ansible playbook example,ansible playbook examples,example ansible playbooks","articleSection":"Ansible,DevOps_Beginner","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-playbook-example/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/2887.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-playbook-example-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-playbook-example-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">blockquote {
+     padding: 2%;
+}
+article h2
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 5px solid black;
+    font-size: 24px;
+}
+code
+{
+  color: rgb(232, 44, 88);
+}
+#custompre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+#exmenu {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: normal;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-2887 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-2887" class="post-2887 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible category-devops_beginner tag-ansible-playbook tag-ansible-playbook-example tag-ansible-playbook-examples tag-example-ansible-playbooks wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="4:56 pm" rel="bookmark"><time class="entry-date published updated" datetime="December 7, 2022">December 7, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20Playbook%20Examples%20%E2%80%93%20Sample%20Ansible%20Playbooks%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-playbook-example%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="2887" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-playbook-example/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+Playbook+Examples+%E2%80%93+Sample+Ansible+Playbooks+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-playbook-example%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="2887" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-playbook-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20Playbook%20Examples%20%E2%80%93%20Sample%20Ansible%20Playbooks%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-playbook-example%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="2887" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-playbook-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-playbook-example%2F&subject=Ansible%20Playbook%20Examples%20%E2%80%93%20Sample%20Ansible%20Playbooks%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="2887" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-playbook-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="2887" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-playbook-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this post, we are going to see examples of Ansible playbook and various different modules and playbook examples with various modules and multiple hosts. We will start with a basic Ansible playbook and learn what is task and play and what is playbook etc.</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#What_is_Ansible_Playbook" title="What is Ansible Playbook">What is Ansible Playbook</a></li><li><a href="#Ansible_Playbook_Example" title="Ansible Playbook Example">Ansible Playbook Example</a></li><li><a href="#Ansible_Play_vs_Ansible_Playbook" title="Ansible Play vs Ansible Playbook?">Ansible Play vs Ansible Playbook?</a></li><li><a href="#Example_Ansible_Playbook_with_multiple_hosts_and_multiple_plays" title="Example Ansible Playbook with multiple hosts and multiple plays.">Example Ansible Playbook with multiple hosts and multiple plays.</a></li><li><a href="#How_to_Execute_an_Ansible_Playbook" title="How to Execute an Ansible Playbook">How to Execute an Ansible Playbook</a></li><li><a href="#How_to_Dry_Run_the_playbook_without_making_Actual_Changes" title="How to Dry Run the playbook without making Actual Changes">How to Dry Run the playbook without making Actual Changes</a></li><li><a href="#How_to_Perform_a_Syntax_Check_on_the_Playbook" title="How to Perform a Syntax Check on the Playbook">How to Perform a Syntax Check on the Playbook</a></li><li><a href="#How_to_use_Variables_in_Ansible_Playbook" title="How to use Variables in Ansible Playbook">How to use Variables in Ansible Playbook</a></li><li><a href="#Example_Ansible_Playbook_to_Setup_LAMP_stack" title="Example Ansible Playbook to Setup LAMP stack">Example Ansible Playbook to Setup LAMP stack</a></li><li><a href="#Ansible_playbook_Examples" title="Ansible playbook Examples">Ansible playbook Examples</a><ul><li><a href="#Archive_module_examples_Ansible" title="Archive module examples &#8211; Ansible">Archive module examples &#8211; Ansible</a></li><li><a href="#Ansible_Unarchive_module_examples" title="Ansible Unarchive module examples">Ansible Unarchive module examples</a></li><li><a href="#Shell_module_examples" title="Shell module examples">Shell module examples</a></li><li><a href="#Ansible_Copy_module_examples" title="Ansible Copy module examples">Ansible Copy module examples</a></li><li><a href="#Ansible_Vagrant_Playbook_for_provisioning_Apache" title="Ansible + Vagrant Playbook for provisioning Apache">Ansible + Vagrant Playbook for provisioning Apache</a></li><li><a href="#Ansible_Copy_SSH_Keys_between_remote_servers_example" title="Ansible Copy SSH Keys between remote servers example">Ansible Copy SSH Keys between remote servers example</a></li><li><a href="#How_to_copy_files_between_remote_hosts_with_ansible" title="How to copy files between remote hosts with ansible">How to copy files between remote hosts with ansible</a></li><li><a href="#Ansible_changed_when_and_failed_when_in_playbook" title="Ansible changed_when and failed_when in playbook">Ansible changed_when and failed_when in playbook</a></li><li><a href="#Ansible_Command_Module_Playbook_examples" title="Ansible Command Module Playbook examples">Ansible Command Module Playbook examples</a></li><li><a href="#How_to_use_GIT_with_Ansible_playbook" title="How to use GIT with Ansible playbook">How to use GIT with Ansible playbook</a></li><li><a href="#Template_module_examples_Ansible" title="Template module examples &#8211; Ansible">Template module examples &#8211; Ansible</a></li><li><a href="#Lookup_module_examples_Ansible" title="Lookup module examples &#8211; Ansible">Lookup module examples &#8211; Ansible</a></li><li><a href="#How_to_read_and_process_JSON_file_with_ansible_example" title="How to read and process JSON file with ansible example">How to read and process JSON file with ansible example</a></li><li><a href="#Ansible_apt_module_examples" title="Ansible apt module examples">Ansible apt module examples</a></li><li><a href="#Ansible_Find_module_examples" title="Ansible Find module examples">Ansible Find module examples</a></li><li><a href="#How_to_Process_JSON_Data_with_JSON_Query_ansible" title="How to Process JSON Data with JSON_Query ansible">How to Process JSON Data with JSON_Query ansible</a></li><li><a href="#Ansible_AWS_EC2_Example_playbook" title="Ansible AWS EC2 Example playbook">Ansible AWS EC2 Example playbook</a></li><li><a href="#Ansible_async_Poll_examples" title="Ansible async Poll examples">Ansible async Poll examples</a></li><li><a href="#How_to_download_file_from_URL_with_ansible_playbook" title="How to download file from URL with ansible playbook">How to download file from URL with ansible playbook</a></li><li><a href="#Ansible_lineinfile_How_to_add_replace_update_line_in_file_with_ansible" title="Ansible lineinfile &#8211; How to add, replace, update line in file with ansible">Ansible lineinfile &#8211; How to add, replace, update line in file with ansible</a></li><li><a href="#Ansible_replace_module_how_to_replace_texts_in_ansible" title="Ansible replace module &#8211; how to replace texts in ansible">Ansible replace module &#8211; how to replace texts in ansible</a></li><li><a href="#How_to_wait_for_task_to_be_completed_in_playbook_example" title="How to wait_for task to be completed in playbook example">How to wait_for task to be completed in playbook example</a></li><li><a href="#Add_users_to_EC2_instances_with_SSH_Access_Ansible_automated" title="Add users to EC2 instances with SSH Access – Ansible automated">Add users to EC2 instances with SSH Access – Ansible automated</a></li><li><a href="#Weblogic_JMS_Queue_Creation_with_Ansible_and_WLST" title="Weblogic JMS Queue Creation with Ansible and WLST">Weblogic JMS Queue Creation with Ansible and WLST</a></li><li><a href="#Ansible_inventory_hostname_and_ansible_hostname_example_playbook" title="Ansible inventory_hostname and ansible_hostname example playbook">Ansible inventory_hostname and ansible_hostname example playbook</a></li><li><a href="#Ansible_FirewallD_Example_Playbook" title="Ansible FirewallD Example Playbook
+">Ansible FirewallD Example Playbook
+</a></li><li><a href="#Ansible_How_to_connect_using_Bastion_host" title="Ansible How to connect using Bastion host ">Ansible How to connect using Bastion host </a></li><li><a href="#Ansible_Playbook_to_find_EC2_instances_using_EFS_file_system" title="Ansible Playbook to find EC2 instances using EFS file system">Ansible Playbook to find EC2 instances using EFS file system</a></li><li><a href="#Ansible_Playbook_to_Delete_OLD_log_files_in_Windows_Ansible_Windows" title="Ansible Playbook to Delete OLD log files in Windows &#8211; Ansible Windows">Ansible Playbook to Delete OLD log files in Windows &#8211; Ansible Windows</a></li><li><a href="#Playbook_to_Find_and_Replace_Default_HTML_in_IIS_Ansible_Windows" title="Playbook to Find and Replace Default HTML in IIS &#8211; Ansible Windows">Playbook to Find and Replace Default HTML in IIS &#8211; Ansible Windows</a></li><li><a href="#Ansible_Windows_Example_How_to_use_Ansible_with_Windows" title="Ansible Windows Example &#8211; How to use Ansible with Windows">Ansible Windows Example &#8211; How to use Ansible with Windows</a></li><li><a href="#Ansible_Select_Attr_Example_How_to_Filter_Dictionary_and_Select_Items" title="Ansible Select Attr Example &#8211; How to Filter Dictionary and Select Items">Ansible Select Attr Example &#8211; How to Filter Dictionary and Select Items</a></li><li><a href="#Ansible_Map_Function_Examples_How_to_Filter_List_and_Dictionaries" title="Ansible Map Function Examples &#8211; How to Filter List and Dictionaries">Ansible Map Function Examples &#8211; How to Filter List and Dictionaries</a></li><li><a href="#Ansible_Split_Function_Examples_With_String_List_and_Dictionary" title="Ansible Split Function Examples &#8211; With String, List and Dictionary">Ansible Split Function Examples &#8211; With String, List and Dictionary</a></li><li><a href="#Ansible_S3_module_Examples_How_to_use_ansible_aws_s3_module" title="Ansible S3 module Examples &#8211; How to use ansible aws_s3 module">Ansible S3 module Examples &#8211; How to use ansible aws_s3 module</a></li><li><a href="#Ansible_Copy_files_Local_to_Remote" title="Ansible Copy files Local to Remote">Ansible Copy files Local to Remote</a></li><li><a href="#Ansible_PRE_tasks_and_POST_Tasks_Introduction_and_Examples" title="Ansible PRE tasks and POST Tasks Introduction and Examples">Ansible PRE tasks and POST Tasks Introduction and Examples</a></li><li><a href="#Ansible_List_Examples_How_to_create_and_append_items_to_list" title="Ansible List Examples &#8211; How to create and append items to list">Ansible List Examples &#8211; How to create and append items to list</a></li><li><a href="#Ansible_playbook_to_install_KAFKA_On_Ubuntu" title="Ansible playbook to install KAFKA On Ubuntu">Ansible playbook to install KAFKA On Ubuntu</a></li><li><a href="#Ansible_Slack_example_How_to_send_Slack_notifications_from_Ansible" title="Ansible Slack example &#8211; How to send Slack notifications from Ansible">Ansible Slack example &#8211; How to send Slack notifications from Ansible</a></li><li><a href="#Ansible_Retry_example_How_to_retry_an_ansible_task_until_the_Condition_is_met" title="Ansible Retry example &#8211; How to retry an ansible task until the Condition is met">Ansible Retry example &#8211; How to retry an ansible task until the Condition is met</a></li><li><a href="#Find_multiple_files_with_patterns_and_replace_them_with_Ansible" title="Find multiple files with patterns and replace them with Ansible">Find multiple files with patterns and replace them with Ansible</a></li><li><a href="#Playbook_to_install_Apache_Tomcat" title="Playbook to install Apache Tomcat ">Playbook to install Apache Tomcat </a></li><li><a href="#How_to_wait_for_URL_to_respond_with_Ansible_URI_Web_and_API_automation" title="How to wait for URL to respond with Ansible URI &#8211; Web and API automation">How to wait for URL to respond with Ansible URI &#8211; Web and API automation</a></li><li><a href="#Ansible_URI_module_examples_for_Web_and_API_automation" title="Ansible URI module examples &#8211; for Web and API automation">Ansible URI module examples &#8211; for Web and API automation</a></li></ul></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="What_is_Ansible_Playbook">What is Ansible Playbook</span></h2>
+<p>It is a metaphor representing the configuration files of Ansible.  It contains a list of tasks  (plays) in an order they should get executed against a set of hosts or a single host based on the configuration specified.  Playbooks are written in YAML, in an easy human-readable syntax</p>
+<blockquote><p>You can consider <strong>ansible ad-hoc commands as shell commands</strong> and a <strong>playbook as a shell script. </strong></p></blockquote>
+<p>In this Shell script analogy, many shell commands put together in the form of shell script to perform a set of tasks and they also give us benefits like conditional statements, loops, functions etc.</p>
+<p>Likewise, Ansible Playbooks are a group of ad-hoc commands with additional programming elements like loops, iterations, conditionals etc.</p>
+<p>Before writing a Playbook It is recommended that you have given a glance on the Ansible AD HOC Command how it works and how to execute them. You can <a href="../ansible-ad-hoc-commands/index.html">read about Ansible AD HOC Command here</a></p>
+<p>Simply put, If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.</p>
+<p>If ansible ad hoc is suitable for quick and single task (or) Purpose,  ansible playbooks are ideal for projects and automation.</p>
+<p>In a single playbook, you can see multiple modules and handlers are organized. In other words, this is called as Orchestration.</p>
+<p><a href="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png"><img class="alignnone size-full wp-image-2787 lazyload" src="../../wp-content/ewww/lazy/placeholder-790x580.png" alt="" width="790" height="580" data-src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png 790w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-300x220.png 300w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-768x564.png 768w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-90x65.png 90w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2787" src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png" alt="" width="790" height="580" srcset="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png 790w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-300x220.png 300w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-768x564.png 768w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-90x65.png 90w" sizes="(max-width: 790px) 100vw, 790px" data-eio="l" /></noscript></a></p>
+<p>As an example. <strong>Let us consider you want to install an Apache Web server</strong> against multiple hosts. The following playbook would get it done for you.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Playbook_Example">Ansible Playbook Example</span></h2>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Playbook
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> webservers
+<span class="hljs-attr" style="color: #6d9cbe;">    become:</span> yes
+    <span class="hljs-attr" style="color: #6d9cbe;">become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> ensure apache is at the latest version
+<span class="hljs-attr" style="color: #6d9cbe;">        yum:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> latest
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> ensure apache is running
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> started</pre>
+<p>this simple ansible-playbook example given above is enough to get your Apache installation done and ready. I sense your anger that I just gave a plain text with no explanation of what do they do.</p>
+<p><a href="../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM.png"><img class="alignnone size-full wp-image-5568 lazyload" src="../../wp-content/ewww/lazy/placeholder-1538x674.png" alt="" width="1538" height="674" data-src="../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM.png 1538w, ../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM-300x131.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM-768x337.png 768w, ../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM-1024x449.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-5568" src="../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM.png" alt="" width="1538" height="674" srcset="../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM.png 1538w, ../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM-300x131.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM-768x337.png 768w, ../../wp-content/uploads/2019/07/Screenshot-2020-07-15-at-1.47.21-PM-1024x449.png 1024w" sizes="(max-width: 1538px) 100vw, 1538px" data-eio="l" /></noscript></a></p>
+<p>Well, I have explained what each line does</p>
+<p><code>name</code> Name of the playbook</p>
+<p><code>hosts</code> A set of hosts usually grouped together as a host group and defined in inventory file</p>
+<p><code>become</code> To tell ansible this play has to be executed with elevated privileges</p>
+<p><code>become_user</code> the user name that we want to switch to like compare it with <code>sudo su - user</code></p>
+<p><code>tasks</code> set of tasks to execute, All tasks would be defined below this</p>
+<p>and then we have two tasks with two modules, the first module is <code>yum</code> and the second module is <code>service</code></p>
+<p><strong>in the first task</strong> with yum  the state <code>latest</code> represents that the forementioned package <code>httpd</code> should be installed if it is not installed (or) if it is already installed it should be upgraded to the latest version available. If you do not want it to be upgraded if present, You can change it to <code>state: present</code></p>
+<p><strong>On the Second task</strong> with service module, we are making sure that the service named <code>httpd</code> is started and running using the <code>state: started</code> Ansible would not restart the service if it is already started and running.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Play_vs_Ansible_Playbook">Ansible Play vs Ansible Playbook?</span></h2>
+<p>To understand the ansible-playbook you have to understand the Ansible Adhoc commands.</p>
+<div class="page" title="Page 78">
+<div class="layoutArea">
+<div class="column">
+<p>Ad hoc commands can run a single, simple task against a set of targeted hosts as a one-time command. The real power of Ansible, however, is in learning how to use playbooks to run multiple, complex tasks against a set of targeted hosts in an easily repeatable manner.</p>
+<p>Here is something to take away</p>
+<blockquote><p><strong>A play</strong> is an ordered set of tasks which should be run against hosts selected from your inventory.</p>
+<p><strong>A playbook</strong> is a text file that contains a list of one or more plays to run in order.</p></blockquote>
+</div>
+</div>
+</div>
+<p>In the previously given example, you can see we are running all the tasks against a single host group named <code>webservers</code>  this is called <strong>A PLAY</strong>.</p>
+<p>If I want to run a different set of tasks against different host group. All you need to do is add one more PLAY.</p>
+<p>Remember: A Playbook can have many plays destined to run against a different set of host groups</p>
+<p>Every Play must contain</p>
+<div class="page" title="Page 53">
+<div class="layoutArea">
+<div class="column">
+<ul>
+<li>A set of hosts to configure</li>
+<li>A list of tasks to be executed on those hosts</li>
+</ul>
+<p>Think of a play as a wire that connects hosts to tasks.</p>
+</div>
+</div>
+</div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Example_Ansible_Playbook_with_multiple_hosts_and_multiple_plays">Example Ansible Playbook with multiple hosts and multiple plays.</span></h2>
+<p>Here is the ansible playbook with multiple hosts in it.  You can see we are working with web and application servers in the same playbook and executing two different plays (set of tasks) respectively.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---
+</span><span style="color: #ffff00;">  # Play1 - WebServer related tasks</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Play Web - Create apache directories and username in web servers
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> webservers
+    <span class="hljs-attr" style="color: #6d9cbe;">become:</span> yes
+<span class="hljs-attr" style="color: #6d9cbe;">    become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> create username apacheadm
+<span class="hljs-attr" style="color: #6d9cbe;">        user:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> apacheadm
+<span class="hljs-attr" style="color: #6d9cbe;">          group:</span> users,admin
+<span class="hljs-attr" style="color: #6d9cbe;">          shell:</span> /bin/bash
+<span class="hljs-attr" style="color: #6d9cbe;">          home:</span> /home/weblogic
+
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> install httpd
+<span class="hljs-attr" style="color: #6d9cbe;">        yum:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> installed
+        
+<span style="color: #ffff00;">  # Play2 - Application Server related tasks</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Play app - Create tomcat directories and username in app servers
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> appservers
+    <span class="hljs-attr" style="color: #6d9cbe;">become:</span> yes
+<span class="hljs-attr" style="color: #6d9cbe;">    become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> Create a username for tomcat
+<span class="hljs-attr" style="color: #6d9cbe;">        user:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> tomcatadm
+<span class="hljs-attr" style="color: #6d9cbe;">          group:</span> users
+<span class="hljs-attr" style="color: #6d9cbe;">          shell:</span> /bin/bash
+<span class="hljs-attr" style="color: #6d9cbe;">          home:</span> /home/tomcat
+
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> create a directory for apache tomcat
+<span class="hljs-attr" style="color: #6d9cbe;">        file:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          path:</span> /opt/oracle
+<span class="hljs-attr" style="color: #6d9cbe;">          owner:</span> tomcatadm
+<span class="hljs-attr" style="color: #6d9cbe;">          group:</span> users
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> present
+<span class="hljs-attr" style="color: #6d9cbe;">          mode:</span> <span class="hljs-number" style="color: #a5c261;">0755</span></pre>
+<p>In the preceding playbook, you could notice that two plays are there and both of them targeted to different host groups.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_to_Execute_an_Ansible_Playbook">How to Execute an Ansible Playbook</span></h2>
+<p>Ansible playbook can be executed with <code>ansible-playbook</code> command. like you have <code>ansible</code> command to execute ad hoc command. This is dedicated for ansible playbooks</p>
+<p>Let us see how to execute the preceding playbook and install apache on the <code>webservers</code> host group</p>
+<p>Note*: a host group is a group of hosts and servers mentioned in the ansible inventory file.</p>
+<pre id="custompre">➜  Ansible-Examples git:(master) ✗ cat ansible_hosts
+[webservers]
+mwivmweb01
+mwivmweb02
+</pre>
+<p>Here is the customized Ansible inventory file with two hosts grouped as <code>webservers</code></p>
+<p>Here the host group name is <code>webservers</code> and it is mentioned in the <code>hosts:</code> directive on the playbook</p>
+<p>Given below is the command syntax or sample to run an ansible playbook.</p>
+<pre id="custompre">➜ ansible-playbook sampleplaybook.yml -i ansible_hosts</pre>
+<p>If you have mentioned all the host groups in your default inventory file <code>/etc/ansible/hosts</code>  then you do not have use <code>-i</code> argument.  this is only when you have a customized inventory file like I do.</p>
+<p><a href="https://youtu.be/5SAIS2cAVKA">See this video log</a> for further information on how to execute the playbook in real-time.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_to_Dry_Run_the_playbook_without_making_Actual_Changes">How to Dry Run the playbook without making Actual Changes</span></h2>
+<p>you can actually run the playbook with Dry Run feature to see what changes would be made to the server without having to perform the actual changes.</p>
+<p>to do that. you just have to add <code>-C</code> to your ansible-playbook startup command</p>
+<pre id="custompre">➜ ansible-playbook -C sampleplaybook.yml -i ansible_hosts</pre>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_to_Perform_a_Syntax_Check_on_the_Playbook">How to Perform a Syntax Check on the Playbook</span></h2>
+<p>If you quickly want to verify if everything is ok with the playbook. You can perform a Syntax check.</p>
+<p>Here is the ansible command line example on how to perform Syntax check on ansible playbook. Refer the video for the practical idea.</p>
+<pre id="custompre">➜ ansible-playbook &#8211; syntax-check sampleplaybook.yml -i ansible_hosts</pre>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_to_use_Variables_in_Ansible_Playbook">How to use Variables in Ansible Playbook</span></h2>
+<p>Ansible playbook supports defining the variable in two forms, Either as a separate file with full of variables and values like a properties file. or a Single liner variable declaration like we do in any common programming languages</p>
+<p><code>vars</code> to define inline variables within the playbook</p>
+<p><code>vars_files</code> to import files with variables</p>
+<p>Let&#8217;s suppose we want to add a few variables for our webserver like the server name and SSL key file and cert file etc.</p>
+<p>it can be done with <code>vars</code> like this</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323 none repeat scroll 0% 0%; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Playbook
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> webservers
+<span class="hljs-attr" style="color: #6d9cbe;">    become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    become_user:</span> root
+<span style="color: #ffff99;"><span class="hljs-attr">    vars:</span>
+<span class="hljs-attr">       key_file:</span>  /etc/apache2/ssl/mywebsite.key
+<span class="hljs-attr">       cert_file:</span> /etc/apache2/ssl/mywebsite.cert
+<span class="hljs-attr">       server_name:</span> www.mywebsite.com</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> ensure apache is at the latest version
+<span class="hljs-attr" style="color: #6d9cbe;">        yum:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> latest
+      <span class="hljs-comment" style="color: #bc9458; font-style: italic;">### SOME MORE TASKS WOULD COME HERE ###</span>
+      <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># you can refer the variable you have defined earlier like this #</span>
+<span class="hljs-comment" style="color: #ffff99; font-style: italic;">      # "{{key_file}}"  (or) "{{cert_file}}" (or) "{{server_name}}" #</span>
+      <span class="hljs-comment" style="color: #bc9458; font-style: italic;">##</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> ensure apache is running
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> started</pre>
+<p>and the variables can be referred with the jinja2 template later<code>"{{ variable name }}"</code></p>
+<p>If you want to keep the variables in a separate file and import it with <code>vars_files</code></p>
+<p>You have to first save the variables and values in the same format you have written in the playbook and the file can later be imported using vars_files like this</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323 none repeat scroll 0% 0%; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Playbook
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> webservers
+<span class="hljs-attr" style="color: #6d9cbe;">    become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    become_user:</span> root
+<span style="color: #ffff99;"><span class="hljs-attr">    vars_files:</span>
+<span class="hljs-bullet">        -</span> apacheconf.yml</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> ensure apache is at the latest version
+<span class="hljs-attr" style="color: #6d9cbe;">        yum:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> latest
+      <span class="hljs-comment" style="color: #bc9458; font-style: italic;">### SOME MORE TASKS WOULD COME HERE ###</span>
+      <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># you can refer the variable you have defined earlier like this #</span>
+<span class="hljs-comment" style="color: #ffff99; font-style: italic;">      # "{{key_file}}"  (or) "{{cert_file}}" (or) "{{server_name}}" #</span>
+      <span class="hljs-comment" style="color: #bc9458; font-style: italic;">##</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> ensure apache is running
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">          name:</span> httpd
+<span class="hljs-attr" style="color: #6d9cbe;">          state:</span> started</pre>
+<p>the content of the <code>apacheconf.yml</code> would like like this</p>
+<pre><span class="hljs-attr">key_file:</span> /etc/apache2/ssl/mywebsite.key  
+<span class="hljs-attr">cert_file:</span> /etc/apache2/ssl/mywebsite.cert  
+<span class="hljs-attr">server_name:</span> www.mywebsite.com</pre>
+<p>to keep things cleaner and to keep your playbook simple, It is recommended to use separate variable files and when you are creating ansible roles, you would have to use the variable files more than defining it inline.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Example_Ansible_Playbook_to_Setup_LAMP_stack">Example Ansible Playbook to Setup LAMP stack</span></h2>
+<p>Linux Apache Mysql/MariaDB PHP is shortly called as LAMP stack and it powers most of the internet websites including Facebook.</p>
+<p>So let us look at a Sample Ansible Playbook to install LAMP stack with necessary packages and tools.</p>
+<p>So what are going to do in this playbook</p>
+<ul>
+<li><strong>Connect to Remote host and execute the following tasks</strong>
+<ul>
+<li>Install all necessary packages like Apache(httpd), mariadb, php</li>
+<li>Installing a firewall and enabling HTTP services</li>
+<li>Start the Apache HTTPD web server.</li>
+<li>Start the MariaDB server</li>
+<li>Download a Sample PHP page from remote URL</li>
+<li>Access the website we have built by accessng the URL</li>
+</ul>
+</li>
+</ul>
+<p>&nbsp;</p>
+<p>Here is the Ansible Playbook example to setup LAMP Stack</p>
+<pre class="hljs" style="display: block; background: #f3f3f3 none repeat scroll 0% 0%; padding: 0.5em; color: #333333; overflow-x: auto;"><span class="hljs-meta" style="color: #969896;">---</span>
+<span class="hljs-attr" style="color: #795da3;">- name:</span> Setting up LAMP Website
+<span class="hljs-attr" style="color: #795da3;">  user:</span> vagrant
+<span class="hljs-attr" style="color: #795da3;">  hosts:</span> testserver
+<span class="hljs-attr" style="color: #795da3;">  become:</span> <span class="hljs-literal" style="color: #0086b3;">yes</span>
+<span class="hljs-attr" style="color: #795da3;">  tasks:</span>
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> latest version of all required packages installed
+<span class="hljs-attr" style="color: #795da3;">      yum:</span>
+<span class="hljs-attr" style="color: #795da3;">        name:</span>
+<span class="hljs-bullet" style="color: #0086b3;">          -</span> firewalld
+<span class="hljs-bullet" style="color: #0086b3;">          -</span> httpd
+<span class="hljs-bullet" style="color: #0086b3;">          -</span> mariadb-server
+<span class="hljs-bullet" style="color: #0086b3;">          -</span> php
+<span class="hljs-bullet" style="color: #0086b3;">          -</span> php-mysql
+<span class="hljs-attr" style="color: #795da3;">        state:</span> latest
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> firewalld enabled and running
+<span class="hljs-attr" style="color: #795da3;">      service:</span>
+<span class="hljs-attr" style="color: #795da3;">        name:</span> firewalld
+<span class="hljs-attr" style="color: #795da3;">        enabled:</span> <span class="hljs-literal" style="color: #0086b3;">true</span>
+<span class="hljs-attr" style="color: #795da3;">        state:</span> started
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> firewalld permits http service
+<span class="hljs-attr" style="color: #795da3;">      firewalld:</span>
+<span class="hljs-attr" style="color: #795da3;">        service:</span> http
+<span class="hljs-attr" style="color: #795da3;">        permanent:</span> <span class="hljs-literal" style="color: #0086b3;">true</span>
+<span class="hljs-attr" style="color: #795da3;">        state:</span> enabled
+<span class="hljs-attr" style="color: #795da3;">        immediate:</span> <span class="hljs-literal" style="color: #0086b3;">yes</span>
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> Copy mime.types file
+<span class="hljs-attr" style="color: #795da3;">      copy:</span>
+<span class="hljs-attr" style="color: #795da3;">        src:</span> /etc/mime.types
+<span class="hljs-attr" style="color: #795da3;">        dest:</span> /etc/httpd/conf/mime.types
+<span class="hljs-attr" style="color: #795da3;">        remote_src:</span> <span class="hljs-literal" style="color: #0086b3;">yes</span>
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> httpd enabled and running
+<span class="hljs-attr" style="color: #795da3;">      service:</span>
+<span class="hljs-attr" style="color: #795da3;">        name:</span> httpd
+<span class="hljs-attr" style="color: #795da3;">        enabled:</span> <span class="hljs-literal" style="color: #0086b3;">true</span>
+<span class="hljs-attr" style="color: #795da3;">        state:</span> started
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> mariadb enabled and running
+<span class="hljs-attr" style="color: #795da3;">      service:</span>
+<span class="hljs-attr" style="color: #795da3;">        name:</span> mariadb
+<span class="hljs-attr" style="color: #795da3;">        enabled:</span> <span class="hljs-literal" style="color: #0086b3;">true</span>
+<span class="hljs-attr" style="color: #795da3;">        state:</span> started
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> copy the php page from remote using get_url
+<span class="hljs-attr" style="color: #795da3;">      get_url:</span>
+<span class="hljs-attr" style="color: #795da3;">        url:</span> <span class="hljs-string" style="color: #df5000;">"https://www.middlewareinventory.com/index.php"</span>
+<span class="hljs-attr" style="color: #795da3;">        dest:</span> /var/www/html/index.php
+<span class="hljs-attr" style="color: #795da3;">        mode:</span> <span class="hljs-number">0644</span>
+
+<span class="hljs-attr" style="color: #795da3;">    - name:</span> test the webpage/website we have setup
+<span class="hljs-attr" style="color: #795da3;">      uri:</span>
+<span class="hljs-attr" style="color: #795da3;">        url:</span> http://{{ansible_hostname}}/index.php
+<span class="hljs-attr" style="color: #795da3;">        status_code:</span> <span class="hljs-number">200</span></pre>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_playbook_Examples">Ansible playbook Examples</span></h2>
+<p>I have written various Ansible playbooks and I have listed most of them here for your easy access.  these articles would have a lot of playbook examples specific to modules and to a single topic.</p>
+<ol>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Archive_module_examples_Ansible"><span style="font-size: 14pt;"><a href="../ansible-archive-module-examples/index.html">Archive module examples &#8211; Ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Unarchive_module_examples"><span style="font-size: 14pt;"><a href="../ansible-unarchive-module-examples/index.html">Ansible Unarchive module examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Shell_module_examples"><span style="font-size: 14pt;"><a href="../ansible-shell-examples/index.html">Shell module examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Copy_module_examples"><span style="font-size: 14pt;"><a href="../ansible-copy-examples/index.html">Ansible Copy module examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Vagrant_Playbook_for_provisioning_Apache"><span style="font-size: 14pt;"><a href="../vagrant-ansible-example/index.html">Ansible + Vagrant Playbook for provisioning Apache</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Copy_SSH_Keys_between_remote_servers_example"><span style="font-size: 14pt;"><a href="../ansible-ssh-key-exchange/index.html">Ansible Copy SSH Keys between remote servers example</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_copy_files_between_remote_hosts_with_ansible"><span style="font-size: 14pt;"><a href="../how-to-copy-files-between-remote-servers-ansible-fetch-sync/index.html">How to copy files between remote hosts with ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_changed_when_and_failed_when_in_playbook"><span style="font-size: 14pt;"><a href="../ansible-changed_when-and-failed_when-examples/index.html">Ansible changed_when and failed_when in playbook</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Command_Module_Playbook_examples"><span style="font-size: 14pt;"><a href="../ansible-command-examples/index.html">Ansible Command Module Playbook examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_use_GIT_with_Ansible_playbook"><span style="font-size: 14pt;"><a href="../ansible-git-example/index.html">How to use GIT with Ansible playbook</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Template_module_examples_Ansible"><span style="font-size: 14pt;"><a href="../ansible-template-module-example/index.html">Template module examples &#8211; Ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Lookup_module_examples_Ansible"><span style="font-size: 14pt;"><a href="../ansible-lookup-file/index.html">Lookup module examples &#8211; Ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_read_and_process_JSON_file_with_ansible_example"><span style="font-size: 14pt;"><a href="../ansible-playbook-read-json-file/index.html">How to read and process JSON file with ansible example</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_apt_module_examples"><span style="font-size: 14pt;"><a href="../ansible-apt-examples/index.html">Ansible apt module examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Find_module_examples"><span style="font-size: 14pt;"><a href="../ansible-find-examples/index.html">Ansible Find module examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_Process_JSON_Data_with_JSON_Query_ansible"><span style="font-size: 14pt;"><a href="../ansible_json_query/index.html">How to Process JSON Data with JSON_Query ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_AWS_EC2_Example_playbook"><span style="font-size: 14pt;"><a href="../ansible-aws-ec2/index.html">Ansible AWS EC2 Example playbook</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_async_Poll_examples"><span style="font-size: 14pt;"><a href="../ansible-async/index.html">Ansible async Poll examples</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_download_file_from_URL_with_ansible_playbook"><span style="font-size: 14pt;"><a href="../ansible-get_url-examples-how-to-download-file-from-url/index.html">How to download file from URL with ansible playbook</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_lineinfile_How_to_add_replace_update_line_in_file_with_ansible"><span style="font-size: 14pt;"><a href="../ansible-lineinfile-examples/index.html">Ansible lineinfile &#8211; How to add, replace, update line in file with ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_replace_module_how_to_replace_texts_in_ansible"><span style="font-size: 14pt;"><a href="../ansible-replace-line-in-file-ansible-replace-examples/index.html">Ansible replace module &#8211; how to replace texts in ansible</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_wait_for_task_to_be_completed_in_playbook_example"><span style="font-size: 14pt;"><a href="../ansible-wait_for-examples/index.html">How to wait_for task to be completed in playbook example</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Add_users_to_EC2_instances_with_SSH_Access_Ansible_automated"><a href="../add-users-to-ec2-instances-with-ssh-access-ansible/index.html" rel="bookmark"><span style="font-size: 14pt;">Add users to EC2 instances with SSH Access – Ansible automated</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Weblogic_JMS_Queue_Creation_with_Ansible_and_WLST"><span style="font-size: 14pt;"><a href="../weblogic-jms-queue-creation-wlst-script-and-ansible-playbook/index.html">Weblogic JMS Queue Creation with Ansible and WLST</a></span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_inventory_hostname_and_ansible_hostname_example_playbook"><a href="../ansible-inventory_hostname-ansible_hostname-variables/index.html"><span style="font-size: 14pt;">Ansible inventory_hostname and ansible_hostname example playbook</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_FirewallD_Example_Playbook"><span style="font-size: 14pt;"><a href="../ansible-firewalld/index.html">Ansible FirewallD Example Playbook</a><br />
+</span></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_How_to_connect_using_Bastion_host"><a href="../ansible-bastion-ssh/index.html"><span style="font-size: 14pt;">Ansible How to connect using Bastion host</span> </a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Playbook_to_find_EC2_instances_using_EFS_file_system"><a href="../collect-efs-ec2-ansible/index.html"><span style="font-size: 14pt;">Ansible Playbook to find EC2 instances using EFS file system</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Playbook_to_Delete_OLD_log_files_in_Windows_Ansible_Windows"><a href="../ansible-playbook-to-delete-old-log-files-windows/index.html"><span style="font-size: 14pt;">Ansible Playbook to Delete OLD log files in Windows &#8211; Ansible Windows</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Playbook_to_Find_and_Replace_Default_HTML_in_IIS_Ansible_Windows"><a href="../find-and-replace-default-html-in-iis-windows-ansible/index.html"><span style="font-size: 14pt;">Playbook to Find and Replace Default HTML in IIS &#8211; Ansible Windows</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Windows_Example_How_to_use_Ansible_with_Windows"><a href="../how-to-use-ansible-with-windows-host-ansible-windows-example/index.html"><span style="font-size: 14pt;">Ansible Windows Example &#8211; How to use Ansible with Windows</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Select_Attr_Example_How_to_Filter_Dictionary_and_Select_Items"><a href="../ansible-selectattr-example/index.html"><span style="font-size: 14pt;">Ansible Select Attr Example &#8211; How to Filter Dictionary and Select Items</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Map_Function_Examples_How_to_Filter_List_and_Dictionaries"><a href="../ansible-map/index.html"><span style="font-size: 14pt;">Ansible Map Function Examples &#8211; How to Filter List and Dictionaries</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Split_Function_Examples_With_String_List_and_Dictionary"><a href="../ansible-selectattr-example/index.html"><span style="font-size: 14pt;">Ansible Split Function Examples &#8211; With String, List and Dictionary</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_S3_module_Examples_How_to_use_ansible_aws_s3_module"><a href="../ansible-aws_s3-example/index.html"><span style="font-size: 14pt;">Ansible S3 module Examples &#8211; How to use ansible aws_s3 module</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Copy_files_Local_to_Remote"><a href="../ansible-copy-file-or-directory-local-to-remote.html"><span style="font-size: 14pt;">Ansible Copy files Local to Remote</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_PRE_tasks_and_POST_Tasks_Introduction_and_Examples"><a href="../ansible-pre-tasks-and-post-tasks-example/index.html"><span style="font-size: 14pt;">Ansible PRE tasks and POST Tasks Introduction and Examples</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_List_Examples_How_to_create_and_append_items_to_list"><a href="../ansible-list-examples-how-to-create-and-append-items-to-list/index.html"><span style="font-size: 18.6667px;">Ansible List Examples &#8211; How to create and append items to list</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_playbook_to_install_KAFKA_On_Ubuntu"><a href="../ansible-playbook-kafka/index.html"><span style="font-size: 14pt;">Ansible playbook to install KAFKA On Ubuntu</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Slack_example_How_to_send_Slack_notifications_from_Ansible"><a href="../ansible-slack-notification/index.html"><span style="font-size: 14pt;">Ansible Slack example &#8211; How to send Slack notifications from Ansible</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_Retry_example_How_to_retry_an_ansible_task_until_the_Condition_is_met"><a href="../ansible-retry-examples/index.html"><span style="font-size: 14pt;">Ansible Retry example &#8211; How to retry an ansible task until the Condition is met</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Find_multiple_files_with_patterns_and_replace_them_with_Ansible"><a href="../ansible-find-multiple-files-with-pattern-replace/index.html"><span style="font-size: 14pt;">Find multiple files with patterns and replace them with Ansible</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Playbook_to_install_Apache_Tomcat"><a href="../ansible-tomcat-installation/index.html"><span style="font-size: 14pt;">Playbook to install Apache Tomcat </span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="How_to_wait_for_URL_to_respond_with_Ansible_URI_Web_and_API_automation"><a href="../ansible-wait-for-url/index.html"><span style="font-size: 14pt;">How to wait for URL to respond with Ansible URI &#8211; Web and API automation</span></a></span></h3>
+</li>
+<li>
+<h3 id="exmenu"><span class="ez-toc-section" id="Ansible_URI_module_examples_for_Web_and_API_automation"><a href="../ansible-uri-examples/index.html"><span style="font-size: 14pt;">Ansible URI module examples &#8211; for Web and API automation</span></a></span></h3>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>I hope this article gave you some solid base on what is Ansible playbook and I know you might still have questions. the best way to learn is to explore and practice. So keep writing many playbooks and you can share it with us in the comments or send them to me.</p>
+<p>If you want your Playbook to be shared with the world consider uploading it to<a href="https://galaxy.ansible.com/"> Ansible Galaxy</a></p>
+<p>If you want your playbook to be published here in DevopsJunction. Share it with us over email or by comment.</p>
+<p><a href="../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM.jpg"><img class="alignnone size-full wp-image-6623 lazyload" src="../../wp-content/ewww/lazy/placeholder-1047x415.png" alt="gritfy" width="1047" height="415" data-src="../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM.jpg 1047w, ../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM-300x119.jpg 300w, ../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM-1024x406.jpg 1024w, ../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM-768x304.jpg 768w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6623" src="../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM.jpg" alt="gritfy" width="1047" height="415" srcset="../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM.jpg 1047w, ../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM-300x119.jpg 300w, ../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM-1024x406.jpg 1024w, ../../wp-content/uploads/2021/01/Screenshot-2021-01-15-at-6.18.23-AM-768x304.jpg 768w" sizes="(max-width: 1047px) 100vw, 1047px" data-eio="l" /></noscript></a></p>
+<p>Keep Learning.</p>
+<p>&nbsp;</p>
+<p>Cheers,<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#345c5158585b7453465d40524d1a575b59"> <span class="__cf_email__" data-cfemail="68000d040407280f1a011c0e11460b0705">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670436354" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="2887" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-playbook-example/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="ff6227950c" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670436354" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1670436354"></span>
+</div>
+</div>
+<hr>
+<p>&nbsp;</p>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../run-ansible-playbook-locally/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-17-at-6.08.06-PM-1-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-17-at-6.08.06-PM-1-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../run-ansible-playbook-locally/index.html'>How to Run Ansible Playbook Locally</a><p>In this post, we are going to see how to run the playbook locally on our Localhost on the control machine. How to run Ansible Playbook locally is one of the questions I used to have before I learnt it. Let me tell you how to Run Ansible Playbook Locally&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-ad-hoc-commands/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-ad-hoc-commands/index.html'>Ansible AD HOC Command Examples - Ansible Cheat Sheet | Devops Junction</a><p>Ansible ad hoc commands are one-liners designed to achieve a very specific task they are like quick snippets and your compact swiss army knife when you want to do a quick task across multiple machines. To put simply, Ansible ad hoc commands are one-liner Linux shell commands and playbooks are&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-lineinfile-multiple-lines-replace-multiple-lines/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible lineinfile multiple lines" data-src="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-24-at-2.27.35-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-24-at-2.27.35-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible lineinfile multiple lines" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-lineinfile-multiple-lines-replace-multiple-lines/index.html'>Ansible lineinfile multiple lines - Replace multiple Lines | Devops Junction</a><p>In this post, we are going to see how to use Ansible lineinfile module to replace multiple Lines at the same time. How to use Multiple Regular Expressions or Regex at the same time. How to Match Multiple lines. For this example, we are going to take apache httpd.conf file&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-command-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Command" data-src="../../wp-content/uploads/2019/04/AnsibleCommand-1-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/AnsibleCommand-1-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Command" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-command-examples/index.html'>Ansible Command Module Examples</a><p>Ansible Command Module Introduction Ansible Command module is used to execute commands on a remote node. The Command module, is used mostly to run simple Linux commands on a remote node/server which is part of a host group or Stand alone server mentioned in the host group. If you want&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-get-ip-address/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-18-at-12.45.43-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-18-at-12.45.43-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-get-ip-address/index.html'>Ansible get ip address of current host or target</a><p>How to get the IP address of the current or remote host in Ansible. That's the question, this article is going to address. While running a Playbook you might have had a requirement where you need to get the IP address of the connected and current remote host.  There are&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/ansible-playbook/index.html" rel="tag">Ansible Playbook</a><a href="../tag/ansible-playbook-example/index.html" rel="tag">ansible playbook example</a><a href="../tag/ansible-playbook-examples/index.html" rel="tag">ansible playbook examples</a><a href="../tag/example-ansible-playbooks/index.html" rel="tag">example ansible playbooks</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../run-ansible-playbook-locally/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>How to Run Ansible Playbook Locally</a></div><div class="nav-next"><a href="../ansible-dry-run-ansible-check-mode/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Ansible Dry Run &#8211; How to Run Playbook in Ansible Check mode</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (68)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (25)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"2887 https:\/\/www.middlewareinventory.com\/?p=2887","disqusShortname":"mwinventory","disqusTitle":"Ansible Playbook Examples \u2013 Sample Ansible Playbooks | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-playbook-example\/","postId":"2887"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"4279fd41b0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"5ef8e7b27a","post_id":"2887"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"95f1f6d575","ip":"2401:4900:1cb9:c179:8986:b4d5:bcdb:de54","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"0bca8f170f","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"aa18ab51f4","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"2887","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-playbook-example/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1670436354;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

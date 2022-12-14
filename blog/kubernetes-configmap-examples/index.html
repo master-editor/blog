@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Kubernetes Configmap Examples - How to Guide | Devops Junction</title>
+<meta name="description" content="Kuberentes Configmap Examples. How to create configmap using --from-file --from-literal option. Types of configmap such as filesystem, environment variable, commandline argument." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Kubernetes Configmap Examples - How to Guide | Devops Junction" />
+<meta property="og:description" content="Kuberentes Configmap Examples. How to create configmap using --from-file --from-literal option. Types of configmap such as filesystem, environment variable, commandline argument." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-10-09T21:41:59+00:00" />
+<meta property="article:modified_time" content="2022-10-09T21:50:46+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg","width":1748,"height":1240,"caption":"Kubernetes Configmap"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#webpage","url":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/","name":"Kubernetes Configmap Examples - How to Guide | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#primaryimage"},"datePublished":"2022-10-09T21:41:59+00:00","dateModified":"2022-10-09T21:50:46+00:00","description":"Kuberentes Configmap Examples. How to create configmap using --from-file --from-literal option. Types of configmap such as filesystem, environment variable, commandline argument.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Kubernetes Configmap Examples &#8211; How to Guide | Devops Junction","datePublished":"2022-10-09T21:41:59+00:00","dateModified":"2022-10-09T21:50:46+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#primaryimage"},"articleSection":"Kubernetes","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Kubernetes Configmap Examples &#8211; How to Guide | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/9099.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-kubernetes-configmap-examples-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-kubernetes-configmap-examples-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+article h2{
+    color: black;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+b,strong{
+  color: black;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    background: #eaeef3 none repeat scroll 0% 0% !important;
+}
+article ul {
+  display: block;
+}
+
+article ul li {
+  display: block;
+  position: relative;
+  padding: 2px;
+  margin-left: 2%;
+}
+
+article ul li:not(:last-child) {
+  margin-bottom: 16px;
+}
+
+article ul li:before {
+  content: "";
+  position: absolute;
+  top: 1.2em;
+  left: -20px;
+  margin-top: -.5em;
+  background: #f69ec4;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+    
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-9099 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-9099" class="post-9099 post type-post status-publish format-standard has-post-thumbnail hentry category-kubernetes wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Kubernetes Configmap Examples &#8211; How to Guide | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="3:11 am" rel="bookmark"><time class="entry-date published updated" datetime="October 10, 2022">October 10, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Kubernetes%20Configmap%20Examples%20%E2%80%93%20How%20to%20Guide%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fkubernetes-configmap-examples%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="9099" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Kubernetes+Configmap+Examples+%E2%80%93+How+to+Guide+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fkubernetes-configmap-examples%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="9099" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Kubernetes%20Configmap%20Examples%20%E2%80%93%20How%20to%20Guide%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fkubernetes-configmap-examples%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="9099" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fkubernetes-configmap-examples%2F&subject=Kubernetes%20Configmap%20Examples%20%E2%80%93%20How%20to%20Guide%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="9099" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="9099" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this article, let us explore Kubernetes configmap and how to create, edit, update, and use them with examples.</p>
+<p>Configmap as the name suggests holds some configuration information, It can be a fine-grained string or an entire file.</p>
+<p>It eliminates the need to hardcode the configuration information into the container or the deployment definition.</p>
+<p>Configmap allows the reuse of images and deployment descriptors across environments like dev, QA, and prod.</p>
+<p>As we are isolating the configuration away from the application and managing it as a separate object (configmap),  we can update the config without having to restart the application</p>
+<p><a href="../../wp-content/uploads/2022/10/Draw.io_.png"><img class="post-img alignnone wp-image-9100 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="kubernetes configmap" width="1748" height="1240" data-src="../../wp-content/uploads/2022/10/Draw.io_.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Draw.io_.png 1748w, ../../wp-content/uploads/2022/10/Draw.io_-300x213.png 300w, ../../wp-content/uploads/2022/10/Draw.io_-1024x726.png 1024w, ../../wp-content/uploads/2022/10/Draw.io_-768x545.png 768w, ../../wp-content/uploads/2022/10/Draw.io_-1536x1090.png 1536w, ../../wp-content/uploads/2022/10/Draw.io_-400x284.png 400w, ../../wp-content/uploads/2022/10/Draw.io_-1080x766.png 1080w, ../../wp-content/uploads/2022/10/Draw.io_-90x65.png 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9100 size-full" src="../../wp-content/uploads/2022/10/Draw.io_.png" alt="kubernetes configmap" width="1748" height="1240" srcset="../../wp-content/uploads/2022/10/Draw.io_.png 1748w, ../../wp-content/uploads/2022/10/Draw.io_-300x213.png 300w, ../../wp-content/uploads/2022/10/Draw.io_-1024x726.png 1024w, ../../wp-content/uploads/2022/10/Draw.io_-768x545.png 768w, ../../wp-content/uploads/2022/10/Draw.io_-1536x1090.png 1536w, ../../wp-content/uploads/2022/10/Draw.io_-400x284.png 400w, ../../wp-content/uploads/2022/10/Draw.io_-1080x766.png 1080w, ../../wp-content/uploads/2022/10/Draw.io_-90x65.png 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>In the preceding diagram you can see, on the left side, we have environments and workloads with config values hardcoded</p>
+<p>To the right, you can see they are moved/isolated into a configmap and have a name <code>configmap-&lt;env</code> which would be referred to later in the definition</p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Types_of_Kubernetes_Configmap" title="Types of Kubernetes Configmap">Types of Kubernetes Configmap</a></li><li><a href="#How_to_Create_Kubernetes_Configmap_Introduction" title="How to Create Kubernetes Configmap &#8211; Introduction">How to Create Kubernetes Configmap &#8211; Introduction</a></li><li><a href="#Creating_Kubernetes_Configmap_with_Kubectl" title="Creating Kubernetes Configmap with Kubectl">Creating Kubernetes Configmap with Kubectl</a><ul><li><a href="#--from-filefilename" title="--from-file=filename">--from-file=filename</a></li><li><a href="#--from-filekeyfilename" title="--from-file=key=filename">--from-file=key=filename</a></li><li><a href="#--from-filedirectory" title="--from-file=directory">--from-file=directory</a></li><li><a href="#--from-literalkeyvalue" title="--from-literal=key=value">--from-literal=key=value</a></li></ul></li><li><a href="#Creating_Kubernetes_Configmap_using_Manifest" title="Creating Kubernetes Configmap using Manifest">Creating Kubernetes Configmap using Manifest</a></li><li><a href="#Creating_Configmap_vs_Using_Configmap" title="Creating Configmap vs Using Configmap">Creating Configmap vs Using Configmap</a></li><li><a href="#Kubesample_SourceCode_and_Docker_Image" title="Kubesample &#8211;   SourceCode and Docker Image">Kubesample &#8211;   SourceCode and Docker Image</a></li><li><a href="#How_the_Kubesample_Application_is_designed_and_works" title="How the Kubesample Application is designed and works">How the Kubesample Application is designed and works</a></li><li><a href="#Deploying_the_KubeSample_Application_and_Configmap" title="Deploying the KubeSample Application and Configmap">Deploying the KubeSample Application and Configmap</a><ul><li><a href="#create-configmapyml" title="create-configmap.yml">create-configmap.yml</a></li><li><a href="#create-deploymentyml" title="create-deployment.yml">create-deployment.yml</a></li></ul></li><li><a href="#Validating_the_Application_Setup" title="Validating the Application Setup">Validating the Application Setup</a></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Types_of_Kubernetes_Configmap">Types of Kubernetes Configmap</span></h2>
+<p>Kubernetes Configmap can be considered and used as one of these</p>
+<ul>
+<li><strong>FileSystem</strong> object &#8211; You can mount configmap and each key would be created as a file with the corresponding value as a content</li>
+<li><strong>Environment</strong> variable &#8211; A key and value pair that you want to pass to the container dynamically</li>
+<li><strong>Commandline</strong> Argument &#8211; You can change the default <code>CMD</code> of the container using the Commandline argument</li>
+</ul>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/10/devopsjunction-configmap.png"><img class="post-img alignnone wp-image-9107 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="" width="1748" height="1240" data-src="../../wp-content/uploads/2022/10/devopsjunction-configmap.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/devopsjunction-configmap.png 1748w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-300x213.png 300w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-1024x726.png 1024w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-768x545.png 768w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-1536x1090.png 1536w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-400x284.png 400w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-1080x766.png 1080w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-90x65.png 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9107 size-full" src="../../wp-content/uploads/2022/10/devopsjunction-configmap.png" alt="" width="1748" height="1240" srcset="../../wp-content/uploads/2022/10/devopsjunction-configmap.png 1748w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-300x213.png 300w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-1024x726.png 1024w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-768x545.png 768w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-1536x1090.png 1536w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-400x284.png 400w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-1080x766.png 1080w, ../../wp-content/uploads/2022/10/devopsjunction-configmap-90x65.png 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>So far we have seen what are the types of configmap. Now let us see different ways to create configmap</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_to_Create_Kubernetes_Configmap_Introduction">How to Create Kubernetes Configmap &#8211; Introduction</span></h2>
+<p>Like many objects in Kubernetes, you can create Configmap in two ways</p>
+<ul>
+<li><strong>Imperative</strong> way &#8211; from the command line</li>
+<li><strong>Manifest</strong> &#8211; from a file on the disk</li>
+</ul>
+<p>Unless you are completely new to programming, you might already know that the map/dictionary is a collection of <code>key: value</code>  pairs ( more like JSON)</p>
+<p>Here is a simple javascript code that explains what is <code>map</code> datatype.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="js" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">const wrongMap = new Map();
+wrongMap['bla'] = 'blaa';
+wrongMap['bla2'] = 'blaaa2';
+
+console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' }</pre>
+<p>&nbsp;</p>
+<p>During the Configmap creation, There are a few ways to read the data that goes into the configmap</p>
+<p>You can read data directly from the<strong> file</strong> or from the <strong>command line </strong>or recursively read all the files from a <strong>directory</strong></p>
+<p>You can use the special command line options with <strong>kubectl create configmap</strong> command to define how to read the data</p>
+<blockquote><p><code><span style="font-family: terminal, monaco, monospace; color: #003366;"><em>--from-file=filename</em> </span></code> &#8211; Read data directly from the file and the filename is the key</p>
+<p><code><span style="color: #003366; font-family: terminal, monaco, monospace;"><em>--from-file=key=filename</em></span> </code> &#8211; Read data from the file but we define the key</p>
+<p><code><span style="color: #003366; font-family: terminal, monaco, monospace;"><em>--from-file=directory</em> </span></code> &#8211; Read all the files in a directory and the filenames are the keys</p>
+<p><code><span style="color: #003366; font-family: terminal, monaco, monospace;"><em>--from-literal=key=value</em></span></code> &#8211; Create a single key=value as a string literal</p></blockquote>
+<p>&nbsp;</p>
+<p>We have seen the types of configmap and methods of creating configmap.</p>
+<p>Let us put them into practice and see how to create each type with different methods</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Creating_Kubernetes_Configmap_with_Kubectl">Creating Kubernetes Configmap with <span style="color: #f01a70;">Kubectl</span></span></h2>
+<p>In this section, we will see how to create a configmap imperatively using the <strong>Kubectl</strong> command</p>
+<h3><span class="ez-toc-section" id="--from-filefilename"><code><span style="font-family: terminal, monaco, monospace; color: #003366;"><em>--from-file=filename</em></span></code></span></h3>
+<p>Now we are going to create a configmap of <code>filesystem</code> type using <code>--from-file=filename</code> option. with no explicit keys defined for the configmap.</p>
+<p>When no keys are defined, the file name would be taken as the key name.</p>
+<p>Here is a glimpse of my terminal, where I am creating configmap</p>
+<p><script id="asciicast-bf1sr2vcyvabPm92VDU9Zus7B" src="https://asciinema.org/a/bf1sr2vcyvabPm92VDU9Zus7B.js" async></script></p>
+<p>If you look at the preceding video, you can see that I have created a file named samplefile.txt and tried to create a configmap from a file using <code>--from-file</code></p>
+<p>Since I have not defined any key explicitly the filename was taken as a key.</p>
+<p>Here are the commands I have used to create the configmap</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">devopsjunction|⇒ cat &gt; samplefile.txt
+this is configmap sample file,
+content in this file would be used as a value
+to a configmap key
+
+devopsjunction|⇒ kubectl create configmap test-config &#8211; from-file=samplefile.txt -n sre01
+configmap/test-config created</pre>
+<p>Let us validate how it is created using the <strong>kubectl get configmap</strong> command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">devopsjunction|⇒ kubectl get configmap test-config -n sre01 -o yaml
+apiVersion: v1
+data:
+  samplefile.txt: |
+    this is configmap sample file,
+    content in this file would be used as a value
+    to a configmap key
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2022-10-02T13:47:14Z"
+  name: test-config
+  namespace: sre01
+  resourceVersion: "340219653"
+  uid: 2ad318a8-ff75-481a-987e-2299f69c92af</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="--from-filekeyfilename"><code><span style="font-family: terminal, monaco, monospace; color: #003366;"><em>--from-file=key=filename</em></span></code></span></h3>
+<p>Now we are going to create a configmap of <code>filesystem</code> type using <code>--from-file=key=filename</code> option</p>
+<p>As you can see, this time we are going to define a key for the configmap</p>
+<p>Let us see it in action</p>
+<div style="width: 840px;" class="wp-video"><!--[if lt IE 9]><script>document.createElement('video');</script><![endif]-->
+<video class="wp-video-shortcode" id="video-9099-1" width="840" height="538" preload="metadata" controls="controls"><source type="video/mp4" src="../../wp-content/uploads/2022/10/Screen-Recording-2022-10-03-at-12.34.13-AM-_=1.mp4" /><a href="../../wp-content/uploads/2022/10/Screen-Recording-2022-10-03-at-12.34.13-AM.mp4">https://www.middlewareinventory.com/wp-content/uploads/2022/10/Screen-Recording-2022-10-03-at-12.34.13-AM.mp4</a></video></div>
+<p>&nbsp;</p>
+<p>As you have seen in the preceding video, we have used the following kubectl command to create a configmap of <code>filesystem</code> type with <code>--from-file=key=filename</code> option</p>
+<pre>$ kubectl create configmap test-configmap-02 &#8211; from-file=configdata=samplefile.txt -n sre01</pre>
+<p>Like last time we have not let the filename be the key name, we have explicitly set the key name rather.</p>
+<p>Once created, the output looked like this.</p>
+<p><a href="../../wp-content/uploads/2022/10/kubernetes-configmap.png"><img class="post-img alignnone wp-image-9135 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1499x963.png" alt="kubernetes configmap" width="1499" height="963" data-src="../../wp-content/uploads/2022/10/kubernetes-configmap.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/kubernetes-configmap.png 1499w, ../../wp-content/uploads/2022/10/kubernetes-configmap-300x193.png 300w, ../../wp-content/uploads/2022/10/kubernetes-configmap-1024x658.png 1024w, ../../wp-content/uploads/2022/10/kubernetes-configmap-768x493.png 768w, ../../wp-content/uploads/2022/10/kubernetes-configmap-1080x694.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9135 size-full" src="../../wp-content/uploads/2022/10/kubernetes-configmap.png" alt="kubernetes configmap" width="1499" height="963" srcset="../../wp-content/uploads/2022/10/kubernetes-configmap.png 1499w, ../../wp-content/uploads/2022/10/kubernetes-configmap-300x193.png 300w, ../../wp-content/uploads/2022/10/kubernetes-configmap-1024x658.png 1024w, ../../wp-content/uploads/2022/10/kubernetes-configmap-768x493.png 768w, ../../wp-content/uploads/2022/10/kubernetes-configmap-1080x694.png 1080w" sizes="(max-width: 1499px) 100vw, 1499px" data-eio="l" /></noscript></a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>If you look at the highlighted portion of the image, you can notice that the configmap is not created with the filename as the key. but the custom key we have set <code>configdata</code></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="--from-filedirectory"><code><span style="font-family: terminal, monaco, monospace; color: #003366;"><em>--from-file=directory</em></span></code></span></h3>
+<p>With this option, we can create a configmap in bulk.</p>
+<p>This reads all the files in the given directory and creates a configmap for each file.  The filename would be the corresponding key name and the content of the file would become the value</p>
+<p>Let us see how this works in real-time</p>
+<div style="width: 840px;" class="wp-video"><video class="wp-video-shortcode" id="video-9099-2" width="840" height="594" preload="metadata" controls="controls"><source type="video/mp4" src="../../wp-content/uploads/2022/10/kubectl_configmap-short-_=2.mp4" /><a href="../../wp-content/uploads/2022/10/kubectl_configmap-short.mp4">https://www.middlewareinventory.com/wp-content/uploads/2022/10/kubectl_configmap-short.mp4</a></video></div>
+<p>&nbsp;</p>
+<p>As shown in the preceding video, we have different types of files under a directory and we are importing all of them into our configmap during the creation using <code>--from-file=directory</code> option</p>
+<p>filename becomes the <code>key</code> and the content inside becomes the <code>value</code></p>
+<p>Here is the command we have used</p>
+<pre>$ kubectl create configmap configfiles &#8211; from-file=configmaps/</pre>
+<p>In this command <code>configmaps/</code> is the directory name.</p>
+<p>Refer to the following image which shows the files in the <code>configmaps</code> directory and and the configmap creation and how it looks after the creation.</p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM.png"><img class="post-img alignnone wp-image-9145 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1492x956.png" alt="kubectl configmap " width="1492" height="956" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM.png 1492w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-300x192.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-1024x656.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-768x492.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-1080x692.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9145 size-full" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM.png" alt="kubectl configmap " width="1492" height="956" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM.png 1492w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-300x192.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-1024x656.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-768x492.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-06-at-11.55.51-PM-1080x692.png 1080w" sizes="(max-width: 1492px) 100vw, 1492px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="--from-literalkeyvalue"><code><span style="font-family: terminal, monaco, monospace; color: #003366;"><em>--from-literal=key=value</em></span></code></span></h3>
+<p>The final option to use with kubectl configmap creation is <code>--from-literal=key=value</code></p>
+<p>So far we have seen how to read the file and create a configmap <code>key: value</code> pair</p>
+<p>It was helpful to store long file objects inside a configmap and later be used when we want to <code>filesystem</code> type configmap and to mount it as a filesystem</p>
+<p>but how to create a simple <code>key: value</code> based configmap</p>
+<p>we are going to do the same, using <code>--from-literal=key=value</code> option of <code>kubectl create configmap</code> command</p>
+<pre>$ kubectl create configmap testconfigmap &#8211; from-literal=ENV=DEV</pre>
+<p>the preceding command creates a new configmap named <code>testconfigmap</code> and just add a single <code>key: value</code> entry inside it</p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM.png"><img class="post-img alignnone wp-image-9146 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1486x594.png" alt="kubectl configmap &#8211; from-literal" width="1486" height="594" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM.png 1486w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-300x120.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-1024x409.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-768x307.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-1080x432.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9146 size-full" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM.png" alt="kubectl configmap &#8211; from-literal" width="1486" height="594" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM.png 1486w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-300x120.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-1024x409.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-768x307.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-07-at-12.17.36-AM-1080x432.png 1080w" sizes="(max-width: 1486px) 100vw, 1486px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Creating_Kubernetes_Configmap_using_Manifest">Creating<span style="color: #228dd4;"> Kubernetes </span>Configmap using <span style="color: #f01a70;">Manifest</span></span></h2>
+<p>We have seen how to create configmap using kubectl, Now let us see how to create configmap using Kubernest Manifest</p>
+<p>You don&#8217;t have to memorize or write the manifest from scratch. you can let kubectl create the config file for you</p>
+<p>Execute the same Imperative command but with two additional options</p>
+<ul>
+<li><strong>--dry-run</strong> &#8211; to instruct kubectl to not create the resource</li>
+<li><strong>-o yaml</strong> &#8211; to display the manifest in the YAML format</li>
+</ul>
+<p>See it in action</p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1.png"><img class="alignnone size-full wp-image-9125 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x588.png" alt="" width="2434" height="746" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1.png 2434w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-300x92.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-1024x314.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-768x235.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-1536x471.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-2048x628.png 2048w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-1080x331.png 1080w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-9125" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1.png" alt="" width="2434" height="746" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1.png 2434w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-300x92.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-1024x314.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-768x235.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-1536x471.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-2048x628.png 2048w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-02-at-11.45.47-PM-1-1080x331.png 1080w" sizes="(max-width: 2434px) 100vw, 2434px" data-eio="l" /></noscript></a></p>
+<p>You can see with a dry run you can actually generate the manifest. but you might need some cleanup.</p>
+<p>To remove the unwanted lines and make the output usable as it is. You can use a <code>kubectl neat</code> command</p>
+<p>It comes from a special package manager called <code>krew</code> refer to our another article on <a href="../cpu-memory-usage-nodes-k8s/index.html#What_is_Krew_and_how_to_download">Krew and krew plugins here</a></p>
+<p>For those who want to copy the source code of this Configmap. here you go</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+data:
+  samplefile.txt: |
+    this is configmap sample file,
+    content in this file would be used as a value
+    to a configmap key
+kind: ConfigMap
+metadata:
+  name: test-config
+  namespace: sre01</pre>
+<p>This is a simple configmap YAML with one key: value pair.</p>
+<p>We can add more <code>key: value</code> pairs to this configmap like the sample given below.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+data:
+  samplefile.txt: |
+    this is configmap sample file,
+    content in this file would be used as a value
+    to a configmap key
+  config.ini: |
+    [analytics]
+    check_for_updates = true
+    [grafana_net]
+    url = https://grafana.net
+    [log]
+    mode = console
+    [paths]
+    data = /var/lib/grafana/data
+    logs = /var/log/grafana
+    plugins = /var/lib/grafana/plugins
+    provisioning = /etc/grafana/provisioning
+  google_token: xxxxxxxxxxxxxxxxxxxx
+  salesforce_token: xxxxxxxxxxxxxxxxx
+  LOG_LEVEL: DEBUG
+  ENVIRONMENT: DEV
+  run.sh: |
+    @test "Test Health" {
+    url="http://prometheus-grafana/api/health"
+
+    code=$(wget &#8211; server-response &#8211; spider &#8211; timeout 10 &#8211; tries 1 ${url} 2&gt;&amp;1 | awk '/^  HTTP/{print $2}')
+    [ "$code" == "200" ]
+    }
+kind: ConfigMap
+metadata:
+  name: test-config
+  namespace: sre01</pre>
+<p>In the preceding sample configmap manifest, you can see we have various keys and values.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Creating_Configmap_vs_Using_Configmap">Creating Configmap vs Using Configmap</span></h2>
+<p>As the title of this chapter convey <code>Creating Configmap</code> is different from <code>Using Configmap</code></p>
+<p>So far we have seen how to Create a configmap with different command line options like</p>
+<ul>
+<li>--from-file=key=value</li>
+<li>--from-file=filename</li>
+<li>--from-file=directory/</li>
+<li>--from-literal</li>
+</ul>
+<p>Also, we have seen how to create a configmap from a manifest/YAML file.</p>
+<p>Now that&#8217;s all to it and the configmap is ready its like a Database of your configuration how you are going to use/consume the data stored in this configmap makes all the difference</p>
+<p>Now let us see, how we can consume/use the config data from the configmap</p>
+<ul>
+<li>you can use it as <code>file object</code></li>
+<li>you can use it as <code>command line argument</code></li>
+<li>or simply an <code>environment variable</code> to support your container</li>
+</ul>
+<p>Hope you have understood the difference between the creation options and how to use configmap in your workloads.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Kubesample_SourceCode_and_Docker_Image">Kubesample &#8211;   SourceCode and Docker Image</span></h2>
+<p>Let us see how to use the configmap in our deployments and workloads.</p>
+<p>To demonstrate this, I have created some sample Applications and named it <code>kubesample</code></p>
+<p>You can find the source code of that kubesample <a href="https://github.com/AKSarav/kubesample.git">in this GitHub repository</a> (Optional)</p>
+<pre>$ git clone https://github.com/AKSarav/kubesample.git</pre>
+<p>Downloading the source code is optional as I have already published the <code>kubesample</code> application image into Dockerhub</p>
+<p>You can simply pull the image from <a href="https://hub.docker.com/r/saravak/kubesample">Dockerhub</a> using the following image name</p>
+<pre>saravak/kubesample</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_the_Kubesample_Application_is_designed_and_works">How the Kubesample Application is designed and works</span></h2>
+<p>The Application is designed on express node js</p>
+<p>It simply loads the static and default <code>index.html</code> file under the corresponding <code>environment(dev/qa/prod)</code> directory</p>
+<p>This Environment is not going to be hardcoded on the deployment manifest, rather would come from the Configmap &#8211; This is an example of Configmap as an <strong>Environment variable</strong></p>
+<p>During the deployment of this application to Kubernetes, we add extra options like <code>cpu-profiling</code> or <code>increased node heap</code> etc.  This also comes from Configmap &#8211; This is an example of Configmap as a <strong>Commandline Argument</strong></p>
+<p>We also add an extra HTML file <code>status.html</code> into the corresponding environment directory at runtime using Configmap as a <strong>FileSystem</strong></p>
+<p>Before we go further and look at the Yaml files for Configmap and Deployment.</p>
+<p>Take a look at the following image, where I have depicted How we are using the configmap in our workload/deployment</p>
+<p><a href="../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg"><img class="post-img alignnone wp-image-9155 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="Kubernetes Configmap" width="1748" height="1240" data-src="../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg 1748w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-300x213.jpg 300w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-1024x726.jpg 1024w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-768x545.jpg 768w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-400x284.jpg 400w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-1080x766.jpg 1080w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9155 size-full" src="../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg" alt="Kubernetes Configmap" width="1748" height="1240" srcset="../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap.jpg 1748w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-300x213.jpg 300w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-1024x726.jpg 1024w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-768x545.jpg 768w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-400x284.jpg 400w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-1080x766.jpg 1080w, ../../wp-content/uploads/2022/10/devopsjunction_kubernetes_configmap-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Deploying_the_KubeSample_Application_and_Configmap">Deploying the KubeSample Application and Configmap</span></h2>
+<p>Here are the source code or the manifest files for the Kubesample Application Deployment and Configmap</p>
+<p>The files are also available on the Github repository, If you have cloned them already you can find them here</p>
+<h3><span class="ez-toc-section" id="create-configmapyml"><strong><span style="color: #003366;">create-configmap.yml</span></strong></span></h3>
+<p>Here is the manifest for configmap</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+data:
+  environment: dev
+  node_options: &#8211; prof
+  port: "3000"
+  status.html: |
+    &lt;html&gt;
+    &lt;body&gt;this is some status page from DEV&lt;/body&gt;
+    &lt;/html&gt;
+kind: ConfigMap
+metadata:
+  name: kubesample
+  namespace: default</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="create-deploymentyml"><strong><span style="color: #003366;">create-deployment.yml</span></strong></span></h3>
+<p>Here is the manifest for Deployment</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kubesample
+  name: kubesample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubesample
+  template:
+    metadata:
+      labels:
+        app: kubesample
+    spec:
+      containers:
+      - image: saravak/kubesample
+        name: kubesample
+        imagePullPolicy: Always
+        resources:
+          limits: 
+            cpu: '0.5'
+            memory: 100Mi
+        command:
+          - "node"
+          - "$(OPTIONS)"
+          - "index.js"
+        env: 
+          - name: appport
+            valueFrom:
+              configMapKeyRef:
+                name: kubesample
+                key: port
+          - name: ENVIRONMENT
+            valueFrom:
+              configMapKeyRef:
+                name: kubesample
+                key: environment
+          - name: OPTIONS
+            valueFrom:
+              configMapKeyRef:
+                name: kubesample
+                key: node_options
+        volumeMounts:
+          - mountPath: /app/dev/status.html
+            name: staticfile
+            subPath: status.html
+      volumes:
+        - name: staticfile
+          configMap: 
+            name: kubesample
+              
+</pre>
+<p>You can use copy this sourcecode and save them on your local disk and apply</p>
+<pre>$ kubectl apply -f create-configmap.yml
+
+$ kubectl apply -f create-deployment.yml</pre>
+<p>This will create the deployment and configmap.</p>
+<p>These are the initial values we have set for the configmap, you can change these values and observe the behaviour</p>
+<blockquote><p>Note*: While you can change the <strong>node_options</strong>, <strong>port</strong> and <strong>status.html</strong> values as you choose/desire to.</p>
+<p>But the value for the <strong>environment</strong> should be one of  <strong>prod, dev, qa </strong>as this property controlls what directory/files to be loaded at runtime.</p>
+<p>As you can see in our Sourcecode, we have only these three directories ( environments ) defined.</p></blockquote>
+<p>&nbsp;</p>
+<div>
+<ul>
+<li>environment: <code>dev</code></li>
+<li>node_options: <code>--prof</code></li>
+<li>port: <code>3000</code></li>
+<li>status.html:
+<div>
+<pre>&lt;html&gt;
+&lt;body&gt;this is some status page from DEV&lt;/body&gt;
+&lt;/html&gt;</pre>
+</div>
+</li>
+</ul>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Validating_the_Application_Setup">Validating the Application Setup</span></h2>
+<p>As we have created the necessary configmap and deployments Now let us validate our setup and test</p>
+<p>Let us first validate the deployment and configmap are intact using the following commands</p>
+<pre>## Validate configmap and Deployments
+
+$ kubectl get configmap kubesample -o yaml
+$ kubectl get deployments kubesample -o yaml
+
+## Validate the pod
+
+$ kubectl get pods
+
+</pre>
+<p>&nbsp;</p>
+<p>Once you know the pod name, you can do the <code>port-forward</code></p>
+<pre>$ kubectl port-forward kubesample-c7bc8ddd5-d966q 3000:3000</pre>
+<p>Here is a video of me doing the above validation steps on my end.</p>
+<div class="lyte-wrapper" style="width:640px;max-width:100%;margin:5px;"><div class="lyMe" id="WYL_Gq1GAMVyBAQ"><div id="lyte_Gq1GAMVyBAQ" data-src="https://i.ytimg.com/vi/Gq1GAMVyBAQ/hqdefault.jpg" class="pL"><div class="tC"><div class="tT"></div></div><div class="play"></div><div class="ctrl"><div class="Lctrl"></div><div class="Rctrl"></div></div></div><noscript><a href="https://youtu.be/Gq1GAMVyBAQ"><img src="https://i.ytimg.com/vi/Gq1GAMVyBAQ/0.jpg" alt="" width="640" height="340" /><br />Watch this video on YouTube</a></noscript></div></div><div class="lL" style="max-width:100%;width:640px;margin:5px;"></div></p>
+<p>&nbsp;</p>
+<p>Once the port forward is done, you can access the <code>kubesample</code> Application on <code>http://localhost:3000</code></p>
+<p>Here are the screenshots of kubesample application taken at my end.</p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM.png"><img class="post-img alignnone wp-image-9165 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1798x1088.png" alt="kubesample kubernetes sample app" width="1798" height="1088" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM.png 1798w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-300x182.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-1024x620.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-768x465.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-1536x929.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-1080x654.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9165 size-full" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM.png" alt="kubesample kubernetes sample app" width="1798" height="1088" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM.png 1798w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-300x182.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-1024x620.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-768x465.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-1536x929.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.10-AM-1080x654.png 1080w" sizes="(max-width: 1798px) 100vw, 1798px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM.png"><img class="post-img alignnone wp-image-9166 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1013.png" alt="kubesample kubernetes sample app" width="2058" height="1086" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM.png 2058w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-300x158.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-1024x540.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-768x405.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-1536x811.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-2048x1081.png 2048w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-1080x570.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9166 size-full" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM.png" alt="kubesample kubernetes sample app" width="2058" height="1086" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM.png 2058w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-300x158.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-1024x540.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-768x405.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-1536x811.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-2048x1081.png 2048w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.06.31-AM-1080x570.png 1080w" sizes="(max-width: 2058px) 100vw, 2058px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>Now you can change the values in our Configmap and retry.</p>
+<pre>$ kubectl edit configmap kubesample</pre>
+<p>After updating the values. here is the snapshot of my current configmap</p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM.png"><img class="alignnone size-full wp-image-9171 lazyload" src="../../wp-content/ewww/lazy/placeholder-1252x592.png" alt="kubectl configmap update" width="1252" height="592" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM.png 1252w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-300x142.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-1024x484.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-768x363.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-1080x511.png 1080w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-9171" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM.png" alt="kubectl configmap update" width="1252" height="592" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM.png 1252w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-300x142.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-1024x484.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-768x363.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.42.17-AM-1080x511.png 1080w" sizes="(max-width: 1252px) 100vw, 1252px" data-eio="l" /></noscript></a></p>
+<p>As you can see I have updated the Environment from <code>dev</code> to <code>prod</code> and made changes on the <code>status.html</code> too.</p>
+<p>Now let us restart the pods for the application to take the new configmap changes and retry</p>
+<p><a href="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM.png"><img class="post-img alignnone wp-image-9172 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1732x1050.png" alt="kubectl configmap examples" width="1732" height="1050" data-src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM.png 1732w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-300x182.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-1024x621.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-768x466.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-1536x931.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-1080x655.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9172 size-full" src="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM.png" alt="kubectl configmap examples" width="1732" height="1050" srcset="../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM.png 1732w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-300x182.png 300w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-1024x621.png 1024w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-768x466.png 768w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-1536x931.png 1536w, ../../wp-content/uploads/2022/10/Screenshot-2022-10-10-at-2.49.08-AM-1080x655.png 1080w" sizes="(max-width: 1732px) 100vw, 1732px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>In summary,  we have learnt different ways to create configmap and to use it in your workload</p>
+<p>We have also tested the configmap in real time by creating a sample application <code>kubesample</code></p>
+<p>Hope this helps. In case you have any feedback or queries. please do let us know in the comments</p>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#741c1118181b3413061d00120d5a171b19"> <span class="__cf_email__" data-cfemail="254d4049494a6542574c51435c0b464a48">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1665352281" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="9099" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="fed62f4374" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1665352281" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1665352281"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../kubernetes-restart-daemonset-kubectl-devops-junction/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2022/04/kubernetes-tricks-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/04/kubernetes-tricks-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../kubernetes-restart-daemonset-kubectl-devops-junction/index.html'>Kubernetes restart daemonset - kubectl | Devops Junction</a><p>In this quick article, let us learn how to restart the Kubernetes DaemonSet and all the pods created by the DaemonSet. Before we move on to the objective, here are some basics. real quick. DaemonSet is to deploy a specific application/feature to your Kubernetes cluster and to make sure it&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../kubernetes-version-kubectl/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="kubectl version" data-src="../../wp-content/uploads/2022/06/kubectl-version-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/06/kubectl-version-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="kubectl version" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../kubernetes-version-kubectl/index.html'>How to check Kubernetes and Kubectl Version | Devops Junction</a><p>How to check the Kubernetes and Kubectl Version using the kubectl command line that's the objective of this article. As you know the kubectl is a command line tool for communicating with a Kubernetes cluster's control plane, using the Kubernetes API. Provided by Kubernetes itself if you are new to Kubectl and&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-systemd-module-examples-devops-junction/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2022/07/ansible-systemd-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/07/ansible-systemd-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-systemd-module-examples-devops-junction/index.html'>Ansible SystemD module Examples - Devops Junction</a><p>Ansible SystemD module helps to control the systemd units such as services and timers created on the Linux server. SystemD is a daemon that manages the services and timer units on the Linux system and we mostly interact with it using the following ways service file systemctl command journalctl command&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="aws s3 cp" data-src="../../wp-content/uploads/2021/09/awss3cp-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/09/awss3cp-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="aws s3 cp" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html'>AWS S3 CP Examples - How to Copy Files with S3 CLI | Devops Junction</a><p>AWS CLI has become a life saver when you want to manage your AWS infrastructure efficiently. This also provides lot of possibilities for Automation and reduce the number of times that you have to login to AWS Management console. If you are new to AWS CLI. Please consider reading this&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../find-who-owns-the-private-ip-in-aws/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2021/08/IPaddress-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/08/IPaddress-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../find-who-owns-the-private-ip-in-aws/index.html'>Find Who owns the Private IP in AWS | DevOps Junction</a><p>At times of troubleshooting an issue or doing a forensic on a security incident in your AWS account.  Finding who owns Private IP plays a major role. Do you know Almost all the AWS resources like Load Balancers, RDS, EFS has their own private IP address. So how to find&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../kubectl-scale-down-all-pods-deployments-in-namespace-kubernetes/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Kubectl Scale down All pods/deployments in namespace &#8211; Kubernetes</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (21)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type="text/javascript" data-cfasync="false">var bU="https://www.middlewareinventory.com/wp-content/plugins/wp-youtube-lyte/lyte/";var mOs=navigator.userAgent.match(/(iphone|ipad|ipod|android)/i);style = document.createElement("style");style.type = "text/css";rules = document.createTextNode(".lyte-wrapper-audio div, .lyte-wrapper div {margin:0px; overflow:hidden;} .lyte,.lyMe{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#777;} .fourthree .lyMe, .fourthree .lyte {padding-bottom:75%;} .lidget{margin-bottom:5px;} .lidget .lyte, .widget .lyMe {padding-bottom:0!important;height:100%!important;} .lyte-wrapper-audio .lyte{height:38px!important;overflow:hidden;padding:0!important} .lyMe iframe, .lyte iframe,.lyte .pL{position:absolute !important;top:0;left:0;width:100%;height:100%!important;background:no-repeat scroll center #000;background-size:cover;cursor:pointer} .tC{left:0;position:absolute;top:0;width:100%} .tC{background-image:linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0))} .tT{color:#FFF;font-family:Roboto,sans-serif;font-size:16px;height:auto;text-align:left;padding:5px 10px 50px 10px} .play{background:no-repeat scroll 0 0 transparent;width:88px;height:63px;position:absolute;left:43%;left:calc(50% - 44px);left:-webkit-calc(50% - 44px);top:38%;top:calc(50% - 31px);top:-webkit-calc(50% - 31px);} .widget .play {top:30%;top:calc(45% - 31px);top:-webkit-calc(45% - 31px);transform:scale(0.6);-webkit-transform:scale(0.6);-ms-transform:scale(0.6);} .lyte:hover .play{background-position:0 -65px;} .lyte-audio .pL{max-height:38px!important} .lyte-audio iframe{height:438px!important} .ctrl{background:repeat scroll 0 -220px rgba(0,0,0,0.3);width:100%;height:40px;bottom:0px;left:0;position:absolute;} .lyte-wrapper .ctrl{display:none}.Lctrl{background:no-repeat scroll 0 -137px transparent;width:158px;height:40px;bottom:0;left:0;position:absolute} .Rctrl{background:no-repeat scroll -42px -179px transparent;width:117px;height:40px;bottom:0;right:0;position:absolute;padding-right:10px;}.lyte-audio .play{display:none}.lyte-audio .ctrl{background-color:rgba(0,0,0,1)}.lyte .hidden{display:none}");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script><script async src="../../wp-content/cache/minify/718e6.js"></script>
+<link rel="stylesheet" href="../../wp-content/cache/minify/d5ca8.css" media="all" />
+<script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"9099 https:\/\/www.middlewareinventory.com\/?p=9099","disqusShortname":"mwinventory","disqusTitle":"Kubernetes Configmap Examples \u2013 How to Guide | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/kubernetes-configmap-examples\/","postId":"9099"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"89447a9924"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"e1fda8c8d8","post_id":"9099"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"5b80f7d594","ip":"108.174.8.21","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"33296ae056","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"1bd6b7afb4","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"9099","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/13d7d.js"></script>
+<script type='text/javascript' id='mediaelement-core-js-before'>
+var mejsL10n = {"language":"en","strings":{"mejs.download-file":"Download File","mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen":"Fullscreen","mejs.play":"Play","mejs.pause":"Pause","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.live-broadcast":"Live Broadcast","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script src="../../wp-content/cache/minify/864c2.js"></script>
+<script type='text/javascript' id='mediaelement-js-extra'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/900c5.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/kubernetes-configmap-examples/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1665352281;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

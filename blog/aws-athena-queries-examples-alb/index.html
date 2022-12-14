@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Athena SQL Query Examples for ALB troubleshooting | Devops Junction</title>
+<meta name="description" content="Athena SQL Queries for ALB troubleshooting. Amazon Athena example, AWS Athena Elastic Load Balancer example. Athena Query examples for Athena for ALB troubleshooting." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Athena SQL Query Examples for ALB troubleshooting | Devops Junction" />
+<meta property="og:description" content="Athena SQL Queries for ALB troubleshooting. Amazon Athena example, AWS Athena Elastic Load Balancer example. Athena Query examples for Athena for ALB troubleshooting." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-08-29T15:09:58+00:00" />
+<meta property="article:modified_time" content="2022-12-08T18:58:56+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/08/aws-athena-queries.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/08/aws-athena-queries.jpg","width":1748,"height":1240,"caption":"amazon athena"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#webpage","url":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/","name":"Athena SQL Query Examples for ALB troubleshooting | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#primaryimage"},"datePublished":"2022-08-29T15:09:58+00:00","dateModified":"2022-12-08T18:58:56+00:00","description":"Athena SQL Queries for ALB troubleshooting. Amazon Athena example, AWS Athena Elastic Load Balancer example. Athena Query examples for Athena for ALB troubleshooting.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Athena SQL Query Examples for ALB troubleshooting | Devops Junction","datePublished":"2022-08-29T15:09:58+00:00","dateModified":"2022-12-08T18:58:56+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#primaryimage"},"articleSection":"AWS","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Athena SQL Query Examples for ALB troubleshooting | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/9000.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-aws-athena-queries-examples-alb-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-aws-athena-queries-examples-alb-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BB7M7WEJH2');
+</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+b, strong {
+  color: black;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    background: #eaeef3 none repeat scroll 0% 0% !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-9000 single-format-standard wp-custom-logo cookies-set cookies-accepted et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-9000" class="post-9000 post type-post status-publish format-standard has-post-thumbnail hentry category-aws wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Athena SQL Query Examples for ALB troubleshooting | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="8:39 pm" rel="bookmark"><time class="entry-date published updated" datetime="December 9, 2022">December 9, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Athena%20SQL%20Query%20Examples%20for%20ALB%20troubleshooting%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Faws-athena-queries-examples-alb%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="9000" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Athena+SQL+Query+Examples+for+ALB+troubleshooting+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Faws-athena-queries-examples-alb%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="9000" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Athena%20SQL%20Query%20Examples%20for%20ALB%20troubleshooting%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Faws-athena-queries-examples-alb%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="9000" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Faws-athena-queries-examples-alb%2F&subject=Athena%20SQL%20Query%20Examples%20for%20ALB%20troubleshooting%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="9000" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="9000" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>ALB(Application Load Balancer) Logs are a great asset when it comes to troubleshooting.  It provides a finer detail of the HTTP request processed by the ALB and sent to the target.</p>
+<p>ALB logs provide various fields and data which are essential to understanding the request flow. You can use it to troubleshoot your application errors, timeouts etc. 4xx and 5xx errors etc.</p>
+<p>This can be used for security auditing and security incident post-mortem analysis too.</p>
+<p>So this is a must-have for the Production Application Load Balancer.</p>
+<p>Once the ALB Logs are enabled, you can ingest the ALB logs into <a href="https://docs.aws.amazon.com/athena/latest/ug/what-is.html">Amazon Athena</a> and start working on the data using SQL queries.</p>
+<p>Here is a quick introduction of Athena from the creators themselves.</p>
+<p><a href="../../wp-content/uploads/2022/08/aws-athena-queries.jpg"><img class="post-img alignnone wp-image-9025 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="amazon athena" width="1748" height="1240" data-src="../../wp-content/uploads/2022/08/aws-athena-queries.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/aws-athena-queries.jpg 1748w, ../../wp-content/uploads/2022/08/aws-athena-queries-300x213.jpg 300w, ../../wp-content/uploads/2022/08/aws-athena-queries-1024x726.jpg 1024w, ../../wp-content/uploads/2022/08/aws-athena-queries-768x545.jpg 768w, ../../wp-content/uploads/2022/08/aws-athena-queries-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/08/aws-athena-queries-400x284.jpg 400w, ../../wp-content/uploads/2022/08/aws-athena-queries-1080x766.jpg 1080w, ../../wp-content/uploads/2022/08/aws-athena-queries-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9025 size-full" src="../../wp-content/uploads/2022/08/aws-athena-queries.jpg" alt="amazon athena" width="1748" height="1240" srcset="../../wp-content/uploads/2022/08/aws-athena-queries.jpg 1748w, ../../wp-content/uploads/2022/08/aws-athena-queries-300x213.jpg 300w, ../../wp-content/uploads/2022/08/aws-athena-queries-1024x726.jpg 1024w, ../../wp-content/uploads/2022/08/aws-athena-queries-768x545.jpg 768w, ../../wp-content/uploads/2022/08/aws-athena-queries-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/08/aws-athena-queries-400x284.jpg 400w, ../../wp-content/uploads/2022/08/aws-athena-queries-1080x766.jpg 1080w, ../../wp-content/uploads/2022/08/aws-athena-queries-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#What_is_AWS_Athena" title="What is AWS  Athena">What is AWS  Athena</a></li><li><a href="#Check_If_ALB_logs_are_enabled_Enable_if_not" title="Check If ALB logs are enabled &#8211; Enable if not">Check If ALB logs are enabled &#8211; Enable if not</a></li><li><a href="#Ingesting_the_ALB_logs_from_S3_to_AWS_Athena" title="Ingesting the ALB logs from S3 to  AWS Athena">Ingesting the ALB logs from S3 to  AWS Athena</a><ul><li><a href="#Create_a_table_and_ingest_the_logs_from_S3_bucket" title="Create a table and ingest the logs from S3 bucket">Create a table and ingest the logs from S3 bucket</a></li><li><a href="#How_to_preview_the_table_in_Athena" title="How to preview the table in Athena">How to preview the table in Athena</a></li><li><a href="#Query_Editor_and_How_to_Edit_Write_and_Save_Queries" title="Query Editor and How to Edit, Write and Save Queries">Query Editor and How to Edit, Write and Save Queries</a></li><li><a href="#Application_Load_Balancer_vs_Classic_Load_Balancer_Fields_Comparison" title="Application Load Balancer vs Classic Load Balancer &#8211; Fields Comparison">Application Load Balancer vs Classic Load Balancer &#8211; Fields Comparison</a></li></ul></li><li><a href="#Athena_SQL_Queries_for_ELB_troubleshooting" title="Athena SQL Queries for ELB troubleshooting">Athena SQL Queries for ELB troubleshooting</a><ul><li><a href="#Requests_grouped_by_HTTP_method_and_client_IP" title="Requests grouped by HTTP method and client IP">Requests grouped by HTTP method and client IP</a></li><li><a href="#Filter_requests_by_HTTP_method_GET_POST_OPTIONS_etc" title="Filter requests by HTTP method GET, POST, OPTIONS etc">Filter requests by HTTP method GET, POST, OPTIONS etc</a></li><li><a href="#Filter_Requests_based_on_HTTP_Status_code_200_400_5xx" title="Filter Requests based on HTTP Status code 200, 400, 5xx">Filter Requests based on HTTP Status code 200, 400, 5xx</a></li><li><a href="#Adding_time_range_to_the_SQL_Query_Find_the_top_10_users_within_time_range" title="Adding time range to the SQL Query &#8211; Find the top 10 users within time range">Adding time range to the SQL Query &#8211; Find the top 10 users within time range</a></li><li><a href="#Deep_Dive_into_the_user_pattern_Finding_the_top_10_URLs_used_by_the_client_IP_user" title="Deep Dive into the user pattern &#8211; Finding the top 10 URLs used by the client IP / user">Deep Dive into the user pattern &#8211; Finding the top 10 URLs used by the client IP / user</a></li><li><a href="#Find_Slow_endpoints_taking_more_processing_time_using_AWS_Athena" title="Find Slow endpoints taking more processing time using AWS Athena">Find Slow endpoints taking more processing time using AWS Athena</a></li><li><a href="#Athena_SQL_query_group_by_5_minutes_time_frame_Usage_Pattern_Rate_limit" title="Athena SQL query group by 5 minutes time frame &#8211; Usage Pattern / Rate limit">Athena SQL query group by 5 minutes time frame &#8211; Usage Pattern / Rate limit</a></li><li><a href="#Find_the_requests_closed_by_the_Client_abruptly_HTTP_status_code_499_or_460" title="Find the requests closed by the Client abruptly &#8211; HTTP status code 499 or 460">Find the requests closed by the Client abruptly &#8211; HTTP status code 499 or 460</a></li></ul></li><li><a href="#There_are_more_SQL_Queries_Coming_up" title="There are more SQL Queries. Coming up">There are more SQL Queries. Coming up</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="What_is_AWS_Athena">What is AWS  Athena</span></h2>
+<p>Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard <a href="https://docs.aws.amazon.com/athena/latest/ug/ddl-sql-reference.html">SQL</a>. With a few actions in the AWS Management Console, you can point Athena at your data stored in Amazon S3 and begin using standard SQL to run ad-hoc queries and get results in seconds.</p>
+<p>Athena is serverless, so there is no infrastructure to set up or manage, and you pay only for the queries you run. Athena scales automatically—running queries in parallel—so results are fast, even with large datasets and complex queries.</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM.png"><img class="post-img alignnone wp-image-9005 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x839.png" alt="Athena ALB" width="3632" height="1588" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM.png 3632w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-300x131.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-1024x448.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-768x336.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-1536x672.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-2048x895.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-1080x472.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9005 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM.png" alt="Athena ALB" width="3632" height="1588" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM.png 3632w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-300x131.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-1024x448.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-768x336.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-1536x672.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-2048x895.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-26-at-10.15.35-PM-1080x472.png 1080w" sizes="(max-width: 3632px) 100vw, 3632px" data-eio="l" /></noscript></a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="Check_If_ALB_logs_are_enabled_Enable_if_not">Check If ALB logs are enabled &#8211; Enable if not</span></h2>
+<p>To check whether ELB- Elastic Load Balancer has the Logs enabled.</p>
+<p>Go to Load Balancer -&gt; Select the Load Balancer -&gt; Check the Attributes section.</p>
+<p>Under the attributes section you can see the <code>Access logs</code> attribute.</p>
+<p>If the access log is enabled you would find the S3 Location and the S3 bucket name. If not enabled you would see <code>Disabled</code></p>
+<p>In the following screenshot, you can see the Access logs is enabled and the S3 location is shown.</p>
+<p><a href="../../wp-content/uploads/2022/08/alb-access-logs-enabled.png"><img class="post-img alignnone wp-image-9011 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1800x924.png" alt="" width="1800" height="924" data-src="../../wp-content/uploads/2022/08/alb-access-logs-enabled.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/alb-access-logs-enabled.png 1800w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-300x154.png 300w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-1024x526.png 1024w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-768x394.png 768w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-1536x788.png 1536w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-1080x554.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9011 size-full" src="../../wp-content/uploads/2022/08/alb-access-logs-enabled.png" alt="" width="1800" height="924" srcset="../../wp-content/uploads/2022/08/alb-access-logs-enabled.png 1800w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-300x154.png 300w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-1024x526.png 1024w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-768x394.png 768w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-1536x788.png 1536w, ../../wp-content/uploads/2022/08/alb-access-logs-enabled-1080x554.png 1080w" sizes="(max-width: 1800px) 100vw, 1800px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>If you have not enabled it yet. Just click on the <code>Edit attributes</code> and enable it</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM.png"><img class="post-img alignnone wp-image-9021 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1882x1394.png" alt="athena queries" width="1882" height="1394" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM.png 1882w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-300x222.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-1024x758.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-768x569.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-1536x1138.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-1080x800.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9021 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM.png" alt="athena queries" width="1882" height="1394" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM.png 1882w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-300x222.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-1024x758.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-768x569.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-1536x1138.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-6.21.37-PM-1080x800.png 1080w" sizes="(max-width: 1882px) 100vw, 1882px" data-eio="l" /></noscript></a></p>
+<p>If you use the existing S3 bucket or select the option to let aws create the S3 bucket for you to store the logs.</p>
+<p>now you can go to S3 and make sure that the bucket is created and the logs are coming.</p>
+<p>You may have to create some traffic and test the ALB to see the log files created.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ingesting_the_ALB_logs_from_S3_to_AWS_Athena">Ingesting the ALB logs from S3 to  AWS Athena</span></h2>
+<p>Now you have the ALB logs enabled and the logs are being written to the S3 bucket.</p>
+<p>Time to put the logs into Analysis using Athena.</p>
+<p>Let us start ingesting the S3 logs into Athena into some table.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Create_a_table_and_ingest_the_logs_from_S3_bucket">Create a table and ingest the logs from S3 bucket</span></h3>
+<p>You can go to Athena Query editor and open a new query tab and paste the following SQL query</p>
+<p>But you need to replace a few placeholders on the Query</p>
+<ul>
+<li>Account ID</li>
+<li>S3 bucket name</li>
+<li>Region</li>
+</ul>
+<p>Ideally, this is the directory structure of how ALB writes the logs in the S3 bucket. You can copy these values from the S3 bucket directory. names itself.</p>
+<p>You can optionally change the table name by replacing the <code> alb_logs</code> on the first line of the Query with some other name of your choice.</p>
+<p>This query creates the Partitioned table and ingests only the data defined on the <code>projection.day.range</code> field</p>
+<p>To know more about these fields and how to create this table without partition etc. <a href="https://docs.aws.amazon.com/athena/latest/ug/application-load-balancer-logs.html">refer this article </a></p>
+<p>This Query would work for the <strong>Application Load Balancer</strong> and <strong>Network Load Balancer</strong></p>
+<p>Classic Load Balancers would not have certain fields in this list. will see the difference shortly</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">CREATE EXTERNAL TABLE IF NOT EXISTS alb_logs (
+            type string,
+            time string,
+            elb string,
+            client_ip string,
+            client_port int,
+            target_ip string,
+            target_port int,
+            request_processing_time double,
+            target_processing_time double,
+            response_processing_time double,
+            elb_status_code int,
+            target_status_code string,
+            received_bytes bigint,
+            sent_bytes bigint,
+            request_verb string,
+            request_url string,
+            request_proto string,
+            user_agent string,
+            ssl_cipher string,
+            ssl_protocol string,
+            target_group_arn string,
+            trace_id string,
+            domain_name string,
+            chosen_cert_arn string,
+            matched_rule_priority string,
+            request_creation_time string,
+            actions_executed string,
+            redirect_url string,
+            lambda_error_reason string,
+            target_port_list string,
+            target_status_code_list string,
+            classification string,
+            classification_reason string
+            )
+            PARTITIONED BY
+            (
+             day STRING
+            )
+            ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.RegexSerDe'
+            WITH SERDEPROPERTIES (
+            'serialization.format' = '1',
+            'input.regex' = 
+        '([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*):([0-9]*) ([^ ]*)[:-]([0-9]*) ([-.0-9]*) ([-.0-9]*) ([-.0-9]*) (|[-0-9]*) (-|[-0-9]*) ([-0-9]*) ([-0-9]*) \"([^ ]*) (.*) (- |[^ ]*)\" \"([^\"]*)\" ([A-Z0-9-_]+) ([A-Za-z0-9.-]*) ([^ ]*) \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" ([-.0-9]*) ([^ ]*) \"([^\"]*)\" \"([^\"]*)\" \"([^ ]*)\" \"([^\s]+?)\" \"([^\s]+)\" \"([^ ]*)\" \"([^ ]*)\"')
+            LOCATION 's3://your-alb-logs-directory/AWSLogs/&lt;ACCOUNT-ID&gt;/elasticloadbalancing/&lt;REGION&gt;/'
+            TBLPROPERTIES
+            (
+             "projection.enabled" = "true",
+             "projection.day.type" = "date",
+             "projection.day.range" = "2022/01/01,NOW",
+             "projection.day.format" = "yyyy/MM/dd",
+             "projection.day.interval" = "1",
+             "projection.day.interval.unit" = "DAYS",
+             "storage.location.template" = "s3://your-alb-logs-directory/AWSLogs/&lt;ACCOUNT-ID&gt;/elasticloadbalancing/&lt;REGION&gt;/${day}"
+            )</pre>
+<p>&nbsp;</p>
+<p>Once the table is created, you would be able to see it on the left navigation pane of the query editor under <code>Tables</code></p>
+<p>you can start executing some simple SQL queries to test or preview the table</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="How_to_preview_the_table_in_Athena">How to preview the table in Athena</span></h3>
+<p>The easy way to preview the table is to click on the hamburger button adjacent to your table and click on the <code>Preview Table</code> option</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM.png"><img class="post-img alignnone wp-image-9013 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-992x742.png" alt="post-img" width="992" height="742" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM.png 992w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM-300x224.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM-768x574.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM-510x382.png 510w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9013 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM.png" alt="post-img" width="992" height="742" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM.png 992w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM-300x224.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM-768x574.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.55.18-AM-510x382.png 510w" sizes="(max-width: 992px) 100vw, 992px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Query_Editor_and_How_to_Edit_Write_and_Save_Queries">Query Editor and How to Edit, Write and Save Queries</span></h3>
+<p>I hope now you get a glimpse of it, as soon as you click on the preview table</p>
+<p>A new Query tab, would be opened with the following SQL query</p>
+<p>Note: The Query Tab would have auto incremented numbers like Query1, Query2 &#8230; QueryN</p>
+<p>You can start editing the Query and write your own SQL queries on the same tab.</p>
+<p>Or create a new Tab and write your Queries. by clicking on the <code>+</code> sign present the Name bar</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM.png"><img class="post-img alignnone wp-image-9015 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x310.png" alt="Athena ALB Queries" width="3554" height="574" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM.png 3554w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-300x48.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-1024x165.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-768x124.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-1536x248.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-2048x331.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-1080x174.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9015 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM.png" alt="Athena ALB Queries" width="3554" height="574" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM.png 3554w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-300x48.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-1024x165.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-768x124.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-1536x248.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-2048x331.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-10.06.51-AM-1080x174.png 1080w" sizes="(max-width: 3554px) 100vw, 3554px" data-eio="l" /></noscript></a></p>
+<p>You can Save your query using <code>Save</code> button shown below the Query panel.  Once saved it would be available on the <span style="color: #003366;"><strong>saved queries</strong></span></p>
+<p>By default, all the executed queries would be available in the <strong><span style="color: #003366;">recent queries</span> </strong>tab. You can re-launch it from there too.</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM.png"><img class="post-img alignnone wp-image-9014 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x566.png" alt="Athena ALB Queries" width="3526" height="1040" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM.png 3526w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-300x88.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-1024x302.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-768x227.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-1536x453.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-2048x604.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-1080x319.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9014 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM.png" alt="Athena ALB Queries" width="3526" height="1040" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM.png 3526w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-300x88.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-1024x302.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-768x227.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-1536x453.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-2048x604.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-9.59.17-AM-1080x319.png 1080w" sizes="(max-width: 3526px) 100vw, 3526px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>You can select a portion/part of the query on the query editor by highlighting it and clicking on the <strong><span style="color: #003366;">Run again</span></strong></p>
+<p>Otherwise, the entire query on the query editor would be executed by default.</p>
+<p>Now you know how Athena works and how to save, edit, write and execute the queries.</p>
+<p>Let us give you some Query examples to keep it handy for your troubleshooting</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Application_Load_Balancer_vs_Classic_Load_Balancer_Fields_Comparison">Application Load Balancer vs Classic Load Balancer &#8211; Fields Comparison</span></h3>
+<p>As we have mentioned earlier,  the fields available would vary for the Application Load balancer and Classic Load Balancer.</p>
+<p>Here is the list of fields available for Classic Load Balancer</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">timestamp           	string              	                    
+elb_name            	string              	                    
+request_ip          	string              	                    
+request_port        	int                 	                    
+backend_ip          	string              	                    
+backend_port        	int                 	                    
+request_processing_time	double              	                    
+backend_processing_time	double              	                    
+client_response_time	double              	                    
+elb_response_code   	string              	                    
+backend_response_code	string              	                    
+received_bytes      	bigint              	                    
+sent_bytes          	bigint              	                    
+request_verb        	string              	                    
+url                 	string              	                    
+protocol            	string              	                    
+user_agent          	string              	                    
+ssl_cipher          	string              	                    
+ssl_protocol        	string</pre>
+<p>&nbsp;</p>
+<p>Here is the list of fields available for Application Load Balancer</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">type                	string              	                    
+time                	string              	                    
+elb                 	string              	                    
+client_ip           	string              	                    
+client_port         	int                 	                    
+target_ip           	string              	                    
+target_port         	int                 	                    
+request_processing_time	double              	                    
+target_processing_time	double              	                    
+response_processing_time	double              	                    
+elb_status_code     	string              	                    
+target_status_code  	string              	                    
+received_bytes      	bigint              	                    
+sent_bytes          	bigint              	                    
+request_verb        	string              	                    
+request_url         	string              	                    
+request_proto       	string              	                    
+user_agent          	string              	                    
+ssl_cipher          	string              	                    
+ssl_protocol        	string              	                    
+target_group_arn    	string              	                    
+trace_id            	string              	                    
+domain_name         	string              	                    
+chosen_cert_arn     	string              	                    
+matched_rule_priority	string              	                    
+request_creation_time	string              	                    
+actions_executed    	string              	                    
+redirect_url        	string              	                    
+lambda_error_reason 	string              	                    
+target_port_list    	string              	                    
+target_status_code_list	string              	                    
+classification      	string              	                    
+classification_reason	string</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Athena_SQL_Queries_for_ELB_troubleshooting">Athena SQL Queries for ELB troubleshooting</span></h2>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Requests_grouped_by_HTTP_method_and_client_IP">Requests grouped by HTTP method and client IP</span></h3>
+<p>The following query counts the number of HTTP requests received by the load balancer grouped by the client IP address:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">SELECT COUNT(request_verb) AS
+ count,
+ request_verb,
+ client_ip
+FROM alb_logs
+GROUP BY request_verb, client_ip
+LIMIT 100;</pre>
+<p>Here is the output of this preceding SQL Query</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM.png"><img class="post-img alignnone wp-image-9019 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1316.png" alt="ALB Athena" width="2084" height="1428" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM.png 2084w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-300x206.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-1024x702.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-768x526.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-1536x1052.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-2048x1403.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-1080x740.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9019 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM.png" alt="ALB Athena" width="2084" height="1428" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM.png 2084w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-300x206.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-1024x702.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-768x526.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-1536x1052.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-2048x1403.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-28-at-7.01.33-PM-1080x740.png 1080w" sizes="(max-width: 2084px) 100vw, 2084px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Filter_requests_by_HTTP_method_GET_POST_OPTIONS_etc">Filter requests by HTTP method GET, POST, OPTIONS etc</span></h3>
+<p>Here is the SQL query to filter only POST requests</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">SELECT Count(request_verb) AS count,
+       request_verb,
+       client_ip
+FROM   alb_logs
+WHERE request_verb = 'POST'
+GROUP  BY request_verb,
+          client_ip
+LIMIT  100;</pre>
+<p>You can remove the <code>limit 100</code>  or increase it if you want more data</p>
+<p>This query can be modified to filter other HTTP request methods like GET, OPTIONS, DELETE, HEAD etc</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"> &#8211; HTTP OPTIONS
+SELECT Count(request_verb) AS count,
+       request_verb,
+       client_ip
+FROM   alb_logs
+WHERE request_verb = 'OPTIONS'
+GROUP  BY request_verb,
+          client_ip
+LIMIT  100; 
+
+ &#8211; HTTP GET
+SELECT Count(request_verb) AS count,
+       request_verb,
+       client_ip
+FROM   alb_logs
+WHERE request_verb = 'GET'
+GROUP  BY request_verb,
+          client_ip
+LIMIT  100; 
+
+ &#8211; HTTP DELETE
+SELECT Count(request_verb) AS count,
+       request_verb,
+       client_ip
+FROM   alb_logs
+WHERE request_verb = 'DELETE'
+GROUP  BY request_verb,
+          client_ip
+LIMIT  100;</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Filter_Requests_based_on_HTTP_Status_code_200_400_5xx">Filter Requests based on HTTP Status code 200, 400, 5xx</span></h3>
+<p>Before we see the query, you need to understand that there are two status codes available per each request</p>
+<ul>
+<li>elb_status_code</li>
+<li>target_status_code</li>
+</ul>
+<p><strong>elb_status_code </strong>is the status code returned by the ELB in case of no response from the target group or backend. All other times it would match the target_status_code</p>
+<p><strong>target_status_code </strong>is the status code returned by the backend Application.</p>
+<p>Why both status code is necessary ?.</p>
+<p>Let&#8217;s suppose ELB time out is configured as 60 seconds and the backend is taking more time to respond. the target_status_code would be empty as the backend has not responded yet and the elb close the connect with status 504.</p>
+<p>In scenarios like this. target_status_code and elb_status_code both are crucial</p>
+<p>Here is the SQL query to find the requests with 5xx response.</p>
+<p>This would be helpful to find your endpoints which are throwing 5xx errors the most.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"> &#8211; SQL query to find requests with 5xx status codes
+SELECT request_url,
+       count(elb_status_code)
+FROM   alb_logs
+WHERE  elb_status_code BETWEEN 500 and 599
+group by request_url</pre>
+<p>&nbsp;</p>
+<p>Here is the query that helps to find out the 2xx and 4xx response codes</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"> &#8211; SQL query to find requests with 4xx status codes
+SELECT request_url,
+       count(elb_status_code)
+FROM   alb_logs
+WHERE  elb_status_code BETWEEN 400 and 499
+group by request_url
+
+ &#8211; SQL query to find requests with 2xx status codes
+SELECT request_url,
+       count(elb_status_code)
+FROM   alb_logs
+WHERE  elb_status_code BETWEEN 200 and 299
+group by request_url</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Adding_time_range_to_the_SQL_Query_Find_the_top_10_users_within_time_range">Adding time range to the SQL Query &#8211; Find the top 10 users within time range</span></h3>
+<p>So far we have seen SQL Queries with no time range specification. Let&#8217;s suppose you want to find out which users/IPs are using your service the most in a specific time range.</p>
+<p>You need to use the time range in your SQL query.</p>
+<p>Just like any other SQL query. It&#8217;s the simple  Start time and end time combined with between clause.</p>
+<p>Here is a query to find out which IP has used the services or hit the LB the most in the 24-hour time range.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"> &#8211; Requests grouped by Client IP
+SELECT client_ip, count(client_ip) as cnt
+FROM myalb_logs
+WHERE  parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z') 
+     BETWEEN parse_datetime('2022-08-29-00:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-08-29-23:59:00','yyyy-MM-dd-HH:mm:ss')
+GROUP BY client_ip 
+ORDER BY cnt DESC</pre>
+<p>Here is the execution output. I have masked the IP address for security reasons.</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM.png"><img class="post-img alignnone wp-image-9020 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1193.png" alt="athena alb queries" width="2846" height="1768" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM.png 2846w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-300x186.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-1024x636.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-768x477.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-1536x954.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-2048x1272.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-1080x671.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9020 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM.png" alt="athena alb queries" width="2846" height="1768" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM.png 2846w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-300x186.png 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-1024x636.png 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-768x477.png 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-1536x954.png 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-2048x1272.png 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-08-29-at-7.28.07-PM-1080x671.png 1080w" sizes="(max-width: 2846px) 100vw, 2846px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Deep_Dive_into_the_user_pattern_Finding_the_top_10_URLs_used_by_the_client_IP_user">Deep Dive into the user pattern &#8211; Finding the top 10 URLs used by the client IP / user</span></h3>
+<p>In the previous example we have found out who are our top 10 customers/users by their total usage</p>
+<p>Next on our list is to find out what endpoints or URLs they (clients) use most.</p>
+<p>Here is the query to find out the top 10 most used endpoints/URLs of the customer with the client_ip <code>13.xxx.xxx.xxx</code></p>
+<p>You can use this query and make modifications to find out the entire access log of some IP / user</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"> &#8211; Top 10 requests per IP
+SELECT request_url, client_ip, count(client_ip) as cnt
+FROM myalb_logs
+WHERE client_ip = '13.xxx.xxx.xxx'
+AND parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z')
+BETWEEN parse_datetime('2022-08-29-00:00:00','yyyy-MM-dd-HH:mm:ss')
+AND parse_datetime('2022-08-29-23:59:00','yyyy-MM-dd-HH:mm:ss')
+GROUP BY client_ip, request_url
+ORDER BY cnt DESC
+LIMIT 10</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Find_Slow_endpoints_taking_more_processing_time_using_AWS_Athena">Find Slow endpoints taking more processing time using AWS Athena</span></h3>
+<p>Here is one more Query where use the <code>request_processing_time</code> field of ALB logs to find out which request is taking more time.</p>
+<p>In other words, What are the slow URLs/services in the ALB</p>
+<p>Here is the SQL Query to find out</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">SELECT request_url, AVG(request_processing_time) as avg_response, COUNT(request_url) as cnt
+FROM myalb_logs
+WHERE parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z') 
+     BETWEEN parse_datetime('2022-08-24-00:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-08-24-23:59:00','yyyy-MM-dd-HH:mm:ss')
+GROUP BY request_url
+ORDER BY avg_response DESC
+</pre>
+<p>In this query, we are taking the Average response of the request URL and also showing the count, of how many requests have been taken into consideration.</p>
+<p>This would be helpful for finding the slowest endpoints behind the ALB and you can fix it for a good customer experience.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Athena_SQL_query_group_by_5_minutes_time_frame_Usage_Pattern_Rate_limit">Athena SQL query group by 5 minutes time frame &#8211; Usage Pattern / Rate limit</span></h3>
+<p>This example is a real-time use case to understand your user&#8217;s behaviour and to find out some baseline numbers for usage.</p>
+<p>Let&#8217;s say you want to implement a Rate limit on the Application Load Balancer with AWS WAF and you want to know what is the current usage pattern</p>
+<p>How many users are reaching the application every 5 minutes?</p>
+<p>Who are our Highly contributing and heavy usage customers? What is the usage pattern of our customers? Is there a DDOS attack or Burst requests from any customer?</p>
+<p>All these questions can be answered with the data you are going to collect</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"> &#8211; Check 5 minute Requests sort by time 00 to 23:50 &#8211; 
+
+SELECT from_unixtime(floor(to_unixtime(from_iso8601_timestamp(request_creation_time)) / 300 )*300) as timekey, client_ip, count(client_ip) as cnt
+FROM "sampledb"."myalb_logs"
+WHERE parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z') 
+     BETWEEN parse_datetime('2022-09-30-00:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-09-30-23:59:00','yyyy-MM-dd-HH:mm:ss')
+GROUP BY from_unixtime(floor(to_unixtime(from_iso8601_timestamp(request_creation_time)) / 300 )*300) , client_ip
+ORDER BY timekey, client_ip DESC
+
+ &#8211; Check 5 minute Requests sort by Request Count &#8211; 
+
+SELECT from_unixtime(floor(to_unixtime(from_iso8601_timestamp(request_creation_time)) / 300 )*300) as timekey, client_ip, count(client_ip) as cnt
+FROM "sampledb"."myalb_logs"
+WHERE parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z') 
+     BETWEEN parse_datetime('2022-09-01-00:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-09-30-23:59:00','yyyy-MM-dd-HH:mm:ss')
+GROUP BY from_unixtime(floor(to_unixtime(from_iso8601_timestamp(request_creation_time)) / 300 )*300) , client_ip
+ORDER BY cnt DESC
+
+ &#8211; Check 5 minute Requests For Single User IP &#8211; 
+
+SELECT from_unixtime(floor(to_unixtime(from_iso8601_timestamp(request_creation_time)) / 300 )*300) as timekey, client_ip, count(client_ip) as cnt
+FROM "sampledb"."myalb_logs"
+WHERE client_ip = '13.**.**.105' AND parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z') 
+     BETWEEN parse_datetime('2022-09-01-00:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-09-30-23:59:00','yyyy-MM-dd-HH:mm:ss')
+GROUP BY from_unixtime(floor(to_unixtime(from_iso8601_timestamp(request_creation_time)) / 300 )*300) , client_ip
+ORDER BY cnt DESC</pre>
+<p>I have written three queries for different use cases</p>
+<ul>
+<li>Requests count for all clients grouped by every 5 minutes</li>
+<li>Find the request counts of all clients based on the 5-minute usage. sort Higher to lower</li>
+<li>Find the usage pattern of a single client_ip (user)</li>
+</ul>
+<p>All these data would help us to retrospect our application and to set some fair usage policy and rate limiting.</p>
+<p>Hope this helps</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Find_the_requests_closed_by_the_Client_abruptly_HTTP_status_code_499_or_460">Find the requests closed by the Client abruptly &#8211; HTTP status code 499 or 460</span></h3>
+<p>At times, when you are trying to troubleshoot a user&#8217;s session, you might find a status code <code>460</code> on the ALB logs, It is a response of ALB to indicate that the client has closed the connection</p>
+<p>This is like the nginx 499 status code to indicate that the client has closed the connection</p>
+<p>In a system architecture where ALB and NGINX both are used together. when the client has closed the connection due to network issues or some browser issues. you might see 499 at the nginx level and 460 at the alb level.</p>
+<p>Here is the diagram I have created, that represents this scenario</p>
+<p><a href="../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM.jpg"><img class="post-img alignnone wp-image-9406 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x779.png" alt="alb athena status code" width="2096" height="850" data-src="../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM.jpg 2096w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-300x122.jpg 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-1024x415.jpg 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-768x311.jpg 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-1536x623.jpg 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-2048x831.jpg 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-1080x438.jpg 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9406 size-full" src="../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM.jpg" alt="alb athena status code" width="2096" height="850" srcset="../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM.jpg 2096w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-300x122.jpg 300w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-1024x415.jpg 1024w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-768x311.jpg 768w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-1536x623.jpg 1536w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-2048x831.jpg 2048w, ../../wp-content/uploads/2022/08/Screenshot-2022-12-08-at-10.52.17-PM-1080x438.jpg 1080w" sizes="(max-width: 2096px) 100vw, 2096px" data-eio="l" /></noscript></a></p>
+<p>you can see when the client closes the connection. ALB responds with 460.</p>
+<p>You can use the following ALB Athena SQL query to find such client-closed connections with alb response code 460</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">SELECT request_url, client_ip, elb_status_code, target_status_code, count(request_url) as totalrequests FROM "sampledb"."alblogs"
+WHERE elb_status_code = 460 AND
+parse_datetime(request_creation_time,'yyyy-MM-dd''T''HH:mm:ss.SSSSSS''Z') 
+     BETWEEN parse_datetime('2022-12-01-00:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-12-08-23:59:00','yyyy-MM-dd-HH:mm:ss') AND 
+request_url like '%/some/pattern/to/search%'
+GROUP BY elb_status_code,request_url, client_ip, elb_status_code, target_status_code
+ORDER by totalrequests desc</pre>
+<p>In this query, we are searching for a URL pattern as well as a status code between the time range.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="There_are_more_SQL_Queries_Coming_up">There are more SQL Queries. Coming up</span></h2>
+<p>I know we have covered only a few SQL queries/examples to show the capability of ALB logs and Athena.</p>
+<p>But there are various fields that we are yet to explore and the possibility is huge.</p>
+<p>So we will try to add more examples to this article consistently.</p>
+<p>You can comment on your favourite/Handy Athena SQL queries for SQL troubleshooting and get it featured here.</p>
+<a href="../../wp-content/uploads/2021/09/DaaS.svg"><img class="post-img lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1047 415'%3E%3C/svg%3E" alt="gritfy" width="1047" height="415" class="post-img lazyload" data-src="../../wp-content/uploads/2021/09/DaaS.svg" loading="lazy" /><noscript><img class="post-img" src="../../wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" data-eio="l" /></noscript></a>
+<p>Hope this helps.</p>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Sarav</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#4b232e2727240b2c39223f2d3265282426"> <span class="__cf_email__" data-cfemail="1c74797070735c7b6e75687a65327f7371">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670530536" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="9000" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="65bbdddae5" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670530536" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1670530536"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-shell-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Shell" data-src="../../wp-content/uploads/2019/10/Screenshot-2019-10-21-at-5.29.32-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/10/Screenshot-2019-10-21-at-5.29.32-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Shell" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-shell-examples/index.html'>Ansible Shell Module Examples</a><p>&nbsp; Ansible shell module is designed to execute Shell commands against the target Unix based hosts. Unlike the Ansible command module, Ansible Shell would accept any highly complexed commands with pipes, redirection etc and you can also execute Shell scripts using Ansible Shell module. The Advantage of Ansible Shell module&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-unarchive-module-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible unarchive" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-07-at-4.53.15-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-07-at-4.53.15-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible unarchive" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-unarchive-module-examples/index.html'>Ansible Unarchive Module Examples</a><p>What is Ansible Unarchive Module and How does it work Ansible Unarchive module helps to unpack or uncompress the files from an archive file such as tar, tar.gz, zip  . Ansible unarchive module can optionally copy the files to the remote server before uncompressing them. Though the unarchive module is&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-cli-stop-terminate-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2020/05/terminate-ec2-instance-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/05/terminate-ec2-instance-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-cli-stop-terminate-examples/index.html'>AWS CLI EC2 Stop and Terminate command Examples</a><p>In AWS infrastructure, We create a lot of EC2 instances on demand and we tend to forget about the stopped instances considering that it is stopped and not being billed for. But the fact is that Even the stopped instances would cost you a couple of pennies in various forms&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible_json_query/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible json_query" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-13-at-5.15.00-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-13-at-5.15.00-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible json_query" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible_json_query/index.html'>Ansible JSON - Parse JSON using Ansible json_query</a><p>Ansible json_query is an on-demand feature that every ansible user wants to explore. In this post we are going to how Ansible JSON processing works. During the infrastructure automation, we might end up in a situation where we need to process Huge datasets, especially in JSON format.    We might&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-find-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Find" data-src="../../wp-content/uploads/2020/01/Screenshot-2020-01-03-at-4.51.17-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/01/Screenshot-2020-01-03-at-4.51.17-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Find" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-find-examples/index.html'>Ansible Find Examples - How to use Ansible Find</a><p>Ansible find module functions as same as the Linux Find command and helps to find files and directories based on various search criteria such as age of the file, accessed date, modified date,  regex search pattern etcetera. As said earlier, this is more of an ansible way to execute the&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../kubectl-get-nodes-sort-by-age-ip-and-more-devops-junction/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Kubectl Get Nodes Sort by AGE, IP and more | Devops Junction</a></div><div class="nav-next"><a href="../kubectl-get-containers-in-pod-how-to-list-containers-in-pod-devops-junction/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Kubectl Get containers in pod &#8211; How to list containers in POD | Devops Junction</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (68)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (25)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (8)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"9000 https:\/\/www.middlewareinventory.com\/?p=9000","disqusShortname":"mwinventory","disqusTitle":"Athena SQL Query Examples for ALB troubleshooting | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/aws-athena-queries-examples-alb\/","postId":"9000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"84b5a96e46"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"b6b6b00d8d","post_id":"9000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"7f3458fda1","ip":"208.127.190.44","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"7405d419b6","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"ff87afad6f","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"9000","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/aws-athena-queries-examples-alb/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1670530536;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

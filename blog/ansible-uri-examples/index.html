@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Ansible URI module Examples - How to use Ansible URI | Devops Junction</title>
+<meta name="description" content="Ansible URI module examples. How to use Ansible URI module in playbook. How to use Ansible with API and Webservices JSON, HTTP GET, PUT, POST examples." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible URI module Examples - How to use Ansible URI | Devops Junction" />
+<meta property="og:description" content="Ansible URI module examples. How to use Ansible URI module in playbook. How to use Ansible with API and Webservices JSON, HTTP GET, PUT, POST examples." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-uri-examples/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-11-20T09:05:23+00:00" />
+<meta property="article:modified_time" content="2022-11-20T19:14:08+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png" />
+<meta property="og:image:width" content="1690" />
+<meta property="og:image:height" content="1496" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png","width":1690,"height":1496,"caption":"Ansible URI examples"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-uri-examples/","name":"Ansible URI module Examples - How to use Ansible URI | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#primaryimage"},"datePublished":"2022-11-20T09:05:23+00:00","dateModified":"2022-11-20T19:14:08+00:00","description":"Ansible URI module examples. How to use Ansible URI module in playbook. How to use Ansible with API and Webservices JSON, HTTP GET, PUT, POST examples.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-uri-examples/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible URI module Examples &#8211; How to use Ansible URI | Devops Junction","datePublished":"2022-11-20T09:05:23+00:00","dateModified":"2022-11-20T19:14:08+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-uri-examples/#primaryimage"},"articleSection":"Ansible","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-uri-examples/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible URI module Examples &#8211; How to use Ansible URI | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/6507.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-uri-examples-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-uri-examples-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+article li {
+    padding: 10px;
+    margin-left: 2%;
+}
+article li::marker
+{
+  color: red;
+}
+b,strong{
+  color: black;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    background: #eaeef3 none repeat scroll 0% 0% !important;
+}
+
+
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-6507 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-6507" class="post-6507 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible URI module Examples &#8211; How to use Ansible URI | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="2:35 pm" rel="bookmark"><time class="entry-date published updated" datetime="November 21, 2022">November 21, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20URI%20module%20Examples%20%E2%80%93%20How%20to%20use%20Ansible%20URI%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-uri-examples%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="6507" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-uri-examples/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+URI+module+Examples+%E2%80%93+How+to+use+Ansible+URI+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-uri-examples%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="6507" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-uri-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20URI%20module%20Examples%20%E2%80%93%20How%20to%20use%20Ansible%20URI%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-uri-examples%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="6507" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-uri-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-uri-examples%2F&subject=Ansible%20URI%20module%20Examples%20%E2%80%93%20How%20to%20use%20Ansible%20URI%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="6507" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-uri-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="6507" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-uri-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>Ansible has become a widely accepted automation platform not just for Infrastructure Automation but for various other use cases</p>
+<p>Some of them are Web and API automation, Monitoring Automation, Cloud Automation and Infrastructure as a code like Terraform</p>
+<p>In this article, we are going to see how to use Ansible for Web and API automation.</p>
+<p>Ansible has two powerful modules for WebService and API automation. they are</p>
+<ul>
+<li><span style="color: #165ca1;"><strong>get_url / win_get_url </strong></span>&#8211; to download files from HTTP/HTTPS and FTP sites</li>
+<li><span style="color: #000000;"><span style="color: #165ca1;"><strong>uri / win_uri</strong></span> </span>&#8211; to interact with web service ( we are going to discuss in this article)</li>
+</ul>
+<p>While the<strong> get_url</strong> module is simply to interact with web and FTP sites and download files.</p>
+<p>The URI module is much more powerful to interact with API and Webservices, You can use the URI module for Complete API monitoring and Automation.</p>
+<p><a href="../../wp-content/uploads/2022/11/ansible-uri.jpg"><img class="post-img alignnone wp-image-9364 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="ansible uri " width="1748" height="1240" data-src="../../wp-content/uploads/2022/11/ansible-uri.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/ansible-uri.jpg 1748w, ../../wp-content/uploads/2022/11/ansible-uri-300x213.jpg 300w, ../../wp-content/uploads/2022/11/ansible-uri-1024x726.jpg 1024w, ../../wp-content/uploads/2022/11/ansible-uri-768x545.jpg 768w, ../../wp-content/uploads/2022/11/ansible-uri-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/11/ansible-uri-400x284.jpg 400w, ../../wp-content/uploads/2022/11/ansible-uri-1080x766.jpg 1080w, ../../wp-content/uploads/2022/11/ansible-uri-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9364 size-full" src="../../wp-content/uploads/2022/11/ansible-uri.jpg" alt="ansible uri " width="1748" height="1240" srcset="../../wp-content/uploads/2022/11/ansible-uri.jpg 1748w, ../../wp-content/uploads/2022/11/ansible-uri-300x213.jpg 300w, ../../wp-content/uploads/2022/11/ansible-uri-1024x726.jpg 1024w, ../../wp-content/uploads/2022/11/ansible-uri-768x545.jpg 768w, ../../wp-content/uploads/2022/11/ansible-uri-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/11/ansible-uri-400x284.jpg 400w, ../../wp-content/uploads/2022/11/ansible-uri-1080x766.jpg 1080w, ../../wp-content/uploads/2022/11/ansible-uri-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Ansible_URI_module_Quick_Examples" title="Ansible URI module Quick Examples">Ansible URI module Quick Examples</a></li><li><a href="#Ansible_URI_parameters" title="Ansible URI parameters">Ansible URI parameters</a></li><li><a href="#Beginner_to_Ansible_No_Problem" title="Beginner to Ansible? No Problem">Beginner to Ansible? No Problem</a></li><li><a href="#Ansible_URI_Examples" title="Ansible URI Examples">Ansible URI Examples</a><ul><li><a href="#Ansible_URI_module_to_connect_and_validate_status_code" title="Ansible URI module to connect and validate status code">Ansible URI module to connect and validate status code</a></li><li><a href="#The_Ansible_URI_module_follow_redirection" title="The Ansible URI module follow redirection">The Ansible URI module follow redirection</a></li><li><a href="#Ansible_URI_How_to_work_with_body_of_the_response_or_page_content" title="Ansible URI &#8211; How to work with body of the response or page content">Ansible URI &#8211; How to work with body of the response or page content</a></li><li><a href="#Ansible_URI_for_API_Automation_JSON_payload" title="Ansible URI for API Automation &#8211; JSON payload">Ansible URI for API Automation &#8211; JSON payload</a></li><li><a href="#Ansible_playbook_to_log_in_to_Form-based_Authentication_Ansible_URI" title="Ansible playbook to log in to Form-based Authentication &#8211; Ansible URI">Ansible playbook to log in to Form-based Authentication &#8211; Ansible URI</a></li><li><a href="#How_to_wait_for_the_URL_to_be_reachable_or_until_it_returns_a_Status_code_or_Content" title="How to wait for the URL to be reachable or until it returns a Status code or Content">How to wait for the URL to be reachable or until it returns a Status code or Content</a></li><li><a href="#More_examples_are_coming" title="More examples are coming">More examples are coming</a></li></ul></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Ansible_URI_module_Quick_Examples">Ansible URI module Quick Examples</span></h2>
+<p>Ansible URI module can be used for simple use cases like checking the status of the web pages and validating the status code as well as complex use cases such as API automation with different HTTP methods and payloads.</p>
+<p>Before we start to go deep into the URI module, Let me give two quick examples of Ansible URI to show you what is ansible URI module capable of.</p>
+<p><strong>Ansible URI used for Simple Status code check</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Playbook for Web automation 
+  hosts: localhost
+  tasks:
+  - name: Check if devopsjunction.com is available and returning status 200
+    uri:
+      url: https://devopsjunction.com
+    register: result</pre>
+<p>&nbsp;</p>
+<p><strong>Ansible URI module used for API or WebService testing</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Playbook for Web automation 
+  hosts: localhost
+  tasks:
+  - name: Ansible URI used for user registration
+    uri:
+      url: https://reqres.in/api/users
+      method: POST
+      body: |-
+        {
+          "name": "Sarav",
+          "job": "leader"
+        }
+      return_content: yes
+      status_code: 201</pre>
+<p>&nbsp;</p>
+<p>Both these playbooks can be tested from your end as we have used publically available URLs/ Webservices.</p>
+<p>We will decode these playbooks in detail shortly.</p>
+<h2></h2>
+<h2><span class="ez-toc-section" id="Ansible_URI_parameters">Ansible URI parameters</span></h2>
+<p>These are the list of parameters supported by the Ansible URI module. I have compiled all the parameters of Ansible URI and their usage, in the following image</p>
+<p>Please go through the list, we would be using most of these parameters in our ansible URI module example playbooks shortly.</p>
+<p><a href="../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png"><img class="post-img alignnone wp-image-9332 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1690x1496.png" alt="Ansible URI examples" width="1690" height="1496" data-src="../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png 1690w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-300x266.png 300w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-1024x906.png 1024w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-768x680.png 768w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-1536x1360.png 1536w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-1080x956.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9332 size-full" src="../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png" alt="Ansible URI examples" width="1690" height="1496" srcset="../../wp-content/uploads/2022/11/ansible-uri-module-parameters.png 1690w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-300x266.png 300w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-1024x906.png 1024w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-768x680.png 768w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-1536x1360.png 1536w, ../../wp-content/uploads/2022/11/ansible-uri-module-parameters-1080x956.png 1080w" sizes="(max-width: 1690px) 100vw, 1690px" data-eio="l" /></noscript></a></p>
+<p>Let us explore and try a few examples of this Ansible URI module.  we will start with the ones from the previous Quick examples section.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Beginner_to_Ansible_No_Problem">Beginner to Ansible? No Problem</span></h2>
+<p>Unless you are new to Ansible, you must already be aware of the basic skeleton of the Ansible playbook.</p>
+<p>If you are completely new to the Ansible playbook, I would refer you to read our Beginner Articles on Ansible by following the below links</p>
+<ul>
+<li><a href="../ansible-playbook-example/index.html">What is Ansible playbook </a></li>
+<li><a href="../ansible-ad-hoc-commands/index.html">What are Ansible ad hoc Commands</a></li>
+</ul>
+<p>We are presuming that you know the basics of the Ansible playbook, therefore we are going to decode only the tasks.</p>
+<p>Let us move on to the examples of the Ansible URI module.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_URI_Examples">Ansible URI Examples</span></h2>
+<p>Let us go through various examples and learn and understand the Ansible URI module better</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_URI_module_to_connect_and_validate_status_code">Ansible URI module to connect and validate status code</span></h3>
+<p>This was our first playbook from the Quick example section, it is to connect to URL and to validate if it is alive by validating the returning status code 200</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Playbook for Web automation 
+  hosts: localhost
+  tasks:
+  - name: Check if devopsjunction.com is available and returning status 200
+    uri:
+      url: https://devopsjunction.com
+    register: result</pre>
+<p>we have one task in the playbook, with a URI module.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">- name: Check if devopsjunction.com is available and returning status 200
+    uri:
+      url: https://devopsjunction.com
+    register: result</pre>
+<p>In this task, we are connecting to the remote URL <code>https://devopsjunction.com</code> and validating whether it&#8217;s alive and responding with HTTP status code 200</p>
+<p>If you look at the playbook, nowhere we are defining the status code to look for.</p>
+<blockquote><p>If <code>status_code</code> directive is not specified.</p>
+<p>Ansible, by default, would consider status code 200 as a success, anything else would fail the playbook</p></blockquote>
+<p>In cases, where the remote URL is supposed to return a NON 200 status code, like <code>301</code> or <code>302</code> we must explicitly define what is the expected status code with the <code>status_code</code>  parameter</p>
+<p>Here is the execution output of this playbook</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png"><img class="post-img alignnone wp-image-9335 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x893.png" alt="ansible uri" width="3000" height="1396" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png 3000w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-300x140.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1024x477.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-768x357.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1536x715.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-2048x953.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1080x503.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9335 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png" alt="ansible uri" width="3000" height="1396" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png 3000w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-300x140.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1024x477.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-768x357.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1536x715.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-2048x953.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1080x503.png 1080w" sizes="(max-width: 3000px) 100vw, 3000px" data-eio="l" /></noscript></a></p>
+<p>You can see the playbook execution is successful and passed.  This is a simple ansible playbook to check if a website or webservice is up and running and returning a specific status code.</p>
+<p>Let&#8217;s suppose we want the URI module to succeed only when the remote URL is returning the status HTTP 301</p>
+<p>As we have already discussed, we need to explicitly specify it with the status_code parameter, as shown in the following playbook</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Ansible URI module examples
+  hosts: localhost
+  tasks:
+  - name: Check if devopsjunction.com is available and returning status 301
+    uri:
+      url: https://devopsjunction.com
+      status_code: 301
+    register: result</pre>
+<p>Here is the execution output of this new playbook</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM.png"><img class="post-img alignnone wp-image-9338 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x909.png" alt="ansible uri status code" width="3668" height="1736" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM.png 3668w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-300x142.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-1024x485.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-768x363.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-1536x727.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-2048x969.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-1080x511.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9338 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM.png" alt="ansible uri status code" width="3668" height="1736" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM.png 3668w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-300x142.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-1024x485.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-768x363.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-1536x727.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-2048x969.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-7.07.06-PM-1080x511.png 1080w" sizes="(max-width: 3668px) 100vw, 3668px" data-eio="l" /></noscript></a></p>
+<p>Let us move on.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="The_Ansible_URI_module_follow_redirection">The Ansible URI module follow redirection</span></h3>
+<p>Our previous playbook from example 1, should have ideally failed but it got succeeded. Let me tell you why.</p>
+<p>If you try the <code>https://devopsjunction.com</code> directly through CURL, you would see it returning 301 status code</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">~|⇒ curl https://devopsjunction.com -I
+HTTP/2 301
+location: https://middlewareinventory.com/devops-junction
+cache-control: max-age=3600
+expires: Sat, 12 Nov 2022 13:28:56 GMT
+content-type: text/html; charset=iso-8859-1
+date: Sat, 12 Nov 2022 12:28:56 GMT
+server: Apache</pre>
+<p>in that case, our playbook should have not succeeded right? but it has. why?</p>
+<p>The reason is <code>follow_redirection</code> . By default, Ansible URI follows if there is a Safe redirection and consider the last hop&#8217;s status.</p>
+<p>In our case, despite the first hop was returning <code>301</code> once it has completed the redirections. the end result was <code>200</code> that&#8217;s what made our previous playbook succeed.</p>
+<p>To understand this better. You can use the <strong>follow redirection</strong> option available on the CURL itself. using the <code>-L</code> flag</p>
+<p>Here is the output of CURL with follow redirection for devopsjunction.com. You can see the final status code is eventually 200.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">~|⇒ curl -L https://devopsjunction.com -I
+HTTP/2 301
+location: https://middlewareinventory.com/devops-junction
+cache-control: max-age=3600
+expires: Sat, 12 Nov 2022 16:55:36 GMT
+content-type: text/html; charset=iso-8859-1
+date: Sat, 12 Nov 2022 15:55:36 GMT
+server: Apache
+
+HTTP/2 301
+date: Sat, 12 Nov 2022 15:55:37 GMT
+content-type: text/html; charset=UTF-8
+location: https://www.middlewareinventory.com/devops-junction
+x-redirect-by: WordPress
+vary: X-Forwarded-Proto,Accept-Encoding,User-Agent
+......
+......
+
+HTTP/2 301
+date: Sat, 12 Nov 2022 15:55:37 GMT
+content-type: text/html; charset=UTF-8
+location: https://www.middlewareinventory.com/devops-junction/
+x-redirect-by: WordPress
+vary: X-Forwarded-Proto,Accept-Encoding,User-Agent
+cache-control: max-age=3600
+......
+......
+
+HTTP/2 200
+date: Sat, 12 Nov 2022 15:55:38 GMT
+content-type: text/html; charset=UTF-8
+vary: Accept-Encoding,Cookie
+last-modified: Thu, 10 Nov 2022 19:39:14 GMT
+cache-control: max-age=0, public
+......
+......
+</pre>
+<p>This is exactly what Ansible did. It followed the redirections.</p>
+<blockquote><p>You can control whether or not to follow the redirects with a parameter <code>follow_redirects</code></p></blockquote>
+<p>If you set the <strong>follow_redirects</strong> to <strong>none</strong>, Ansible URI would not follow the redirects and our playbook would fail.</p>
+<p>Look at the playbook and the execution output of both with and without <code>follow_redirects</code></p>
+<p><strong>Here is the execution output of the playbook without <code>follow_redirects</code> parameter. </strong></p>
+<p>Ansible assumes to follow the redirects by default ( this is the same playbook from previous example)</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png"><img class="post-img alignnone wp-image-9335 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x893.png" alt="" width="3000" height="1396" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png 3000w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-300x140.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1024x477.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-768x357.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1536x715.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-2048x953.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1080x503.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9335 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png" alt="" width="3000" height="1396" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM.png 3000w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-300x140.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1024x477.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-768x357.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1536x715.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-2048x953.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-12-at-6.39.22-PM-1080x503.png 1080w" sizes="(max-width: 3000px) 100vw, 3000px" data-eio="l" /></noscript></a></p>
+<p><strong>The output of the playbook with <code>follow_redirects</code> parameter set to <code>none</code>  </strong></p>
+<p>we instruct ansible to not follow redirects this time and it fails.</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png"><img class="post-img alignnone wp-image-9348 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x870.png" alt="ansible uri json" width="2954" height="1338" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png 2954w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-300x136.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1024x464.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-768x348.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1536x696.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-2048x928.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1080x489.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9348 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png" alt="ansible uri json" width="2954" height="1338" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png 2954w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-300x136.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1024x464.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-768x348.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1536x696.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-2048x928.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1080x489.png 1080w" sizes="(max-width: 2954px) 100vw, 2954px" data-eio="l" /></noscript></a></p>
+<p>hope you have understood the crucial role of follow_redirects in the Ansible URI module.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_URI_How_to_work_with_body_of_the_response_or_page_content">Ansible URI &#8211; How to work with body of the response or page content</span></h3>
+<p>the last two examples we have seen on Ansible URI were around the status code. sometimes we might want to work with the content of the web page.</p>
+<p>In this example, we are going to see how Ansible URI handles the content of the webpage or the API response</p>
+<p>Let us see it with a practical example, Let&#8217;s suppose we want to know the public IP address of the node where the Ansible task is being executed. ( controller or remote)</p>
+<p>Based on that result, we might want to execute or skip a downward task</p>
+<p>Look at the following playbook where we connect to the remote URL <code>https://checkip.amazonaws.com</code>  this returns ( response/content) the public IP of the origin ( from where the call has been made)</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Ansible URI module examples
+  hosts: localhost
+  tasks:
+  - name: Check the outbound IP address
+    uri:
+      url: https://checkip.amazonaws.com 
+      return_content: true
+    register: result
+
+  - name: Creating a new variable to store this IP
+    set_fact:
+      publicip: "{{ result.content | trim() }}"
+
+  - debug: 
+      var: publicip</pre>
+<p>&nbsp;</p>
+<p>Here is the execution output of this playbook</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM.png"><img class="post-img alignnone wp-image-9342 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1456.png" alt="ansible uri return content" width="2750" height="2086" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM.png 2750w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-300x228.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-1024x777.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-768x583.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-1536x1165.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-2048x1554.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-1080x819.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9342 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM.png" alt="ansible uri return content" width="2750" height="2086" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM.png 2750w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-300x228.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-1024x777.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-768x583.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-1536x1165.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-2048x1554.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-13-at-9.29.40-PM-1080x819.png 1080w" sizes="(max-width: 2750px) 100vw, 2750px" data-eio="l" /></noscript></a></p>
+<p>If you look closer, you would be able to see we are using a parameter <code>return_content</code> and it is set to <code>yes</code></p>
+<p>Why do we need return_content on Ansible?</p>
+<p>Without the return_content parameter, Ansible would not collect the response content or page content.</p>
+<p>To validate this you can try the same playbook without the return_content parameter.</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM.png"><img class="post-img alignnone wp-image-9343 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1211.png" alt="ansible uri return_content" width="3188" height="2010" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM.png 3188w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-300x189.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-1024x646.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-768x484.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-1536x968.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-2048x1291.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-1080x681.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9343 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM.png" alt="ansible uri return_content" width="3188" height="2010" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM.png 3188w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-300x189.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-1024x646.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-768x484.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-1536x968.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-2048x1291.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-14-at-4.35.46-PM-1080x681.png 1080w" sizes="(max-width: 3188px) 100vw, 3188px" data-eio="l" /></noscript></a></p>
+<p>As shown in the preceding snapshot, we have removed the <code>return_content</code> and the task is failing.</p>
+<p>If you look at the highlighted text on the failure message. you can see there is no attribute named <code>content</code></p>
+<p>By default, ansible does not collect the entire page response or the content it is more like using <code>curl -I</code>  where curl collects only the headers, not the content.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_URI_for_API_Automation_JSON_payload">Ansible URI for API Automation &#8211; JSON payload</span></h3>
+<p>So far we have been using only web services with ansible URI.  Let us start to use API endpoints and different content-type and payloads.</p>
+<p>Let us start with the famous JSON payload. JSON has become an indispensable element in API and Webservices.</p>
+<p>In this example, we are going to use a publicly available API endpoint <a href="https://reqres.in" target="_blank" rel="noopener noreferrer">reqres.in</a></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Ansible URI examples
+  hosts: localhost
+  tasks:
+  - name: Ansible URI playbook for API with JSON Payload.
+    uri:
+      url: https://reqres.in/api/login
+      method: POST
+      body_format: json
+      body: |-
+        {
+          "email": "<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="4e2b382b602621223a0e3c2b3f3c2b3d602720">[email&#160;protected]</a>",
+          "password": "cityslicka"
+        }
+      return_content: yes
+    register: result
+    changed_when: "'token' in result.content"
+
+  - debug: var=result.content</pre>
+<p>As you can see, our preceding playbook is designed to send a payload using <code>body</code> parameter</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">body: |-
+        {
+          "email": "<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="355043501b5d5a5941754750444750461b5c5b">[email&#160;protected]</a>",
+          "password": "cityslicka"
+        }</pre>
+<p>Unless defined, this payload would be considered as body <code>raw</code> not as JSON</p>
+<p>so you need to define the right interpretation of our body</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">body_format: json</pre>
+<p>Since we care about the response content. we are using <code>return_content: yes</code>  which is something we have learnt in the previous examples.</p>
+<p>We are also defining the method of the HTTP as <code>POST</code> by default Ansible would consider the request as <code>GET</code>  when you are making a wrong method of call, you might get HTTP 400 error.</p>
+<p>Finally, the expected response from this API endpoint is a token. If our credentials are accepted the API should present us with a token.</p>
+<p>We are ensuring that we get a token in our response</p>
+<p>The reason for using <strong>changed_when</strong> is to ensure that the job is considered successful only when a certain condition is met.</p>
+<p>You can alternatively use <strong>failed_when</strong> as well in this context with inverted condition.</p>
+<p><a href="../ansible-changed_when-and-failed_when-examples/index.html">Read my exclusive article on changed_when and failed_when here</a></p>
+<p>execution output of our playbook is here</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png"><img class="alignnone size-full wp-image-9348 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x870.png" alt="ansible uri json" width="2954" height="1338" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png 2954w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-300x136.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1024x464.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-768x348.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1536x696.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-2048x928.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1080x489.png 1080w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-9348" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png" alt="ansible uri json" width="2954" height="1338" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM.png 2954w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-300x136.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1024x464.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-768x348.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1536x696.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-2048x928.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-17-at-6.15.26-AM-1080x489.png 1080w" sizes="(max-width: 2954px) 100vw, 2954px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_playbook_to_log_in_to_Form-based_Authentication_Ansible_URI">Ansible playbook to log in to Form-based Authentication &#8211; Ansible URI</span></h3>
+<p>In the previous example, we have seen how to login to API and obtain a token by sending a payload over HTTP POST using Ansible URI</p>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>In this example, we will see how to log in to the form-based Authentication enabled Web Application.</p>
+<p>As I could not find a simple Application to demonstrate I ended up creating one</p>
+<p>It is a simple Form based Login App designed on Flask. you can find the source code in my GitHub repo</p>
+<pre>https://github.com/AKSarav/login-form-app-sample</pre>
+<p>You can download the source code and host it yourself on your locally.</p>
+<p>Or use the readily available public Heroku link of this application</p>
+<pre>https://form-login-webapp.herokuapp.com/</pre>
+<blockquote><p>Note*: This URL might change or expire this is hosted on HerokuApp free plan.</p></blockquote>
+<p>&nbsp;</p>
+<p>Before we automate this with Ansible, let us take a quick look at how this application works when tried from the browser.</p>
+<p><a href="../../wp-content/uploads/2022/11/form-login-webapp.gif"><img class="alignnone size-full wp-image-9354 lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1272 658'%3E%3C/svg%3E" alt="ansible login form based webapp" width="1272" height="658" data-src="../../wp-content/uploads/2022/11/form-login-webapp.gif" loading="lazy" /><noscript><img class="alignnone size-full wp-image-9354" src="../../wp-content/uploads/2022/11/form-login-webapp.gif" alt="ansible login form based webapp" width="1272" height="658" data-eio="l" /></noscript></a></p>
+<p>As shown in the preceding GIF, we are entering the credentials admin/admin and clicking on the Login button.</p>
+<p>After successful login, we can see a message <code>you have successfully logged in</code></p>
+<p>If you put in the wrong credentials, you would be redirected to the login form once again with an error message.</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM.png"><img class="post-img alignnone wp-image-9356 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x523.png" alt="ansible uri form" width="2468" height="672" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM.png 2468w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-300x82.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-1024x279.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-768x209.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-1536x418.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-2048x558.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-1080x294.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9356 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM.png" alt="ansible uri form" width="2468" height="672" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM.png 2468w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-300x82.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-1024x279.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-768x209.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-1536x418.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-2048x558.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-20-at-1.20.02-PM-1080x294.png 1080w" sizes="(max-width: 2468px) 100vw, 2468px" data-eio="l" /></noscript></a></p>
+<p>Here is the Ansible playbook to Login to the form based Authentication enabled Web App</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+  - name: Ansible URI examples
+    hosts: localhost
+    tasks:
+    - name: Login to WebApplication with Ansible
+      uri:
+        url: https://form-login-webapp.herokuapp.com
+        method: POST
+        body_format: form-urlencoded
+        follow_redirects: all
+        body:
+        - [ username, admin ]
+        - [ password, admin ]
+        - [ enter, Login]
+        return_content: yes
+      register: login
+      changed_when: "'you have successfully logged in' in login.content"
+
+    - debug: var=login.content</pre>
+<p>Let us decode the important fields of this playbook</p>
+<ul>
+<li><strong>url</strong> &#8211; URL of our form-based login application</li>
+<li><strong>method</strong> &#8211; we are using HTTP POST to send our username and password</li>
+<li><strong>body_format </strong>&#8211; to send the credentials we should use <code>form-urlencoded</code> body format</li>
+<li><strong>follow_redirects</strong> &#8211; we are following through all the redirects until we get to the home screen</li>
+<li><strong>body </strong>&#8211; In this form-urlencoded body we need to define what is the key and the value for each form item
+<ul>
+<li>username &#8211; we are passing <code>admin</code> as our username</li>
+<li>password &#8211;  we are passing <code>admin</code> as our password too.</li>
+<li>enter &#8211; where to click. A button name to submit. in our case it is <code>Login</code></li>
+</ul>
+</li>
+<li><strong>return_content</strong>:  we are enabling return_content to see the response content</li>
+<li><strong>changed_when</strong>:  Just to let Ansible know when to consider this task successful. in our case, when we have the message <code>you have successfully logged in</code> on the response content</li>
+</ul>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="How_to_wait_for_the_URL_to_be_reachable_or_until_it_returns_a_Status_code_or_Content">How to wait for the URL to be reachable or until it returns a Status code or Content</span></h3>
+<p>As we have seen various examples already on Ansible URI. we might want to add some conditional execution on it</p>
+<p>Like making it wait until it returns a specific status code or message etc.</p>
+<p>I have a dedicated article on the same. please refer the following link</p>
+<blockquote class="wp-embedded-content" data-secret="wriyX7K0Xn"><p><a href="../ansible-wait-for-url/index.html">Ansible Wait for URL to respond or Retry &#8211; WEB and API | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Ansible Wait for URL to respond or Retry &#8211; WEB and API  | Devops Junction&#8221; &#8212; Middleware Inventory" src="../ansible-wait-for-url/embed/index.html#?secret=wriyX7K0Xn" data-secret="wriyX7K0Xn" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="More_examples_are_coming">More examples are coming</span></h3>
+<p>I have already put a few days/weeks of effort already in compiling this article and creating necessary supporting artefacts like the cheat sheet, the flask application etc.</p>
+<p>I still feel there is more to cover in Ansible URI such as</p>
+<ul>
+<li>File upload with Ansible URI</li>
+<li>Authenticating with already stored Cookie</li>
+<li>More examples on API calls etc</li>
+</ul>
+<p>While am working on these items with necessary examples and supporting images/videos. I am publishing this article to help those in need</p>
+<p>if you have any more requirements or ideas that can or should be covered in this article. let me know in the comments.</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#6c04090000032c0b1e05180a15420f0301"> <span class="__cf_email__" data-cfemail="b4dcd1d8d8dbf4d3c6ddc0d2cd9ad7dbd9">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668971672" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="6507" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-uri-examples/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="faa5fb4088" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668971672" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668971672"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-systemd-module-examples-devops-junction/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2022/07/ansible-systemd-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/07/ansible-systemd-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-systemd-module-examples-devops-junction/index.html'>Ansible SystemD module Examples - Devops Junction</a><p>Ansible SystemD module helps to control the systemd units such as services and timers created on the Linux server. SystemD is a daemon that manages the services and timer units on the Linux system and we mostly interact with it using the following ways service file systemctl command journalctl command&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-playbook-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Playbook Examples" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Playbook Examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-playbook-example/index.html'>Ansible Playbook Examples - Sample Ansible Playbooks | Devops Junction</a><p>In this post, we are going to see examples of Ansible playbook and various different modules and playbook examples with various modules and multiple hosts. We will start with a basic Ansible playbook and learn what is task and play and what is playbook etc. What is Ansible Playbook It&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-shell-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Shell" data-src="../../wp-content/uploads/2019/10/Screenshot-2019-10-21-at-5.29.32-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/10/Screenshot-2019-10-21-at-5.29.32-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Shell" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-shell-examples/index.html'>Ansible Shell Module Examples</a><p>&nbsp; Ansible shell module is designed to execute Shell commands against the target Unix based hosts. Unlike the Ansible command module, Ansible Shell would accept any highly complexed commands with pipes, redirection etc and you can also execute Shell scripts using Ansible Shell module. The Advantage of Ansible Shell module&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-unarchive-module-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible unarchive" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-07-at-4.53.15-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-07-at-4.53.15-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible unarchive" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-unarchive-module-examples/index.html'>Ansible Unarchive Module Examples</a><p>What is Ansible Unarchive Module and How does it work Ansible Unarchive module helps to unpack or uncompress the files from an archive file such as tar, tar.gz, zip  . Ansible unarchive module can optionally copy the files to the remote server before uncompressing them. Though the unarchive module is&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-wait_for-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible wait_for examples" data-src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible wait_for examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-wait_for-examples/index.html'>Ansible wait_for module examples - How to | Devops Junction</a><p>Introduction to Ansible wait_for module Ansible wait_for module can be used to pause your playbook execution and to wait for many different things or conditions before continuing with the execution. The wait_for module of ansible is to make your playbook or task execution halt or pause for various reasons and for&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-wait-for-url/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible Wait for URL to respond or Retry &#8211; WEB and API | Devops Junction</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (68)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"6507 https:\/\/www.middlewareinventory.com\/?p=6507","disqusShortname":"mwinventory","disqusTitle":"Ansible URI module Examples \u2013 How to use Ansible URI | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-uri-examples\/","postId":"6507"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"e09e108a35"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"05a1ef13d7","post_id":"6507"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"0aac301697","ip":"2a03:2880:27ff:76::face:b00c","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"497f3b12ab","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"1982d2299c","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"6507","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-uri-examples/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668971672;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

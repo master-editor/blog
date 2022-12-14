@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+
+<title>SpringBoot Kubernetes Example - Jenkins &amp; IBM Cloud | Devops Junction</title>
+<meta name="description" content="Deploying SpringBoot Application to Kubernetes on IBM Cloud using Jenkins. SpringBoot Kubernetes example. SpringBoot Jenkins CI/CD example IBM Cloud." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="SpringBoot Kubernetes Example - Jenkins &amp; IBM Cloud | Devops Junction" />
+<meta property="og:description" content="Deploying SpringBoot Application to Kubernetes on IBM Cloud using Jenkins. SpringBoot Kubernetes example. SpringBoot Jenkins CI/CD example IBM Cloud." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-01-06T07:55:35+00:00" />
+<meta property="article:modified_time" content="2022-01-15T15:00:19+00:00" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2022/01/SpringBoot-1.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#primaryimage","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2022/01/SpringBoot-1.jpg","width":1748,"height":1240},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#webpage","url":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/","name":"SpringBoot Kubernetes Example - Jenkins & IBM Cloud | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#primaryimage"},"datePublished":"2022-01-06T07:55:35+00:00","dateModified":"2022-01-15T15:00:19+00:00","description":"Deploying SpringBoot Application to Kubernetes on IBM Cloud using Jenkins. SpringBoot Kubernetes example. SpringBoot Jenkins CI/CD example IBM Cloud.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"SpringBoot Kubernetes Example &#8211; Jenkins &#038; IBM Cloud | Devops Junction","datePublished":"2022-01-06T07:55:35+00:00","dateModified":"2022-01-15T15:00:19+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#primaryimage"},"articleSection":"IBM Cloud,Jenkins,Kubernetes","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; SpringBoot Kubernetes Example &#8211; Jenkins &#038; IBM Cloud | Devops Junction Comments Feed" href="feed/index.rss" />
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.12.2';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-84162240-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	if ( 'undefined' === typeof gaOptout ) {
+		function gaOptout() {
+			__gaTrackerOptout();
+		}
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-84162240-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+
+<script type="text/javascript" data-cfasync="false">
+			window.google_analytics_uacct = 'UA-84162240-1';
+
+        </script>
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/404f7.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/88e5e.css" media="all" />
+<script type='text/javascript' id='monsterinsights-frontend-script-js-extra'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"https:\/\/www.middlewareinventory.com","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1058f.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1de0a.js"></script>
+<script type='text/javascript' id='ssb-front-js-js-extra'>
+/* <![CDATA[ */
+var SSB = {"ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","fb_share_nonce":"9fe2b70daf"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/268e7.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/7788.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-spring-boot-kubernetes-jenkins-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-spring-boot-kubernetes-jenkins-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script> <style media="screen">/*inline margin*/
+	
+	
+	
+	
+	
+	
+			 /*margin-digbar*/
+
+	
+	
+	
+	
+	   div[class*="simplesocialbuttons-float"].simplesocialbuttons.simplesocial-round-icon button{
+	 margin: ;
+   }
+	
+	
+	
+</style>
+
+<meta property="og:title" content="SpringBoot Kubernetes Example &#8211; Jenkins &#038; IBM Cloud | Devops Junction - Middleware Inventory" />
+<meta property="og:description" content="In this article, we are going to see how to deploy the SpringBoot application to Kubernetes using Jenkins. The platform we are choosing is IBM Cloud.
+
+We are going to see SpringBoot Kubernetes Example setup on IBM Cloud using Jenkins Pipeline.
+
+We will be creating Docker images, setting up Kubernetes, creating Jenkins pipeline, doing slack integration everything from the scratch
+Learning objectives
+In this" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2022/01/SpringBoot-1.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="In this article, we are going to see how to deploy the SpringBoot application to Kubernetes using Jenkins. The platform we are choosing is IBM Cloud.
+
+We are going to see SpringBoot Kubernetes Example setup on IBM Cloud using Jenkins Pipeline.
+
+We will be creating Docker images, setting up Kubernetes, creating Jenkins pipeline, doing slack integration everything from the scratch
+Learning objectives
+In this" />
+<meta name="twitter:title" content="SpringBoot Kubernetes Example &#8211; Jenkins &#038; IBM Cloud | Devops Junction - Middleware Inventory" />
+<meta property="twitter:image" content="https://www.middlewareinventory.com/wp-content/uploads/2022/01/SpringBoot-1.jpg" />
+<style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-7788 single-format-standard wp-custom-logo cookies-set cookies-accepted elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-7788" class="post-7788 post type-post status-publish format-standard has-post-thumbnail hentry category-ibm-cloud category-jenkins category-kubernetes wpautop">
+<header class="entry-header">
+<h1 class="entry-title">SpringBoot Kubernetes Example &#8211; Jenkins &#038; IBM Cloud | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="1:25 pm" rel="bookmark"><time class="entry-date published updated" datetime="January 15, 2022">January 15, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=SpringBoot%20Kubernetes%20Example%20%E2%80%93%20Jenkins%20%26%20IBM%20Cloud%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fspring-boot-kubernetes-jenkins%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="7788" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=SpringBoot+Kubernetes+Example+%E2%80%93+Jenkins+%26+IBM+Cloud+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fspring-boot-kubernetes-jenkins%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="7788" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=SpringBoot%20Kubernetes%20Example%20%E2%80%93%20Jenkins%20%26%20IBM%20Cloud%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fspring-boot-kubernetes-jenkins%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="7788" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fspring-boot-kubernetes-jenkins%2F&subject=SpringBoot%20Kubernetes%20Example%20%E2%80%93%20Jenkins%20%26%20IBM%20Cloud%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="7788" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="7788" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this article, we are going to see how to deploy the SpringBoot application to Kubernetes using Jenkins. The platform we are choosing is IBM Cloud.</p>
+<p>We are going to see SpringBoot Kubernetes Example setup on IBM Cloud using Jenkins Pipeline.</p>
+<p>We will be creating Docker images, setting up Kubernetes, creating Jenkins pipeline, doing slack integration everything from the scratch</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Learning_objectives" title="Learning objectives">Learning objectives</a></li><li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li><li><a href="#Steps" title="Steps">Steps</a><ul><li><a href="#1_Create_a_Kubernetes_Cloud_on_IBM_Cloud" title="1. Create a Kubernetes Cloud on IBM Cloud">1. Create a Kubernetes Cloud on IBM Cloud</a></li><li><a href="#2_Build_a_Modified_Jenkins_Image" title="2. Build a Modified Jenkins Image">2. Build a Modified Jenkins Image</a></li><li><a href="#3_Deploy_a_Modified_Jenkins_Image_to_Kubernetes" title="3. Deploy a Modified Jenkins Image to Kubernetes">3. Deploy a Modified Jenkins Image to Kubernetes</a></li><li><a href="#4_Set_up_Jenkins_Environment" title="4. Set up Jenkins Environment">4. Set up Jenkins Environment</a></li><li><a href="#5_Create_the_First_Jenkins_Pipeline" title="5. Create the First Jenkins Pipeline">5. Create the First Jenkins Pipeline</a></li><li><a href="#6_Integrate_Jenkins_and_Slack" title="6. Integrate Jenkins and Slack">6. Integrate Jenkins and Slack</a></li><li><a href="#7_Integrate_Jenkins_and_GitHub" title="7. Integrate Jenkins and GitHub">7. Integrate Jenkins and GitHub</a></li><li><a href="#8_Test_the_First_Jenkins_Pipeline" title="8. Test the First Jenkins Pipeline">8. Test the First Jenkins Pipeline</a></li></ul></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Learning_objectives"><strong>Learning objectives</strong></span></h2>
+<p>In this tutorial, we will:</p>
+<ul>
+<li>Set up a Jenkins environment on Kubernetes</li>
+<li>Configure a CI/CD Jenkins pipeline</li>
+<li>Build Docker images using Jenkins</li>
+<li>Push Docker images to a Docker registry</li>
+<li>Deploy Docker images to a Kubernetes environment</li>
+<li>Integrate Slack and Jenkins</li>
+<li>Integrate GitHub and Jenkins using GitHub webhooks</li>
+</ul>
+<h2><span class="ez-toc-section" id="Prerequisites"><strong>Prerequisites</strong></span></h2>
+<ul>
+<li>Create a free <a href="https://cloud.ibm.com/">IBM Cloud Account</a></li>
+<li>Install the <a href="https://cloud.ibm.com/docs/cli?topic=cloud-cli-install-ibmcloud-cli">IBM Cloud CLI</a></li>
+<li>Download and install <a href="https://www.docker.com/">Docker</a></li>
+<li>Create a <a href="https://hub.docker.com/">Docker Hub Account</a></li>
+<li>Install the <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/">Kubernetes CLI(kubectl)</a></li>
+<li>Install a <a href="https://git-scm.com/downloads">Git Client</a></li>
+<li>Create a <a href="https://github.com/">GitHub Account</a></li>
+<li>Create a <a href="https://slack.com/">Slack Account</a></li>
+</ul>
+<h2><span class="ez-toc-section" id="Steps"><strong>Steps</strong></span></h2>
+<p>Follow these steps to set up and run this tutorial.</p>
+<ol>
+<li>Create a Kubernetes Cluster on IBM Cloud</li>
+<li>Build a Modified Jenkins Image</li>
+<li>Deploy a Modified Jenkins Image to Kubernetes</li>
+<li>Set up Jenkins Environment</li>
+<li>Create the First Jenkins Pipeline</li>
+<li>Integrate Jenkins and Slack</li>
+<li>Integrate Jenkins and GitHub</li>
+<li>Test the First Jenkins Pipeline.</li>
+</ol>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="1_Create_a_Kubernetes_Cloud_on_IBM_Cloud">1. Create a Kubernetes Cloud on IBM Cloud</span></h3>
+<ul>
+<li>Create an IBM Cloud account (if you don’t have one!!) and login into the same with your credentials.</li>
+</ul>
+<p><a href="../../wp-content/uploads/2022/01/img1-scaled.jpg"><img class="post-img alignnone wp-image-7791 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x914.png" alt="" width="2560" height="1218" data-src="../../wp-content/uploads/2022/01/img1-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img1-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img1-300x143.jpg 300w, ../../wp-content/uploads/2022/01/img1-1024x487.jpg 1024w, ../../wp-content/uploads/2022/01/img1-768x365.jpg 768w, ../../wp-content/uploads/2022/01/img1-1536x731.jpg 1536w, ../../wp-content/uploads/2022/01/img1-2048x974.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7791 size-full" src="../../wp-content/uploads/2022/01/img1-scaled.jpg" alt="" width="2560" height="1218" srcset="../../wp-content/uploads/2022/01/img1-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img1-300x143.jpg 300w, ../../wp-content/uploads/2022/01/img1-1024x487.jpg 1024w, ../../wp-content/uploads/2022/01/img1-768x365.jpg 768w, ../../wp-content/uploads/2022/01/img1-1536x731.jpg 1536w, ../../wp-content/uploads/2022/01/img1-2048x974.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<ul>
+<li>Select <code>Kubernetes</code> option from the left panel and click on the ‘Create Cluster’ option</li>
+</ul>
+<p><a style="font-size: 1.0625rem;" href="../../wp-content/uploads/2022/01/img2-3-scaled.jpg"><img class="post-img alignnone wp-image-7796 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1016.png" alt="" width="2560" height="1354" data-src="../../wp-content/uploads/2022/01/img2-3-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img2-3-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img2-3-300x159.jpg 300w, ../../wp-content/uploads/2022/01/img2-3-1024x542.jpg 1024w, ../../wp-content/uploads/2022/01/img2-3-768x406.jpg 768w, ../../wp-content/uploads/2022/01/img2-3-1536x812.jpg 1536w, ../../wp-content/uploads/2022/01/img2-3-2048x1083.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7796 size-full" src="../../wp-content/uploads/2022/01/img2-3-scaled.jpg" alt="" width="2560" height="1354" srcset="../../wp-content/uploads/2022/01/img2-3-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img2-3-300x159.jpg 300w, ../../wp-content/uploads/2022/01/img2-3-1024x542.jpg 1024w, ../../wp-content/uploads/2022/01/img2-3-768x406.jpg 768w, ../../wp-content/uploads/2022/01/img2-3-1536x812.jpg 1536w, ../../wp-content/uploads/2022/01/img2-3-2048x1083.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img3-2-scaled.jpg"><img class="post-img alignnone wp-image-7798 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1052.png" alt="" width="2560" height="1402" data-src="../../wp-content/uploads/2022/01/img3-2-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img3-2-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img3-2-300x164.jpg 300w, ../../wp-content/uploads/2022/01/img3-2-1024x561.jpg 1024w, ../../wp-content/uploads/2022/01/img3-2-768x421.jpg 768w, ../../wp-content/uploads/2022/01/img3-2-1536x841.jpg 1536w, ../../wp-content/uploads/2022/01/img3-2-2048x1122.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7798 size-full" src="../../wp-content/uploads/2022/01/img3-2-scaled.jpg" alt="" width="2560" height="1402" srcset="../../wp-content/uploads/2022/01/img3-2-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img3-2-300x164.jpg 300w, ../../wp-content/uploads/2022/01/img3-2-1024x561.jpg 1024w, ../../wp-content/uploads/2022/01/img3-2-768x421.jpg 768w, ../../wp-content/uploads/2022/01/img3-2-1536x841.jpg 1536w, ../../wp-content/uploads/2022/01/img3-2-2048x1122.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<ul>
+<li>Next, select the plan as ‘Free’ and give a proper name for the cluster and click on the ‘Create’ button.</li>
+</ul>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/01/img4.png"><img class="post-img alignnone wp-image-7799 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1019.png" alt="" width="3350" height="1778" data-src="../../wp-content/uploads/2022/01/img4.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img4.png 3350w, ../../wp-content/uploads/2022/01/img4-300x159.png 300w, ../../wp-content/uploads/2022/01/img4-1024x543.png 1024w, ../../wp-content/uploads/2022/01/img4-768x408.png 768w, ../../wp-content/uploads/2022/01/img4-1536x815.png 1536w, ../../wp-content/uploads/2022/01/img4-2048x1087.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7799 size-full" src="../../wp-content/uploads/2022/01/img4.png" alt="" width="3350" height="1778" srcset="../../wp-content/uploads/2022/01/img4.png 3350w, ../../wp-content/uploads/2022/01/img4-300x159.png 300w, ../../wp-content/uploads/2022/01/img4-1024x543.png 1024w, ../../wp-content/uploads/2022/01/img4-768x408.png 768w, ../../wp-content/uploads/2022/01/img4-1536x815.png 1536w, ../../wp-content/uploads/2022/01/img4-2048x1087.png 2048w" sizes="(max-width: 3350px) 100vw, 3350px" data-eio="l" /></noscript></a></p>
+<p>This will take about 30-40 mins to create the k8 cluster and to get the k8 dashboard up and ready.</p>
+<p><a href="../../wp-content/uploads/2022/01/img5.png"><img class="post-img alignnone wp-image-7800 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1343.png" alt="" width="2714" height="1898" data-src="../../wp-content/uploads/2022/01/img5.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img5.png 2714w, ../../wp-content/uploads/2022/01/img5-300x210.png 300w, ../../wp-content/uploads/2022/01/img5-1024x716.png 1024w, ../../wp-content/uploads/2022/01/img5-768x537.png 768w, ../../wp-content/uploads/2022/01/img5-1536x1074.png 1536w, ../../wp-content/uploads/2022/01/img5-2048x1432.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7800 size-full" src="../../wp-content/uploads/2022/01/img5.png" alt="" width="2714" height="1898" srcset="../../wp-content/uploads/2022/01/img5.png 2714w, ../../wp-content/uploads/2022/01/img5-300x210.png 300w, ../../wp-content/uploads/2022/01/img5-1024x716.png 1024w, ../../wp-content/uploads/2022/01/img5-768x537.png 768w, ../../wp-content/uploads/2022/01/img5-1536x1074.png 1536w, ../../wp-content/uploads/2022/01/img5-2048x1432.png 2048w" sizes="(max-width: 2714px) 100vw, 2714px" data-eio="l" /></noscript></a></p>
+<p>Make a note of the URL (refer to above image), we need resource group and region details for future use.</p>
+<p>Once our node status is ‘normal’ , we should be able to conclude that Kubernetes successfully created node clusters.</p>
+<p><a href="../../wp-content/uploads/2022/01/img6.png"><img class="post-img alignnone wp-image-7801 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1090.png" alt="" width="3360" height="1908" data-src="../../wp-content/uploads/2022/01/img6.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img6.png 3360w, ../../wp-content/uploads/2022/01/img6-300x170.png 300w, ../../wp-content/uploads/2022/01/img6-1024x581.png 1024w, ../../wp-content/uploads/2022/01/img6-768x436.png 768w, ../../wp-content/uploads/2022/01/img6-1536x872.png 1536w, ../../wp-content/uploads/2022/01/img6-2048x1163.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7801 size-full" src="../../wp-content/uploads/2022/01/img6.png" alt="" width="3360" height="1908" srcset="../../wp-content/uploads/2022/01/img6.png 3360w, ../../wp-content/uploads/2022/01/img6-300x170.png 300w, ../../wp-content/uploads/2022/01/img6-1024x581.png 1024w, ../../wp-content/uploads/2022/01/img6-768x436.png 768w, ../../wp-content/uploads/2022/01/img6-1536x872.png 1536w, ../../wp-content/uploads/2022/01/img6-2048x1163.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<p>Once our cluster creation completes, we should be able to access the Kubernetes dashboard and we should be able to see created nodes details in the same.</p>
+<p><a href="../../wp-content/uploads/2022/01/img7.png"><img class="post-img alignnone wp-image-7802 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1070.png" alt="" width="3356" height="1870" data-src="../../wp-content/uploads/2022/01/img7.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img7.png 3356w, ../../wp-content/uploads/2022/01/img7-300x167.png 300w, ../../wp-content/uploads/2022/01/img7-1024x571.png 1024w, ../../wp-content/uploads/2022/01/img7-768x428.png 768w, ../../wp-content/uploads/2022/01/img7-1536x856.png 1536w, ../../wp-content/uploads/2022/01/img7-2048x1141.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7802 size-full" src="../../wp-content/uploads/2022/01/img7.png" alt="" width="3356" height="1870" srcset="../../wp-content/uploads/2022/01/img7.png 3356w, ../../wp-content/uploads/2022/01/img7-300x167.png 300w, ../../wp-content/uploads/2022/01/img7-1024x571.png 1024w, ../../wp-content/uploads/2022/01/img7-768x428.png 768w, ../../wp-content/uploads/2022/01/img7-1536x856.png 1536w, ../../wp-content/uploads/2022/01/img7-2048x1141.png 2048w" sizes="(max-width: 3356px) 100vw, 3356px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="2_Build_a_Modified_Jenkins_Image"><strong>2. Build a Modified Jenkins Image</strong></span></h3>
+<p>Previously, Jenkins was designed to run on physical machines without any containerization technology. As containerization become more popular, Jenkins adapted its solution to the new containerized world. Unfortunately, Jenkins requires Docker to build Docker images. However, a containerized version of Jenkins does not contain Docker and Docker CLI by default. For this reason, a new Docker image that contains Docker CLI and other tools must be created by using a Jenkins image as a base image.</p>
+<ul>
+<li>Create a new directory with some meaningful name ‘ci-cd-k8-pipeline’</li>
+</ul>
+<pre><code class="language-bash">$ mkdir ci-cd-k8-pipeline
+$ cd ci-cd-k8-pipeline
+</code></pre>
+<ul>
+<li>Create one more directory specific to jenkins.</li>
+</ul>
+<pre><code class="language-bash">$ mkdir modified-jenkins-image
+</code></pre>
+<ul>
+<li>Next, inside the ‘modified-jenkins-image’ directory create Dockerfile with below content</li>
+</ul>
+<pre><code class="language-docker">FROM jenkins/jenkins:lts
+
+USER root
+
+ENV DOCKERVERSION=18.03.1-ce
+
+RUN curl -fsSLO &lt;https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz&gt; \\
+  &amp;&amp; tar xzvf docker-${DOCKERVERSION}.tgz --strip 1 \\
+                 -C /usr/local/bin docker/docker \\
+  &amp;&amp; rm docker-${DOCKERVERSION}.tgz
+
+RUN curl -LO &lt;https://storage.googleapis.com/kubernetes-release/release/$&gt;(curl -s &lt;https://storage.googleapis.com/kubernetes-release/release/stable.txt&gt;)/bin/linux/amd64/kubectl \\
+	&amp;&amp; chmod +x ./kubectl \\
+	&amp;&amp; mv ./kubectl /usr/local/bin/kubectl
+</code></pre>
+<ul>
+<li>Build docker image for jenkins</li>
+</ul>
+<pre><code class="language-bash">$ docker build -t tapan2609/modified-jenkins:latest .
+</code></pre>
+<p>In the above command, replace ‘tapan2609’ with your docker hub username.</p>
+<p>You should see below similar logs, once docker image starts building</p>
+<pre><code>[+] Building 5.7s (8/8) FINISHED                                                                                                                                                                                                              
+ =&gt; [internal] load build definition from Dockerfile                                                                                                                                                                                     0.0s
+ =&gt; =&gt; transferring dockerfile: 596B                                                                                                                                                                                                     0.0s
+ =&gt; [internal] load .dockerignore                                                                                                                                                                                                        0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                                                                                                                                          0.0s
+ =&gt; [internal] load metadata for docker.io/jenkins/jenkins:lts                                                                                                                                                                           5.6s
+ =&gt; [auth] jenkins/jenkins:pull token for registry-1.docker.io                                                                                                                                                                           0.0s
+ =&gt; [1/3] FROM docker.io/jenkins/jenkins:<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="d1bda5a291a2b9b0e3e4e7">[email&#160;protected]</a>:c1d02293a08ba69483992f541935f7639fb10c6c322785bdabaf7fa94cd5e732                                                                                                                     0.0s
+ =&gt; =&gt; resolve docker.io/jenkins/jenkins:<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="2b475f586b58434a191e1d">[email&#160;protected]</a>:c1d02293a08ba69483992f541935f7639fb10c6c322785bdabaf7fa94cd5e732                                                                                                                     0.0s
+ =&gt; CACHED [2/3] RUN curl -fsSLO &lt;https://download.docker.com/linux/static/stable/x86_64/docker-18.03.1-ce.tgz&gt;   &amp;&amp; tar xzvf docker-18.03.1-ce.tgz --strip 1                  -C /usr/local/bin docker/docker   &amp;&amp; rm docker-18.03.1-ce.  0.0s
+ =&gt; CACHED [3/3] RUN curl -LO &lt;https://storage.googleapis.com/kubernetes-release/release/$&gt;(curl -s &lt;https://storage.googleapis.com/kubernetes-release/release/stable.txt&gt;)/bin/linux/amd64/kubectl  &amp;&amp; chmod +x ./kubectl  &amp;&amp; mv ./kubectl  0.0s
+ =&gt; exporting to image                                                                                                                                                                                                                   0.0s
+ =&gt; =&gt; exporting layers                                                                                                                                                                                                                  0.0s
+ =&gt; =&gt; writing image sha256:0ac83a3d36d09a94356facfc42be180b4633482ed67cf5c12c9c162c43975922                                                                                                                                             0.0s
+ =&gt; =&gt; naming to docker.io/tapan2609/modified-jenkins:latest
+</code></pre>
+<p>Congratulations! Now your modified Jenkins image is successfully built.</p>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="3_Deploy_a_Modified_Jenkins_Image_to_Kubernetes"><strong>3. Deploy a Modified Jenkins Image to Kubernetes</strong></span></h3>
+<p>The modified Jenkins image is in the local environment now and Kubernetes cannot access the local images. This is where Docker Hub comes into the picture. Docker Hub is a cloud-based repository in which Docker users and partners create, test, store, and distribute container images. A modified Jenkins image is needed to push to the Docker Hub or other container registries like <a href="https://www.ibm.com/cloud/container-registry">IBM Cloud Container Registry</a>. By default, Docker uses Docker Hub.</p>
+<ul>
+<li>First, login into docker hub using below command</li>
+</ul>
+<pre><code class="language-docker">$ docker login
+
+username : tapan2609
+password : ********
+
+Authenticating with existing credentials...
+Login Succeeded
+
+Logging in with your password grants your terminal complete access to your account. 
+For better security, log in with a limited-privilege personal access token. Learn more at &lt;https://docs.docker.com/go/access-tokens/&gt;
+</code></pre>
+<ul>
+<li>Next, push the modified Jenkins image to Docker Hub with docker push command</li>
+</ul>
+<pre><code class="language-bash">$ docker push tapan2609/modified-jenkins:latest
+</code></pre>
+<p>The pushed image can now be seen via <a href="https://hub.docker.com/">Docker Hub</a> and Kubernetes can now access the image conveniently.</p>
+<p><a href="../../wp-content/uploads/2022/01/img8.png"><img class="post-img alignnone wp-image-7803 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x617.png" alt="" width="3360" height="1080" data-src="../../wp-content/uploads/2022/01/img8.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img8.png 3360w, ../../wp-content/uploads/2022/01/img8-300x96.png 300w, ../../wp-content/uploads/2022/01/img8-1024x329.png 1024w, ../../wp-content/uploads/2022/01/img8-768x247.png 768w, ../../wp-content/uploads/2022/01/img8-1536x494.png 1536w, ../../wp-content/uploads/2022/01/img8-2048x658.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7803 size-full" src="../../wp-content/uploads/2022/01/img8.png" alt="" width="3360" height="1080" srcset="../../wp-content/uploads/2022/01/img8.png 3360w, ../../wp-content/uploads/2022/01/img8-300x96.png 300w, ../../wp-content/uploads/2022/01/img8-1024x329.png 1024w, ../../wp-content/uploads/2022/01/img8-768x247.png 768w, ../../wp-content/uploads/2022/01/img8-1536x494.png 1536w, ../../wp-content/uploads/2022/01/img8-2048x658.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<ul>
+<li>Next, create ‘jenkins-deployment.yaml’ file under ‘modified-jenkins-image’ directory with below contents</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      volumes:
+      - name: dind-storage
+        emptyDir: {}
+      containers:
+      - name: jenkins
+        image: tapan2609/modified-jenkins:latest
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        env:
+        - name: DOCKER_HOST
+          value: tcp://localhost:2375
+      - name: dind
+        image: docker:18.05-dind
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - name: dind-storage
+          mountPath: /var/lib/docker</pre>
+<p>&nbsp;</p>
+<p>Find <code>'tapan2609/modified-jenkins:latest'</code> and replace the Docker Hub username, pushed image&#8217;s name, and version.</p>
+<p>The deployment file is now ready to deploy modified Jenkins to Kubernetes.</p>
+<ul>
+<li>Now, open the Kubernetes cluster dashboard which we created in step 1 and navigate to the <code>'Actions'</code> in right top and select ‘connect to cli’ option  and run the commands to gain access to the Kubernetes cluster via the terminal.</li>
+</ul>
+<p><a href="../../wp-content/uploads/2022/01/img9.png"><img class="post-img alignnone wp-image-7804 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1055.png" alt="" width="3358" height="1846" data-src="../../wp-content/uploads/2022/01/img9.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img9.png 3358w, ../../wp-content/uploads/2022/01/img9-300x165.png 300w, ../../wp-content/uploads/2022/01/img9-1024x563.png 1024w, ../../wp-content/uploads/2022/01/img9-768x422.png 768w, ../../wp-content/uploads/2022/01/img9-1536x844.png 1536w, ../../wp-content/uploads/2022/01/img9-2048x1126.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7804 size-full" src="../../wp-content/uploads/2022/01/img9.png" alt="" width="3358" height="1846" srcset="../../wp-content/uploads/2022/01/img9.png 3358w, ../../wp-content/uploads/2022/01/img9-300x165.png 300w, ../../wp-content/uploads/2022/01/img9-1024x563.png 1024w, ../../wp-content/uploads/2022/01/img9-768x422.png 768w, ../../wp-content/uploads/2022/01/img9-1536x844.png 1536w, ../../wp-content/uploads/2022/01/img9-2048x1126.png 2048w" sizes="(max-width: 3358px) 100vw, 3358px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img10-4-scaled.jpg"><img class="post-img alignnone wp-image-7809 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x962.png" alt="" width="2560" height="1282" data-src="../../wp-content/uploads/2022/01/img10-4-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img10-4-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img10-4-300x150.jpg 300w, ../../wp-content/uploads/2022/01/img10-4-1024x513.jpg 1024w, ../../wp-content/uploads/2022/01/img10-4-768x384.jpg 768w, ../../wp-content/uploads/2022/01/img10-4-1536x769.jpg 1536w, ../../wp-content/uploads/2022/01/img10-4-2048x1025.jpg 2048w, ../../wp-content/uploads/2022/01/img10-4-840x420.jpg 840w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7809 size-full" src="../../wp-content/uploads/2022/01/img10-4-scaled.jpg" alt="" width="2560" height="1282" srcset="../../wp-content/uploads/2022/01/img10-4-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img10-4-300x150.jpg 300w, ../../wp-content/uploads/2022/01/img10-4-1024x513.jpg 1024w, ../../wp-content/uploads/2022/01/img10-4-768x384.jpg 768w, ../../wp-content/uploads/2022/01/img10-4-1536x769.jpg 1536w, ../../wp-content/uploads/2022/01/img10-4-2048x1025.jpg 2048w, ../../wp-content/uploads/2022/01/img10-4-840x420.jpg 840w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Execute the below set of commands to gain access to the k8s cluster</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p><span style="color: #003366;"><strong>Log in to your IBM Cloud account.</strong></span></p>
+<pre><code class="language-bash">$ ibmcloud login -a cloud.ibm.com -r eu-de -g Default
+</code></pre>
+<p>you should see the output of the above command similar to below</p>
+<pre><code>API endpoint: &lt;https://cloud.ibm.com&gt;
+
+Get a one-time code from &lt;https://identity-3.ap-south.iam.cloud.ibm.com/identity/passcode&gt; to proceed.
+email &gt; ********** (give your IBM cloud login email ID)
+password &gt; ******** (give your IBM cloud login password)
+Authenticating...
+OK
+
+Targeted account IBM (590f58d2bfa44fcfb28a666cd1c02275)
+
+Targeted resource group Default
+
+Targeted region eu-de
+
+                      
+API endpoint:      &lt;https://cloud.ibm.com&gt;   
+Region:            eu-de   
+User:              ********  
+Account:           IBM (590f58d2bfa*********)   
+Resource group:    Default   
+CF API endpoint:      
+Org:                  
+Space:
+</code></pre>
+<p>&nbsp;</p>
+<p><strong><span style="color: #003366;">Set the Kubernetes context to your cluster for this terminal session </span></strong></p>
+<pre><code class="language-bash">$ ibmcloud ks cluster config --cluster c750429f0alunes0ok4g
+</code></pre>
+<p>you should see the output of the above command similar to below</p>
+<blockquote><p>Note: Here <code>c750429f0alunes0ok4g</code> is your k8 cluster-id, this you can get from IBM cloud k8 dashboard. (Replace accordingly)</p></blockquote>
+<pre><code>OK
+The configuration for c750429f0alunes0ok4g was downloaded successfully.
+
+Added context for c750429f0alunes0ok4g to the current kubeconfig file.
+You can now execute 'kubectl' commands against your cluster. For example, run 'kubectl get nodes'.
+If you are accessing the cluster for the first time, 'kubectl' commands might fail for a few seconds while RBAC synchronizes.
+</code></pre>
+<p><strong><span style="color: #003366;"> 3. Verify that you can connect to your cluster. </span></strong></p>
+<pre><code>$ kubectl config current-context
+</code></pre>
+<p>you should see the output of above command similar to below</p>
+<pre><code>cicd-sb-cluster/c750429f0alunes0ok4g
+</code></pre>
+<p>Now, you can run <code>kubectl</code> commands to manage your cluster workloads in IBM Cloud!</p>
+<ul>
+<li>Create <code>Jenkins-service.yaml</code> file with below contents under ‘modified-Jenkins-image’ directory.</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service
+spec:
+  type: NodePort
+  selector:
+    app: jenkins
+  ports:
+  - name: web-interface
+    protocol: TCP
+    nodePort: 30100
+    port: 8080
+    targetPort: 8080
+  - name: remote-java-api
+    protocol: TCP
+    nodePort: 30200
+    port: 50000
+    targetPort: 50000</pre>
+<p>&nbsp;</p>
+<ul>
+<li>Make sure that the directory is <code>'modified-jenkins-image'</code> and run the following commands to deploy the modified Jenkins to Kubernetes:</li>
+</ul>
+<pre><code class="language-bash">$ kubectl apply -f jenkins-deployment.yaml
+$ kubectl apply -f jenkins-service.yaml
+</code></pre>
+<p>the output of the above commands should be similar to below</p>
+<pre><code>deployment.apps/jenkins created
+service/jenkins-service created
+</code></pre>
+<ul>
+<li>Now run the following command to make sure that Jenkins is deployed and has a running status. The deployment process may take a couple of minutes.</li>
+</ul>
+<pre><code class="language-bash">$ kubectl get deployment,pod,service
+</code></pre>
+<p>the output of the above command should be similar to below</p>
+<pre><code>NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/jenkins   1/1     1            1           2m30s
+
+NAME                           READY   STATUS    RESTARTS   AGE
+pod/jenkins-676f9c9747-vh2j8   2/2     Running   0          2m29s
+
+NAME                      TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)                          AGE
+service/jenkins-service   NodePort    172.21.80.56   &lt;none&gt;        8080:30100/TCP,50000:30200/TCP   101s
+service/kubernetes        ClusterIP   172.21.0.1     &lt;none&gt;        443/TCP                          12h
+</code></pre>
+<ul>
+<li>Run the following commands to retrieve the external IP of your worker node to gain access to the Jenkins dashboard:</li>
+</ul>
+<pre><code class="language-bash">$ export EXTERNAL_IP=$(kubectl get nodes -o jsonpath='{.items[0].status.addresses[?(@.type=="ExternalIP")].address }')$ export NODE_PORT=30100$ export NODE_PORT=30100
+</code></pre>
+<pre><code class="language-bash">$ export NODE_PORT=30100
+</code></pre>
+<pre><code class="language-bash">$ echo $EXTERNAL_IP:$NODE_PORT
+</code></pre>
+<p>the output of the above echo command should be external-ip appended with port</p>
+<pre><code>169.51.203.3:30100
+</code></pre>
+<blockquote><p>Note: This is the address where you can access your Jenkins server which is deployed in the k8 cluster.</p></blockquote>
+<p>Try to access the above URL and you should be able to see Jenkins getting started page.</p>
+<p><a href="../../wp-content/uploads/2022/01/img11-1-scaled.jpg"><img class="post-img alignnone wp-image-7811 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1075.png" alt="" width="2560" height="1433" data-src="../../wp-content/uploads/2022/01/img11-1-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img11-1-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img11-1-300x168.jpg 300w, ../../wp-content/uploads/2022/01/img11-1-1024x573.jpg 1024w, ../../wp-content/uploads/2022/01/img11-1-768x430.jpg 768w, ../../wp-content/uploads/2022/01/img11-1-1536x860.jpg 1536w, ../../wp-content/uploads/2022/01/img11-1-2048x1146.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7811 size-full" src="../../wp-content/uploads/2022/01/img11-1-scaled.jpg" alt="" width="2560" height="1433" srcset="../../wp-content/uploads/2022/01/img11-1-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img11-1-300x168.jpg 300w, ../../wp-content/uploads/2022/01/img11-1-1024x573.jpg 1024w, ../../wp-content/uploads/2022/01/img11-1-768x430.jpg 768w, ../../wp-content/uploads/2022/01/img11-1-1536x860.jpg 1536w, ../../wp-content/uploads/2022/01/img11-1-2048x1146.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="4_Set_up_Jenkins_Environment"><strong>4. Set up Jenkins Environment</strong></span></h3>
+<p>Now it’s time to set up your Jenkins environment. Jenkins assigns the initial admin password, which can be found by logging into the Jenkins container.</p>
+<ul>
+<li>Run the following command to obtain the logs of the Jenkins container:</li>
+</ul>
+<pre><code class="language-bash">$ kubectl logs $(kubectl get pods --selector=app=jenkins -o=jsonpath='{.items[0].metadata.name}') jenkins
+</code></pre>
+<blockquote><p>Note: The initial admin password can be found between the rows of asterisks.</p></blockquote>
+<p>you should see output similar to below</p>
+<pre><code>Running from: /usr/share/jenkins/jenkins.war
+webroot: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2021-12-28 06:49:55.452+0000 [id=1]	INFO	org.eclipse.jetty.util.log.Log#initialized: Logging initialized @1273ms to org.eclipse.jetty.util.log.JavaUtilLog
+2021-12-28 06:49:55.632+0000 [id=1]	INFO	winstone.Logger#logInternal: Beginning extraction from war file
+2021-12-28 06:49:57.238+0000 [id=1]	WARNING	o.e.j.s.handler.ContextHandler#setContextPath: Empty contextPath
+2021-12-28 06:49:57.556+0000 [id=1]	INFO	org.eclipse.jetty.server.Server#doStart: jetty-9.4.43.v20210629; built: 2021-06-30T11:07:22.254Z; git: 526006ecfa3af7f1a27ef3a288e2bef7ea9dd7e8; jvm 11.0.13+8
+2021-12-28 06:49:58.692+0000 [id=1]	INFO	o.e.j.w.StandardDescriptorProcessor#visitServlet: NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+2021-12-28 06:49:58.805+0000 [id=1]	INFO	o.e.j.s.s.DefaultSessionIdManager#doStart: DefaultSessionIdManager workerName=node0
+2021-12-28 06:49:58.805+0000 [id=1]	INFO	o.e.j.s.s.DefaultSessionIdManager#doStart: No SessionScavenger set, using defaults
+2021-12-28 06:49:58.809+0000 [id=1]	INFO	o.e.j.server.session.HouseKeeper#startScavenging: node0 Scavenging every 660000ms
+2021-12-28 06:49:59.677+0000 [id=1]	INFO	hudson.WebAppMain#contextInitialized: Jenkins home directory: /var/jenkins_home found at: EnvVars.masterEnvVars.get("JENKINS_HOME")
+2021-12-28 06:50:00.014+0000 [id=1]	INFO	o.e.j.s.handler.ContextHandler#doStart: Started <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="93e4bdd3a1a2a5aaa2a7">[email&#160;protected]</a>{Jenkins v2.319.1,/,file:///var/jenkins_home/war/,AVAILABLE}{/var/jenkins_home/war}
+2021-12-28 06:50:00.078+0000 [id=1]	INFO	o.e.j.server.AbstractConnector#doStart: Started <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="85d6e0f7f3e0f7c6eaebebe0e6f1eaf7c5b2b7e6e3b7e1e0b0">[email&#160;protected]</a>{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2021-12-28 06:50:00.079+0000 [id=1]	INFO	org.eclipse.jetty.server.Server#doStart: Started @5903ms
+2021-12-28 06:50:00.089+0000 [id=23]	INFO	winstone.Logger#logInternal: Winstone Servlet Engine running: controlPort=disabled
+2021-12-28 06:50:01.084+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: Started initialization
+2021-12-28 06:50:01.375+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: Listed all plugins
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.google.inject.internal.cglib.core.$ReflectUtils$2 (file:/var/jenkins_home/war/WEB-INF/lib/guice-4.0.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of com.google.inject.internal.cglib.core.$ReflectUtils$2
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+2021-12-28 06:50:05.165+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: Prepared all plugins
+2021-12-28 06:50:05.183+0000 [id=28]	INFO	jenkins.InitReactorRunner$1#onAttained: Started all plugins
+2021-12-28 06:50:05.237+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: Augmented all extensions
+2021-12-28 06:50:07.598+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: System config loaded
+2021-12-28 06:50:07.599+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: System config adapted
+2021-12-28 06:50:07.599+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: Loaded all jobs
+2021-12-28 06:50:07.600+0000 [id=28]	INFO	jenkins.InitReactorRunner$1#onAttained: Configuration for all jobs updated
+2021-12-28 06:50:08.425+0000 [id=42]	INFO	hudson.model.AsyncPeriodicWork#lambda$doRun$1: Started Download metadata
+2021-12-28 06:50:08.444+0000 [id=42]	INFO	hudson.util.Retrier#start: Attempt #1 to do the action check updates server
+2021-12-28 06:50:08.817+0000 [id=28]	INFO	jenkins.install.SetupWizard#init: 
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+2390194edc0341b5821915fa36864c3c (this is your jenkins initial admin password)
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+2021-12-28 06:50:52.249+0000 [id=29]	INFO	jenkins.InitReactorRunner$1#onAttained: Completed initialization
+2021-12-28 06:50:52.292+0000 [id=22]	INFO	hudson.WebAppMain$3#run: Jenkins is fully up and running
+2021-12-28 06:50:52.847+0000 [id=42]	INFO	h.m.DownloadService$Downloadable#load: Obtained the updated data file for hudson.tasks.Maven.MavenInstaller
+2021-12-28 06:50:52.848+0000 [id=42]	INFO	hudson.util.Retrier#start: Performed the action check updates server successfully at the attempt #1
+2021-12-28 06:50:52.852+0000 [id=42]	INFO	hudson.model.AsyncPeriodicWork#lambda$doRun$1: Finished Download metadata. 44,425 ms
+</code></pre>
+<p>Now select the <code>'Install suggested plugins'</code> option.</p>
+<p><a href="../../wp-content/uploads/2022/01/img12-1-2-scaled.jpg"><img class="post-img alignnone wp-image-7815 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1126.png" alt="" width="2560" height="1501" data-src="../../wp-content/uploads/2022/01/img12-1-2-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img12-1-2-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img12-1-2-300x176.jpg 300w, ../../wp-content/uploads/2022/01/img12-1-2-1024x601.jpg 1024w, ../../wp-content/uploads/2022/01/img12-1-2-768x450.jpg 768w, ../../wp-content/uploads/2022/01/img12-1-2-1536x901.jpg 1536w, ../../wp-content/uploads/2022/01/img12-1-2-2048x1201.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7815 size-full" src="../../wp-content/uploads/2022/01/img12-1-2-scaled.jpg" alt="" width="2560" height="1501" srcset="../../wp-content/uploads/2022/01/img12-1-2-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img12-1-2-300x176.jpg 300w, ../../wp-content/uploads/2022/01/img12-1-2-1024x601.jpg 1024w, ../../wp-content/uploads/2022/01/img12-1-2-768x450.jpg 768w, ../../wp-content/uploads/2022/01/img12-1-2-1536x901.jpg 1536w, ../../wp-content/uploads/2022/01/img12-1-2-2048x1201.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img13-scaled.jpg"><img class="post-img alignnone wp-image-7817 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x884.png" alt="" width="2560" height="1178" data-src="../../wp-content/uploads/2022/01/img13-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img13-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img13-300x138.jpg 300w, ../../wp-content/uploads/2022/01/img13-1024x471.jpg 1024w, ../../wp-content/uploads/2022/01/img13-768x353.jpg 768w, ../../wp-content/uploads/2022/01/img13-1536x707.jpg 1536w, ../../wp-content/uploads/2022/01/img13-2048x942.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7817 size-full" src="../../wp-content/uploads/2022/01/img13-scaled.jpg" alt="" width="2560" height="1178" srcset="../../wp-content/uploads/2022/01/img13-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img13-300x138.jpg 300w, ../../wp-content/uploads/2022/01/img13-1024x471.jpg 1024w, ../../wp-content/uploads/2022/01/img13-768x353.jpg 768w, ../../wp-content/uploads/2022/01/img13-1536x707.jpg 1536w, ../../wp-content/uploads/2022/01/img13-2048x942.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Create first admin user in Jenkins</p>
+<p><a href="../../wp-content/uploads/2022/01/img16-scaled.jpg"><img class="post-img alignnone wp-image-7816 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1096.png" alt="" width="2560" height="1461" data-src="../../wp-content/uploads/2022/01/img16-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img16-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img16-300x171.jpg 300w, ../../wp-content/uploads/2022/01/img16-1024x585.jpg 1024w, ../../wp-content/uploads/2022/01/img16-768x438.jpg 768w, ../../wp-content/uploads/2022/01/img16-1536x877.jpg 1536w, ../../wp-content/uploads/2022/01/img16-2048x1169.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7816 size-full" src="../../wp-content/uploads/2022/01/img16-scaled.jpg" alt="" width="2560" height="1461" srcset="../../wp-content/uploads/2022/01/img16-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img16-300x171.jpg 300w, ../../wp-content/uploads/2022/01/img16-1024x585.jpg 1024w, ../../wp-content/uploads/2022/01/img16-768x438.jpg 768w, ../../wp-content/uploads/2022/01/img16-1536x877.jpg 1536w, ../../wp-content/uploads/2022/01/img16-2048x1169.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Click on ‘save and continue’ and your Jenkins server is ready to use!!</p>
+<p><a href="../../wp-content/uploads/2022/01/img17.png"><img class="post-img alignnone wp-image-7818 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1119.png" alt="" width="3252" height="1896" data-src="../../wp-content/uploads/2022/01/img17.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img17.png 3252w, ../../wp-content/uploads/2022/01/img17-300x175.png 300w, ../../wp-content/uploads/2022/01/img17-1024x597.png 1024w, ../../wp-content/uploads/2022/01/img17-768x448.png 768w, ../../wp-content/uploads/2022/01/img17-1536x896.png 1536w, ../../wp-content/uploads/2022/01/img17-2048x1194.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7818 size-full" src="../../wp-content/uploads/2022/01/img17.png" alt="" width="3252" height="1896" srcset="../../wp-content/uploads/2022/01/img17.png 3252w, ../../wp-content/uploads/2022/01/img17-300x175.png 300w, ../../wp-content/uploads/2022/01/img17-1024x597.png 1024w, ../../wp-content/uploads/2022/01/img17-768x448.png 768w, ../../wp-content/uploads/2022/01/img17-1536x896.png 1536w, ../../wp-content/uploads/2022/01/img17-2048x1194.png 2048w" sizes="(max-width: 3252px) 100vw, 3252px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img19-scaled.jpg"><img class="post-img alignnone wp-image-7825 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1079.png" alt="" width="2560" height="1439" data-src="../../wp-content/uploads/2022/01/img19-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img19-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img19-300x169.jpg 300w, ../../wp-content/uploads/2022/01/img19-1024x575.jpg 1024w, ../../wp-content/uploads/2022/01/img19-768x432.jpg 768w, ../../wp-content/uploads/2022/01/img19-1536x863.jpg 1536w, ../../wp-content/uploads/2022/01/img19-2048x1151.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7825 size-full" src="../../wp-content/uploads/2022/01/img19-scaled.jpg" alt="" width="2560" height="1439" srcset="../../wp-content/uploads/2022/01/img19-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img19-300x169.jpg 300w, ../../wp-content/uploads/2022/01/img19-1024x575.jpg 1024w, ../../wp-content/uploads/2022/01/img19-768x432.jpg 768w, ../../wp-content/uploads/2022/01/img19-1536x863.jpg 1536w, ../../wp-content/uploads/2022/01/img19-2048x1151.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Congratulations!!!.. You have successfully deployed and configured Jenkins in the Kubernetes cluster.</p>
+<p>Wait there!!..story is not yet over. It has just begun.. !!! 😁😁😁😁😁😁😁</p>
+<p>With Jenkins ready for use, the following credentials are needed for Jenkins to fulfil a duty conveniently and to run properly:</p>
+<ul>
+<li><code>'GitHub'</code> credentials to gain access to source code</li>
+<li><code>'DockerHub'</code> credentials to push a built image to Docker Hub</li>
+<li><code>'Kubeconfig'</code> file to gain access to a Kubernetes cluster</li>
+</ul>
+<p><code>'GitHub'</code> and <code>'DockerHub'</code> credentials are a type of <code>'Username with password'</code>. But <code>'Kubeconfig'</code> the credential is a type of <code>'Secret file'</code></p>
+<ul>
+<li>Next, download the kubeconfig file for your cluster</li>
+</ul>
+<pre><code class="language-bash">$ ibmcloud ks cluster config --cluster c750429f0alunes0ok4g
+</code></pre>
+<p>while configuring Kubernetes cli, you should have already executed the above command. Now we need to go to the Kubeconfig directory of the Kubernetes cluster (the Kubeconfig environment variable should be set before running this command):</p>
+<p>Remember, before executing the command to get into kubeconfig directory, you should set the ‘KUBECONFIG’ environment variable. To do that follow the below steps</p>
+<pre><code class="language-bash">$ export KUBECONFIG=/Users/$USER/.bluemix/plugins/container-service/clusters/cicd-sb-cluster-c750429f0alunes0ok4g/kube-config-aaa00-cicd-sb-cluster.yml
+</code></pre>
+<p>the path should be similar to</p>
+<pre><code class="language-bash">/Users/$USER/.bluemix/plugins/container-service/clusters/&lt;your cluster name with cluster ID&gt;/&lt;your cluster .yml file&gt;
+</code></pre>
+<p>Now get into kubeconfig directory using the below command</p>
+<pre><code class="language-bash">$ cd $(echo $KUBECONFIG | awk '{split($0,a,"kube-config"); print a[1];}') &amp;&amp; ls
+</code></pre>
+<p>the output of the above command should be similar to below</p>
+<pre><code>(base) C02Z34YFLVDQ:cicd-sb-cluster-c750429f0alunes0ok4g c5281159$ cd $(echo $KUBECONFIG | awk '{split($0,a,"kube-config"); print a[1];}') &amp;&amp; ls -ltr
+total 48
+-rw-r--r--  1 c5281159  staff  4760 Dec 28 12:12 ca.pem
+-rw-r--r--  1 c5281159  staff  3597 Dec 28 12:12 kube-config.yaml
+-rw-r--r--  1 c5281159  staff  4760 Dec 28 12:12 ca-aaa00-cicd-sb-cluster.pem
+-rw-r--r--  1 c5281159  staff  3597 Dec 28 12:12 kube-config-aaa00-cicd-sb-cluster.yml
+</code></pre>
+<p>Mainly there should be two files in the directory.</p>
+<ul>
+<li><code>'&lt;PEM-FILE&gt;.pem'</code> the file that stands for Privacy-Enhanced Mail and is a file format for storing and sending cryptographic keys, certificates, and other data.</li>
+<li><code>'&lt;KUBE-CONFIG&gt;.yml'</code> the file is used to configure access to a cluster and sometimes is called a kubeconfig file, which is a generic way of referring to configuration files.</li>
+</ul>
+<p>Both files should be in the same directory. In Jenkins, there is no option to keep these two files in the same directory. For this reason, the <code>'&lt;PEM-FILE&gt;.pem'</code> file should be embedded into the <code>'&lt;KUBE-CONFIG&gt;.yml'</code>file. To do this, copy both files into the desktop directory. The copying process is not mandatory but is done to preserve the original files.</p>
+<p>Now run this command in the directory that contains the <code>'&lt;PEM-FILE&gt;.pem'</code> file and the <code>'&lt;KUBE-CONFIG&gt;.yml'</code> file.</p>
+<pre><code class="language-bash">$ for file in ./*; do cp $file /Users/$USER/Desktop; done;
+</code></pre>
+<ul>
+<li>If you’d like, the destination directory can be changed by editing <code>'/Users/$USER/Desktop'</code>.</li>
+</ul>
+<p>Next, go to the desktop directory via the terminal. Encode the <code>'&lt;PEM-FILE&gt;.pem'</code> file as base64:</p>
+<pre><code class="language-bash">$ base64 &lt;PEM-FILE&gt;.pem
+</code></pre>
+<p>Copy the result and open the <code>'&lt;KUBE-CONFIG&gt;.yml'</code> file with a code editor. Find <code>'certificate-authority: &lt;PEM-FILE&gt;.pem'</code> and change it to <code>'certificate-authority-data: &lt;BASE64-RESULT&gt;'</code>.</p>
+<p><a href="../../wp-content/uploads/2022/01/img20.png"><img class="post-img alignnone wp-image-7826 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x808.png" alt="" width="2756" height="1160" data-src="../../wp-content/uploads/2022/01/img20.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img20.png 2756w, ../../wp-content/uploads/2022/01/img20-300x126.png 300w, ../../wp-content/uploads/2022/01/img20-1024x431.png 1024w, ../../wp-content/uploads/2022/01/img20-768x323.png 768w, ../../wp-content/uploads/2022/01/img20-1536x647.png 1536w, ../../wp-content/uploads/2022/01/img20-2048x862.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7826 size-full" src="../../wp-content/uploads/2022/01/img20.png" alt="" width="2756" height="1160" srcset="../../wp-content/uploads/2022/01/img20.png 2756w, ../../wp-content/uploads/2022/01/img20-300x126.png 300w, ../../wp-content/uploads/2022/01/img20-1024x431.png 1024w, ../../wp-content/uploads/2022/01/img20-768x323.png 768w, ../../wp-content/uploads/2022/01/img20-1536x647.png 1536w, ../../wp-content/uploads/2022/01/img20-2048x862.png 2048w" sizes="(max-width: 2756px) 100vw, 2756px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img21.png"><img class="post-img alignnone wp-image-7827 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x497.png" alt="" width="3360" height="870" data-src="../../wp-content/uploads/2022/01/img21.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img21.png 3360w, ../../wp-content/uploads/2022/01/img21-300x78.png 300w, ../../wp-content/uploads/2022/01/img21-1024x265.png 1024w, ../../wp-content/uploads/2022/01/img21-768x199.png 768w, ../../wp-content/uploads/2022/01/img21-1536x398.png 1536w, ../../wp-content/uploads/2022/01/img21-2048x530.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7827 size-full" src="../../wp-content/uploads/2022/01/img21.png" alt="" width="3360" height="870" srcset="../../wp-content/uploads/2022/01/img21.png 3360w, ../../wp-content/uploads/2022/01/img21-300x78.png 300w, ../../wp-content/uploads/2022/01/img21-1024x265.png 1024w, ../../wp-content/uploads/2022/01/img21-768x199.png 768w, ../../wp-content/uploads/2022/01/img21-1536x398.png 1536w, ../../wp-content/uploads/2022/01/img21-2048x530.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img22.png"><img class="post-img alignnone wp-image-7828 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x835.png" alt="" width="2756" height="1198" data-src="../../wp-content/uploads/2022/01/img22.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img22.png 2756w, ../../wp-content/uploads/2022/01/img22-300x130.png 300w, ../../wp-content/uploads/2022/01/img22-1024x445.png 1024w, ../../wp-content/uploads/2022/01/img22-768x334.png 768w, ../../wp-content/uploads/2022/01/img22-1536x668.png 1536w, ../../wp-content/uploads/2022/01/img22-2048x890.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7828 size-full" src="../../wp-content/uploads/2022/01/img22.png" alt="" width="2756" height="1198" srcset="../../wp-content/uploads/2022/01/img22.png 2756w, ../../wp-content/uploads/2022/01/img22-300x130.png 300w, ../../wp-content/uploads/2022/01/img22-1024x445.png 1024w, ../../wp-content/uploads/2022/01/img22-768x334.png 768w, ../../wp-content/uploads/2022/01/img22-1536x668.png 1536w, ../../wp-content/uploads/2022/01/img22-2048x890.png 2048w" sizes="(max-width: 2756px) 100vw, 2756px" data-eio="l" /></noscript></a></p>
+<p>After completing the steps above, the <code>'&lt;KUBE-CONFIG&gt;.yml'</code> now contains the <code>'&lt;PEM-FILE&gt;.pem'</code> file.</p>
+<p>Now go back to the Jenkins dashboard and find the <code>'Credentials'</code> option in the left pane and select the <code>'(global)'</code> option. The credentials can be added by clicking the <code>'Add Credentials'</code> button in the left pane.</p>
+<p><a href="../../wp-content/uploads/2022/01/img23.png"><img class="post-img alignnone wp-image-7829 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1059.png" alt="" width="3354" height="1850" data-src="../../wp-content/uploads/2022/01/img23.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img23.png 3354w, ../../wp-content/uploads/2022/01/img23-300x165.png 300w, ../../wp-content/uploads/2022/01/img23-1024x565.png 1024w, ../../wp-content/uploads/2022/01/img23-768x424.png 768w, ../../wp-content/uploads/2022/01/img23-1536x847.png 1536w, ../../wp-content/uploads/2022/01/img23-2048x1130.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7829 size-full" src="../../wp-content/uploads/2022/01/img23.png" alt="" width="3354" height="1850" srcset="../../wp-content/uploads/2022/01/img23.png 3354w, ../../wp-content/uploads/2022/01/img23-300x165.png 300w, ../../wp-content/uploads/2022/01/img23-1024x565.png 1024w, ../../wp-content/uploads/2022/01/img23-768x424.png 768w, ../../wp-content/uploads/2022/01/img23-1536x847.png 1536w, ../../wp-content/uploads/2022/01/img23-2048x1130.png 2048w" sizes="(max-width: 3354px) 100vw, 3354px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img24.png"><img class="post-img alignnone wp-image-7830 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1054.png" alt="" width="3334" height="1830" data-src="../../wp-content/uploads/2022/01/img24.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img24.png 3334w, ../../wp-content/uploads/2022/01/img24-300x165.png 300w, ../../wp-content/uploads/2022/01/img24-1024x562.png 1024w, ../../wp-content/uploads/2022/01/img24-768x422.png 768w, ../../wp-content/uploads/2022/01/img24-1536x843.png 1536w, ../../wp-content/uploads/2022/01/img24-2048x1124.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7830 size-full" src="../../wp-content/uploads/2022/01/img24.png" alt="" width="3334" height="1830" srcset="../../wp-content/uploads/2022/01/img24.png 3334w, ../../wp-content/uploads/2022/01/img24-300x165.png 300w, ../../wp-content/uploads/2022/01/img24-1024x562.png 1024w, ../../wp-content/uploads/2022/01/img24-768x422.png 768w, ../../wp-content/uploads/2022/01/img24-1536x843.png 1536w, ../../wp-content/uploads/2022/01/img24-2048x1124.png 2048w" sizes="(max-width: 3334px) 100vw, 3334px" data-eio="l" /></noscript></a></p>
+<p>First, add the <code>'GitHub'</code> credentials as <code>'Username with password'</code> with the ID <code>'github'</code>. Then add the <code>'DockerHub'</code> credentials as <code>'Username with password'</code> with the ID <code>'dockerhub'</code>. Lastly, add the <code>'Kubeconfig'</code> credentials as <code>'Secret file'</code> with the ID <code>'kubeconfig'</code>.</p>
+<p><a href="../../wp-content/uploads/2022/01/img25.png"><img class="post-img alignnone wp-image-7831 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x897.png" alt="" width="3348" height="1564" data-src="../../wp-content/uploads/2022/01/img25.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img25.png 3348w, ../../wp-content/uploads/2022/01/img25-300x140.png 300w, ../../wp-content/uploads/2022/01/img25-1024x478.png 1024w, ../../wp-content/uploads/2022/01/img25-768x359.png 768w, ../../wp-content/uploads/2022/01/img25-1536x718.png 1536w, ../../wp-content/uploads/2022/01/img25-2048x957.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7831 size-full" src="../../wp-content/uploads/2022/01/img25.png" alt="" width="3348" height="1564" srcset="../../wp-content/uploads/2022/01/img25.png 3348w, ../../wp-content/uploads/2022/01/img25-300x140.png 300w, ../../wp-content/uploads/2022/01/img25-1024x478.png 1024w, ../../wp-content/uploads/2022/01/img25-768x359.png 768w, ../../wp-content/uploads/2022/01/img25-1536x718.png 1536w, ../../wp-content/uploads/2022/01/img25-2048x957.png 2048w" sizes="(max-width: 3348px) 100vw, 3348px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img26.png"><img class="post-img alignnone wp-image-7832 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x951.png" alt="" width="3360" height="1664" data-src="../../wp-content/uploads/2022/01/img26.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img26.png 3360w, ../../wp-content/uploads/2022/01/img26-300x149.png 300w, ../../wp-content/uploads/2022/01/img26-1024x507.png 1024w, ../../wp-content/uploads/2022/01/img26-768x380.png 768w, ../../wp-content/uploads/2022/01/img26-1536x761.png 1536w, ../../wp-content/uploads/2022/01/img26-2048x1014.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7832 size-full" src="../../wp-content/uploads/2022/01/img26.png" alt="" width="3360" height="1664" srcset="../../wp-content/uploads/2022/01/img26.png 3360w, ../../wp-content/uploads/2022/01/img26-300x149.png 300w, ../../wp-content/uploads/2022/01/img26-1024x507.png 1024w, ../../wp-content/uploads/2022/01/img26-768x380.png 768w, ../../wp-content/uploads/2022/01/img26-1536x761.png 1536w, ../../wp-content/uploads/2022/01/img26-2048x1014.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img27.png"><img class="post-img alignnone wp-image-7833 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x639.png" alt="" width="3360" height="1118" data-src="../../wp-content/uploads/2022/01/img27.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img27.png 3360w, ../../wp-content/uploads/2022/01/img27-300x100.png 300w, ../../wp-content/uploads/2022/01/img27-1024x341.png 1024w, ../../wp-content/uploads/2022/01/img27-768x256.png 768w, ../../wp-content/uploads/2022/01/img27-1536x511.png 1536w, ../../wp-content/uploads/2022/01/img27-2048x681.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7833 size-full" src="../../wp-content/uploads/2022/01/img27.png" alt="" width="3360" height="1118" srcset="../../wp-content/uploads/2022/01/img27.png 3360w, ../../wp-content/uploads/2022/01/img27-300x100.png 300w, ../../wp-content/uploads/2022/01/img27-1024x341.png 1024w, ../../wp-content/uploads/2022/01/img27-768x256.png 768w, ../../wp-content/uploads/2022/01/img27-1536x511.png 1536w, ../../wp-content/uploads/2022/01/img27-2048x681.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<blockquote><p>Note : Remember to select .yml file as a secret file entry for Kubernetes credentials. This file contains base64 decoded .pem entries. (Don’t select .pem file here)</p></blockquote>
+<p>The credentials are now ready to use and now plugins need to be installed. Jenkins has a wide range of plugin options. The <a href="https://plugins.jenkins.io/kubernetes-cli">Kubernetes CLI</a> plugin is not mandatory; however, it eases the process. Kubernetes CLI allows you to configure <code>'kubectl'</code> to interact with Kubernetes clusters.</p>
+<p>Let’s get that set up by going back to the Jenkins dashboard and finding the <code>'Manage Jenkins'</code> option in the left pane. Select <code>'Manage Plugins'</code> and then choose the <code>'Available'</code> tab. There should be a lot of available plugins in that tab. Search for the <code>'Kubernetes CLI'</code> plugin and install it. Voila!! Jenkins is ready for the first landing!</p>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="5_Create_the_First_Jenkins_Pipeline"><strong>5. Create the First Jenkins Pipeline</strong></span></h3>
+<p>Now we shall create a Jenkins pipeline for the spring-boot project which got committed in the Github repo.</p>
+<p>reference repo: <a href="https://github.com/sheldon-cooper26/springboot-docker-kubernates">https://github.com/sheldon-cooper26/springboot-docker-kubernates</a></p>
+<p>To create the Jenkins pipeline, a GitHub account that contains the following files is needed.  <code>'deployment.yaml'</code>, <code>'Dockerfile'</code>, <code>'spring-boot-project'</code>, <code>'Jenkinsfile'</code> and  <code>'service.yaml'</code>.</p>
+<p>Let&#8217;s see the contents of all files listed above</p>
+<ul>
+<li>deployment.yaml</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sbmvnpodinfo-deployment
+  labels:
+    app: sbmvnpodinfo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sbmvnpodinfo
+  template:
+    metadata:
+      labels:
+        app: sbmvnpodinfo
+    spec:
+      containers:
+      - name: sbmvnpodinfo
+        image: tapan2609/sbmvnpodinfo:{{BUILD_NUMBER}}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MY_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: MY_POD_SERVICE_ACCOUNT
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.serviceAccountName</pre>
+<p>&nbsp;</p>
+<ul>
+<li>Dockerfile</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="dockerfile" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"># Build stage
+FROM maven:3.6.3-jdk-8-slim AS build
+COPY holaworld/src /home/app/src
+COPY holaworld/pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean test package
+
+# Package stage
+FROM openjdk:8-jdk-alpine
+COPY --from=build /home/app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]</pre>
+<p>&nbsp;</p>
+<ul>
+<li>Jenkinsfile</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="groovy" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">pipeline {
+  agent any
+  stages {
+    stage('Docker Build') {
+      steps {
+        sh "docker build -t tapan2609/sbmvnpodinfo:${env.BUILD_NUMBER} ."
+      }
+    }
+    stage('Docker Push') {
+      steps {
+        withCredentials([usernamePassword(credentialsId: 'docker098765', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh "docker push tapan2609/sbmvnpodinfo:${env.BUILD_NUMBER}"
+        }
+      }
+    }
+    stage('Docker Remove Image') {
+      steps {
+        sh "docker rmi tapan2609/sbmvnpodinfo:${env.BUILD_NUMBER}"
+      }
+    }
+    stage('Apply Kubernetes Files') {
+      steps {
+          withKubeConfig([credentialsId: 'kubeconfig']) {
+          sh 'cat deployment.yaml | sed "s/{{BUILD_NUMBER}}/$BUILD_NUMBER/g" | kubectl apply -f -'
+          sh 'kubectl apply -f service.yaml'
+        }
+      }
+  }
+}
+post {
+    success {
+      slackSend(message: "sbmvn Pipeline is successfully completed.")
+    }
+    failure {
+      slackSend(message: "sbmvn Pipeline failed. Please check the logs.")
+    }
+}
+}</pre>
+<p>&nbsp;</p>
+<ul>
+<li>service.yml</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+kind: Service
+metadata:
+  name: sbmvnpodinfo-service
+spec:
+  type: NodePort
+  selector:
+    app: sbmvnpodinfo
+  ports:
+  - protocol: TCP
+    nodePort: 30301
+    port: 8080
+    targetPort: 8080</pre>
+<p>&nbsp;</p>
+<p>Navigate back to the Jenkins dashboard and find the <code>'New Item'</code> option in the left pane.</p>
+<p><a href="../../wp-content/uploads/2022/01/img28.png"><img class="post-img alignnone wp-image-7834 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x890.png" alt="" width="3348" height="1552" data-src="../../wp-content/uploads/2022/01/img28.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img28.png 3348w, ../../wp-content/uploads/2022/01/img28-300x139.png 300w, ../../wp-content/uploads/2022/01/img28-1024x475.png 1024w, ../../wp-content/uploads/2022/01/img28-768x356.png 768w, ../../wp-content/uploads/2022/01/img28-1536x712.png 1536w, ../../wp-content/uploads/2022/01/img28-2048x949.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7834 size-full" src="../../wp-content/uploads/2022/01/img28.png" alt="" width="3348" height="1552" srcset="../../wp-content/uploads/2022/01/img28.png 3348w, ../../wp-content/uploads/2022/01/img28-300x139.png 300w, ../../wp-content/uploads/2022/01/img28-1024x475.png 1024w, ../../wp-content/uploads/2022/01/img28-768x356.png 768w, ../../wp-content/uploads/2022/01/img28-1536x712.png 1536w, ../../wp-content/uploads/2022/01/img28-2048x949.png 2048w" sizes="(max-width: 3348px) 100vw, 3348px" data-eio="l" /></noscript></a></p>
+<p>Enter an item name and choose <code>'Pipeline'</code>. (An example project URL is <code>''</code>)</p>
+<p><a href="../../wp-content/uploads/2022/01/img29.jpg.html"><img class="alignnone size-medium wp-image-7835 lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1 1'%3E%3C/svg%3E" alt="" width="1" height="1" data-src="../../wp-content/uploads/2022/01/img29.jpg.html" loading="lazy" /><noscript><img class="alignnone size-medium wp-image-7835" src="../../wp-content/uploads/2022/01/img29.jpg.html" alt="" width="1" height="1" data-eio="l" /></noscript></a><a href="../../wp-content/uploads/2022/01/img29-2-scaled.jpg"><img class="post-img alignnone wp-image-7842 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1094.png" alt="" width="2560" height="1458" data-src="../../wp-content/uploads/2022/01/img29-2-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img29-2-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img29-2-300x171.jpg 300w, ../../wp-content/uploads/2022/01/img29-2-1024x583.jpg 1024w, ../../wp-content/uploads/2022/01/img29-2-768x437.jpg 768w, ../../wp-content/uploads/2022/01/img29-2-1536x875.jpg 1536w, ../../wp-content/uploads/2022/01/img29-2-2048x1167.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7842 size-full" src="../../wp-content/uploads/2022/01/img29-2-scaled.jpg" alt="" width="2560" height="1458" srcset="../../wp-content/uploads/2022/01/img29-2-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img29-2-300x171.jpg 300w, ../../wp-content/uploads/2022/01/img29-2-1024x583.jpg 1024w, ../../wp-content/uploads/2022/01/img29-2-768x437.jpg 768w, ../../wp-content/uploads/2022/01/img29-2-1536x875.jpg 1536w, ../../wp-content/uploads/2022/01/img29-2-2048x1167.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Choose <code>'GitHub project'</code> and type your project’s URL. Find the <code>'Pipeline'</code> section and change the definition value from <code>'Pipeline script'</code> to <code>'Pipeline script from SCM'</code>. For the <code>'SCM'</code> option, choose <code>'Git'</code>.</p>
+<p><a href="../../wp-content/uploads/2022/01/img30.png"><img class="post-img alignnone wp-image-7843 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x832.png" alt="" width="3354" height="1454" data-src="../../wp-content/uploads/2022/01/img30.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img30.png 3354w, ../../wp-content/uploads/2022/01/img30-300x130.png 300w, ../../wp-content/uploads/2022/01/img30-1024x444.png 1024w, ../../wp-content/uploads/2022/01/img30-768x333.png 768w, ../../wp-content/uploads/2022/01/img30-1536x666.png 1536w, ../../wp-content/uploads/2022/01/img30-2048x888.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7843 size-full" src="../../wp-content/uploads/2022/01/img30.png" alt="" width="3354" height="1454" srcset="../../wp-content/uploads/2022/01/img30.png 3354w, ../../wp-content/uploads/2022/01/img30-300x130.png 300w, ../../wp-content/uploads/2022/01/img30-1024x444.png 1024w, ../../wp-content/uploads/2022/01/img30-768x333.png 768w, ../../wp-content/uploads/2022/01/img30-1536x666.png 1536w, ../../wp-content/uploads/2022/01/img30-2048x888.png 2048w" sizes="(max-width: 3354px) 100vw, 3354px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img31.png"><img class="post-img alignnone wp-image-7844 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x455.png" alt="" width="840" height="373" data-src="../../wp-content/uploads/2022/01/img31-1024x455.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img31-1024x455.png 1024w, ../../wp-content/uploads/2022/01/img31-300x133.png 300w, ../../wp-content/uploads/2022/01/img31-768x341.png 768w, ../../wp-content/uploads/2022/01/img31-1536x682.png 1536w, ../../wp-content/uploads/2022/01/img31-2048x910.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7844 size-large" src="../../wp-content/uploads/2022/01/img31-1024x455.png" alt="" width="840" height="373" srcset="../../wp-content/uploads/2022/01/img31-1024x455.png 1024w, ../../wp-content/uploads/2022/01/img31-300x133.png 300w, ../../wp-content/uploads/2022/01/img31-768x341.png 768w, ../../wp-content/uploads/2022/01/img31-1536x682.png 1536w, ../../wp-content/uploads/2022/01/img31-2048x910.png 2048w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img32.png"><img class="post-img alignnone wp-image-7845 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x958.png" alt="" width="3168" height="1580" data-src="../../wp-content/uploads/2022/01/img32.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img32.png 3168w, ../../wp-content/uploads/2022/01/img32-300x150.png 300w, ../../wp-content/uploads/2022/01/img32-1024x511.png 1024w, ../../wp-content/uploads/2022/01/img32-768x383.png 768w, ../../wp-content/uploads/2022/01/img32-1536x766.png 1536w, ../../wp-content/uploads/2022/01/img32-2048x1021.png 2048w, ../../wp-content/uploads/2022/01/img32-840x420.png 840w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7845 size-full" src="../../wp-content/uploads/2022/01/img32.png" alt="" width="3168" height="1580" srcset="../../wp-content/uploads/2022/01/img32.png 3168w, ../../wp-content/uploads/2022/01/img32-300x150.png 300w, ../../wp-content/uploads/2022/01/img32-1024x511.png 1024w, ../../wp-content/uploads/2022/01/img32-768x383.png 768w, ../../wp-content/uploads/2022/01/img32-1536x766.png 1536w, ../../wp-content/uploads/2022/01/img32-2048x1021.png 2048w, ../../wp-content/uploads/2022/01/img32-840x420.png 840w" sizes="(max-width: 3168px) 100vw, 3168px" data-eio="l" /></noscript></a></p>
+<p>Now type in your repository URL and choose the <code>'Github'</code> credentials. (An example repository url is <code>'&lt;https://github.com/sheldon-cooper26/springboot-docker-kubernates.git'</code>&gt;)</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="6_Integrate_Jenkins_and_Slack"><strong>6. Integrate Jenkins and Slack</strong></span></h3>
+<p>To post notifications to a Slack channel, Jenkins needs the <code>'Slack Plugin'</code>. Go back to the Jenkins dashboard and find the <code>'Manage Jenkins'</code> option in the left pane. Select the <code>'Manage Plugins'</code> option and choose the <code>'Available'</code> tab. Search for the <code>'Slack Notification'</code> plugin and install it.</p>
+<p><a href="../../wp-content/uploads/2022/01/img33.png"><img class="post-img alignnone wp-image-7846 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x537.png" alt="" width="840" height="441" data-src="../../wp-content/uploads/2022/01/img33-1024x537.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img33-1024x537.png 1024w, ../../wp-content/uploads/2022/01/img33-300x157.png 300w, ../../wp-content/uploads/2022/01/img33-768x403.png 768w, ../../wp-content/uploads/2022/01/img33-1536x805.png 1536w, ../../wp-content/uploads/2022/01/img33-2048x1074.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7846 size-large" src="../../wp-content/uploads/2022/01/img33-1024x537.png" alt="" width="840" height="441" srcset="../../wp-content/uploads/2022/01/img33-1024x537.png 1024w, ../../wp-content/uploads/2022/01/img33-300x157.png 300w, ../../wp-content/uploads/2022/01/img33-768x403.png 768w, ../../wp-content/uploads/2022/01/img33-1536x805.png 1536w, ../../wp-content/uploads/2022/01/img33-2048x1074.png 2048w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img34.png"><img class="post-img alignnone wp-image-7847 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x789.png" alt="" width="3360" height="1380" data-src="../../wp-content/uploads/2022/01/img34.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img34.png 3360w, ../../wp-content/uploads/2022/01/img34-300x123.png 300w, ../../wp-content/uploads/2022/01/img34-1024x421.png 1024w, ../../wp-content/uploads/2022/01/img34-768x315.png 768w, ../../wp-content/uploads/2022/01/img34-1536x631.png 1536w, ../../wp-content/uploads/2022/01/img34-2048x841.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7847 size-full" src="../../wp-content/uploads/2022/01/img34.png" alt="" width="3360" height="1380" srcset="../../wp-content/uploads/2022/01/img34.png 3360w, ../../wp-content/uploads/2022/01/img34-300x123.png 300w, ../../wp-content/uploads/2022/01/img34-1024x421.png 1024w, ../../wp-content/uploads/2022/01/img34-768x315.png 768w, ../../wp-content/uploads/2022/01/img34-1536x631.png 1536w, ../../wp-content/uploads/2022/01/img34-2048x841.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img35-scaled.jpg"><img class="post-img alignnone wp-image-7848 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x782.png" alt="" width="2560" height="1043" data-src="../../wp-content/uploads/2022/01/img35-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img35-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img35-300x122.jpg 300w, ../../wp-content/uploads/2022/01/img35-1024x417.jpg 1024w, ../../wp-content/uploads/2022/01/img35-768x313.jpg 768w, ../../wp-content/uploads/2022/01/img35-1536x626.jpg 1536w, ../../wp-content/uploads/2022/01/img35-2048x834.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7848 size-full" src="../../wp-content/uploads/2022/01/img35-scaled.jpg" alt="" width="2560" height="1043" srcset="../../wp-content/uploads/2022/01/img35-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img35-300x122.jpg 300w, ../../wp-content/uploads/2022/01/img35-1024x417.jpg 1024w, ../../wp-content/uploads/2022/01/img35-768x313.jpg 768w, ../../wp-content/uploads/2022/01/img35-1536x626.jpg 1536w, ../../wp-content/uploads/2022/01/img35-2048x834.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Hopefully, you’ve already created your Slack account. If not, <a href="https://slack.com/">click here</a> to get started.</p>
+<p><a href="../../wp-content/uploads/2022/01/img36.png"><img class="post-img alignnone wp-image-7849 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x829.png" alt="" width="3340" height="1442" data-src="../../wp-content/uploads/2022/01/img36.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img36.png 3340w, ../../wp-content/uploads/2022/01/img36-300x130.png 300w, ../../wp-content/uploads/2022/01/img36-1024x442.png 1024w, ../../wp-content/uploads/2022/01/img36-768x332.png 768w, ../../wp-content/uploads/2022/01/img36-1536x663.png 1536w, ../../wp-content/uploads/2022/01/img36-2048x884.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7849 size-full" src="../../wp-content/uploads/2022/01/img36.png" alt="" width="3340" height="1442" srcset="../../wp-content/uploads/2022/01/img36.png 3340w, ../../wp-content/uploads/2022/01/img36-300x130.png 300w, ../../wp-content/uploads/2022/01/img36-1024x442.png 1024w, ../../wp-content/uploads/2022/01/img36-768x332.png 768w, ../../wp-content/uploads/2022/01/img36-1536x663.png 1536w, ../../wp-content/uploads/2022/01/img36-2048x884.png 2048w" sizes="(max-width: 3340px) 100vw, 3340px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img37.png"><img class="post-img alignnone wp-image-7850 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x690.png" alt="" width="3246" height="1166" data-src="../../wp-content/uploads/2022/01/img37.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img37.png 3246w, ../../wp-content/uploads/2022/01/img37-300x108.png 300w, ../../wp-content/uploads/2022/01/img37-1024x368.png 1024w, ../../wp-content/uploads/2022/01/img37-768x276.png 768w, ../../wp-content/uploads/2022/01/img37-1536x552.png 1536w, ../../wp-content/uploads/2022/01/img37-2048x736.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7850 size-full" src="../../wp-content/uploads/2022/01/img37.png" alt="" width="3246" height="1166" srcset="../../wp-content/uploads/2022/01/img37.png 3246w, ../../wp-content/uploads/2022/01/img37-300x108.png 300w, ../../wp-content/uploads/2022/01/img37-1024x368.png 1024w, ../../wp-content/uploads/2022/01/img37-768x276.png 768w, ../../wp-content/uploads/2022/01/img37-1536x552.png 1536w, ../../wp-content/uploads/2022/01/img37-2048x736.png 2048w" sizes="(max-width: 3246px) 100vw, 3246px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img38.png"><img class="post-img alignnone wp-image-7851 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x709.png" alt="" width="2984" height="1102" data-src="../../wp-content/uploads/2022/01/img38.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img38.png 2984w, ../../wp-content/uploads/2022/01/img38-300x111.png 300w, ../../wp-content/uploads/2022/01/img38-1024x378.png 1024w, ../../wp-content/uploads/2022/01/img38-768x284.png 768w, ../../wp-content/uploads/2022/01/img38-1536x567.png 1536w, ../../wp-content/uploads/2022/01/img38-2048x756.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7851 size-full" src="../../wp-content/uploads/2022/01/img38.png" alt="" width="2984" height="1102" srcset="../../wp-content/uploads/2022/01/img38.png 2984w, ../../wp-content/uploads/2022/01/img38-300x111.png 300w, ../../wp-content/uploads/2022/01/img38-1024x378.png 1024w, ../../wp-content/uploads/2022/01/img38-768x284.png 768w, ../../wp-content/uploads/2022/01/img38-1536x567.png 1536w, ../../wp-content/uploads/2022/01/img38-2048x756.png 2048w" sizes="(max-width: 2984px) 100vw, 2984px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img39.png"><img class="post-img alignnone wp-image-7852 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x680.png" alt="" width="3254" height="1152" data-src="../../wp-content/uploads/2022/01/img39.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img39.png 3254w, ../../wp-content/uploads/2022/01/img39-300x106.png 300w, ../../wp-content/uploads/2022/01/img39-1024x363.png 1024w, ../../wp-content/uploads/2022/01/img39-768x272.png 768w, ../../wp-content/uploads/2022/01/img39-1536x544.png 1536w, ../../wp-content/uploads/2022/01/img39-2048x725.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7852 size-full" src="../../wp-content/uploads/2022/01/img39.png" alt="" width="3254" height="1152" srcset="../../wp-content/uploads/2022/01/img39.png 3254w, ../../wp-content/uploads/2022/01/img39-300x106.png 300w, ../../wp-content/uploads/2022/01/img39-1024x363.png 1024w, ../../wp-content/uploads/2022/01/img39-768x272.png 768w, ../../wp-content/uploads/2022/01/img39-1536x544.png 1536w, ../../wp-content/uploads/2022/01/img39-2048x725.png 2048w" sizes="(max-width: 3254px) 100vw, 3254px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img40-scaled.jpg"><img class="post-img alignnone wp-image-7853 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1103.png" alt="" width="2560" height="1470" data-src="../../wp-content/uploads/2022/01/img40-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img40-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img40-300x172.jpg 300w, ../../wp-content/uploads/2022/01/img40-1024x588.jpg 1024w, ../../wp-content/uploads/2022/01/img40-768x441.jpg 768w, ../../wp-content/uploads/2022/01/img40-1536x882.jpg 1536w, ../../wp-content/uploads/2022/01/img40-2048x1176.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7853 size-full" src="../../wp-content/uploads/2022/01/img40-scaled.jpg" alt="" width="2560" height="1470" srcset="../../wp-content/uploads/2022/01/img40-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img40-300x172.jpg 300w, ../../wp-content/uploads/2022/01/img40-1024x588.jpg 1024w, ../../wp-content/uploads/2022/01/img40-768x441.jpg 768w, ../../wp-content/uploads/2022/01/img40-1536x882.jpg 1536w, ../../wp-content/uploads/2022/01/img40-2048x1176.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>Once you have a Slack account, configure the Jenkins integration by using <a href="https://my.slack.com/services/new/jenkins-ci">Jenkins CI</a>.</p>
+<p><a href="../../wp-content/uploads/2022/01/JenkinsSlack.png"><img class="alignnone size-full wp-image-7881 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x813.png" alt="SpringBoot Kubernetes" width="3012" height="1276" data-src="../../wp-content/uploads/2022/01/JenkinsSlack.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/JenkinsSlack.png 3012w, ../../wp-content/uploads/2022/01/JenkinsSlack-300x127.png 300w, ../../wp-content/uploads/2022/01/JenkinsSlack-1024x434.png 1024w, ../../wp-content/uploads/2022/01/JenkinsSlack-768x325.png 768w, ../../wp-content/uploads/2022/01/JenkinsSlack-1536x651.png 1536w, ../../wp-content/uploads/2022/01/JenkinsSlack-2048x868.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-7881" src="../../wp-content/uploads/2022/01/JenkinsSlack.png" alt="SpringBoot Kubernetes" width="3012" height="1276" srcset="../../wp-content/uploads/2022/01/JenkinsSlack.png 3012w, ../../wp-content/uploads/2022/01/JenkinsSlack-300x127.png 300w, ../../wp-content/uploads/2022/01/JenkinsSlack-1024x434.png 1024w, ../../wp-content/uploads/2022/01/JenkinsSlack-768x325.png 768w, ../../wp-content/uploads/2022/01/JenkinsSlack-1536x651.png 1536w, ../../wp-content/uploads/2022/01/JenkinsSlack-2048x868.png 2048w" sizes="(max-width: 3012px) 100vw, 3012px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img43-scaled.jpg"><img class="post-img alignnone wp-image-7857 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x960.png" alt="" width="2560" height="1280" data-src="../../wp-content/uploads/2022/01/img43-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img43-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img43-300x150.jpg 300w, ../../wp-content/uploads/2022/01/img43-1024x512.jpg 1024w, ../../wp-content/uploads/2022/01/img43-768x384.jpg 768w, ../../wp-content/uploads/2022/01/img43-1536x768.jpg 1536w, ../../wp-content/uploads/2022/01/img43-2048x1024.jpg 2048w, ../../wp-content/uploads/2022/01/img43-840x420.jpg 840w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7857 size-full" src="../../wp-content/uploads/2022/01/img43-scaled.jpg" alt="" width="2560" height="1280" srcset="../../wp-content/uploads/2022/01/img43-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img43-300x150.jpg 300w, ../../wp-content/uploads/2022/01/img43-1024x512.jpg 1024w, ../../wp-content/uploads/2022/01/img43-768x384.jpg 768w, ../../wp-content/uploads/2022/01/img43-1536x768.jpg 1536w, ../../wp-content/uploads/2022/01/img43-2048x1024.jpg 2048w, ../../wp-content/uploads/2022/01/img43-840x420.jpg 840w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>After configuration, click on <code>'Manage Jenkins'</code> again in the left navigation and go to <code>'Configure System'</code>. Find the <code>'Slack'</code> section and add the following values:</p>
+<ul>
+<li><strong><code>Workspace</code></strong>: &lt;TEAM-SUBDOMAIN&gt;</li>
+<li><strong><code>Credential</code></strong>: &lt;INTEGRATION-TOKEN-CREDENTIAL-ID&gt;</li>
+<li><strong><code>Default channel / member id</code></strong>: &lt;CHANNEL-NAME&gt;</li>
+</ul>
+<p><a href="../../wp-content/uploads/2022/01/img44.png"><img class="post-img alignnone wp-image-7858 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x957.png" alt="" width="3360" height="1674" data-src="../../wp-content/uploads/2022/01/img44.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img44.png 3360w, ../../wp-content/uploads/2022/01/img44-300x149.png 300w, ../../wp-content/uploads/2022/01/img44-1024x510.png 1024w, ../../wp-content/uploads/2022/01/img44-768x383.png 768w, ../../wp-content/uploads/2022/01/img44-1536x765.png 1536w, ../../wp-content/uploads/2022/01/img44-2048x1020.png 2048w, ../../wp-content/uploads/2022/01/img44-840x420.png 840w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7858 size-full" src="../../wp-content/uploads/2022/01/img44.png" alt="" width="3360" height="1674" srcset="../../wp-content/uploads/2022/01/img44.png 3360w, ../../wp-content/uploads/2022/01/img44-300x149.png 300w, ../../wp-content/uploads/2022/01/img44-1024x510.png 1024w, ../../wp-content/uploads/2022/01/img44-768x383.png 768w, ../../wp-content/uploads/2022/01/img44-1536x765.png 1536w, ../../wp-content/uploads/2022/01/img44-2048x1020.png 2048w, ../../wp-content/uploads/2022/01/img44-840x420.png 840w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<p>If you’d like, you can create a secret text credential by clicking the <code>'Add'</code> button. You can also test the Jenkins and Slack integration by clicking the <code>'Test Connection'</code> button.</p>
+<p><a href="../../wp-content/uploads/2022/01/img45.png"><img class="post-img alignnone wp-image-7860 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1030.png" alt="" width="2672" height="1434" data-src="../../wp-content/uploads/2022/01/img45.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img45.png 2672w, ../../wp-content/uploads/2022/01/img45-300x161.png 300w, ../../wp-content/uploads/2022/01/img45-1024x550.png 1024w, ../../wp-content/uploads/2022/01/img45-768x412.png 768w, ../../wp-content/uploads/2022/01/img45-1536x824.png 1536w, ../../wp-content/uploads/2022/01/img45-2048x1099.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7860 size-full" src="../../wp-content/uploads/2022/01/img45.png" alt="" width="2672" height="1434" srcset="../../wp-content/uploads/2022/01/img45.png 2672w, ../../wp-content/uploads/2022/01/img45-300x161.png 300w, ../../wp-content/uploads/2022/01/img45-1024x550.png 1024w, ../../wp-content/uploads/2022/01/img45-768x412.png 768w, ../../wp-content/uploads/2022/01/img45-1536x824.png 1536w, ../../wp-content/uploads/2022/01/img45-2048x1099.png 2048w" sizes="(max-width: 2672px) 100vw, 2672px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img46.png"><img class="post-img alignnone wp-image-7861 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x887.png" alt="" width="3354" height="1550" data-src="../../wp-content/uploads/2022/01/img46.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img46.png 3354w, ../../wp-content/uploads/2022/01/img46-300x139.png 300w, ../../wp-content/uploads/2022/01/img46-1024x473.png 1024w, ../../wp-content/uploads/2022/01/img46-768x355.png 768w, ../../wp-content/uploads/2022/01/img46-1536x710.png 1536w, ../../wp-content/uploads/2022/01/img46-2048x946.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7861 size-full" src="../../wp-content/uploads/2022/01/img46.png" alt="" width="3354" height="1550" srcset="../../wp-content/uploads/2022/01/img46.png 3354w, ../../wp-content/uploads/2022/01/img46-300x139.png 300w, ../../wp-content/uploads/2022/01/img46-1024x473.png 1024w, ../../wp-content/uploads/2022/01/img46-768x355.png 768w, ../../wp-content/uploads/2022/01/img46-1536x710.png 1536w, ../../wp-content/uploads/2022/01/img46-2048x946.png 2048w" sizes="(max-width: 3354px) 100vw, 3354px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="7_Integrate_Jenkins_and_GitHub"><strong>7. Integrate Jenkins and GitHub</strong></span></h3>
+<p>To receive specified events to Jenkins from GitHub, you need to configure <a href="https://developer.github.com/webhooks/">Webhooks</a>. Webhooks allow external services to be notified when certain events happen. When the specified events happen, GitHub will send a POST request to Jenkins.</p>
+<p>To begin configuration, navigate to your project repository on GitHub. Click <code>Settings</code> in the right corner and find the Webhooks option in the left pane.</p>
+<p><a href="../../wp-content/uploads/2022/01/img47.png"><img class="post-img alignnone wp-image-7862 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1064.png" alt="" width="3116" height="1726" data-src="../../wp-content/uploads/2022/01/img47.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img47.png 3116w, ../../wp-content/uploads/2022/01/img47-300x166.png 300w, ../../wp-content/uploads/2022/01/img47-1024x567.png 1024w, ../../wp-content/uploads/2022/01/img47-768x425.png 768w, ../../wp-content/uploads/2022/01/img47-1536x851.png 1536w, ../../wp-content/uploads/2022/01/img47-2048x1134.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7862 size-full" src="../../wp-content/uploads/2022/01/img47.png" alt="" width="3116" height="1726" srcset="../../wp-content/uploads/2022/01/img47.png 3116w, ../../wp-content/uploads/2022/01/img47-300x166.png 300w, ../../wp-content/uploads/2022/01/img47-1024x567.png 1024w, ../../wp-content/uploads/2022/01/img47-768x425.png 768w, ../../wp-content/uploads/2022/01/img47-1536x851.png 1536w, ../../wp-content/uploads/2022/01/img47-2048x1134.png 2048w" sizes="(max-width: 3116px) 100vw, 3116px" data-eio="l" /></noscript></a></p>
+<p>Click the <code>Add webhook</code> button. The payload URL is <code>http://&lt;JENKINS-URL&gt;:&lt;JENKINS-PORT&gt;/github-webhook/</code>. An example URL looks like <code>http://169.47.252.31:30100/github-webhook/</code>. Make sure you save the webhook.</p>
+<p><a href="../../wp-content/uploads/2022/01/SpringBoot.png"><img class="alignnone size-full wp-image-7880 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x956.png" alt="" width="3322" height="1654" data-src="../../wp-content/uploads/2022/01/SpringBoot.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/SpringBoot.png 3322w, ../../wp-content/uploads/2022/01/SpringBoot-300x149.png 300w, ../../wp-content/uploads/2022/01/SpringBoot-1024x510.png 1024w, ../../wp-content/uploads/2022/01/SpringBoot-768x382.png 768w, ../../wp-content/uploads/2022/01/SpringBoot-1536x765.png 1536w, ../../wp-content/uploads/2022/01/SpringBoot-2048x1020.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-7880" src="../../wp-content/uploads/2022/01/SpringBoot.png" alt="" width="3322" height="1654" srcset="../../wp-content/uploads/2022/01/SpringBoot.png 3322w, ../../wp-content/uploads/2022/01/SpringBoot-300x149.png 300w, ../../wp-content/uploads/2022/01/SpringBoot-1024x510.png 1024w, ../../wp-content/uploads/2022/01/SpringBoot-768x382.png 768w, ../../wp-content/uploads/2022/01/SpringBoot-1536x765.png 1536w, ../../wp-content/uploads/2022/01/SpringBoot-2048x1020.png 2048w" sizes="(max-width: 3322px) 100vw, 3322px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/01/image111.png"><img class="post-img alignnone wp-image-7867 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1119.png" alt="" width="3270" height="1906" data-src="../../wp-content/uploads/2022/01/image111.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/image111.png 3270w, ../../wp-content/uploads/2022/01/image111-300x175.png 300w, ../../wp-content/uploads/2022/01/image111-1024x597.png 1024w, ../../wp-content/uploads/2022/01/image111-768x448.png 768w, ../../wp-content/uploads/2022/01/image111-1536x895.png 1536w, ../../wp-content/uploads/2022/01/image111-2048x1194.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7867 size-full" src="../../wp-content/uploads/2022/01/image111.png" alt="" width="3270" height="1906" srcset="../../wp-content/uploads/2022/01/image111.png 3270w, ../../wp-content/uploads/2022/01/image111-300x175.png 300w, ../../wp-content/uploads/2022/01/image111-1024x597.png 1024w, ../../wp-content/uploads/2022/01/image111-768x448.png 768w, ../../wp-content/uploads/2022/01/image111-1536x895.png 1536w, ../../wp-content/uploads/2022/01/image111-2048x1194.png 2048w" sizes="(max-width: 3270px) 100vw, 3270px" data-eio="l" /></noscript></a></p>
+<p>Jenkins is now configured to accept events from GitHub and there are only a few more steps to complete the Jenkins and GitHub integration.</p>
+<p>Head over to the first pipeline&#8217;s dashboard and click the <code>'Configure'</code> option. Choose <code>'GitHub hook trigger for GITScm polling'</code> under the <code>'Build Triggers'</code> section and save the configuration.</p>
+<p><a href="../../wp-content/uploads/2022/01/image112.png"><img class="post-img alignnone wp-image-7868 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x947.png" alt="" width="3358" height="1656" data-src="../../wp-content/uploads/2022/01/image112.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/image112.png 3358w, ../../wp-content/uploads/2022/01/image112-300x148.png 300w, ../../wp-content/uploads/2022/01/image112-1024x505.png 1024w, ../../wp-content/uploads/2022/01/image112-768x379.png 768w, ../../wp-content/uploads/2022/01/image112-1536x757.png 1536w, ../../wp-content/uploads/2022/01/image112-2048x1010.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7868 size-full" src="../../wp-content/uploads/2022/01/image112.png" alt="" width="3358" height="1656" srcset="../../wp-content/uploads/2022/01/image112.png 3358w, ../../wp-content/uploads/2022/01/image112-300x148.png 300w, ../../wp-content/uploads/2022/01/image112-1024x505.png 1024w, ../../wp-content/uploads/2022/01/image112-768x379.png 768w, ../../wp-content/uploads/2022/01/image112-1536x757.png 1536w, ../../wp-content/uploads/2022/01/image112-2048x1010.png 2048w" sizes="(max-width: 3358px) 100vw, 3358px" data-eio="l" /></noscript></a></p>
+<p>The pipeline should be triggered manually once to identify stages that are used in the Jenkinsfile. After that, the GitHub webhook can trigger the pipeline.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="8_Test_the_First_Jenkins_Pipeline"><strong>8. Test the First Jenkins Pipeline</strong></span></h3>
+<p>Jenkins is finally ready to test.</p>
+<p>Go to the first pipeline&#8217;s dashboard and click <code>'Build Now'</code>.</p>
+<p><a href="../../wp-content/uploads/2022/01/img51.png"><img class="post-img alignnone wp-image-7865 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x867.png" alt="" width="3354" height="1514" data-src="../../wp-content/uploads/2022/01/img51.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img51.png 3354w, ../../wp-content/uploads/2022/01/img51-300x135.png 300w, ../../wp-content/uploads/2022/01/img51-1024x462.png 1024w, ../../wp-content/uploads/2022/01/img51-768x347.png 768w, ../../wp-content/uploads/2022/01/img51-1536x693.png 1536w, ../../wp-content/uploads/2022/01/img51-2048x924.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7865 size-full" src="../../wp-content/uploads/2022/01/img51.png" alt="" width="3354" height="1514" srcset="../../wp-content/uploads/2022/01/img51.png 3354w, ../../wp-content/uploads/2022/01/img51-300x135.png 300w, ../../wp-content/uploads/2022/01/img51-1024x462.png 1024w, ../../wp-content/uploads/2022/01/img51-768x347.png 768w, ../../wp-content/uploads/2022/01/img51-1536x693.png 1536w, ../../wp-content/uploads/2022/01/img51-2048x924.png 2048w" sizes="(max-width: 3354px) 100vw, 3354px" data-eio="l" /></noscript></a></p>
+<p>The steps that are defined in Jenkinsfile are now available. Simply make a small change on the ’HelloController.java’(<a href="https://github.com/sheldon-cooper26/springboot-docker-kubernates/blob/main/holaworld/src/main/java/com/bigblackbird/holaworld/HelloController.java">https://github.com/sheldon-cooper26/springboot-docker-kubernates/blob/main/holaworld/src/main/java/com/bigblackbird/holaworld/HelloController.java</a>) and push it to <code>GitHub</code>.</p>
+<p><a href="../../wp-content/uploads/2022/01/img52-scaled.jpg"><img class="post-img alignnone wp-image-7869 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x719.png" alt="" width="2560" height="958" data-src="../../wp-content/uploads/2022/01/img52-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img52-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img52-300x112.jpg 300w, ../../wp-content/uploads/2022/01/img52-1024x383.jpg 1024w, ../../wp-content/uploads/2022/01/img52-768x287.jpg 768w, ../../wp-content/uploads/2022/01/img52-1536x575.jpg 1536w, ../../wp-content/uploads/2022/01/img52-2048x766.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7869 size-full" src="../../wp-content/uploads/2022/01/img52-scaled.jpg" alt="" width="2560" height="958" srcset="../../wp-content/uploads/2022/01/img52-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img52-300x112.jpg 300w, ../../wp-content/uploads/2022/01/img52-1024x383.jpg 1024w, ../../wp-content/uploads/2022/01/img52-768x287.jpg 768w, ../../wp-content/uploads/2022/01/img52-1536x575.jpg 1536w, ../../wp-content/uploads/2022/01/img52-2048x766.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/01/img53-scaled.jpg"><img class="post-img alignnone wp-image-7870 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x713.png" alt="" width="2560" height="951" data-src="../../wp-content/uploads/2022/01/img53-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img53-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img53-300x111.jpg 300w, ../../wp-content/uploads/2022/01/img53-1024x380.jpg 1024w, ../../wp-content/uploads/2022/01/img53-768x285.jpg 768w, ../../wp-content/uploads/2022/01/img53-1536x571.jpg 1536w, ../../wp-content/uploads/2022/01/img53-2048x761.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7870 size-full" src="../../wp-content/uploads/2022/01/img53-scaled.jpg" alt="" width="2560" height="951" srcset="../../wp-content/uploads/2022/01/img53-scaled.jpg 2560w, ../../wp-content/uploads/2022/01/img53-300x111.jpg 300w, ../../wp-content/uploads/2022/01/img53-1024x380.jpg 1024w, ../../wp-content/uploads/2022/01/img53-768x285.jpg 768w, ../../wp-content/uploads/2022/01/img53-1536x571.jpg 1536w, ../../wp-content/uploads/2022/01/img53-2048x761.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>The pipeline is triggered by GitHub and Jenkins deploys a runs application to Kubernetes.</p>
+<p>The application can be found at <a href="http://169.51.203.3:30301/greet">http://169.51.203.3:30301/greet</a></p>
+<pre>(http://&lt;jenkins url&gt;:&lt;application port&gt;/greet)</pre>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/01/img54.png"><img class="post-img alignnone wp-image-7871 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1494x286.png" alt="" width="1494" height="286" data-src="../../wp-content/uploads/2022/01/img54.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img54.png 1494w, ../../wp-content/uploads/2022/01/img54-300x57.png 300w, ../../wp-content/uploads/2022/01/img54-1024x196.png 1024w, ../../wp-content/uploads/2022/01/img54-768x147.png 768w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7871 size-full" src="../../wp-content/uploads/2022/01/img54.png" alt="" width="1494" height="286" srcset="../../wp-content/uploads/2022/01/img54.png 1494w, ../../wp-content/uploads/2022/01/img54-300x57.png 300w, ../../wp-content/uploads/2022/01/img54-1024x196.png 1024w, ../../wp-content/uploads/2022/01/img54-768x147.png 768w" sizes="(max-width: 1494px) 100vw, 1494px" data-eio="l" /></noscript></a></p>
+<p>Meantime you should be getting notifications in slacks about your build status.</p>
+<p><a href="../../wp-content/uploads/2022/01/img55.png"><img class="post-img alignnone wp-image-7872 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x963.png" alt="" width="3218" height="1614" data-src="../../wp-content/uploads/2022/01/img55.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img55.png 3218w, ../../wp-content/uploads/2022/01/img55-300x150.png 300w, ../../wp-content/uploads/2022/01/img55-1024x514.png 1024w, ../../wp-content/uploads/2022/01/img55-768x385.png 768w, ../../wp-content/uploads/2022/01/img55-1536x770.png 1536w, ../../wp-content/uploads/2022/01/img55-2048x1027.png 2048w, ../../wp-content/uploads/2022/01/img55-840x420.png 840w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7872 size-full" src="../../wp-content/uploads/2022/01/img55.png" alt="" width="3218" height="1614" srcset="../../wp-content/uploads/2022/01/img55.png 3218w, ../../wp-content/uploads/2022/01/img55-300x150.png 300w, ../../wp-content/uploads/2022/01/img55-1024x514.png 1024w, ../../wp-content/uploads/2022/01/img55-768x385.png 768w, ../../wp-content/uploads/2022/01/img55-1536x770.png 1536w, ../../wp-content/uploads/2022/01/img55-2048x1027.png 2048w, ../../wp-content/uploads/2022/01/img55-840x420.png 840w" sizes="(max-width: 3218px) 100vw, 3218px" data-eio="l" /></noscript></a></p>
+<p>Now as a further step, let&#8217;s make small changes to <a href="http://HelloController.java">HelloController.java</a>, and let&#8217;s confirm if Jenkins pickups are the same and build it.</p>
+<p>Here, I am changing the string value from ‘When you are good at something!!..don’t do it for free to ‘Why do we fall bruce!!?.. Just to rise up again!!”</p>
+<p><a href="../../wp-content/uploads/2022/01/img56.png"><img class="post-img alignnone wp-image-7873 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1034.png" alt="" width="3360" height="1810" data-src="../../wp-content/uploads/2022/01/img56.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img56.png 3360w, ../../wp-content/uploads/2022/01/img56-300x162.png 300w, ../../wp-content/uploads/2022/01/img56-1024x552.png 1024w, ../../wp-content/uploads/2022/01/img56-768x414.png 768w, ../../wp-content/uploads/2022/01/img56-1536x827.png 1536w, ../../wp-content/uploads/2022/01/img56-2048x1103.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7873 size-full" src="../../wp-content/uploads/2022/01/img56.png" alt="" width="3360" height="1810" srcset="../../wp-content/uploads/2022/01/img56.png 3360w, ../../wp-content/uploads/2022/01/img56-300x162.png 300w, ../../wp-content/uploads/2022/01/img56-1024x552.png 1024w, ../../wp-content/uploads/2022/01/img56-768x414.png 768w, ../../wp-content/uploads/2022/01/img56-1536x827.png 1536w, ../../wp-content/uploads/2022/01/img56-2048x1103.png 2048w" sizes="(max-width: 3360px) 100vw, 3360px" data-eio="l" /></noscript></a></p>
+<p>I can see Jenkins has picked up changes and started to build new commits. (Build number &#8211; 8)</p>
+<p><a href="../../wp-content/uploads/2022/01/img57.png"><img class="post-img alignnone wp-image-7874 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x861.png" alt="" width="3260" height="1462" data-src="../../wp-content/uploads/2022/01/img57.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img57.png 3260w, ../../wp-content/uploads/2022/01/img57-300x135.png 300w, ../../wp-content/uploads/2022/01/img57-1024x459.png 1024w, ../../wp-content/uploads/2022/01/img57-768x344.png 768w, ../../wp-content/uploads/2022/01/img57-1536x689.png 1536w, ../../wp-content/uploads/2022/01/img57-2048x918.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7874 size-full" src="../../wp-content/uploads/2022/01/img57.png" alt="" width="3260" height="1462" srcset="../../wp-content/uploads/2022/01/img57.png 3260w, ../../wp-content/uploads/2022/01/img57-300x135.png 300w, ../../wp-content/uploads/2022/01/img57-1024x459.png 1024w, ../../wp-content/uploads/2022/01/img57-768x344.png 768w, ../../wp-content/uploads/2022/01/img57-1536x689.png 1536w, ../../wp-content/uploads/2022/01/img57-2048x918.png 2048w" sizes="(max-width: 3260px) 100vw, 3260px" data-eio="l" /></noscript></a></p>
+<p>Now try to access the same URL (<a href="http://169.51.203.3:30301/greet">http://169.51.203.3:30301/greet</a>) in a browser, and we should be able to see new string content.</p>
+<p><a href="../../wp-content/uploads/2022/01/img58.png"><img class="post-img alignnone wp-image-7875 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x561.png" alt="" width="1958" height="572" data-src="../../wp-content/uploads/2022/01/img58.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/01/img58.png 1958w, ../../wp-content/uploads/2022/01/img58-300x88.png 300w, ../../wp-content/uploads/2022/01/img58-1024x299.png 1024w, ../../wp-content/uploads/2022/01/img58-768x224.png 768w, ../../wp-content/uploads/2022/01/img58-1536x449.png 1536w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7875 size-full" src="../../wp-content/uploads/2022/01/img58.png" alt="" width="1958" height="572" srcset="../../wp-content/uploads/2022/01/img58.png 1958w, ../../wp-content/uploads/2022/01/img58-300x88.png 300w, ../../wp-content/uploads/2022/01/img58-1024x299.png 1024w, ../../wp-content/uploads/2022/01/img58-768x224.png 768w, ../../wp-content/uploads/2022/01/img58-1536x449.png 1536w" sizes="(max-width: 1958px) 100vw, 1958px" data-eio="l" /></noscript></a></p>
+<p>Congratulations!! (This time for real)😀😀 You have successfully constructed a fully-fledged CI-CD pipeline for Spring-Boot application using IBM cloud, Jenkins, Docker, Kubernetes, Slack.</p>
+<a href="../../wp-content/uploads/2021/09/DaaS.svg"><img class="post-img lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1047 415'%3E%3C/svg%3E" alt="gritfy" width="1047" height="415" class="post-img lazyload" data-src="../../wp-content/uploads/2021/09/DaaS.svg" loading="lazy" /><noscript><img class="post-img" src="../../wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" data-eio="l" /></noscript></a>
+<p>Cheers<br />
+Tapen Hegde</p>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../jenkins-tomcat-deploy-deploying-application-tomcat-using-jenkins/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-02-at-5.39.23-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-02-at-5.39.23-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../jenkins-tomcat-deploy-deploying-application-tomcat-using-jenkins/index.html'>Jenkins Tomcat Deploy - Deploying Application to Tomcat using Jenkins</a><p>In this post, we are going to look at the steps required to configure the Jenkins and Tomcat and achieve Continuous Deployment and Continuous Integration. Jenkins Tomcat Deploy We are going to see how to pull the code from the Source Code Management Repository -&nbsp; GITHUB and deploy it to&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../jenkins-remote-build-trigger-url/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="jenkins remote build" data-src="../../wp-content/uploads/2019/09/Screenshot-2020-07-06-at-12.16.06-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/09/Screenshot-2020-07-06-at-12.16.06-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="jenkins remote build" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../jenkins-remote-build-trigger-url/index.html'>Jenkins Remote Build Trigger - Build Jobs with URL and Token</a><p>Jenkins Build Trigger using remote access API is a key element when it comes to automating the Deployment process and implementing the CI/CD pipelines with Jenkins. In this post, we are going to see how to create a Jenkins Job or Project and configure API token and enable REMOTE API&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../deploy-aws-lambda-jenkins/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2021/12/mwi-designs-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/12/mwi-designs-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../deploy-aws-lambda-jenkins/index.html'>Deploy AWS Lambda Functions using Jenkins | Devops Junction</a><p>Serverless Computing is a disruptive change in the way we used to approach the infrastructure and host our applications. With Serverless Computing like AWS Lambda, you can simply deploy your single python file without having to worry about writing the production-grade wrappers like gunicorn and supervisor etc. Serverless computing is&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-application-status-script-wlst/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/03/Screen-Shot-2018-03-29-at-12.30.55-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/03/Screen-Shot-2018-03-29-at-12.30.55-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-application-status-script-wlst/index.html'>Weblogic Application Status Script WLST</a><p>To Get the Deployed Application Status in the Weblogic Domain, you can use the following python script and run it with WLST. It has nice Formatting and this post also covers "How to ignore or avoid the weblogic informational messages while running the WLST script" Copy the Script given below&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-content'>
+<a href='../weblogic-application-deployment-parser/index.html'>Weblogic Application Deployment Parser</a><p>Let me introduce&nbsp; Weblogic Application Deployment Parser , A tool designed to list all the application (app-deployment) configuration from the config.xml file of weblogic. It uses the same core of Weblogic Config XML Reader you can find it here Though there are&nbsp; weblogic.Admin and WLST ways to get the deployed&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../sqscli-app/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>SQSCLI &#8211; GUI Desktop App to Browse SQS Messages</a></div><div class="nav-next"><a href="../terraform-remote-state-datasource-example/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Terraform remote state datasource Example &#8211; GCP | Devops Junction</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (28)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (1)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (16)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (5)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><div class="simplesocialbuttons simplesocial-round-icon simplesocialbuttons-float-left-center post-7788 post  ssb_counter-activate simplesocialbuttons-slide-bottom-in">
+<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
+<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=SpringBoot+Kubernetes+Example+%E2%80%93+Jenkins+%26+IBM+Cloud+%7C+Devops+Junction&url=https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
+<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
+<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=SpringBoot+Kubernetes+Example+%E2%80%93+Jenkins+%26+IBM+Cloud+%7C+Devops+Junction&body=https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/"><span class="simplesocialtxt">Email</span></button>
+<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://web.whatsapp.com/send?text=https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/"><span class="simplesocialtxt">WhatsApp</span></button>
+</div>
+<script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"7788 https:\/\/www.middlewareinventory.com\/?p=7788","disqusShortname":"mwinventory","disqusTitle":"SpringBoot Kubernetes Example \u2013 Jenkins & IBM Cloud | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/spring-boot-kubernetes-jenkins\/","postId":"7788"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c3faebb42a"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"ad1aa689b7","post_id":"7788"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"f0b2747bdc","ip":"198.175.68.42","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f2bcf.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/129c2.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/spring-boot-kubernetes-jenkins/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script> 
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1657211264;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

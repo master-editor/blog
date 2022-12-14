@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Packer AWS Example with Terraform - DevOps Junction</title>
+<meta name="description" content="Packer aws example with terraform example, How to create a Packer AWS Machine Image for EC2, Packer with AWS and build machine images for AWS and deploy the Machine Images AMIs to EC2 using Terraform. Infrastructure automation with Packer and Terraform. Create Machine Images AMIs with Packer and Deploy to AWS." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Packer AWS Example with Terraform - DevOps Junction" />
+<meta property="og:description" content="Packer aws example with terraform example, How to create a Packer AWS Machine Image for EC2, Packer with AWS and build machine images for AWS and deploy the Machine Images AMIs to EC2 using Terraform. Infrastructure automation with Packer and Terraform. Create Machine Images AMIs with Packer and Deploy to AWS." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-03-30T21:10:16+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:18:12+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2019/03/cloud.jpeg" />
+<meta property="og:image:width" content="1050" />
+<meta property="og:image:height" content="700" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2019/03/cloud.jpeg","width":1050,"height":700},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#webpage","url":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/","name":"Packer AWS Example with Terraform - DevOps Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#primaryimage"},"datePublished":"2019-03-30T21:10:16+00:00","dateModified":"2022-11-10T19:18:12+00:00","description":"Packer aws example with terraform example, How to create a Packer AWS Machine Image for EC2, Packer with AWS and build machine images for AWS and deploy the Machine Images AMIs to EC2 using Terraform. Infrastructure automation with Packer and Terraform. Create Machine Images AMIs with Packer and Deploy to AWS.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/packer-aws-terraform-example/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Packer AWS Example with Terraform","datePublished":"2019-03-30T21:10:16+00:00","dateModified":"2022-11-10T19:18:12+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#primaryimage"},"keywords":"aws machine creation example,Infrastructure as code example,packer and terraform,packer aws,packer aws ebs,packer aws ebs example,Packer AWS example,packer terraform,Terraform AWS example","articleSection":"AWS,DevOps_Beginner,Packer,Terraform","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/packer-aws-terraform-example/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Packer AWS Example with Terraform Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/3134.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-packer-aws-terraform-example-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-packer-aws-terraform-example-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+blockquote {
+     padding: 2%;
+}
+
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+code
+{
+  color: black;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-3134 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-3134" class="post-3134 post type-post status-publish format-standard has-post-thumbnail hentry category-aws category-devops_beginner category-packer category-terraform tag-aws-machine-creation-example tag-infrastructure-as-code-example tag-packer-and-terraform tag-packer-aws tag-packer-aws-ebs tag-packer-aws-ebs-example tag-packer-aws-example tag-packer-terraform tag-terraform-aws-example wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Packer AWS Example with Terraform</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="2:40 am" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Packer%20AWS%20Example%20with%20Terraform&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpacker-aws-terraform-example%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="3134" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Packer+AWS+Example+with+Terraform&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpacker-aws-terraform-example%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="3134" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Packer%20AWS%20Example%20with%20Terraform&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpacker-aws-terraform-example%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="3134" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpacker-aws-terraform-example%2F&subject=Packer%20AWS%20Example%20with%20Terraform" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="3134" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="3134" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this article, we are going to see a quick packer aws example setup and provide the steps to create an AWS Image (AMI) using Packer and we are also going to Create Amazon EC2 Instance ( Elastic Bean Stack &#8211; EBS)  from the same AMI Image we have created, using Terraform,</p>
+<p>we are going to use three different products or technologies together such as <code> Packer, aws Terraform.</code></p>
+<p><code></code> <a href="../../wp-content/uploads/2019/03/cloud.jpeg"><img class="alignnone size-full wp-image-3138 lazyload" src="../../wp-content/ewww/lazy/placeholder-1050x700.png" alt="" width="1050" height="700" data-src="../../wp-content/uploads/2019/03/cloud.jpeg" loading="lazy" data-srcset="../../wp-content/uploads/2019/03/cloud.jpeg 1050w, ../../wp-content/uploads/2019/03/cloud-300x200.jpeg 300w, ../../wp-content/uploads/2019/03/cloud-768x512.jpeg 768w, ../../wp-content/uploads/2019/03/cloud-1024x683.jpeg 1024w, ../../wp-content/uploads/2019/03/cloud-840x560.jpeg 840w, ../../wp-content/uploads/2019/03/cloud-120x80.jpeg 120w, ../../wp-content/uploads/2019/03/cloud-360x240.jpeg 360w, ../../wp-content/uploads/2019/03/cloud-600x400.jpeg 600w, ../../wp-content/uploads/2019/03/cloud-480x320.jpeg 480w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-3138" src="../../wp-content/uploads/2019/03/cloud.jpeg" alt="" width="1050" height="700" srcset="../../wp-content/uploads/2019/03/cloud.jpeg 1050w, ../../wp-content/uploads/2019/03/cloud-300x200.jpeg 300w, ../../wp-content/uploads/2019/03/cloud-768x512.jpeg 768w, ../../wp-content/uploads/2019/03/cloud-1024x683.jpeg 1024w, ../../wp-content/uploads/2019/03/cloud-840x560.jpeg 840w, ../../wp-content/uploads/2019/03/cloud-120x80.jpeg 120w, ../../wp-content/uploads/2019/03/cloud-360x240.jpeg 360w, ../../wp-content/uploads/2019/03/cloud-600x400.jpeg 600w, ../../wp-content/uploads/2019/03/cloud-480x320.jpeg 480w" sizes="(max-width: 1050px) 100vw, 1050px" data-eio="l" /></noscript></a> Let us see some Quick Overview of Packer and Terraform before we proceed further</p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#What_is_Packer" title="What is Packer?">What is Packer?</a></li><li><a href="#What_is_Terraform" title="What is Terraform?">What is Terraform?</a></li><li><a href="#Steps_to_Create_Packer_Image_and_Create_EC2_with_Terraform" title="Steps to Create Packer Image and Create EC2 with Terraform">Steps to Create Packer Image and Create EC2 with Terraform</a><ul><li><a href="#Step0_Get_your_Programmatic_Access_Create_Access_Key_and_Secret_from_AWS" title="Step0: Get your Programmatic Access / Create Access Key and Secret from AWS">Step0: Get your Programmatic Access / Create Access Key and Secret from AWS</a></li><li><a href="#Step1_Install_and_Setup_Packer" title="Step1: Install and Setup Packer">Step1: Install and Setup Packer</a></li><li><a href="#Step2_Create_a_WorkSpace_to_place_Scripts_and_Packer_Template" title="Step2:  Create a WorkSpace to place Scripts and Packer Template">Step2:  Create a WorkSpace to place Scripts and Packer Template</a></li><li><a href="#The_Sample_Template_file_for_packer" title="The Sample Template file for packer">The Sample Template file for packer</a></li><li><a href="#Step3_Build_an_Image_using_Packer_from_the_Template_JSON_file" title="Step3: Build an Image using Packer from the Template JSON file">Step3: Build an Image using Packer from the Template JSON file</a></li><li><a href="#Step4_Building_AWS_EC2_Instance_using_Terraform_and_AMI" title="Step4: Building AWS EC2 Instance using Terraform and AMI">Step4: Building AWS EC2 Instance using Terraform and AMI</a></li><li><a href="#Some_Quick_Caveats" title="Some Quick Caveats">Some Quick Caveats</a></li></ul></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="What_is_Packer">What is Packer?</span></h2>
+<p>Packer is an OpenSource Image Provisioning tool developed by Hashicorp.</p>
+<p>It creates machine images and makes the Configuration Management and Server provisioning an easy Job.</p>
+<p>It can create Images for multiple platforms like Docker, AWS, Oracle Virtual Box, Digital Ocean, OpenStack, Linode, Azure etc.</p>
+<p>you can write the Instructions to the packer as JSON files they are called as  <code>Templates</code> in Packer Parlance.</p>
+<p>The technology Packer facilitates is widely known Infrastructure as a Code  (IOC)</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="What_is_Terraform">What is Terraform?</span></h2>
+<p>Terraform is an open-source <strong>infrastructure as code</strong> software tool created by HashiCorp.</p>
+<p>It enables users to define and provision a datacenter infrastructure using a high-level configuration language known as Hashicorp Configuration Language (HCL), or optionally JSON.</p>
+<p>Terraform supports a number of cloud infrastructure providers such as</p>
+<ul>
+<li>Amazon Web Services</li>
+<li>IBM Cloud (formerly Bluemix)</li>
+<li>Google Cloud Platform</li>
+<li>Linode</li>
+<li>Microsoft Azure</li>
+<li>Oracle Cloud Infrastructure</li>
+<li>VMware vSphere</li>
+<li>OpenStack  </li>
+</ul>
+<p>Simply put, the Machine Images we create using Packer can be used by Terraform to build the infrastructures.</p>
+<p>Since this is going to be the process of  <strong>Infrastructure as a Code </strong>paradigm.</p>
+<p>We need a API programmatic access for AWS.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Steps_to_Create_Packer_Image_and_Create_EC2_with_Terraform">Steps to Create Packer Image and Create EC2 with Terraform</span></h2>
+<p>These are the steps we are going to perform to create a packer image which install <code>apache</code> httpd webserver using a shell provisioner and prepare the image.</p>
+<p>Once the image is ready we are going to use Terraform create an instance based on the AMI or the image we have created using packer.  </p>
+<h3><span class="ez-toc-section" id="Step0_Get_your_Programmatic_Access_Create_Access_Key_and_Secret_from_AWS">Step0: Get your Programmatic Access / Create Access Key and Secret from AWS</span></h3>
+<ol>
+<li>
+<div>Login to AWS Console</div>
+</li>
+<li>
+<div>In the services go to IAM</div>
+</li>
+<li>
+<div>Create a User and Click on map existing Policies</div>
+</li>
+<li>
+<div>Choose UserName and Select the Policy (Administrator Access Policy)</div>
+</li>
+<li>
+<div>Create user</div>
+</li>
+<li>
+<div>Final Stage would present the AccessKEY and Secret Access like given below.</div>
+</li>
+</ol>
+<figure id="attachment_3140" aria-describedby="caption-attachment-3140" style="width: 996px" class="wp-caption alignleft"><a href="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png"><img class="size-full wp-image-3140 lazyload" src="../../wp-content/ewww/lazy/placeholder-996x385.png" alt="" width="996" height="385" data-src="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png 996w, ../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-300x116.png 300w, ../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-768x297.png 768w" data-sizes="auto" /><noscript><img class="size-full wp-image-3140" src="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png" alt="" width="996" height="385" srcset="../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png 996w, ../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-300x116.png 300w, ../../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-768x297.png 768w" sizes="(max-width: 996px) 100vw, 996px" data-eio="l" /></noscript></a><figcaption id="caption-attachment-3140" class="wp-caption-text">API key creation Successful Message Banner</figcaption></figure>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step1_Install_and_Setup_Packer">Step1: Install and Setup Packer</span></h3>
+<ol>
+<li>
+<div>Download Packer <a href="https://www.packer.io/downloads.html">https://www.packer.io/downloads.html</a></div>
+</li>
+<li>
+<div>Unzip the downloaded file and there will be a Single File named packer</div>
+</li>
+<li>I have installed the packer in <code>/apps/packer</code></li>
+<li>Let us add this path into the<code> $PATH</code> variable and <code>BASH_PROFILE</code> file as well for better convenience and to call packer any location without having to refer the full path of the packer.</li>
+<li>Add the /apps/packer at the end of the <code>export PATH=*</code> line
+<pre><span class="s1">export</span><span class="s2"><b> PATH=</b></span><span class="s3">/usr/</span><span class="s1">local</span><span class="s3">/Cellar/openssl/</span><span class="s4">1</span><span class="s3">.</span><span class="s4">0</span><span class="s3">.2p/bin:</span><span class="s5">$PATH<span class="s3">:/apps/packer/</span></span></pre>
+</li>
+<li>To validate if it is working just type <code>packer -version</code></li>
+</ol>
+<p>&nbsp;</p>
+<p><span style="font-size: 18pt;"><strong>What is a Packer Template file and  How to Write a Packer Template?</strong></span></p>
+<p>The Packer template file uses JSON format and it consists of three parts</p>
+<ul>
+<li>Builders</li>
+<li>provisioners</li>
+<li>Post-Processors</li>
+</ul>
+<p>Along with this, There is a dedicated section for variables and we will start from there. <strong><span style="font-size: 14pt;"><code>Variables</code> &#8211;</span> </strong>This Section would contain the list of variables you need to use or need across other sections on the Packer Template JSON file.</p>
+<p>It is always a Good practice to use variables and referring the variable name across the builders and provisioners as using a variable would make your Packer Template easy to understand and to modify/update in future for new requirements.</p>
+<p>In our case, we have set our  AWS Access ID and  Secure Key as the variable and we have defined it to be taken from the Environment variable for additional security.   </p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 14pt;"><code>builders</code> &#8211; </span> </strong>Here we define what image we are going to create and for which technology/platform we are going to create an image for like <code>AWS, DOCKER, VirtualBox, OpenStack etc.</code></p>
+<p>Based on the Builders the configuration elements we use in this section would vary. Packer support various builders like EC2, Vmware, Virtual box etc.. and it can be expanded to various other new products and technologies.  </p>
+<p>&nbsp;</p>
+<p><span style="font-size: 14pt;"><strong><code>Provisioners</code> &#8211;  </strong></span>These are the list of built-in or external configuration on management tools like<code> Shell, Ansible, Chef, PowerShell etc..</code></p>
+<p>Here we define what must the image be build with, like a software product, Certain Usernames, Directories, Patch Version, Kernal Version,  Environmental specific configuration etc.</p>
+<p>Provisioners let you design your image and make it more meaningful by adding a necessary software/programs to it, Without it, the image we create is a simple OS kernel base image otherwise Some Use Cases of Provisioners</p>
+<ul>
+<li>Installing Packages/Softwares</li>
+<li>Creating a username and Configuration</li>
+<li>Run Some Custom Scripts to make Environment required changes</li>
+<li>Configure File System / NFS / Storage etc</li>
+<li>Security Setup / Configuration</li>
+<li>downloading necessary code files etc.</li>
+<li>patching the kernel</li>
+<li>Configuring the Packages/Softwares the way you want ( Apache/NGINX/Tomcat/mysql) etc</li>
+</ul>
+<p>Basically, provisioners are doing the main job here and making the image as ready to use</p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 14pt;"><code>Post Processors</code> (Optional):</span> </strong>Post-processors comes into the picture after the image is Successfully built or created by the builder and provisioned by the provisioner(s).</p>
+<p>Post-processors are optional, and they can be used to upload artefacts, re-package, create tags, Publish to clouds like <code>hub.docker.com</code> and <code>vagrant cloud</code> etc Some of the Popular Post processors are</p>
+<ul>
+<li>Docker Push</li>
+<li>Docker Tag</li>
+<li>Vagrant</li>
+<li>Vagrant cloud</li>
+<li>Vsphere Template</li>
+<li>Amazon Import</li>
+<li>DigitalOcean import etc</li>
+</ul>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step2_Create_a_WorkSpace_to_place_Scripts_and_Packer_Template">Step2:  Create a WorkSpace to place Scripts and Packer Template</span></h3>
+<p>Let us create a new directory and call it as a workspace where our Template and other files required for the Packer must be present, By files,  I meant any provisioners script like <code>Shell Script, Ansible playbook etc. </code></p>
+<p>Which you want to execute during the provisioning to configure your image in the way you want. Here are the steps as they are executed.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"># Create a Directory or Work Space
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="50313b2331223126103d3934343c3527312235393e26353e243f2229">[email&#160;protected]</a>:/apps/packer$ pwd
+/apps/packer
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="7c1d170f1d0e1d0a3c1115181810190b1d0e1915120a191208130e05">[email&#160;protected]</a>:/apps/packer$ mkdir awsimages
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="fa9b91899b889b8cba97939e9e969f8d9b889f93948c9f948e958883">[email&#160;protected]</a>:/apps/packer$ cd awsimages
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="0e6f657d6f7c6f784e63676a6a626b796f7c6b6760786b607a617c77">[email&#160;protected]</a>:/apps/packer/awsimages$ ls -rlt
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="2243495143504354624f4b46464e47554350474b4c54474c564d505b">[email&#160;protected]</a>:/apps/packer/awsimages$ pwd
+/apps/packer/awsimages
+
+
+# Create a New test file named welcomefile with a Single Line of Welcome Message
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="a3c2c8d0c2d1c2d5e3cecac7c7cfc6d4c2d1c6cacdd5c6cdd7ccd1da">[email&#160;protected]</a>:/apps/packer/awsimages$ cat &gt; welcomefile
+WELCOME TO PACKER SARAV!..  
+
+# Create a Simple Script named setup.sh to install Apache2                     
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="0263697163706374426f6b66666e67756370676b6c74676c766d707b">[email&#160;protected]</a>:/apps/packer/awsimages$ cat &gt; setup.sh
+echo "Hello Sarav, How are you doing"
+echo "Installing Apache2"
+apt-get update
+apt-get -y install apache2
+
+
+# Validate if they are created
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="4f2e243c2e3d2e390f22262b2b232a382e3d2a2621392a213b203d36">[email&#160;protected]</a>:/apps/packer/awsimages$ ls -rlt
+total 16
+-rw-r--r &#8211;  1 aksarav  wheel    27B Mar  2 12:13 welcomefile
+-rw-r--r &#8211;  1 aksarav  wheel    38B Mar  2 12:13 setup.sh
+
+# Make the Script Executable
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="93f2f8e0f2e1f2e5d3fefaf7f7fff6e4f2e1f6fafde5f6fde7fce1ea">[email&#160;protected]</a>:/apps/packer/awsimages$ chmod a+x setup.sh 
+
+# Set your AWS ACCESS KEY and SECRET KEY as an environment variable for additional security [ Some characters are masked for Obvious reasons ]
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="60010b1301120116200d0904040c0517011205090e16050e140f1219">[email&#160;protected]</a>:/apps/packer/awsimages$ export AWS_ACCESS_KEY_ID=AK************IEVXQ
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="aacbc1d9cbd8cbdceac7c3cecec6cfddcbd8cfc3c4dccfc4dec5d8d3">[email&#160;protected]</a>:/apps/packer/awsimages$ export AWS_SECRET_ACCESS_KEY=gbaIbK*********************iwN0dGfS
+
+# Create a New template file and paste the below content
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="2948425a485b485f6944404d4d454c5e485b4c40475f">[email&#160;protected]</a>entory:/apps/packer/awsimages$ cat &gt; ebs.json</pre>
+<p>&nbsp;</p>
+<p>Having learnt the basics of Packer file creation, Now let us see our Sample template JSON file the for packer.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="The_Sample_Template_file_for_packer">The Sample Template file for packer</span></h3>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">{
+    "variables": {
+        "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+        "region":         "us-east-1"
+    },
+    "builders": [
+        {
+            "access_key": "{{user `aws_access_key`}}",
+            "ami_name": "packer-linux-aws-demo-{{timestamp}}",
+            "instance_type": "t3.micro",
+            "region": "ap-south-1",
+            "secret_key": "{{user `aws_secret_key`}}",
+            "source_ami_filter": {
+              "filters": {
+              "virtualization-type": "hvm",
+              "name": "ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*",
+              "root-device-type": "ebs"
+              },
+              "owners": ["099720109477"],
+              "most_recent": true
+            },
+            "ssh_username": "ubuntu",
+            "type": "amazon-ebs"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "./welcomefile",
+            "destination": "/home/ubuntu/"
+        },
+        {
+            "type": "shell",
+            "inline":[
+                "ls -al /home/ubuntu",
+                "cat /home/ubuntu/welcomefile"
+            ]
+        },
+        {
+            "type": "shell",
+            "script": "./setup.sh"
+        }
+    ]
+}</pre>
+<p>&nbsp;</p>
+<p>Once you have saved the preceding Template JSON content in the workspace. [ in my case the file name is <code>ebs.json</code> ] Now it is a time to validate and execute.</p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 18pt;">How to validate the Packer Image?</span></strong></p>
+<p>To validate the packer image file ( JSON ) we have created,  we can use the <code>packer validate</code> command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-linenumbers="false">$ packer validate ebs.json 
+Template validated successfully.</pre>
+<p>&nbsp;</p>
+<p>If you get <code>Template validated Successfully</code> message. Then you are Good.</p>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step3_Build_an_Image_using_Packer_from_the_Template_JSON_file">Step3: Build an Image using Packer from the Template JSON file</span></h3>
+<p>Now it is a time to build the Image from the Template we have created already.  We should use <code>packer build</code> command followed by the JSON file name to build the image</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ packer build ebs.json 
+amazon-ebs output will be in this color.
+==&gt; amazon-ebs: Prevalidating AMI Name: packer-linux-aws-demo-1551511502
+    amazon-ebs: Found Image ID: ami-0a574895390037a62
+==&gt; amazon-ebs: Creating temporary keypair: packer_5c7a2fcf-66e5-01d5-b774-fcc0ddcfc2c5
+==&gt; amazon-ebs: Creating temporary security group for this instance: packer_5c7a2fd1-2ab9-8f5a-e3c6-d33e5ce49bee
+==&gt; amazon-ebs: Authorizing access to port 22 from 0.0.0.0/0 in the temporary security group...
+==&gt; amazon-ebs: Launching a source AWS instance...
+==&gt; amazon-ebs: Adding tags to source instance
+    amazon-ebs: Adding tag: "Name": "Packer Builder"
+    amazon-ebs: Instance ID: i-09510a5b2434d64b2
+==&gt; amazon-ebs: Waiting for instance (i-09510a5b2434d64b2) to become ready...
+==&gt; amazon-ebs: Using ssh communicator to connect: 13.232.19.83
+==&gt; amazon-ebs: Waiting for SSH to become available...
+==&gt; amazon-ebs: Connected to SSH!
+==&gt; amazon-ebs: Uploading ./welcomefile =&gt; /home/ubuntu/
+1 items:  27 B / 27 B [===================================================================================================================================] 0s
+==&gt; amazon-ebs: Provisioning with shell script: /var/folders/gy/_pnf5jtn711fcqn8v2j54tcm0000gn/T/packer-shell531024437
+    amazon-ebs: total 32
+    amazon-ebs: drwxr-xr-x 4 ubuntu ubuntu 4096 Mar  2 07:25 .
+    amazon-ebs: drwxr-xr-x 3 root   root   4096 Mar  2 07:25 ..
+    amazon-ebs: -rw-r--r &#8211; 1 ubuntu ubuntu  220 Aug 31  2015 .bash_logout
+    amazon-ebs: -rw-r--r &#8211; 1 ubuntu ubuntu 3771 Aug 31  2015 .bashrc
+    amazon-ebs: drwx---- &#8211; 2 ubuntu ubuntu 4096 Mar  2 07:25 .cache
+    amazon-ebs: -rw-r--r &#8211; 1 ubuntu ubuntu  655 May 16  2017 .profile
+    amazon-ebs: drwx---- &#8211; 2 ubuntu ubuntu 4096 Mar  2 07:25 .ssh
+    amazon-ebs: -rw-r--r &#8211; 1 ubuntu ubuntu   27 Mar  2 07:25 welcomefile
+    amazon-ebs: WELCOME TO PACKER SARAV!..
+==&gt; amazon-ebs: Provisioning with shell script: ./setup.sh
+    amazon-ebs: Hello Sarav, How are you doing
+    amazon-ebs: Installing Apache2
+==&gt; amazon-ebs: Stopping the source instance...
+    amazon-ebs: Stopping instance, attempt 1
+==&gt; amazon-ebs: Waiting for the instance to stop...
+==&gt; amazon-ebs: Creating unencrypted AMI packer-linux-aws-demo-1551511502 from instance i-09510a5b2434d64b2
+    amazon-ebs: AMI: ami-0ba13714603920d0e
+==&gt; amazon-ebs: Waiting for AMI to become ready...
+==&gt; amazon-ebs: Terminating the source AWS instance...
+==&gt; amazon-ebs: Cleaning up any extra volumes...
+==&gt; amazon-ebs: No volumes to clean up, skipping
+==&gt; amazon-ebs: Deleting temporary security group...
+==&gt; amazon-ebs: Deleting temporary keypair...
+Build 'amazon-ebs' finished.
+==&gt; Builds finished. The artifacts of successful builds are:
+--&gt; amazon-ebs: AMIs were created:
+ap-south-1: ami-0ba13714603920d0e</pre>
+<p>&nbsp;</p>
+<p>In the preceding Execution Output, If you look at the Texts highlighted in Yellow,  You can understand, The Provisioner Scripts we have defined to be executed has Successfully launched during the Image Creation and Succeeded.</p>
+<p>It has also installed the <code>Apache2</code> httpd inside the newly created image and we can expect apache2 httpd server be present whenever we create an instance out of this newly created AMI or Amazon Machine Image.</p>
+<p>Here the last line would give you the AMI Image ID <code>ami-0ba13714603920d0e</code> which would vary for everyone.</p>
+<p>So you must copy yours and keep it safe as we will need for Terraform</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step4_Building_AWS_EC2_Instance_using_Terraform_and_AMI">Step4: Building AWS EC2 Instance using Terraform and AMI</span></h3>
+<p>Now we have created the AWS Machine Image using Packer. By now, you can actually see your images in the AMI section on the AWS Management console.</p>
+<p>Now let us see how to Create an EC2 instance using Terraform To make this precise and Short I have not added the installation instruction of Terraform.</p>
+<p>You can find the instructions here <a href="https://learn.hashicorp.com/terraform/getting-started/install" target="_blank" rel="noopener noreferrer">Installing Terraform</a> Now Let me proceed further with an assumption that you have installed the Terraform.</p>
+<p>In the workspace, Create a new file named <code><span class="s1">BuildEC2.tf</span></code> with the following content and make sure that your Environment variables are set properly and machine ID is updated</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">provider "aws" {
+  region = "ap-south-1"
+}
+
+resource "aws_instance" "web" {
+  ami           = "UPDATE YOUR AMI MACHINE ID"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "HelloWorld"
+  }
+}
+</pre>
+<p>&nbsp;</p>
+<p>These are the commands to build AWS EC2 instance using terraform, in the same order it was executed</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"># Make Sure the Terraform Template/Instruction file is present
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="0263697163706374426f6b66666e67756370676b6c74676c766d707b">[email&#160;protected]</a>:/apps/terraform$ ls -rlt
+total 8
+-rw-r--r &#8211;  1 aksarav  wheel   189B Mar  2 13:51 BuildEC2.tf
+
+# Init terraform
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="8beae0f8eaf9eafdcbe6e2efefe7eefceaf9eee2e5fdeee5ffe4f9f2">[email&#160;protected]</a>:/apps/terraform$ terraform init
+Initializing provider plugins...
+- Checking for available provider plugins on https://releases.hashicorp.com...
+- Downloading plugin for provider "aws" (2.0.0)...
+The following providers do not have any version constraints in configuration,
+so the latest version was installed.
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = "..." constraints to the
+corresponding provider blocks in configuration, with the constraint strings
+suggested below.
+* provider.aws: version = "~&gt; 2.0"
+Terraform has been successfully initialized!
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+
+# Apply Terraform to build the EC2 instance
+<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="b0d1dbc3d1c2d1c6f0ddd9d4d4dcd5c7d1c2d5d9dec6d5dec4dfc2c9">[email&#160;protected]</a>:/apps/terraform$ terraform apply
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+Terraform will perform the following actions:
+  + aws_instance.web
+      id:                           &lt;computed&gt;
+      ami:                          "ami-0ba13714603920d0e"
+      arn:                          &lt;computed&gt;
+      associate_public_ip_address:  &lt;computed&gt;
+      availability_zone:            &lt;computed&gt;
+      cpu_core_count:               &lt;computed&gt;
+      cpu_threads_per_core:         &lt;computed&gt;
+      ebs_block_device.#:           &lt;computed&gt;
+      ephemeral_block_device.#:     &lt;computed&gt;
+      get_password_data:            "false"
+      host_id:                      &lt;computed&gt;
+      instance_state:               &lt;computed&gt;
+      instance_type:                "t2.micro"
+      ipv6_address_count:           &lt;computed&gt;
+      ipv6_addresses.#:             &lt;computed&gt;
+      key_name:                     &lt;computed&gt;
+      network_interface.#:          &lt;computed&gt;
+      network_interface_id:         &lt;computed&gt;
+      password_data:                &lt;computed&gt;
+      placement_group:              &lt;computed&gt;
+      primary_network_interface_id: &lt;computed&gt;
+      private_dns:                  &lt;computed&gt;
+      private_ip:                   &lt;computed&gt;
+      public_dns:                   &lt;computed&gt;
+      public_ip:                    &lt;computed&gt;
+      root_block_device.#:          &lt;computed&gt;
+      security_groups.#:            &lt;computed&gt;
+      source_dest_check:            "true"
+      subnet_id:                    &lt;computed&gt;
+      tags.%:                       "1"
+      tags.Name:                    "HelloWorld"
+      tenancy:                      &lt;computed&gt;
+      volume_tags.%:                &lt;computed&gt;
+      vpc_security_group_ids.#:     &lt;computed&gt;
+Plan: 1 to add, 0 to change, 0 to destroy.
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+  Enter a value: yes
+aws_instance.web: Creating...
+  ami:                          "" =&gt; "ami-0ba13714603920d0e"
+  arn:                          "" =&gt; "&lt;computed&gt;"
+  associate_public_ip_address:  "" =&gt; "&lt;computed&gt;"
+  availability_zone:            "" =&gt; "&lt;computed&gt;"
+  cpu_core_count:               "" =&gt; "&lt;computed&gt;"
+  cpu_threads_per_core:         "" =&gt; "&lt;computed&gt;"
+  ebs_block_device.#:           "" =&gt; "&lt;computed&gt;"
+  ephemeral_block_device.#:     "" =&gt; "&lt;computed&gt;"
+  get_password_data:            "" =&gt; "false"
+  host_id:                      "" =&gt; "&lt;computed&gt;"
+  instance_state:               "" =&gt; "&lt;computed&gt;"
+  instance_type:                "" =&gt; "t2.micro"
+  ipv6_address_count:           "" =&gt; "&lt;computed&gt;"
+  ipv6_addresses.#:             "" =&gt; "&lt;computed&gt;"
+  key_name:                     "" =&gt; "&lt;computed&gt;"
+  network_interface.#:          "" =&gt; "&lt;computed&gt;"
+  network_interface_id:         "" =&gt; "&lt;computed&gt;"
+  password_data:                "" =&gt; "&lt;computed&gt;"
+  placement_group:              "" =&gt; "&lt;computed&gt;"
+  primary_network_interface_id: "" =&gt; "&lt;computed&gt;"
+  private_dns:                  "" =&gt; "&lt;computed&gt;"
+  private_ip:                   "" =&gt; "&lt;computed&gt;"
+  public_dns:                   "" =&gt; "&lt;computed&gt;"
+  public_ip:                    "" =&gt; "&lt;computed&gt;"
+  root_block_device.#:          "" =&gt; "&lt;computed&gt;"
+  security_groups.#:            "" =&gt; "&lt;computed&gt;"
+  source_dest_check:            "" =&gt; "true"
+  subnet_id:                    "" =&gt; "&lt;computed&gt;"
+  tags.%:                       "" =&gt; "1"
+  tags.Name:                    "" =&gt; "HelloWorld"
+  tenancy:                      "" =&gt; "&lt;computed&gt;"
+  volume_tags.%:                "" =&gt; "&lt;computed&gt;"
+  vpc_security_group_ids.#:     "" =&gt; "&lt;computed&gt;"
+aws_instance.web: Still creating... (10s elapsed)
+aws_instance.web: Creation complete after 15s (ID: i-06987184944fa33cf)
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>Now you can see the EC2 instance created successfully on AWS. you can cross verify the same on the console.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Some_Quick_Caveats">Some Quick Caveats</span></h3>
+<ul>
+<li> Make sure the region you select for the Image creation at Packer and the Terraform Region matches.  <code>as AMI ID is region Specific</code></li>
+<li>Make Sure you use the valid AWS Key and Secret</li>
+<li><span style="color: #000000;">Last but not least, Make sure you shut down the EC2 instances and Remove the AMI images if you are on Free tier. You would be charged otherwise.</span></li>
+</ul>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>This is a quick introduction for Packer and Terraform and there are numerous and advanced use cases for Terraform and it is widely used on the industry right now for the IAC.</p>
+<p>Hope this give some basic Idea on the Terraform and Packer.</p>
+<p>You can checkout our other articles in Terraform here and keep learning</p>
+<p>&nbsp;</p>
+<p>Cheers</p>
+<p>Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#036b666f6f6c4364716a77657a2d606c6e"> <span class="__cf_email__" data-cfemail="345c5158585b7453465d40524d1a575b59">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668109568" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="3134" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668109568" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668109568"></span>
+</div>
+</div>
+<hr>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/aws-machine-creation-example/index.html" rel="tag">aws machine creation example</a><a href="../tag/infrastructure-as-code-example/index.html" rel="tag">Infrastructure as code example</a><a href="../tag/packer-and-terraform/index.html" rel="tag">packer and terraform</a><a href="../tag/packer-aws/index.html" rel="tag">packer aws</a><a href="../tag/packer-aws-ebs/index.html" rel="tag">packer aws ebs</a><a href="../tag/packer-aws-ebs-example/index.html" rel="tag">packer aws ebs example</a><a href="../tag/packer-aws-example/index.html" rel="tag">Packer AWS example</a><a href="../tag/packer-terraform/index.html" rel="tag">packer terraform</a><a href="../tag/terraform-aws-example/index.html" rel="tag">Terraform AWS example</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-lineinfile-multiple-lines-replace-multiple-lines/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible lineinfile multiple lines &#8211; Replace multiple Lines | Devops Junction</a></div><div class="nav-next"><a href="../docker-ssh-into-container-howto/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Docker SSH Into the Container &#8211; How to SSH to Container</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"3134 https:\/\/www.middlewareinventory.com\/?p=3134","disqusShortname":"mwinventory","disqusTitle":"Packer AWS Example with Terraform","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/packer-aws-terraform-example\/","postId":"3134"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"3134"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"2605:6440:3008:a001::21b7","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"3134","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/packer-aws-terraform-example/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668109569;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

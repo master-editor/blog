@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Ansible Retry Examples - Retry a task until condition met | DevopsJunction</title>
+<meta name="description" content="Ansible retry examples. How to retry a task in ansible until a certain condition is met. Ansible retry until file exists. Ansible retry include_tasks. Ansible retry infinite without timeout." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible Retry Examples - Retry a task until condition met | DevopsJunction" />
+<meta property="og:description" content="Ansible retry examples. How to retry a task in ansible until a certain condition is met. Ansible retry until file exists. Ansible retry include_tasks. Ansible retry infinite without timeout." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-retry-examples/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-05-01T10:14:21+00:00" />
+<meta property="article:modified_time" content="2022-11-05T12:23:50+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/05/ansible-retry.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/05/ansible-retry.jpg","width":1748,"height":1240,"caption":"Ansible retry"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-retry-examples/","name":"Ansible Retry Examples - Retry a task until condition met | DevopsJunction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#primaryimage"},"datePublished":"2022-05-01T10:14:21+00:00","dateModified":"2022-11-05T12:23:50+00:00","description":"Ansible retry examples. How to retry a task in ansible until a certain condition is met. Ansible retry until file exists. Ansible retry include_tasks. Ansible retry infinite without timeout.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-retry-examples/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible Retry Examples &#8211; Retry a task until condition met | DevopsJunction","datePublished":"2022-05-01T10:14:21+00:00","dateModified":"2022-11-05T12:23:50+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-retry-examples/#primaryimage"},"articleSection":"Ansible","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-retry-examples/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible Retry Examples &#8211; Retry a task until condition met |  DevopsJunction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/8203.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-retry-examples-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-retry-examples-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    background: #eaeef3 none repeat scroll 0% 0% !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-8203 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-8203" class="post-8203 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible Retry Examples &#8211; Retry a task until condition met | DevopsJunction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="3:44 pm" rel="bookmark"><time class="entry-date published updated" datetime="November 5, 2022">November 5, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20Retry%20Examples%20%E2%80%93%20Retry%20a%20task%20until%20condition%20met%20%7C%20%20DevopsJunction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-retry-examples%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="8203" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-retry-examples/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+Retry+Examples+%E2%80%93+Retry+a+task+until+condition+met+%7C++DevopsJunction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-retry-examples%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="8203" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-retry-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20Retry%20Examples%20%E2%80%93%20Retry%20a%20task%20until%20condition%20met%20%7C%20%20DevopsJunction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-retry-examples%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="8203" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-retry-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-retry-examples%2F&subject=Ansible%20Retry%20Examples%20%E2%80%93%20Retry%20a%20task%20until%20condition%20met%20%7C%20%20DevopsJunction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="8203" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-retry-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="8203" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-retry-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>in this article, we are going to see how to retry an ansible task until it meets a certain condition or validation.</p>
+<p>It is more like <code>do sometask until somecondition</code> kind of setup available in all the programming and scripting languages</p>
+<p>Ansible lets you execute a task until a condition is met or satisfied. using <code>retry until</code> specification.</p>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/05/ansible-retry.jpg"><img class="post-img alignnone wp-image-8408 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="Ansible retry" width="1748" height="1240" data-src="../../wp-content/uploads/2022/05/ansible-retry.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/05/ansible-retry.jpg 1748w, ../../wp-content/uploads/2022/05/ansible-retry-300x213.jpg 300w, ../../wp-content/uploads/2022/05/ansible-retry-1024x726.jpg 1024w, ../../wp-content/uploads/2022/05/ansible-retry-768x545.jpg 768w, ../../wp-content/uploads/2022/05/ansible-retry-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/05/ansible-retry-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8408 size-full" src="../../wp-content/uploads/2022/05/ansible-retry.jpg" alt="Ansible retry" width="1748" height="1240" srcset="../../wp-content/uploads/2022/05/ansible-retry.jpg 1748w, ../../wp-content/uploads/2022/05/ansible-retry-300x213.jpg 300w, ../../wp-content/uploads/2022/05/ansible-retry-1024x726.jpg 1024w, ../../wp-content/uploads/2022/05/ansible-retry-768x545.jpg 768w, ../../wp-content/uploads/2022/05/ansible-retry-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/05/ansible-retry-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Ansible_Retry_until_file_exists_A_Quick_example_to_Ansible_Retry" title="Ansible Retry until file exists &#8211; A Quick example to Ansible Retry">Ansible Retry until file exists &#8211; A Quick example to Ansible Retry</a></li><li><a href="#Where_Ansible_Retry_until_can_be_used" title="Where Ansible Retry until can be used?">Where Ansible Retry until can be used?</a></li><li><a href="#Ansible_Retries_without_Until" title="Ansible Retries without Until">Ansible Retries without Until</a></li><li><a href="#Difference_between_Ansible_Wait_for_and_Retry_until" title="Difference between Ansible Wait_for and Retry until">Difference between Ansible Wait_for and Retry until</a></li><li><a href="#Ansible_Retry_until_the_remote_URL_is_returning_a_message_Ansible_wait_for_URL_or_website" title="Ansible Retry until the remote URL is returning a message &#8211; Ansible wait_for URL or website">Ansible Retry until the remote URL is returning a message &#8211; Ansible wait_for URL or website</a></li><li><a href="#Ansible_Retry_until_with_include_tasks" title="Ansible Retry until with include_tasks">Ansible Retry until with include_tasks</a></li><li><a href="#Ansible_Retry_until_with_include_tasks_Ansible_Infinite_Retry" title="Ansible Retry until with include_tasks &#8211; Ansible Infinite Retry">Ansible Retry until with include_tasks &#8211; Ansible Infinite Retry</a></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Ansible_Retry_until_file_exists_A_Quick_example_to_Ansible_Retry">Ansible Retry until file exists &#8211; A Quick example to Ansible Retry</span></h2>
+<p>In this quick example, you can see that we are trying to validate if the file is created at a certain path.</p>
+<p>You can think of it as a file watcher,</p>
+<p>Our Ansible task waits for the file to be created until it eventually times out. we can also define the number of retries and interval between each check</p>
+<p>If the file is not created before the retries the task would be marked as failed.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Retry until a file is available
+  hosts: localhost
+  tasks:
+    - name: Validate if the file is present
+      shell: ls -lrt /tmp/myprocess.pid
+      register: lsresult
+      until: "lsresult is not failed"
+      retries: 10
+      delay: 10</pre>
+<p>This is how it looks like when the file is not created even after 10 retries with a delay of 10 seconds.</p>
+<p>by default the value you are giving for <code>delay</code> would be considered in seconds.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png"><img class="post-img alignnone wp-image-8323 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1652x1206.png" alt="ansible retry until" width="1652" height="1206" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png 1652w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-300x219.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1024x748.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-768x561.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1536x1121.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-90x65.png 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8323 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png" alt="ansible retry until" width="1652" height="1206" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png 1652w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-300x219.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1024x748.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-768x561.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1536x1121.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-90x65.png 90w" sizes="(max-width: 1652px) 100vw, 1652px" data-eio="l" /></noscript></a></p>
+<p>The task would be marked as <code>failed</code></p>
+<p>you can write your task with any module and make it retry until a certain condition is met.</p>
+<p>Here I have used <code>Shell</code> module of ansible and running <code>ls -lrt</code> command. you can do the same with <code>file</code> module too</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Retry until a file is available
+  hosts: localhost
+  tasks:
+    - name: Validate if the file is present
+      file:
+        path: /tmp/myprocess.pid
+        state: file
+      register: lsresult
+      until: "lsresult is not failed"
+      retries: 10
+      delay: 10</pre>
+<p>Here the <code>state: file</code> just returns the state of the path provided. So we are using it to validate the presence of the file here.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Where_Ansible_Retry_until_can_be_used">Where Ansible Retry until can be used?</span></h2>
+<p>As you can see we can use <strong>until,</strong> <strong>retries </strong>and <strong>delay </strong>keywords with any task and make it retry for no of times with a defined interval</p>
+<p>I cannot say this is an alternative to the typical loop that runs the job until the condition is met.</p>
+<p>As you might have already noticed</p>
+<blockquote><p> Ansible <strong>Retry until</strong> can rerun the task only until the <strong>defined number of retries</strong>. It cannot run the task forever until the condition is met, like a typical loop.</p></blockquote>
+<p>So we cannot use ansible retry for tasks which we cannot foresee/estimate how long it may take.</p>
+<p>So this is definitely not a replacement for our typical loop. But it solves a major problem of having an infinite loop by timing out the task after defined retries.</p>
+<p>But sometimes we might want a task to continue infinite times until a certain condition is met, Despite the no of retries it has to take.</p>
+<p>Is there a way to make ansible retry go infinite retries?</p>
+<p>Fortunately Yes, there is a way to make Ansible retry to go on an infinite loop. we will talk about it later.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Retries_without_Until">Ansible Retries without Until</span></h2>
+<div id="retrying-a-task-until-a-condition-is-met" class="section">
+<p>When you run a task with <code class="docutils literal notranslate"><span class="pre">until</span></code> and register the result as a variable, the registered variable will include a key called “attempts”, which records the number of the retries for the task.</p>
+<div class="admonition note">
+<p>You must set the <code class="docutils literal notranslate"><span class="pre">until</span></code> parameter if you want a task to retry.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">until</span></code> is not defined, the value for the <code class="docutils literal notranslate"><span class="pre">retries</span></code> parameter is forced to 1. So it would not retry</p>
+<p>Let us take the same playbook we have been using so far, A File watcher.</p>
+<p>All I am going to do is to remove the <code>until</code> keyword but the retries are going to remain as 10 times.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Retry until a file is available
+  hosts: localhost
+  tasks:
+    - name: Validate if the file is present
+      file:
+        path: /tmp/myprocess.pid
+        state: file
+      register: lsresult
+      retries: 10
+      delay: 10
+
+</pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Here is the execution output of this playbook ( on the right)</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png"><img class="post-img alignnone wp-image-8329 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x560.png" alt="Ansible Retry until" width="3390" height="988" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png 3390w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-300x87.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1024x298.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-768x224.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1536x448.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-2048x597.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8329 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png" alt="Ansible Retry until" width="3390" height="988" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png 3390w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-300x87.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1024x298.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-768x224.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1536x448.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-2048x597.png 2048w" sizes="(max-width: 3390px) 100vw, 3390px" data-eio="l" /></noscript></a></p>
+<p>You can see, Despite having the retries set to 10 the task did not re-run.  this would be the result of using retries without until conditional validation</p>
+
+<h2><span class="ez-toc-section" id="Difference_between_Ansible_Wait_for_and_Retry_until">Difference between Ansible Wait_for and Retry until</span></h2>
+<p>If you have been practising Ansible for some time then you might have got this question already in your mind.</p>
+<p>How it is different from the Ansible wait_for module.</p>
+<p>For those who do not know what is ansible wait_for please read our dedicated ansible wait_for article and return here</p>
+<blockquote class="wp-embedded-content" data-secret="ISxTRBjvWn"><p><a href="../ansible-wait_for-examples/index.html">Ansible wait_for module examples &#8211; How to | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Ansible wait_for module examples &#8211; How to | Devops Junction&#8221; &#8212; Middleware Inventory" src="../ansible-wait_for-examples/embed/index.html#?secret=ISxTRBjvWn" data-secret="ISxTRBjvWn" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>While ansible wait_for helps in a similar use case and makes the task wait until a certain condition is met.</p>
+<p>There are few major differences between ansible wait_for and ansible retry until</p>
+<p>Here I tried to summarize a few of them</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr style="height: 28px;">
+<td style="width: 50%; height: 28px;"><span style="color: #003366;"><strong>Ansible wait_for</strong></span></td>
+<td style="width: 50%; height: 28px;"><strong><span style="color: #003366;"> Ansible Retry until</span></strong></td>
+</tr>
+<tr style="height: 54px;">
+<td style="width: 50%; height: 54px;">A limited number of use cases, cannot be used directly with any module as wait_for is a module itself.</td>
+<td style="width: 50%; height: 54px;">Can rerun any module with Ansible retry, until</td>
+</tr>
+<tr style="height: 54px;">
+<td style="width: 50%; height: 54px;">It can work with Ports and network interfaces and can wait until a reboot is completed</td>
+<td style="width: 50%; height: 54px;">Cannot work directly with Network interfaces or used for port, connection  monitoring</td>
+</tr>
+<tr style="height: 28px;">
+<td style="width: 50%; height: 28px;">The customized failure message is possible</td>
+<td style="width: 50%; height: 28px;">Since Ansible Retry is not a separate module but an addon to rerun any module. it cannot have a customized failure message</td>
+</tr>
+<tr style="height: 28px;">
+<td style="width: 50%; height: 28px;">Rerun the entire task as an attempt until the condition is met, so can track the no of attempts.</td>
+<td style="width: 50%; height: 28px;">Rerun the condition only, cannot track the attempts made</td>
+</tr>
+</tbody>
+</table>
+<p>So both of them have specific use cases. While some of them can be overlapping like a file watcher but we can choose to use the right fit for your job.</p>
+<p>In fact, the file watcher playbook we have been discussing in our article can be achieved through ansible wait_for too as I have mentioned.</p>
+<p>here is the ansible-playbook waits for the file to be created using <code>wait_for</code> module</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">- name: Wait for the file to be available
+  register: waitforfile
+  wait_for:
+    path: /tmp/myprocess.pid
+    delay: 10
+    timeout: 30
+    state: present
+    msg: "Specified PID FILE is not present"</pre>
+<p>The execution output of this playbook has been given below.</p>
+<p>As you can see,  It simply waits for the condition in the background and once the timeout is elapsed it fails.</p>
+<p>So both ansible retries until and wait_for do their tasks in different manner/approach.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png"><img class="post-img alignnone wp-image-8330 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x586.png" alt="Ansible retry until " width="3380" height="1032" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png 3380w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-300x92.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1024x313.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-768x234.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1536x469.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-2048x625.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8330 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png" alt="Ansible retry until " width="3380" height="1032" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png 3380w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-300x92.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1024x313.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-768x234.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1536x469.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-2048x625.png 2048w" sizes="(max-width: 3380px) 100vw, 3380px" data-eio="l" /></noscript></a></p>
+<h2></h2>
+<p>Here are some more examples we collected about Ansible retries until.</p>
+<p>As we have already mentioned you can use retries with any module and make it retry until a certain condition is met</p>
+<h2></h2>
+<h2><span class="ez-toc-section" id="Ansible_Retry_until_the_remote_URL_is_returning_a_message_Ansible_wait_for_URL_or_website">Ansible Retry until the remote URL is returning a message &#8211; Ansible wait_for URL or website</span></h2>
+<p>Here is an example of Ansible retry being used with the URI module to continuously check the remote URL and retry until the URL returns a certain message or content</p>
+<p>In another word, we are waiting for the website or webpage to respond.</p>
+<p>In this example, we are trying to hit the locally hosted web application at <code>http://localhost:8080</code></p>
+<p>but in real use cases, it can be a remote URL</p>
+<p>here we are looking for a message <code>Completed</code> be present in the response. If the response is not <code>Completed</code></p>
+<p>or the site is not responding or returning some 5xx 4xx error. the job would simply retry 2 times with a delay of 10.</p>
+<p>You can increase the delay and retries as per your requirement.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Ansible Retry Examples
+  hosts: localhost
+  tasks:
+  - name: Job Status Check
+    uri:
+      url: http://localhost:8080
+      return_content: yes
+    register: result
+    until: "'Completed' in result.content"
+    ignore_errors: yes
+    retries: 2
+    delay: 10</pre>
+<p>Here is the execution result along with the simple server node js code I have used to setup my server which returns a message <code>Completed</code></p>
+<p>If the message is present. the job would immediately become successful at the first time as shown in the following snapshot</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png"><img class="post-img alignnone wp-image-8389 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x898.png" alt="ansible retry" width="3584" height="1676" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png 3584w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-300x140.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1024x479.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-768x359.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1536x718.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-2048x958.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8389 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png" alt="ansible retry" width="3584" height="1676" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png 3584w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-300x140.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1024x479.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-768x359.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1536x718.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-2048x958.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" data-eio="l" /></noscript></a></p>
+<p>If the message is not present. the job would retry for the specified number of times before eventually failing.</p>
+<p>Refer to the following snapshot where we have changed the message in the server.js to <code>InProgress</code></p>
+<p>We have also changed the retries to <code>10</code> and as you can see on the right side. It fails after trying for 10 times.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png"><img class="post-img alignnone wp-image-8390 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x908.png" alt="" width="3584" height="1694" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png 3584w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-300x142.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1024x484.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-768x363.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1536x726.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-2048x968.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8390 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png" alt="" width="3584" height="1694" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png 3584w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-300x142.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1024x484.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-768x363.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1536x726.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-2048x968.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" data-eio="l" /></noscript></a></p>
+
+<h2><span class="ez-toc-section" id="Ansible_Retry_until_with_include_tasks">Ansible Retry until with include_tasks</span></h2>
+<p>here is one more example where we are going to execute a couple of other ansible playbooks using <code>include_tasks</code> until the condition is satisfied</p>
+<p>It is similar to the same template we have been following. Instead of one task, we are going to invoke one/multiple tasks using include_tasks</p>
+<p>now let us see an example where we are going to invoke two tasks</p>
+<ul>
+<li>The first task is to retry until the file exists</li>
+<li>Send Slack notification with the status of the file creation</li>
+</ul>
+<p>Both these tasks would be on the same file which would be called by include_tasks</p>
+<p>Since this is include_tasks, we are going to create two individual files.</p>
+<ul>
+<li>main.yml &#8211; the main playbook</li>
+<li>retry-until-file-create.yml &#8211; tasks file</li>
+</ul>
+<p>here is the <code>main.yml</code> file which invokes the other tasks using <code>include_tasks</code></p>
+<p><strong><span style="color: #003366;">main.yml</span></strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Ansible Retry with include_tasks example
+  hosts: localhost
+  tasks:
+    - name: Executing the task
+      include_tasks:
+        file: retry-until-file-create.yaml
+</pre>
+<p>&nbsp;</p>
+<p><strong><span style="color: #003366;">retry-until-file-create.yaml</span></strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+  - name: Wait for the file to be available
+    register: fileexists
+    file:
+      path: /tmp/myprocess.pid
+      state: file
+    until: fileexists is not failed
+    retries: 5
+    delay: 10
+    ignore_errors: true
+  
+  - name: notify Slack that the job is failing
+    tags: slack
+    community.general.slack:
+      token: T02****8KPF/*******/WOa7r*****tXy7Ao0jnWn
+      msg: |
+          ### StatusUpdate ###
+          &#8211; ------------------------------------
+          ``
+          `Server`: {{ansible_host}}
+          `Status`: Ansible File Watcher Job failed
+          &#8211; ------------------------------------
+      channel: '#ansible'
+      color: good
+      username: 'Ansible on {{ inventory_hostname }}'
+      link_names: 0
+      parse: 'none'
+    when: fileexists is failed
+
+  - name: notify Slack that the job is Successful
+    tags: slack
+    community.general.slack:
+      token: T02****8KPF/*******/WOa7r*****tXy7Ao0jnWn
+      msg: |
+          ### StatusUpdate ###
+          &#8211; ------------------------------------
+          ``
+          `Server`: {{ansible_host}}
+          `Status`: Ansible File Watcher Job Successful.
+          &#8211; ------------------------------------
+      channel: '#ansible'
+      color: good
+      username: 'Ansible on {{ inventory_hostname }}'
+      link_names: 0
+      parse: 'none'
+    when: fileexists is not failed</pre>
+<p>that is a. quick example of using <code>incloude_tasks</code> with ansible retries</p>
+<p>The Main task would validate if the file exists for a defined period and fail, Since we have set <code>ignore_errors: true</code> it would not fail the entire playbook</p>
+<p>It will then move on the next stage of sending notification based on the status of the main task.</p>
+<p>If the file exists, the main task would be successful <code>not failed</code> and it would invoke the Successful message Slack notification</p>
+<p>In case of failure, it would invoke the failure notification message.</p>
+<p>Both are done using the <code>when: result is failed</code> or <code>not failed</code> validation</p>
+<p>Here is a simple Slack notification that has been generated and received in our slack channel.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png"><img class="post-img alignnone wp-image-8406 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x443.png" alt="Ansible retry include_tasks" width="2824" height="652" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png 2824w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-300x69.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1024x236.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-768x177.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1536x355.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-2048x473.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8406 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png" alt="Ansible retry include_tasks" width="2824" height="652" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png 2824w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-300x69.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1024x236.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-768x177.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1536x355.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-2048x473.png 2048w" sizes="(max-width: 2824px) 100vw, 2824px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Retry_until_with_include_tasks_Ansible_Infinite_Retry">Ansible Retry until with include_tasks &#8211; Ansible Infinite Retry</span></h2>
+<p>As I have mentioned earlier, there is a way to make ansible retry to go infinite</p>
+<p>Let&#8217;s see, How to make Ansible retry never end</p>
+<p>To make Ansible Retry go infinite and continue even after the retries timeout we have to use the same principle we used with import_tasks</p>
+<p>The first thing to make ansible retry go infinite is to split the task you want to execute and run it as part of <code>import_tasks</code></p>
+<ul>
+<li>main.yml &#8211; the main playbook</li>
+<li>retry-until-file-create.yml &#8211; tasks file</li>
+</ul>
+<p>In the previous example, we have seen how to create two playbooks one is a main playbook and the other contains the tasks</p>
+<p>The only difference between the previous example and the current one is one line.</p>
+<p>we are going to make the <code>retry-until-file-create.yml</code> to call itself once again using the <code>import_tasks</code></p>
+<blockquote><p>the task playbook would call itself once again ( restart) if the task is not successful</p></blockquote>
+<p>Here are the playbooks</p>
+<p><strong><span style="color: #003366;">main.yml</span></strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Ansible Retry with include_tasks example
+  hosts: localhost
+  tasks:
+    - name: Executing the task
+      include_tasks:
+        file: retry-until-file-create.yaml
+</pre>
+<p>&nbsp;</p>
+<p><strong><span style="color: #003366;">retry-until-file-create.yaml</span></strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+  - name: Wait for the file to be available
+    register: fileexists
+    file:
+      path: /tmp/myprocess.pid
+      state: file
+    until: fileexists is not failed
+    retries: 5
+    delay: 10
+    ignore_errors: true
+  
+  - name: notify Slack that the job is failing
+    tags: slack
+    community.general.slack:
+      token: T02****8KPF/*******/WOa7r*****tXy7Ao0jnWn
+      msg: |
+          ### StatusUpdate ###
+          &#8211; ------------------------------------
+          ``
+          `Server`: {{ansible_host}}
+          `Status`: Ansible File Watcher Job failed
+          &#8211; ------------------------------------
+      channel: '#ansible'
+      color: good
+      username: 'Ansible on {{ inventory_hostname }}'
+      link_names: 0
+      parse: 'none'
+    when: fileexists is failed
+    ignore_errors: true
+
+  - name: notify Slack that the job is Successful
+    tags: slack
+    community.general.slack:
+      token: T02****8KPF/*******/WOa7r*****tXy7Ao0jnWn
+      msg: |
+          ### StatusUpdate ###
+          &#8211; ------------------------------------
+          ``
+          `Server`: {{ansible_host}}
+          `Status`: Ansible File Watcher Job Successful.
+          &#8211; ------------------------------------
+      channel: '#ansible'
+      color: good
+      username: 'Ansible on {{ inventory_hostname }}'
+      link_names: 0
+      parse: 'none'
+    when: fileexists is not failed
+
+  - name: Re run the task if failed
+    include_tasks: retry-until-file-create.yaml
+    when: "fileexists is failed"</pre>
+<p>&nbsp;</p>
+<p>Here is the terminal recording of this playbook execution.</p>
+<p><script id="asciicast-CF45z2LpEpchmPEX0imQOpp18" src="https://asciinema.org/a/CF45z2LpEpchmPEX0imQOpp18.js" async></script></p>
+<p>As you can see the job is continuously retrying without ending when the main task is failing and stop automatically when the main task ( File existence) is successful.</p>
+<p>This is how we can make Ansible retry continue infinitely without timing out</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>In this article, we have learnt about ansible retry until and how it differs from ansible wait module</p>
+<p>We also learnt the following key objectives.</p>
+<ul>
+<li>How to retry until a task is complete with Ansible</li>
+<li>How to retry until a file exists in Ansible</li>
+<li>Retrying with include_tasks</li>
+<li>How to send Slack notification when the job fails after retry</li>
+<li>How to make Ansible retry to run infinite without a timeout</li>
+</ul>
+<p>hope this helps.  If you are looking for professional DevOps support for your company or individually do reach out to us at <a href="../../cdn-cgi/l/email-protection.html#1e767b7272715e796c776a7867307d7173"><span class="__cf_email__" data-cfemail="640c0108080b2403160d10021d4a070b09">[email&#160;protected]</span></a></p>
+<a href="../../wp-content/uploads/2021/09/DaaS.svg"><img class="post-img lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1047 415'%3E%3C/svg%3E" alt="gritfy" width="1047" height="415" class="post-img lazyload" data-src="../../wp-content/uploads/2021/09/DaaS.svg" loading="lazy" /><noscript><img class="post-img" src="../../wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" data-eio="l" /></noscript></a>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#eb838e878784ab8c99829f8d92c5888486"> <span class="__cf_email__" data-cfemail="e48c8188888ba483968d90829dca878b89">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1667653797" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="8203" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-retry-examples/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="690836aa17" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1667653797" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1667653797"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-delegate_to/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible delegate_to" data-src="../../wp-content/uploads/2020/11/Screenshot-2020-11-01-at-1.43.28-AM-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/11/Screenshot-2020-11-01-at-1.43.28-AM-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible delegate_to" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-delegate_to/index.html'>Ansible delegate_to Examples - Run task on specific host</a><p>Ansible Delegate_to module helps us to execute a specific task in our playbook to run in other host or machine. This process of handing over the control of execution to another host (or) executing a task in another machine is called as delegation and  the module delegate_to helps you to&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-inventory_hostname-ansible_hostname-variables/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible_hostname" data-src="../../wp-content/uploads/2020/11/IMG_0005-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/11/IMG_0005-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible_hostname" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-inventory_hostname-ansible_hostname-variables/index.html'>Ansible Inventory_hostname & ansible_hostname Examples</a><p>In this post, we are going to see two built-in variables of ansible mostly used in Ansible playbooks and they are inventory_hostname and ansible_hostname while both these variables are to give you the hostname of the machine. they differ in a way, where it comes from. So in this article,&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-find-multiple-files-with-pattern-replace/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Find Multiple Files and Replace" data-src="../../wp-content/uploads/2021/08/Screenshot-2021-08-22-at-9.11.58-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/08/Screenshot-2021-08-22-at-9.11.58-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Find Multiple Files and Replace" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-find-multiple-files-with-pattern-replace/index.html'>Ansible Find multiple files with pattern and replace</a><p>In this post we are going we are going to see how to find a list of  files containing a text or a pattern and replace them at once. As you know I have written a dedicated and brief articles on both Ansible find and replace modules with many examples.&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-lookup-file/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible File lookup" data-src="../../wp-content/uploads/2020/04/Screenshot-2020-04-20-at-1.46.58-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/04/Screenshot-2020-04-20-at-1.46.58-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible File lookup" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-lookup-file/index.html'>Ansible lookup file - How to Read file into variable in Ansible</a><p>In this post, we are going to see how to use ansible lookup and how to read file  into ansible playbook using ansible file lookup. Purpose of Ansible Lookups When it comes to automation, we handle different types of data and files such as csv, txt and sometimes we might even need&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-find-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Find" data-src="../../wp-content/uploads/2020/01/Screenshot-2020-01-03-at-4.51.17-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/01/Screenshot-2020-01-03-at-4.51.17-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Find" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-find-examples/index.html'>Ansible Find Examples - How to use Ansible Find</a><p>Ansible find module functions as same as the Linux Find command and helps to find files and directories based on various search criteria such as age of the file, accessed date, modified date,  regex search pattern etcetera. As said earlier, this is more of an ansible way to execute the&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../how-to-restart-all-deployments-in-namespace-kubectl/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>How to restart all deployments in namespace &#8211; Kubectl | Devops Junction</a></div><div class="nav-next"><a href="../redis-get-memory-usage-and-ttl-of-all-keys-devops-junction/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Redis &#8211; Get Memory Usage and TTL of all keys | Devops Junction</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"8203 https:\/\/www.middlewareinventory.com\/?p=8203","disqusShortname":"mwinventory","disqusTitle":"Ansible Retry Examples \u2013 Retry a task until condition met |  DevopsJunction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-retry-examples\/","postId":"8203"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"554900c4f3"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"25e6ff867d","post_id":"8203"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"e8618e7cf4","ip":"2001:4860:7:631::e0","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"0058a32a55","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"b127edcc59","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"8203","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-retry-examples/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1667653797;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

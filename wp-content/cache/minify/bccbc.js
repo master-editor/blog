@@ -1,0 +1,7 @@
+var disqus_url=embedVars.disqusUrl;var disqus_identifier=embedVars.disqusIdentifier;var disqus_container_id='disqus_thread';var disqus_shortname=embedVars.disqusShortname;var disqus_title=embedVars.disqusTitle;var disqus_config_custom=window.disqus_config;var disqus_config=function(){var dsqConfig=embedVars.disqusConfig;this.page.integration=dsqConfig.integration;this.page.remote_auth_s3=dsqConfig.remote_auth_s3;this.page.api_key=dsqConfig.api_key;this.sso=dsqConfig.sso;this.language=dsqConfig.language;if(disqus_config_custom)
+disqus_config_custom.call(this);};(function(){if(document.getElementById(disqus_container_id)){var dsq=document.createElement('script');dsq.type='text/javascript';dsq.async=true;dsq.src='https://'+disqus_shortname+'.disqus.com/embed.js';(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(dsq);}})();;jQuery(document).ready(function($){var newWidth,oldWidth=$('.dae-shortcode-download-wrapper').parent().width();function daeAddMediaQuery(){$('.dae-shortcode-download-wrapper').addClass('dae-shortcode-download-wrapper-wide');}
+function daeRemoveMediaQuery(){$('.dae-shortcode-download-wrapper').removeClass('dae-shortcode-download-wrapper-wide');}
+if(oldWidth>1000){daeAddMediaQuery();}
+$(window).resize(function(){newWidth=$('.dae-shortcode-download-wrapper').parent().width();if(newWidth>1000&&oldWidth<=1000){daeAddMediaQuery();}
+if(newWidth<1000&&oldWidth>=1000){daeRemoveMediaQuery();}
+oldWidth=newWidth;});});

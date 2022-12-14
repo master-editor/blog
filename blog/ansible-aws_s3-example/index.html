@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+
+<title>How to use ansible with S3 - Ansible aws_s3 examples | Devops Junction</title>
+<meta name="description" content="Ansible S3 examples and how to use ansible aws_s3 module to copy, upload, download and list objects in S3. Ansible S3 list example, Ansible S3 Upload example, Ansible S3 Download example." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to use ansible with S3 - Ansible aws_s3 examples | Devops Junction" />
+<meta property="og:description" content="Ansible S3 examples and how to use ansible aws_s3 module to copy, upload, download and list objects in S3. Ansible S3 list example, Ansible S3 Upload example, Ansible S3 Download example." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2021-12-31T18:53:46+00:00" />
+<meta property="article:modified_time" content="2022-01-01T09:23:18+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2021/12/Ansible-S3.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2021/12/Ansible-S3.jpg","width":1748,"height":1240,"caption":"Ansible S3"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/","name":"How to use ansible with S3 - Ansible aws_s3 examples | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#primaryimage"},"datePublished":"2021-12-31T18:53:46+00:00","dateModified":"2022-01-01T09:23:18+00:00","description":"Ansible S3 examples and how to use ansible aws_s3 module to copy, upload, download and list objects in S3. Ansible S3 list example, Ansible S3 Upload example, Ansible S3 Download example.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-aws_s3-example/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"How to use ansible with S3 &#8211; Ansible aws_s3 examples | Devops Junction","datePublished":"2021-12-31T18:53:46+00:00","dateModified":"2022-01-01T09:23:18+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#primaryimage"},"articleSection":"Ansible","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-aws_s3-example/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; How to use ansible with S3 &#8211; Ansible aws_s3 examples  | Devops Junction Comments Feed" href="feed/index.rss" />
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.12.2';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-84162240-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	if ( 'undefined' === typeof gaOptout ) {
+		function gaOptout() {
+			__gaTrackerOptout();
+		}
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-84162240-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+
+<script type="text/javascript" data-cfasync="false">
+			window.google_analytics_uacct = 'UA-84162240-1';
+
+        </script>
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/404f7.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/88e5e.css" media="all" />
+<script type='text/javascript' id='monsterinsights-frontend-script-js-extra'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"https:\/\/www.middlewareinventory.com","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1058f.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1de0a.js"></script>
+<script type='text/javascript' id='ssb-front-js-js-extra'>
+/* <![CDATA[ */
+var SSB = {"ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","fb_share_nonce":"3d8661396b"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/268e7.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/7702.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-aws_s3-example-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-aws_s3-example-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script> <style media="screen">/*inline margin*/
+	
+	
+	
+	
+	
+	
+			 /*margin-digbar*/
+
+	
+	
+	
+	
+	   div[class*="simplesocialbuttons-float"].simplesocialbuttons.simplesocial-round-icon button{
+	 margin: ;
+   }
+	
+	
+	
+</style>
+
+<meta property="og:title" content="How to use ansible with S3 &#8211; Ansible aws_s3 examples  | Devops Junction - Middleware Inventory" />
+<meta property="og:description" content="S3 has become the cheap and best object storage and it is used widely across enterprises and products, to securely save and access data over the internet.
+
+We have various ways to interact with the S3 bucket,  to upload, download and copy objects back and forth to S3.
+
+ 	SDKs ( Boto, AWS SDK for Javascript etc)
+ 	AWS CLI
+ 	AWS Console
+
+We have" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="og:image" content="../../wp-content/uploads/2021/12/Ansible-S3.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="S3 has become the cheap and best object storage and it is used widely across enterprises and products, to securely save and access data over the internet.
+
+We have various ways to interact with the S3 bucket,  to upload, download and copy objects back and forth to S3.
+
+ 	SDKs ( Boto, AWS SDK for Javascript etc)
+ 	AWS CLI
+ 	AWS Console
+
+We have" />
+<meta name="twitter:title" content="How to use ansible with S3 &#8211; Ansible aws_s3 examples  | Devops Junction - Middleware Inventory" />
+<meta property="twitter:image" content="../../wp-content/uploads/2021/12/Ansible-S3.jpg" />
+<style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-7702 single-format-standard wp-custom-logo cookies-not-set elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-7702" class="post-7702 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<header class="entry-header">
+<h1 class="entry-title">How to use ansible with S3 &#8211; Ansible aws_s3 examples | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="12:23 am" rel="bookmark"><time class="entry-date published updated" datetime="January 1, 2022">January 1, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=How%20to%20use%20ansible%20with%20S3%20%E2%80%93%20Ansible%20aws_s3%20examples%20%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws_s3-example%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="7702" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=How+to+use+ansible+with+S3+%E2%80%93+Ansible+aws_s3+examples++%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws_s3-example%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="7702" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=How%20to%20use%20ansible%20with%20S3%20%E2%80%93%20Ansible%20aws_s3%20examples%20%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws_s3-example%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="7702" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws_s3-example%2F&subject=How%20to%20use%20ansible%20with%20S3%20%E2%80%93%20Ansible%20aws_s3%20examples%20%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="7702" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="7702" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>S3 has become the cheap and best object storage and it is used widely across enterprises and products, to securely save and access data over the internet.</p>
+<p>We have various ways to interact with the S3 bucket,  to upload, download and copy objects back and forth to S3.</p>
+<ul>
+<li>SDKs ( Boto, AWS SDK for Javascript etc)</li>
+<li>AWS CLI</li>
+<li>AWS Console</li>
+</ul>
+<p>We have written an article on how to use<a href="../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html"> AWS CLI with S3</a></p>
+<p>How can we talk about infrastructure efficiency and cloud automation without Ansible?</p>
+<p>So, In this article, we are going to see how to use Ansible for managing objects in the S3 bucket</p>
+<p>We are going to see how to use Ansible to upload files to S3, Download files from S3 and copy files to S3 etc.</p>
+<p>With no further ado. lets go-ahead</p>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2021/12/Ansible-S3.jpg"><img class="post-img alignnone wp-image-7749 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="Ansible S3" width="1748" height="1240" data-src="../../wp-content/uploads/2021/12/Ansible-S3.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Ansible-S3.jpg 1748w, ../../wp-content/uploads/2021/12/Ansible-S3-300x213.jpg 300w, ../../wp-content/uploads/2021/12/Ansible-S3-1024x726.jpg 1024w, ../../wp-content/uploads/2021/12/Ansible-S3-768x545.jpg 768w, ../../wp-content/uploads/2021/12/Ansible-S3-1536x1090.jpg 1536w, ../../wp-content/uploads/2021/12/Ansible-S3-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7749 size-full" src="../../wp-content/uploads/2021/12/Ansible-S3.jpg" alt="Ansible S3" width="1748" height="1240" srcset="../../wp-content/uploads/2021/12/Ansible-S3.jpg 1748w, ../../wp-content/uploads/2021/12/Ansible-S3-300x213.jpg 300w, ../../wp-content/uploads/2021/12/Ansible-S3-1024x726.jpg 1024w, ../../wp-content/uploads/2021/12/Ansible-S3-768x545.jpg 768w, ../../wp-content/uploads/2021/12/Ansible-S3-1536x1090.jpg 1536w, ../../wp-content/uploads/2021/12/Ansible-S3-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Things_to_know_before_moving_on" title="Things to know before moving on">Things to know before moving on</a></li><li><a href="#Ansible_S3_List_Examples" title="Ansible S3 List Examples">Ansible S3 List Examples</a><ul><li><a href="#Ansible_S3_List_Objects_in_a_Bucket" title="Ansible S3 List Objects in a Bucket">Ansible S3 List Objects in a Bucket</a></li><li><a href="#Will_it_list_the_directories_and_subdirectories" title="Will it list the directories and subdirectories?">Will it list the directories and subdirectories?</a></li><li><a href="#Ansible_S3_List_Objects_using_the_prefix" title="Ansible S3 List Objects using the prefix">Ansible S3 List Objects using the prefix</a></li><li><a href="#Control_the_No_of_objects_returned_with_max_keys" title="Control the No of objects returned with max_keys">Control the No of objects returned with max_keys</a></li><li><a href="#Specify_where_to_start_when_listing_objects_with_a_marker" title="Specify where to start when listing objects with a marker">Specify where to start when listing objects with a marker</a></li></ul></li><li><a href="#Ansible_S3_Upload_Examples" title="Ansible S3 Upload Examples">Ansible S3 Upload Examples</a><ul><li><a href="#Ansible_S3_Upload_PUT_example" title="Ansible S3 Upload / PUT example">Ansible S3 Upload / PUT example</a></li><li><a href="#Ansible_S3_PUT_UPLOAD_rendered_template_Dynamic_Content" title="Ansible S3 PUT / UPLOAD rendered template &#8211; Dynamic Content">Ansible S3 PUT / UPLOAD rendered template &#8211; Dynamic Content</a></li><li><a href="#Ansible_S3_PUT_UPLOAD_with_Custom_Headers_Metadata" title="Ansible S3 PUT / UPLOAD with Custom Headers &amp; Metadata">Ansible S3 PUT / UPLOAD with Custom Headers &amp; Metadata</a></li></ul></li><li><a href="#Ansible_S3_Download_GET_Examples" title="Ansible S3 Download / GET Examples">Ansible S3 Download / GET Examples</a><ul><li><a href="#Ansible_S3_GET_Download_Object_Single_File" title="Ansible S3 GET / Download Object  &#8211; Single File">Ansible S3 GET / Download Object  &#8211; Single File</a></li><li><a href="#Ansible_S3_GET_Download_Object_How_to_download_Directory_recursively" title="Ansible S3 GET / Download Object  &#8211; How to download Directory recursively">Ansible S3 GET / Download Object  &#8211; How to download Directory recursively</a></li><li><a href="#Ansible_S3_GET_Download_Specific_version_of_Object" title="Ansible S3 GET / Download Specific version of Object">Ansible S3 GET / Download Specific version of Object</a></li><li><a href="#Ansible_S3_GET_Download_Only_when_the_Checksum_does_not_match" title="Ansible S3 GET / Download Only when the Checksum does not match">Ansible S3 GET / Download Only when the Checksum does not match</a></li></ul></li><li><a href="#Ansible_S3_Delete_Objects_example" title="Ansible S3 Delete Objects example">Ansible S3 Delete Objects example</a></li><li><a href="#Ansible_S3_Copy_Objects_example_Copying_between_S3_buckets" title="Ansible S3 Copy Objects example &#8211; Copying between S3 buckets">Ansible S3 Copy Objects example &#8211; Copying between S3 buckets</a></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Things_to_know_before_moving_on">Things to know before moving on</span></h2>
+<ul>
+<li>We presume you have AWS CLI configured or have AWS ACCESS KEY/SECRET</li>
+<li>PUT and Upload are the same</li>
+<li>GET and Download are the same</li>
+</ul>
+<p>There are various modes of operation available with Ansible S3.</p>
+<ul>
+<li><code>PUT</code>: upload</li>
+<li><code>GET</code><span style="color: #404040; font-size: 1.0625rem;">: download</span></li>
+<li><code>geturl</code><span style="color: #404040; font-size: 1.0625rem;">: return download URL</span></li>
+<li><code>getstr</code><span style="color: #404040; font-size: 1.0625rem;">: download object as a string</span></li>
+<li><code>list</code><span style="color: #404040; font-size: 1.0625rem;">: list keys / objects</span></li>
+<li><code>create</code><span style="color: #404040; font-size: 1.0625rem;">: create bucket</span></li>
+<li><code>delete</code><span style="color: #404040; font-size: 1.0625rem;">: delete bucket</span></li>
+<li><code>delobj</code><span style="color: #404040; font-size: 1.0625rem;">: delete object</span></li>
+<li><code>copy</code><span style="color: #404040; font-size: 1.0625rem;">: copy object that is already stored in another bucket</span></li>
+</ul>
+<p>For the <code>aws_s3</code> module to work you need to have certain package version requirements</p>
+<div id="requirements" class="section">
+<p>The below requirements are needed on the host that executes this module.</p>
+<ul>
+<li>python &gt;= 3.6</li>
+<li>boto3 &gt;= 1.15.0</li>
+<li>botocore &gt;= 1.18.0</li>
+</ul>
+</div>
+<p>you can check your these things using the following commands</p>
+<ul>
+<li><code>ansible --version</code> that shows the python interpreter version and ansible version</li>
+<li><code>pip list|grep boto</code> or <code>pip3 list|grep boto</code> shows the boot3 and botocore version</li>
+</ul>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_S3_List_Examples">Ansible S3 List Examples</span></h2>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_List_Objects_in_a_Bucket">Ansible S3 List Objects in a Bucket</span></h3>
+<p>In S3 parlance the name of the object is known as a key.  It is kept that way to align with the Object storage principle of S3.</p>
+<p>As you know Objects are created with Keys and values. Every object you store are referred to with their name also known as <code>key</code></p>
+<p>Here is the Ansible Playbook that lists bucket <code>devopsjunction</code> using <code>mode: list</code></p>
+<p>Since I have multiple <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html">named profiles in AWS CLI.</a> I need to instruct Ansible to use the right profile by mentioning <code>profile: personal</code></p>
+<p>If no profile is specified, Ansible would choose the default AWS CLI profile</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket List - Ansible
+  hosts: localhost
+  tasks:
+  - name: List keys or Objects
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: list
+    register: listresult
+
+  - debug: msg={{listresult.s3_keys}}</pre>
+<p>here is the execution output of this playbook</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM.png"><img class="post-img alignnone wp-image-7708 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1307.png" alt="ansible s3 list example" width="2720" height="1852" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM.png 2720w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-300x204.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-1024x697.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-768x523.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-1536x1046.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-2048x1394.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7708 size-full" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM.png" alt="ansible s3 list example" width="2720" height="1852" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM.png 2720w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-300x204.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-1024x697.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-768x523.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-1536x1046.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-3.04.03-PM-2048x1394.png 2048w" sizes="(max-width: 2720px) 100vw, 2720px" data-eio="l" /></noscript></a></p>
+<p>This is how you can list the objects in the bucket.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Will_it_list_the_directories_and_subdirectories">Will it list the directories and subdirectories?</span></h3>
+<p><strong>Yes,</strong> By default, the list mode of Ansible would list the objects and their subdirectories if they are a directory.</p>
+<p>You can limit the number of keys/objects to be returned using a value called <code>max_keys</code> which we will see later.</p>
+<p>Here is the output of the same playbook listing the directories and their content</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM.png"><img class="post-img alignnone wp-image-7710 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1447.png" alt="ansible s3 list example" width="2596" height="1956" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM.png 2596w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-300x226.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-1024x772.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-768x579.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-1536x1157.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-2048x1543.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7710 size-full" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM.png" alt="ansible s3 list example" width="2596" height="1956" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM.png 2596w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-300x226.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-1024x772.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-768x579.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-1536x1157.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.34.20-PM-2048x1543.png 2048w" sizes="(max-width: 2596px) 100vw, 2596px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_List_Objects_using_the_prefix">Ansible S3 List Objects using the prefix</span></h3>
+<p>Now let us suppose we have so many files in our S3 buckets and categorized into directories and subdirectories like this</p>
+<p>Let&#8217;s say we are maintaining a directory for every single month for each year like this.</p>
+<p>What If we want to list only the files of  <code>2021</code> and <code>12th</code> month</p>
+<p>Based on the directory convention we follow, we can use <code>2021/12</code> as the prefix to display all the files of Dec 2021.</p>
+<p>&nbsp;</p>
+<h2><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM.png"><img class="post-img alignnone wp-image-7711 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1288x1262.png" alt="ansible s3 list prefix" width="1288" height="1262" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM.png 1288w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM-300x294.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM-1024x1003.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM-768x752.png 768w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7711 size-full" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM.png" alt="ansible s3 list prefix" width="1288" height="1262" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM.png 1288w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM-300x294.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM-1024x1003.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-6.57.33-PM-768x752.png 768w" sizes="(max-width: 1288px) 100vw, 1288px" data-eio="l" /></noscript></a></h2>
+<p>&nbsp;</p>
+<p>Here is the Playbook with the prefix</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket List - Ansible
+  hosts: localhost
+  tasks:
+  - name: List keys/Objects
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: list
+      prefix: "2021/12"
+    register: listresult
+
+  - debug: msg={{listresult.s3_keys}}</pre>
+<p>&nbsp;</p>
+<p>Here is the execution output of this playbook. you can see only the files matching the prefix are listed.</p>
+<p>It is more like using a wildcard as a prefix in <code>ls -lrt</code> command if you are familiar with linux</p>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2021/12/s3listprefix.png"><img class="post-img alignnone wp-image-7715 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1159.png" alt="ansible s3 list" width="2922" height="1764" data-src="../../wp-content/uploads/2021/12/s3listprefix.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/s3listprefix.png 2922w, ../../wp-content/uploads/2021/12/s3listprefix-300x181.png 300w, ../../wp-content/uploads/2021/12/s3listprefix-1024x618.png 1024w, ../../wp-content/uploads/2021/12/s3listprefix-768x464.png 768w, ../../wp-content/uploads/2021/12/s3listprefix-1536x927.png 1536w, ../../wp-content/uploads/2021/12/s3listprefix-2048x1236.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7715 size-full" src="../../wp-content/uploads/2021/12/s3listprefix.png" alt="ansible s3 list" width="2922" height="1764" srcset="../../wp-content/uploads/2021/12/s3listprefix.png 2922w, ../../wp-content/uploads/2021/12/s3listprefix-300x181.png 300w, ../../wp-content/uploads/2021/12/s3listprefix-1024x618.png 1024w, ../../wp-content/uploads/2021/12/s3listprefix-768x464.png 768w, ../../wp-content/uploads/2021/12/s3listprefix-1536x927.png 1536w, ../../wp-content/uploads/2021/12/s3listprefix-2048x1236.png 2048w" sizes="(max-width: 2922px) 100vw, 2922px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Control_the_No_of_objects_returned_with_max_keys">Control the No of objects returned with max_keys</span></h3>
+<p>As time goes on S3 objects and their subdirectories and files would become more complex and grow.</p>
+<p>Just imagine having a Million files and subdirectories under each directory.</p>
+<p>When you execute a list command on the bucket with millions and billions of objects. you need to set a limit on how many objects you can get as a result.</p>
+<p>By default this value is <code>1000</code>  but not all the time we want 1000, right?</p>
+<p>so to limit it we can use the <code>max_keys</code> property with some numeric value</p>
+<p>Here is the playbook with the <code>max_keys</code> set to 400.  It would restrict the number of returned objects to 400 despite there are more than 400</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket List - Ansible
+  hosts: localhost
+  tasks:
+  - name: List keys/Objects
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: list
+      prefix: "2021/12"
+      max_keys: 400
+    register: listresult
+
+  - debug: msg={{listresult.s3_keys}}</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Specify_where_to_start_when_listing_objects_with_a_marker">Specify where to start when listing objects with a marker</span></h3>
+<p>when you are listing objects, the objects are returned in ascending order based on their name.</p>
+<p>For example, consider this resultset.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">ok: [localhost] =&gt; {
+    "msg": [
+        "2021/12/",
+        "2021/12/26/",
+        "2021/12/26/Screenshot 2021-12-26 at 2.43.55 PM.png",
+        "2021/12/26/Screenshot 2021-12-26 at 2.58.51 PM.png",
+        "2021/12/26/Screenshot 2021-12-26 at 3.04.03 PM.png",
+        "2021/12/26/Screenshot 2021-12-26 at 6.34.20 PM.png",
+        "2021/12/26/Screenshot 2021-12-26 at 6.57.33 PM.png"
+    ]
+}</pre>
+<p>Now I want to list only the objects starting from the third one</p>
+<pre>2021/12/26/Screenshot 2021-12-26 at 3.04.03 PM.png</pre>
+<p>That&#8217;s where the <code>marker</code> parameter comes into the picture.</p>
+<p>Here is the playbook with <code>marker</code></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket List - Ansible
+  hosts: localhost
+  tasks:
+  - name: List keys/Objects
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: list
+      prefix: "2021/12"
+      marker: "2021/12/26/Screenshot 2021-12-26 at 3.04.03 PM.png"
+    register: listresult
+
+  - debug: msg={{listresult.s3_keys}}</pre>
+<p>&nbsp;</p>
+<p>Here is the result of this playbook</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM.png"><img class="post-img alignnone wp-image-7716 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1274.png" alt="ansible s3 list marker" width="2590" height="1718" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM.png 2590w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-300x199.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-1024x679.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-768x509.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-1536x1019.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-2048x1358.png 2048w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-120x80.png 120w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-360x240.png 360w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7716 size-full" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM.png" alt="ansible s3 list marker" width="2590" height="1718" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM.png 2590w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-300x199.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-1024x679.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-768x509.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-1536x1019.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-2048x1358.png 2048w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-120x80.png 120w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-26-at-8.31.33-PM-360x240.png 360w" sizes="(max-width: 2590px) 100vw, 2590px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_S3_Upload_Examples">Ansible S3 Upload Examples</span></h2>
+<p>Before we proceed to. upload files to S3 there are some key points we need to be aware of.</p>
+<p><strong>An Amazon S3 bucket has no directory hierarchy</strong> such as you would find in a typical computer file system. You can, however, create a logical hierarchy by using object key names that imply a folder structure. For example, instead of naming an object <code class="code">sample.jpg</code>, you can name it <code class="code">photos/2006/February/sample.jpg</code>.</p>
+<p>This would create the necessary directory structure if it is not already present. If it present, It would upload your file there.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_Upload_PUT_example">Ansible S3 Upload / PUT example</span></h3>
+<p>Uploading a file to S3 is technically known as PUT and we need to execute a PUT call to upload a file to S3.</p>
+<p>Now let us see how to use Ansible to upload a file using the PUT mode.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket Upload - Ansible
+  hosts: localhost
+  tasks:
+  - name: Upload/PUT file to S3 bucket
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: put
+      object: "2021/12/Screenshot 2021-12-26 at 8.31.33 PM.png"
+      src: "/Users/saravananthangaraj/Desktop/Screenshot 2021-12-26 at 8.31.33 PM.png"
+    register: putresult
+
+  - debug: msg="{{ putresult.msg }} and the S3 Object URL is {{putresult.url}}"
+    when: putresult.changed</pre>
+<p><span style="color: #e80e91;">when you are uploading a file that is not present</span>, it would be created.</p>
+<p><span style="color: #e80e91;">If it is already present and if the bucket versioning is enabled</span>, the old version of the file would be replaced with this new file you are uploading. you can optionally retrieve the old versions in case if you need them.</p>
+<p><span style="color: #107bc7;"><span style="color: #e80e91;">If the file is already present but the Versioning is not enabled</span>,</span> you would end up overwriting the data forever.  Even if you have accidentally done it.</p>
+<p>So Enabling Bucket versioning is highly recommended if you are storing critical data and do not want to end up losing it.</p>
+<p>Enabling Bucket Versioning would also enforce MFA for delete actions so the files or the versions cannot be deleted easily.</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM.png"><img class="post-img alignnone wp-image-7720 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x926.png" alt="ansible s3 upload" width="3584" height="1728" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM.png 3584w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-300x145.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-1024x494.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-768x370.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-1536x741.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-2048x987.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-7720 size-full" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM.png" alt="ansible s3 upload" width="3584" height="1728" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM.png 3584w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-300x145.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-1024x494.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-768x370.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-1536x741.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-1.01.10-AM-2048x987.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_PUT_UPLOAD_rendered_template_Dynamic_Content">Ansible S3 PUT / UPLOAD rendered template &#8211; Dynamic Content</span></h3>
+<p>At times we might want to generate a file with dynamic content using the Ansible Jinja2 template and then upload it to the S3 bucket.</p>
+<p>How can we do that?</p>
+<p>Well, let&#8217;s see a quick example.</p>
+<p>I am going to list my <code>Desktop</code> directory with <code>ls -lrt</code> command and save the results into a file and upload that file into S3.</p>
+<p>Here is the playbook and it does the following things</p>
+<ul>
+<li>Execute the command and store the result into <code>register</code> variable</li>
+<li>Using <code>set_fact</code> create a new fact variable and store the collected directory listing,  the data type would be a list of files</li>
+<li>Display the fact variable we have created using <code>debug</code></li>
+<li>Using template and Jinja2, Iterate over the list of files and write into a file using <code>lookup</code></li>
+<li>Redirect the <code>lookup</code> output to the <code>content</code> stream of aws_s3 and create a new file and upload to S3</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket Upload - Ansible
+  hosts: localhost
+  tasks:
+  - name: List Desktop and save the output to register variable
+    shell: "ls -lrt /Users/saravananthangaraj/Desktop"
+    register: dirlist
+  
+  - name: Save the output to Content varible
+    set_fact: 
+      content: "{{dirlist.stdout_lines}}"
+    when: dirlist.changed
+  
+  - name: Display the Content before Writing
+    debug: msg="{{content}}"
+
+  - name: Upload/PUT file to S3 bucket
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: put
+      object: "2021/12/27/DesktopDirectoryListing.txt"
+      content: "{{ lookup('template', 'directorylist.yml.j2')}}"
+    register: putresult</pre>
+<p>here is the template file we are using in the lookup</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">{% for line in content %}
+    {{line}}
+{% endfor %}</pre>
+<p>both these files are kept in the same directory so I am referring to just the file name with lookup and template.</p>
+<p>So the content would be placed into this file and then copied over to the S3 with the name <code>DesktopDirectoryListing.txt</code></p>
+<p>If you go to S3 and download the file and view it, you can see the directory listing.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_PUT_UPLOAD_with_Custom_Headers_Metadata">Ansible S3 PUT / UPLOAD with Custom Headers &amp; Metadata</span></h3>
+<p>S3 lets you control the access and versioning of the objects by specifying custom headers and metadata</p>
+<p>For example, you want to give permission to a user X for the object you are uploading right now, based on the email address of his AWS account.</p>
+<p>you can do that with the following headers</p>
+<pre>x-amz-grant-full-control: <code class="replaceable">GrantFullControl</code> x-amz-grant-read: <code class="replaceable">GrantRead</code></pre>
+<p>In fact, there are more Headers available for you to use while uploading the objects. Here is the list of headers taken from AWS Documentation</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">PUT /Key+ HTTP/1.1
+Host: Bucket.s3.amazonaws.com
+x-amz-acl: ACL
+Cache-Control: CacheControl
+Content-Disposition: ContentDisposition
+Content-Encoding: ContentEncoding
+Content-Language: ContentLanguage
+Content-Length: ContentLength
+Content-MD5: ContentMD5
+Content-Type: ContentType
+Expires: Expires
+x-amz-grant-full-control: GrantFullControl
+x-amz-grant-read: GrantRead
+x-amz-grant-read-acp: GrantReadACP
+x-amz-grant-write-acp: GrantWriteACP
+x-amz-server-side-encryption: ServerSideEncryption
+x-amz-storage-class: StorageClass
+x-amz-website-redirect-location: WebsiteRedirectLocation
+x-amz-server-side-encryption-customer-algorithm: SSECustomerAlgorithm
+x-amz-server-side-encryption-customer-key: SSECustomerKey
+x-amz-server-side-encryption-customer-key-MD5: SSECustomerKeyMD5
+x-amz-server-side-encryption-aws-kms-key-id: SSEKMSKeyId
+x-amz-server-side-encryption-context: SSEKMSEncryptionContext
+x-amz-server-side-encryption-bucket-key-enabled: BucketKeyEnabled
+x-amz-request-payer: RequestPayer
+x-amz-tagging: Tagging
+x-amz-object-lock-mode: ObjectLockMode
+x-amz-object-lock-retain-until-date: ObjectLockRetainUntilDate
+x-amz-object-lock-legal-hold: ObjectLockLegalHoldStatus
+x-amz-expected-bucket-owner: ExpectedBucketOwner
+
+Body</pre>
+<p>You can read more about them here</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html#API_PutObject_RequestSyntax">PUT Object headers</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingMetadata.html">Object metadata</a></li>
+</ul>
+<p>Here is the Ansible Playbook</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: AWS S3 Bucket Upload - Ansible with Metadata and headers
+  hosts: localhost
+  tasks:
+  - name: Upload/PUT file to S3 bucket
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: put
+      object: "2021/12/27/Screenshot 2021-12-27 at 1.10.19 AM.png"
+      src: "/Users/saravananthangaraj/Desktop/Screenshot 2021-12-27 at 1.10.19 AM.png"
+      headers: '<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="b1c99cd0dccb9cd6c3d0dfc59cd7c4dddd9cd2dedfc5c3dedd8cd4dcd0d8ddf0d5d5c3d4c2c28cd9d4dddddef1d6c3d8c5d7c89fd2dedc">[email&#160;protected]</a>'
+      metadata: 'Content-Encoding=gzip,Cache-Control=no-cache'
+    register: putresult
+
+  - debug: 
+      msg="{{ putresult.msg }} and the S3 Object URL is {{putresult.url}}" 
+    when: putresult.changed</pre>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_S3_Download_GET_Examples">Ansible S3 Download / GET Examples</span></h2>
+<p>In this section, we are going to see a few examples of how to use Ansible to download objects from S3.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_GET_Download_Object_Single_File">Ansible S3 GET / Download Object  &#8211; Single File</span></h3>
+<p>To download or GET the object from the S3 bucket we are using the <code>get</code> mode of ansible <code>aws_s3</code> module</p>
+<p>Here is the example playbook that downloads a single file from S3 to local</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">---
+- name: Download object from AWS S3 bucket using Ansible
+  hosts: localhost
+  tasks:
+  - name: GET/DOWNLOAD file from S3 bucket
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: get
+      object: "2021/12/27/Screenshot 2021-12-27 at 1.10.19 AM.png"
+      dest: "/Users/saravananthangaraj/Downloads/Screenshot 2021-12-27 at 1.10.19 AM.png"
+    register: getresult
+
+  - debug: 
+      msg="{{ getresult.msg }}" 
+    when: getresult.changed</pre>
+<p>The result of this playbook would be like this</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM.png"><img class="alignnone size-full wp-image-7733 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1293.png" alt="ansible s3 download" width="2868" height="1932" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM.png 2868w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-300x202.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-1024x690.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-768x517.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-1536x1035.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-2048x1380.png 2048w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-120x80.png 120w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-7733" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM.png" alt="ansible s3 download" width="2868" height="1932" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM.png 2868w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-300x202.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-1024x690.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-768x517.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-1536x1035.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-2048x1380.png 2048w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-27-at-10.31.47-PM-120x80.png 120w" sizes="(max-width: 2868px) 100vw, 2868px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_GET_Download_Object_How_to_download_Directory_recursively">Ansible S3 GET / Download Object  &#8211; How to download Directory recursively</span></h3>
+<p>To download a directory with its content from S3.  There is no available option in the S3 console as you may know</p>
+<p>the only option we have is <code>recursive</code> option in <a href="../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html#How_to_Recursively_upload_or_download_copy_files_with_AWS_S3_CP_command">AWS CLI S3</a> as we have covered<a href="../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction.html"> in our other article </a></p>
+<p>But in Ansible there is no such <code>recursive</code> option as we have checked. so we created a workaround the obvious way</p>
+<p>Get a list of Directories and Files and save it in a list and try to download one by one by iterating over the <code>directories</code> and <code>files</code></p>
+<p>We are using some Advanced Ansible concepts like <code>map</code> filter and <code>Jinja2</code> expressions in this.</p>
+<p>If you are new to these items please refer our other exclusive articles on those topics</p>
+<ul>
+<li><a href="../ansible-map/index.html">Ansible Map Introduction and Examples</a></li>
+<li><a href="https://jinja.palletsprojects.com/en/3.0.x/templates/">Jinja3 Designer Documentation</a></li>
+</ul>
+<p>Here is the playbook</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Download object from AWS S3 bucket using Ansible
+  hosts: localhost
+  vars: 
+    - directories: []
+    - files: []
+    - destlocation: "/Users/saravananthangaraj/Downloads"
+
+  tasks:
+
+  - name: Get the list of files first
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: list
+      prefix: "2021/12/"
+    register: listresult
+
+  - name: Get the list of Directories
+    set_fact: 
+      directories: '{%if item is not none %}{{ directories }} + [ "{{ item }}" ] {% else %}{{directories}}{% endif %}'
+    with_items: "{{ listresult.s3_keys | map('regex_search', '^.+\/$') }}"
+
+  - name: Get the list of Files
+    set_fact: 
+      files: '{%if item is not none %}{{ files }} + [ "{{ item }}" ] {% else %}{{files}}{% endif %}'
+    with_items: "{{ listresult.s3_keys | map('regex_search', '^.+[^\/]$') }}"
+    
+  - name: Create the directories first
+    shell: |
+      mkdir -p {{item}}
+    args:
+      chdir: "{{destlocation}}"
+    with_items: "{{directories}}"
+  
+  - name: GET/DOWNLOAD file from S3 bucket
+    amazon.aws.aws_s3:
+      profile: personal
+      bucket: devopsjunction
+      mode: get
+      object: "{{item}}"
+      dest: "{{destlocation}}/{{item}}"
+    register: getresult
+    with_items: "{{files}}"
+
+  - debug: 
+      msg="{{ getresult.msg }}" 
+    when: getresult.changed</pre>
+<p>I guess it would be better to explain this over the video. here you go.</p>
+<div data-nosnippet="true"><iframe title="YouTube video player" src="https://www.youtube.com/embed/GpVPt3Iom7Y" width="560" height="315" frameborder="0" allowfullscreen="allowfullscreen" data-nosnippet="true"></iframe></div>
+<p>Hope the video clarifies if you have any doubt, with that let&#8217;s move to another example</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_GET_Download_Specific_version_of_Object">Ansible S3 GET / Download Specific version of Object</span></h3>
+<p>If your S3 bucket is production standard then you might be having Bucket Versioning enabled.</p>
+<p>When the bucket versioning is enabled. When you upload an object which is already present in S3. it would not be completely overwritten rather replaced with the latest and the old version can still be accessed</p>
+<p>You can list the available versions of each object in S3 management console on the <code>versions</code> tab</p>
+<p>If you know the version ID you can pass it while trying to download the object using the <code>version</code> parameter</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">- name: Get a specific version of an object.
+  amazon.aws.aws_s3:
+    bucket: devopsjunction
+    object: 2021/12/26/Screenshot 2021-12-26 at 2.43.55 PM.png
+    version: 48c9ee5131af7a716edc22df9772aa6f
+    dest: /home/sarav/Downloads/Screenshot 2021-12-26 at 2.43.55 PM.png
+    mode: get</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Ansible_S3_GET_Download_Only_when_the_Checksum_does_not_match">Ansible S3 GET / Download Only when the Checksum does not match</span></h3>
+<p>There is a parameter in the s3 module named <code>overwrite</code> which adds control over the overwriting behaviour of the Upload(PUT) or download( GET) tasks</p>
+<p>By default, it is set to <code>always</code> overwrite if the object exists either upload/download.</p>
+<p>Besides <code>always</code> overwrite accepts two more values</p>
+<ul>
+<li>never  &#8211; Do not overwrite</li>
+<li>different &#8211; Overwrite when the checksum is different</li>
+</ul>
+<p>If you do not want to overwrite either while uploading or downloading. you can set this parameter to <code>never</code></p>
+<p>the <code>different</code> value is to validate the checksum of the objects before performing the action.</p>
+<p>If the Checksum is different, then perform the action. Can either be upload or download</p>
+<p>Here is the playbook that downloads the object from S3 when checksums are different</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Download object from AWS S3 bucket using Ansible
+  hosts: localhost
+
+  tasks:
+  
+  - name: GET an object but don't download if the file checksums match. New in 2.0
+    amazon.aws.aws_s3:
+      bucket: devopsjunction
+      profile: personal
+      object: "2021/12/26/Screenshot 2021-12-26 at 2.43.55 PM.png"
+      dest: "/Users/saravananthangaraj/Downloads/2021/12/26/Screenshot 2021-12-26 at 2.43.55 PM.png"
+      mode: get
+      overwrite: different
+    register: getresult
+
+  - debug: msg="{{ getresult.msg }}"</pre>
+<p>&nbsp;</p>
+<p>If the checksums are matching you would see a message like this and the task would be <code>OK</code>and not <code>CHANGED</code></p>
+<pre>Local and remote object are identical, ignoring. Use overwrite=always parameter to force.</pre>
+<p>Here is the output</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM.png"><img class="alignnone size-full wp-image-7745 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1236.png" alt="ansible s3 download checksum" width="3114" height="2004" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM.png 3114w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-300x193.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-1024x659.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-768x494.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-1536x988.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-2048x1318.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-7745" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM.png" alt="ansible s3 download checksum" width="3114" height="2004" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM.png 3114w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-300x193.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-1024x659.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-768x494.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-1536x988.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.01.51-AM-2048x1318.png 2048w" sizes="(max-width: 3114px) 100vw, 3114px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_S3_Delete_Objects_example">Ansible S3 Delete Objects example</span></h2>
+<p>In this section, we are going to see how to Delete Objects from S3 using Ansible.</p>
+<p>to delete objects you need to use the <code>mode: delobj</code> in your task</p>
+<p>Here is the playbook to delete an object from the S3 bucket using ansible</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Delete object from AWS S3 bucket using Ansible
+  hosts: localhost
+
+  tasks:
+  
+  - name: Delete Objects from S3 bucket
+    amazon.aws.aws_s3:
+      bucket: devopsjunction
+      profile: personal
+      object: "2021/12/26/Screenshot 2021-12-26 at 2.43.55 PM.png"
+      mode: delobj
+    register: delresult
+
+  - debug: msg="{{ delresult.msg }}"</pre>
+<p>Here is the execution output of this playbook</p>
+<p><a href="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM.png"><img class="alignnone size-full wp-image-7746 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1224.png" alt="ansible s3 delete object" width="2952" height="1882" data-src="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM.png 2952w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-300x191.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-1024x653.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-768x490.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-1536x979.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-2048x1306.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-7746" src="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM.png" alt="ansible s3 delete object" width="2952" height="1882" srcset="../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM.png 2952w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-300x191.png 300w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-1024x653.png 1024w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-768x490.png 768w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-1536x979.png 1536w, ../../wp-content/uploads/2021/12/Screenshot-2021-12-29-at-12.26.57-AM-2048x1306.png 2048w" sizes="(max-width: 2952px) 100vw, 2952px" data-eio="l" /></noscript></a></p>
+<p>There are a few things I have noticed with Ansible S3 Delete, I thought you should be aware of this</p>
+<p><span style="color: #003366;"><strong>Quick caveats</strong></span></p>
+<ul>
+<li>Ansible Delete Object does not check if the object is actually present or not.  Even if the object is not present it returns the Successful message <em>Object deleted from bucket</em></li>
+<li>You Can delete the directories using <code>delobj</code> ansible s3 delete only when the directory is empty. otherwise, it would give a Successful message but not the deletion does not happen</li>
+<li>The successful message comes despite the deletion status of the file. Which seems buggy.</li>
+</ul>
+<p>So make sure to inspect twice if the object is really deleted in these cases.</p>
+<p>( These caveats are made based on the observation made as of 29 Dec 2021. If its fixed we will try to keep this updated (or) please let us know in comments )</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_S3_Copy_Objects_example_Copying_between_S3_buckets">Ansible S3 Copy Objects example &#8211; Copying between S3 buckets</span></h2>
+<p>In this section, we are going to see how to copy objects between two s3 buckets using ansible</p>
+<p>Here is the playbook that performs the transfer between two S3 buckets or copies objects from one bucket to another.</p>
+<p>Truth be told, we have not been able to test this Copy module successfully and this playbook was created as per the Ansible documentation.</p>
+<p>We have created an issue to Ansible <a href="https://github.com/ansible-collections/amazon.aws/issues/602">https://github.com/ansible-collections/amazon.aws/issues/602</a></p>
+<p>We will keep this article updated as soon we get more info on this one.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Copy objects from one S3 bucket to another bucket using Ansible
+  hosts: localhost
+
+  tasks:
+  - name: Copy Objects from one S3 bucket to another
+    amazon.aws.aws_s3:
+      bucket: gritfy.io
+      profile: personal
+      object: sqscli-mac.zip
+      mode: copy
+      copy_src: 
+        bucket: devopsjunction
+        object: sqscli-mac.zip
+    register: copyresult
+
+  - debug: msg="{{ delresult.msg }}"
+
+</pre>
+<p>&nbsp;</p>
+<p>Meanwhile, you can use the AWS CLI S3 CP command to perform this task.</p>
+<p>We have a dedicated article for the same</p>
+<blockquote class="wp-embedded-content" data-secret="XsXelGcIQQ"><p><a href="../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html">AWS S3 CP Examples &#8211; How to Copy Files with S3 CLI | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;AWS S3 CP Examples &#8211; How to Copy Files with S3 CLI  | Devops Junction&#8221; &#8212; Middleware Inventory" src="../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/embed/index.html#?secret=XsXelGcIQQ" data-secret="XsXelGcIQQ" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>In this detailed article, I have tried to cover as many as examples possible for the Ansible aws_s3 module usage</p>
+<ul>
+<li>How to list S3 objects using Ansible using prefix and max_keys etc</li>
+<li>Upload S3 Objects using Ansible with template and metadata</li>
+<li>Download S3 objects using Ansible recursively and based on checksum etc</li>
+<li>How to Delete the Objects from S3 using Ansible</li>
+<li>How to Copy objects between two S3 buckets</li>
+</ul>
+<p>Hope you found all the examples helpful. we have tested each playbook as always and we have mentioned if we have noticed any issue as a caveat.</p>
+<p>If you have any feedback or questions. please use the comments section.</p>
+<a href="../../wp-content/uploads/2021/09/DaaS.svg"><img class="post-img lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1047 415'%3E%3C/svg%3E" alt="gritfy" width="1047" height="415" class="post-img lazyload" data-src="../../wp-content/uploads/2021/09/DaaS.svg" loading="lazy" /><noscript><img class="post-img" src="../../wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" data-eio="l" /></noscript></a>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Find me on Linkedin <a href="https://www.linkedin.com/in/rumen-lishkov/">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#bdd5d8d1d1d2fddacfd4c9dbc493ded2d0"> <span class="__cf_email__" data-cfemail="224a474e4e4d6245504b56445b0c414d4f">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1657191346" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="7702" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="915ddf1a10" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1657191346" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1657191346"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="aws s3 cp" data-src="../../wp-content/uploads/2021/09/awss3cp-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/09/awss3cp-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="aws s3 cp" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html'>AWS S3 CP Examples - How to Copy Files with S3 CLI | Devops Junction</a><p>AWS CLI has become a life saver when you want to manage your AWS infrastructure efficiently. This also provides lot of possibilities for Automation and reduce the number of times that you have to login to AWS Management console. If you are new to AWS CLI. Please consider reading this&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-find-multiple-files-with-pattern-replace/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Find Multiple Files and Replace" data-src="../../wp-content/uploads/2021/08/Screenshot-2021-08-22-at-9.11.58-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/08/Screenshot-2021-08-22-at-9.11.58-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Find Multiple Files and Replace" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-find-multiple-files-with-pattern-replace/index.html'>Ansible Find multiple files with pattern and replace</a><p>In this post we are going we are going to see how to find a list of&nbsp; files containing a text or a pattern and replace them at once. As you know I have written a dedicated and brief articles on both Ansible find and replace modules with many examples.&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-inventory_hostname-ansible_hostname-variables/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible_hostname" data-src="../../wp-content/uploads/2020/11/IMG_0005-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/11/IMG_0005-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible_hostname" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-inventory_hostname-ansible_hostname-variables/index.html'>Ansible Inventory_hostname & ansible_hostname Examples</a><p>In this post, we are going to see two built-in variables of ansible mostly used in Ansible playbooks and they are inventory_hostname and ansible_hostname while both these variables are to give you the hostname of the machine. they differ in a way, where it comes from. So in this article,&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-playbook-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Playbook Examples" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Playbook Examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-playbook-example/index.html'>Ansible Playbook Examples - Sample Ansible Playbooks | Devops Junction</a><p>In this post, we are going to see examples of Ansible playbook and various different modules and playbook examples with various modules and multiple hosts. We will start with a basic Ansible playbook and learn what is task and play and what is playbook etc. What is Ansible Playbook It&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-find-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Find" data-src="../../wp-content/uploads/2020/01/Screenshot-2020-01-03-at-4.51.17-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/01/Screenshot-2020-01-03-at-4.51.17-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Find" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-find-examples/index.html'>Ansible Find Examples - How to use Ansible Find</a><p>Ansible find module functions as same as the Linux Find command and helps to find files and directories based on various search criteria such as age of the file, accessed date, modified date,&nbsp; regex search pattern etcetera. As said earlier, this is more of an ansible way to execute the&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../store-terraform-state-terraform-cloud/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Store terraform state file on Terraform cloud Remote | Devops Junction</a></div><div class="nav-next"><a href="../cpu-memory-usage-nodes-k8s/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Get CPU and Memory Usage of NODES and PODS &#8211; Kubectl | K8s</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (28)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (1)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (16)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (5)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><div class="simplesocialbuttons simplesocial-round-icon simplesocialbuttons-float-left-center post-7702 post  ssb_counter-activate simplesocialbuttons-slide-bottom-in">
+<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
+<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=How+to+use+ansible+with+S3+%E2%80%93+Ansible+aws_s3+examples++%7C+Devops+Junction&url=https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
+<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
+<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=How+to+use+ansible+with+S3+%E2%80%93+Ansible+aws_s3+examples++%7C+Devops+Junction&body=https://www.middlewareinventory.com/blog/ansible-aws_s3-example/"><span class="simplesocialtxt">Email</span></button>
+<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://web.whatsapp.com/send?text=https://www.middlewareinventory.com/blog/ansible-aws_s3-example/"><span class="simplesocialtxt">WhatsApp</span></button>
+</div>
+<script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"7702 https:\/\/www.middlewareinventory.com\/?p=7702","disqusShortname":"mwinventory","disqusTitle":"How to use ansible with S3 \u2013 Ansible aws_s3 examples  | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-aws_s3-example\/","postId":"7702"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"2019084a26"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"b4d440853b","post_id":"7702"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"0b980bed5f","ip":"208.74.127.8","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f2bcf.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/129c2.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-aws_s3-example/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script> 
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1657191346;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

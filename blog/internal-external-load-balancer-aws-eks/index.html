@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>AWS EKS Load Balancer from Kubernetes Service | Devops Junction</title>
+<meta name="description" content="AWS EKS Create Internal or External Load Balancer using Kubernetes Service file. AWS EKS Load Balancer example. EKS LoadBalancer example. AWS LB Controller example." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="AWS EKS Load Balancer from Kubernetes Service | Devops Junction" />
+<meta property="og:description" content="AWS EKS Create Internal or External Load Balancer using Kubernetes Service file. AWS EKS Load Balancer example. EKS LoadBalancer example. AWS LB Controller example." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-04-05T20:38:42+00:00" />
+<meta property="article:modified_time" content="2022-11-22T17:59:37+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg","width":1748,"height":1240,"caption":"EKS Create Internal LB"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#webpage","url":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/","name":"AWS EKS Load Balancer from Kubernetes Service | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#primaryimage"},"datePublished":"2022-04-05T20:38:42+00:00","dateModified":"2022-11-22T17:59:37+00:00","description":"AWS EKS Create Internal or External Load Balancer using Kubernetes Service file. AWS EKS Load Balancer example. EKS LoadBalancer example. AWS LB Controller example.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"AWS EKS Load Balancer from Kubernetes Service | Devops Junction","datePublished":"2022-04-05T20:38:42+00:00","dateModified":"2022-11-22T17:59:37+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#webpage"},"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/#primaryimage"},"articleSection":"AWS,Kubernetes","inLanguage":"en-US"},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/8226.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-internal-external-load-balancer-aws-eks-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-internal-external-load-balancer-aws-eks-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    background: #eaeef3 none repeat scroll 0% 0% !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-8226 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-8226" class="post-8226 post type-post status-publish format-standard has-post-thumbnail hentry category-aws category-kubernetes wpautop">
+<header class="entry-header">
+<h1 class="entry-title">AWS EKS Load Balancer from Kubernetes Service | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="2:08 am" rel="bookmark"><time class="entry-date published updated" datetime="November 22, 2022">November 22, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=AWS%20EKS%20Load%20Balancer%20from%20Kubernetes%20Service%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Finternal-external-load-balancer-aws-eks%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="8226" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=AWS+EKS+Load+Balancer+from+Kubernetes+Service+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Finternal-external-load-balancer-aws-eks%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="8226" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=AWS%20EKS%20Load%20Balancer%20from%20Kubernetes%20Service%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Finternal-external-load-balancer-aws-eks%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="8226" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Finternal-external-load-balancer-aws-eks%2F&subject=AWS%20EKS%20Load%20Balancer%20from%20Kubernetes%20Service%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="8226" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="8226" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this article, we are going to see how to create <span style="color: #eb057f;">internal</span> and <span style="color: #eb057f;">external</span> load balancers using the Kubernetes <strong>service</strong> on EKS</p>
+<p>When we think about making an application or deployment available externally or internally over a Domain name</p>
+<p>We think of <a href="../kubernetes-ingress-example/index.html">Kubernetes Ingress</a> but that&#8217;s not the only way to expose your service.</p>
+<p>There are three ways to make service available externally ( Irrespective of External or Internal Load balancer )</p>
+<p><a href="../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg"><img class="post-img alignnone wp-image-8306 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="eks load balancer" width="1748" height="1240" data-src="../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg 1748w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-300x213.jpg 300w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-1024x726.jpg 1024w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-768x545.jpg 768w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8306 size-full" src="../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg" alt="eks load balancer" width="1748" height="1240" srcset="../../wp-content/uploads/2022/04/eks-create-internal-lb.jpg 1748w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-300x213.jpg 300w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-1024x726.jpg 1024w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-768x545.jpg 768w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/04/eks-create-internal-lb-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Three_Ways_to_expose_a_Service_through_AWS_Load_Balancer" title="Three Ways to expose a Service through AWS Load Balancer ">Three Ways to expose a Service through AWS Load Balancer </a><ul><li><a href="#Setting_the_Service_type_to_Nodeport" title="Setting the Service type to Nodeport">Setting the Service type to Nodeport</a></li><li><a href="#Setting_the_Service_type_to_Loadbalancer_Discussed_in_this_article" title="Setting the Service type to Loadbalancer ( Discussed in this article )">Setting the Service type to Loadbalancer ( Discussed in this article )</a></li><li><a href="#Creating_an_Ingress_resource_Not_covered_in_this_article" title="Creating an Ingress resource ( Not covered in this article )">Creating an Ingress resource ( Not covered in this article )</a></li></ul></li><li><a href="#Installing_AWS_LB_Controller_add_on_to_EKS" title="Installing AWS LB Controller add on to EKS">Installing AWS LB Controller add on to EKS</a><ul><li><a href="#Enabling_OIDC_in_our_EKS_Cluster" title="Enabling OIDC in our EKS Cluster">Enabling OIDC in our EKS Cluster</a></li><li><a href="#Creating_IAM_Policy" title="Creating IAM Policy">Creating IAM Policy</a></li><li><a href="#Creating_IAM_Service_Account_and_Attach_the_Policy" title="Creating IAM Service Account and Attach the Policy">Creating IAM Service Account and Attach the Policy</a></li><li><a href="#Installing_AWS_load_balancer_controller_in_EKS_with_Helm" title="Installing AWS load balancer controller in EKS with Helm">Installing AWS load balancer controller in EKS with Helm</a></li></ul></li><li><a href="#Creating_a_new_deployment_in_EKS_Cluster" title="Creating a new deployment in EKS Cluster">Creating a new deployment in EKS Cluster</a></li><li><a href="#Creating_AWS_EKS_Load_Balancer_External_from_K8s_Service" title="Creating AWS EKS Load Balancer External &#8211; from K8s Service">Creating AWS EKS Load Balancer External &#8211; from K8s Service</a></li><li><a href="#Creating_AWS_EKS_Load_Balancer_Internal_from_K8s_Service" title="Creating AWS EKS Load Balancer Internal &#8211; from K8s Service">Creating AWS EKS Load Balancer Internal &#8211; from K8s Service</a><ul><li><a href="#More_Annotations_to_Customize_the_LoadBalancer_Creation" title="More Annotations to Customize the LoadBalancer Creation">More Annotations to Customize the LoadBalancer Creation</a></li></ul></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Three_Ways_to_expose_a_Service_through_AWS_Load_Balancer">Three Ways to expose a Service <span style="color: #003366;"><span style="color: #eb107a;">through AWS Load Balancer </span></span></span></h2>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Setting_the_Service_type_to_Nodeport"><strong>Setting the Service type to <span style="color: #eb107a;">Nodeport</span></strong></span></h3>
+<p>services that need to be exposed to the outside world can be configured with the node port. In this method, each cluster node opens a port on the node itself (hence this name was given ) and redirects traffic received on that port to the underlying service</p>
+<p>You can add the selective machines/nodes into a Target group of existing or new Load Balancers.</p>
+<p>The target group would be using NodePort as the target port</p>
+<h3></h3>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Setting_the_Service_type_to_Loadbalancer_Discussed_in_this_article"><strong>Setting the Service type to <span style="color: #eb107a;">Loadbalancer </span>( Discussed in this article )</strong></span></h3>
+<p>an extension of the NodePort type—This makes the service accessible through a dedicated load balancer, provisioned from the cloud infrastructure Kubernetes is running on.</p>
+<p>The load balancer redirects traffic to the node port across all the nodes. Clients connect to the service through the load balancer’s IP.</p>
+<p>In this type Load Balancer Creation and Targetgroup creation would all be done automatically.</p>
+<p>In the case of EKS  <code>Cluster LB Controller</code> would take care of that job. Which needs to be manually installed and set up.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Creating_an_Ingress_resource_Not_covered_in_this_article"><strong>Creating an <span style="color: #eb107a;">Ingress</span> resource ( Not covered in this article )</strong></span></h3>
+<p>A radically different mechanism for exposing multiple services through a single IP address. It operates at the HTTP level (network layer 7) and can thus offer more features than layer 4 services can.  that&#8217;s what we are going to see in this article. It is more like AWS  Application Load Balancers.</p>
+<p>We are not going to cover Ingress in this article. we have a dedicated article for K8s ingress. you can refer</p>
+<blockquote class="wp-embedded-content" data-secret="EHoDnL4BkH"><p><a href="../kubernetes-ingress-example/index.html">Kubernetes Ingress Example on Google Cloud</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Kubernetes Ingress Example on Google Cloud&#8221; &#8212; Middleware Inventory" src="../kubernetes-ingress-example/embed/index.html#?secret=EHoDnL4BkH" data-secret="EHoDnL4BkH" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote><p> In this article we are going to use only Service and with a type of Load Balancer.</p></blockquote>
+<p>Setting the Service type to <code>LoadBalancer</code> does not automatically create the load balancer for you.</p>
+<p>For EKS to be able to create a Load Balancer, it needs to have certain configurations and Service accounts created.</p>
+<p>To facilitate EKS to create and manage AWS Load Balancers. we need to deploy an additional controller named <a href="https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html">AWS LB Controller</a> which was earlier known as AWS Ingress controller.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Installing_AWS_LB_Controller_add_on_to_EKS"><span style="color: #003366;"><span style="color: #000000;">Installing</span> <span style="color: #ed1878;">AWS LB Controller</span> <span style="color: #000000;">add on to EKS</span></span></span></h2>
+<p>Here are the quick installation and configuration steps to install AWS LB Controller on your EKS Cluster.</p>
+<p>We presume you have installed EKS Cluster already.</p>
+<p>if you have not created it yet. Refer to <a href="../creating-eks-cluster-with-karpenter-auto-scaling-terraform-kubernetes/index.html">this article to create EKS Cluster to Karpenter Autoscaling &#8211; Terraform</a></p>
+<p>To manage your existing EKS Cluster, AWS provides a CLI named <code>eksctl</code>which you can <a href="https://eksctl.io/">download/install</a> from here.</p>
+<p><strong>eksctl</strong> can make use of your <strong>awscli</strong> profiles for authentication and to communicate to your AWS account.</p>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Enabling_OIDC_in_our_EKS_Cluster">Enabling OIDC in our EKS Cluster</span></h3>
+<p>let us begin with enabling OpenID Connect<strong>(OIDC)</strong> in our EKS Cluster. this lets our IAM roles be associated directly with Kubernetes service accounts.</p>
+<p>It is a new feature where you can associate IAM roles with your Kubernetes Service accounts directly. <a href="https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html">Read more about it here</a></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">⇒ eksctl utils associate-iam-oidc-provider \
+    &#8211; region us-east-2 \
+    &#8211; cluster gritfyeks \
+    &#8211; approve
+</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Creating_IAM_Policy">Creating IAM Policy</span></h3>
+<p>Once we have enabled the OIDC in our EKS cluster. we can go ahead and download the <code>iam_policy</code>configuration needed to be created.</p>
+<p>You can directly download it using <code>curl</code></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">⇒ curl -o iam_policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.0/docs/install/iam_policy.json
+</pre>
+<p>Content of the <code>iam_policy.json</code> file <a href="https://gist.github.com/AKSarav/4506ba82df274f689e4266af28f40fd8">available in Github</a> if you would like to directly copy</p>
+<p>Now you can use this json file to create your iam policy using <code>aws iam create-policy</code>command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">⇒ aws iam create-policy \
+    &#8211; policy-name AWSLoadBalancerControllerIAMPolicy \
+    &#8211; policy-document file://iam_policy.json</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Creating_IAM_Service_Account_and_Attach_the_Policy">Creating IAM Service Account and Attach the Policy</span></h3>
+<p>Now it&#8217;s time to create an <code>iamserviceaccount</code> in our EKS cluster.  we are going to use <code>eksctl</code> for the same.</p>
+<p>you need to update the <code>cluster</code>name and region before trying this out</p>
+<p>this creates a service account named <code>aws-load-balancer-controller</code>in kube-system namespace and this service, account is associated with IAM policy we created earlier.</p>
+<p>You might have to just change the following things before running the command</p>
+<ul>
+<li>ClusterName</li>
+<li>Policy ARN &#8211; ( Just AWS Account Number is enough)</li>
+<li>AWS account Region</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">⇒ eksctl create iamserviceaccount \
+--cluster ${YOUR_CLUSTER_NAME} &#8211; region ${YOUR_AWS_REGION} \
+--namespace kube-system \
+--name aws-load-balancer-controller \
+--attach-policy-arn arn:aws:iam::${YOUR_AWS_ACCOUNT_NUMBER}:policy/AWSLoadBalancerControllerIAMPolicy \
+--override-existing-serviceaccounts \
+--approve
+</pre>
+<p>Now we have the necessary service accounts and OIDC in place. Now we can go ahead and deploy the <strong>aws-load-balancer-controller </strong>using helm</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Installing_AWS_load_balancer_controller_in_EKS_with_Helm">Installing AWS load balancer controller in EKS with Helm</span></h3>
+<p>If you do not have <a href="https://helm.sh/">helm</a> installed in your local system. Please install it before continuing. you can find more information about helm <a href="https://helm.sh/">here</a></p>
+<p>Let us begin with adding the necessary charts and repository to helm</p>
+<pre># helm repo add eks https://aws.github.io/eks-charts
+# helm repo update</pre>
+<p>Once you have executed the <code>helm repo add</code> and  <code></code><code>helm repo update</code></p>
+<p>you are good to install the aws-load-balancer-controller</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">⇒ helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+  -n kube-system \
+  &#8211; set clusterName=${Your Cluster Name} \
+  &#8211; set serviceAccount.create=false \
+  &#8211; set serviceAccount.name=aws-load-balancer-controller</pre>
+<p>Once the helm chart is successfully deployed. we can verify by listing the <code>aws-load-balancer-controller</code> deployment on the <code>kube-system</code> namespace</p>
+<pre>⇒ kubectl get deployments aws-load-balancer-controller -n kube-system
+NAME READY UP-TO-DATE AVAILABLE AGE
+aws-load-balancer-controller 2/2 2 2 56s</pre>
+<p>Once you have validated that the deployment is present and LIVE. Now we can move on to the next phase of this article.</p>
+<p>We are going to deploy and test some sample applications in our EKS Cluster.</p>
+<p>This is the Image or Application we are going to deploy.</p>
+<blockquote class="wp-embedded-content" data-secret="8APSMhODz8"><p><a href="../docker-tomcat-example-dockerfile-sample/index.html">Docker Tomcat Example &#8211; Dockerfile for Tomcat, Docker Tomcat Image</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Docker Tomcat Example &#8211; Dockerfile for Tomcat, Docker Tomcat Image&#8221; &#8212; Middleware Inventory" src="../docker-tomcat-example-dockerfile-sample/embed/index.html#?secret=8APSMhODz8" data-secret="8APSMhODz8" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Creating_a_new_deployment_in_EKS_Cluster">Creating a new <span style="color: #ed1878;">deployment</span> in EKS Cluster</span></h2>
+<p>To test the load balancer we. need to first deploy some applications to the Kubernetes cluster.</p>
+<p>I have taken our famous <code>aksarav/tomcat8</code> image and deployed it to the cluster with the following single line command</p>
+<pre>⇒ kubectl create deployment tomcatinfra &#8211; image=saravak/tomcat8
+deployment.apps/tomcatinfra created</pre>
+<p>But in real-time you would ideally be creating a deployment with YAML with much more customizations</p>
+<p>Since our objective is to test the load balancer with EKS am fastening this with single line deployment creation</p>
+<p>Now the deployment is created. The next stage is where the Load Balancer is going to be created.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Creating_AWS_EKS_Load_Balancer_External_from_K8s_Service">Creating AWS <span style="color: #ed1878;">EKS Load Balancer</span> External &#8211; from K8s Service</span></h2>
+<p>Now we need to expose our application as a service.   To keep things simple we are going to use one-liner commands for this</p>
+<pre>⇒ kubectl expose deployment tomcatinfra &#8211; port=80 &#8211; target-port=8080 &#8211; type LoadBalancer 
+  service/tomcatinfra exposed</pre>
+<p>when you run the <code>kubectl expose</code> command with your deployment name and the port.  Service would be auto-created</p>
+<p>Here is the YAML file of the service, if you do not want to use the one-liner command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+kind: Service
+metadata:
+  name: tomcatappsvc
+spec:
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  selector:
+    app: tomcatinfra
+  type: LoadBalancer</pre>
+<p>&nbsp;</p>
+<p>As you can see, We are also defining what type of service has to be created using <code>--type LoadBalancer</code> in both formats</p>
+<p>If all configurations are in place and done right. You would be able to see that a new  Load Balancer is created</p>
+<p><a href="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM.png"><img class="alignnone wp-image-8269 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x192.png" alt="eks load balancer" width="3326" height="332" data-src="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM.png 3326w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-300x30.png 300w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-1024x102.png 1024w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-768x77.png 768w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-1536x153.png 1536w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-2048x204.png 2048w" data-sizes="auto" /><noscript><img class="alignnone wp-image-8269 size-full" src="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM.png" alt="eks load balancer" width="3326" height="332" srcset="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM.png 3326w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-300x30.png 300w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-1024x102.png 1024w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-768x77.png 768w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-1536x153.png 1536w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-12.52.42-AM-2048x204.png 2048w" sizes="(max-width: 3326px) 100vw, 3326px" data-eio="l" /></noscript></a></p>
+<blockquote><p>By default when you expose a service. it would become a publicaly available load balancer. In order to make it private we need to special annotations. Will get there.</p></blockquote>
+<p>For now, we have tested how to create an External Load Balancer with <code>aws-load-balancer-controller</code> and expose our deployment as a service</p>
+<p>Now let us access our application to validate if it is accessible</p>
+<p><a href="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM.png"><img class="alignnone wp-image-8271 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1003.png" alt="EKS Load Balancer" width="2834" height="1480" data-src="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM.png 2834w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-300x157.png 300w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-1024x535.png 1024w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-768x401.png 768w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-1536x802.png 1536w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-2048x1070.png 2048w" data-sizes="auto" /><noscript><img class="alignnone wp-image-8271 size-full" src="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM.png" alt="EKS Load Balancer" width="2834" height="1480" srcset="../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM.png 2834w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-300x157.png 300w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-1024x535.png 1024w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-768x401.png 768w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-1536x802.png 1536w, ../../wp-content/uploads/2022/03/Screenshot-2022-03-29-at-1.02.49-AM-2048x1070.png 2048w" sizes="(max-width: 2834px) 100vw, 2834px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Creating_AWS_EKS_Load_Balancer_Internal_from_K8s_Service">Creating AWS EKS<span style="color: #ed1878;"> Load Balancer</span> Internal &#8211; from K8s Service</span></h2>
+<p>We have seen how to create an external load balancer with service. we have used a one-liner command to expose our deployment.</p>
+<p>It has created the External Load Balancer automatically.</p>
+<p>Now we are going to see how to create Internal Load Balancer with Service.</p>
+<p>By default when you create a service it would expose the load balancer to the public. but this can be controlled using certain <code>annotations</code></p>
+<p>Let us take a look at the YAML file we are going to use to create our service.</p>
+<p>As Classic Load Balancer is going to be deprecated shortly by AWS. I have chosen NLB. So we are now going to create internal network load balancer with EKS</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+    service.beta.kubernetes.io/aws-load-balancer-type: nlb
+spec:
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  selector:
+    app: tomcatinfra
+  type: LoadBalancer</pre>
+<p>Our deployment is still the same as we have used in the last example.</p>
+<pre>kubectl create deployment tomcatinfra &#8211; image=saravak/tomcat8</pre>
+<p>This is a simple Tomcat Application that exposes a port <code>8080</code> in our service that&#8217;s the target port and our Service Load balancer is going to listen on port <code>80</code></p>
+<p>TargetPort should always point to the application exposed port. <code>80 =&gt; 8080</code></p>
+<p>Now let us create the service using this YAML file and validate.</p>
+<pre>kubectl apply -f internalservice.yml</pre>
+<p>here is a quick video record of me applying this YAML file in my  EKS cluster.</p>
+<p><a href="https://asciinema.org/a/ou7DsZozHeFTQ9FA9xC0FA3x4" target="_blank" rel="noopener noreferrer"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="https://asciinema.org/a/ou7DsZozHeFTQ9FA9xC0FA3x4.svg" loading="lazy" class="lazyload" /><noscript><img src="https://asciinema.org/a/ou7DsZozHeFTQ9FA9xC0FA3x4.svg" data-eio="l" /></noscript></a></p>
+<p>As you have seen in the screen record the internal Load Balancer was created.</p>
+<p>Here are some more screenshots I have taken from the AWS console for the Load Balancer</p>
+<p>As you can see a new network Load Balancer has been created and the schema is set to <code>internal</code></p>
+<p>It means we have successfully created an internal load balancer using LB Controller</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM.png"><img class="post-img alignnone wp-image-8299 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1002.png" alt="eks load balancer" width="3840" height="2004" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM.png 3840w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-300x157.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-1024x534.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-768x401.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-1536x802.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-2048x1069.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8299 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM.png" alt="eks load balancer" width="3840" height="2004" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM.png 3840w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-300x157.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-1024x534.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-768x401.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-1536x802.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.48.45-AM-2048x1069.png 2048w" sizes="(max-width: 3840px) 100vw, 3840px" data-eio="l" /></noscript></a></p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM.png"><img class="post-img alignnone wp-image-8300 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x949.png" alt="eks load balancer" width="3322" height="1642" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM.png 3322w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-300x148.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-1024x506.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-768x380.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-1536x759.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-2048x1012.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8300 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM.png" alt="eks load balancer" width="3322" height="1642" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM.png 3322w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-300x148.png 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-1024x506.png 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-768x380.png 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-1536x759.png 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-2.50.51-AM-2048x1012.png 2048w" sizes="(max-width: 3322px) 100vw, 3322px" data-eio="l" /></noscript></a></p>
+<p>Since this is an internal load balancer, you have to be present within the VPC internal network to be able to access this.</p>
+<p>If you have VPN servers. that&#8217;s the best way to connect to the internal network</p>
+<p>Otherwise, you can launch a machine on the VPC and try to access it from there. that&#8217;s what am going to do</p>
+<p>I launched a new Windows server on the same VPC we have created manually and going to test this Load balancer from there</p>
+<p>You can see that the URL is available and accessible from the windows server launched on the same VPC but not externally.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-scaled.jpg"><img class="post-img alignnone wp-image-8301 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x801.png" alt="eks load balancer" width="2560" height="1068" data-src="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-scaled.jpg 2560w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-300x125.jpg 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-1024x427.jpg 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-768x320.jpg 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-1536x641.jpg 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-2048x854.jpg 2048w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8301 size-full" src="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-scaled.jpg" alt="eks load balancer" width="2560" height="1068" srcset="../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-scaled.jpg 2560w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-300x125.jpg 300w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-1024x427.jpg 1024w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-768x320.jpg 768w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-1536x641.jpg 1536w, ../../wp-content/uploads/2022/04/Screenshot-2022-04-05-at-3.31.54-AM-2048x854.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>The only difference between the external load balancer creation and internal load balancer creation is the annotation we are setting.</p>
+<p>There are more Annotations available which you can explore List of <a href="https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/service/annotations/">EKS Load Balancer Annotations </a></p>
+<h2></h2>
+<h3><span class="ez-toc-section" id="More_Annotations_to_Customize_the_LoadBalancer_Creation">More Annotations to Customize the LoadBalancer Creation</span></h3>
+<p>We have used only a few annotations which are necessary for making the LB an internal Load Balancer.</p>
+<p>I know there are more options to configure/customize during the LB creation and there are more annotations available as well.</p>
+<p>Here are some things you can customize and control using Annotations.</p>
+<ul>
+<li>Healthcheck attributes</li>
+<li>Enabling Access log</li>
+<li>Adding SSL Certificate and TLS Listener to your NLB</li>
+</ul>
+<p><a href="https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.3/guide/service/annotations/">Find the complete list of LoadBalancer Annotations for EKS here </a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>In this article, we have seen how to create Internal and external load balancers using  LB Controller on EKS.</p>
+<p>We also have installed the LB Controller on our EKS Cluster and deployed a sample application and exposed it as a service and created an internal network load balancer and external Load balancer.</p>
+<p>We also validated the internal NLB with a machine created and available on the local VPC.</p>
+<p>If you have any questions. please do let me know on the comments section</p>
+<p>For any professional support  reach us at <a href="../../cdn-cgi/l/email-protection.html#3c54595050537c5b4e55485a45125f5351"><span class="__cf_email__" data-cfemail="7e161b1212113e190c170a1807501d1113">[email&#160;protected]</span></a></p>
+<a href="../../wp-content/uploads/2021/09/DaaS.svg"><img class="post-img lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1047 415'%3E%3C/svg%3E" alt="gritfy" width="1047" height="415" class="post-img lazyload" data-src="../../wp-content/uploads/2021/09/DaaS.svg" loading="lazy" /><noscript><img class="post-img" src="../../wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" data-eio="l" /></noscript></a>
+<p>&nbsp;</p>
+<p>Thanks<br />
+Sarav</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#d3bbb6bfbfbc93b4a1baa7b5aafdb0bcbe"> <span class="__cf_email__" data-cfemail="bbd3ded7d7d4fbdcc9d2cfddc295d8d4d6">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1669141825" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="8226" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="32c9fb2773" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1669141825" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1669141825"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../creating-eks-cluster-with-karpenter-auto-scaling-terraform-kubernetes/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="EKS Karpenter Example" data-src="../../wp-content/uploads/2022/02/aws-eks-karpenter-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/02/aws-eks-karpenter-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="EKS Karpenter Example" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../creating-eks-cluster-with-karpenter-auto-scaling-terraform-kubernetes/index.html'>Creating EKS Cluster with Karpenter Auto scaling - Terraform | Kubernetes</a><p>Kubernetes has been a disruptive change in IT Infrastructure. It had been widely adopted across the industry Managed Kubernetes are the best choice if you do not want to face the hurdles of setting up K8s from scratch Unless you want to deep learn Kubernetes. AWS a market leader in&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../terraform-eks-spot-instances/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Terraform eks spot instance" data-src="../../wp-content/uploads/2022/04/Terraform-eks-spot-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/04/Terraform-eks-spot-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Terraform eks spot instance" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../terraform-eks-spot-instances/index.html'>Creating EKS Cluster with SPOT instances - Terraform | Devops Junction</a><p>In this article, we are going to see how to create an EKS Cluster with SPOT and OnDemand instances using Terraform. If you have prior experience with AWS, you might know what is SPOT instances and ondemand instances are.  Let us start with a quick introduction towards SPOT instances. Quick&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../deploy-tomcat-kubernetes/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Tomcat Kubernetes" data-src="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Tomcat Kubernetes" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../deploy-tomcat-kubernetes/index.html'>How to Deploy Tomcat on Kubernetes Step by Step</a><p>Overview In this post, we are going to see how to deploy tomcat on Kubernetes.  How to Deploy Tomcat based web application into Kubernetes. We are taking Google Cloud - Kubernetes Engine (GKE) for our example and creating our Kubernetes Cluster with 3 nodes You can do all these steps&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../manage-and-monitor-kubernetes-with-ease-lens-ide/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Kubernetes Monitoring" data-src="../../wp-content/uploads/2021/05/Screenshot-2021-05-03-at-1.45.32-AM-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/05/Screenshot-2021-05-03-at-1.45.32-AM-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Kubernetes Monitoring" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../manage-and-monitor-kubernetes-with-ease-lens-ide/index.html'>Manage and Monitor Kubernetes with ease - Lens IDE</a><p>I came across a wonderful solution for managing and monitoring the Kubernetes cluster and wanted to share my experience in this post with screenshots. While there are a lot of ways to monitor the Kubernetes cluster like setting up Prometheus, Grafana Deamon set and sidecar container strategies etc. All of&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../troubleshooting-load-balancing-issues-in-weblogic/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/01/mwi_config-1-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/01/mwi_config-1-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../troubleshooting-load-balancing-issues-in-weblogic/index.html'>Troubleshooting Load Balancing Issues in Weblogic</a><p>This Post is going talk about few real time requirements (or) scenarios and how to handle it. Let's start! Consider the following scnearios Scenario 1 The Weblogic Cluster is having four managed servers and during the load/stress test you are finding that there is improper load balancing between the cluster members.&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../terraform-eks-spot-instances/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Creating EKS Cluster with SPOT instances &#8211; Terraform | Devops Junction</a></div><div class="nav-next"><a href="../aws-pulumi-ebs-example/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Clone EBS Volumes between AWS EC2 with Pulumi | Devops Junction</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="comments" class="comments-area">
+</div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (68)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script src="../../wp-content/cache/minify/bdf1e.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"cee45d0bd4"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"6d8b0dd575","post_id":"8226"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"367b2cc674","ip":"82.71.5.99","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2c87b.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"45a2999ac7","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"b16c5a338e","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"8226","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/internal-external-load-balancer-aws-eks/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1669141825;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

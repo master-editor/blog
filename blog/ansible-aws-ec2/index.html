@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Ansible EC2 Example - Create EC2 instance with Ansible</title>
+<meta name="description" content="Ansible EC2 Example. Ansible Create AWS EC2 instances Example, How to Create EC2 instance with Ansible. Ansible AWS example, AWS Playbook example. Ansible playbook to create EC2 instances with Ansible. Ansible Vault and EC2 example. Setup Boto for AWS" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible EC2 Example - Create EC2 instance with Ansible" />
+<meta property="og:description" content="Ansible EC2 Example. Ansible Create AWS EC2 instances Example, How to Create EC2 instance with Ansible. Ansible AWS example, AWS Playbook example. Ansible playbook to create EC2 instances with Ansible. Ansible Vault and EC2 example. Setup Boto for AWS" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-12-01T20:39:40+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:18:12+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png" />
+<meta property="og:image:width" content="1440" />
+<meta property="og:image:height" content="753" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png","width":1440,"height":753,"caption":"Ansible EC2 Create"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/","name":"Ansible EC2 Example - Create EC2 instance with Ansible","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#primaryimage"},"datePublished":"2019-12-01T20:39:40+00:00","dateModified":"2022-11-10T19:18:12+00:00","description":"Ansible EC2 Example. Ansible Create AWS EC2 instances Example, How to Create EC2 instance with Ansible. Ansible AWS example, AWS Playbook example. Ansible playbook to create EC2 instances with Ansible. Ansible Vault and EC2 example. Setup Boto for AWS","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-aws-ec2/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible EC2 Example &#8211; Create EC2 instance with Ansible","datePublished":"2019-12-01T20:39:40+00:00","dateModified":"2022-11-10T19:18:12+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-aws-ec2/#primaryimage"},"keywords":"Ansible and AWS,Ansible AWS Boto,Ansible AWS Example,Ansible EC2,Ansible EC2 Creation,Ansible EC2 example","articleSection":"Ansible,DevOps_Beginner","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-aws-ec2/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible EC2 Example &#8211; Create EC2 instance with Ansible Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/4561.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-aws-ec2-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-aws-ec2-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">blockquote {
+     padding: 2%;
+}
+
+
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+
+
+article h3 {
+    background-color: whitesmoke;
+    color: black;
+    border-left: 10px solid black;
+    font-size: 22px;
+    border-left: 5px solid;
+    padding-left: 3%;
+}
+code{
+  color: crimson
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-4561 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-4561" class="post-4561 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible category-devops_beginner tag-ansible-and-aws tag-ansible-aws-boto tag-ansible-aws-example tag-ansible-ec2 tag-ansible-ec2-creation tag-ansible-ec2-example wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible EC2 Example &#8211; Create EC2 instance with Ansible</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="2:09 am" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20EC2%20Example%20%E2%80%93%20Create%20EC2%20instance%20with%20Ansible&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws-ec2%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="4561" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+EC2+Example+%E2%80%93+Create+EC2+instance+with+Ansible&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws-ec2%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="4561" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20EC2%20Example%20%E2%80%93%20Create%20EC2%20instance%20with%20Ansible&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws-ec2%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="4561" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-aws-ec2%2F&subject=Ansible%20EC2%20Example%20%E2%80%93%20Create%20EC2%20instance%20with%20Ansible" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="4561" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="4561" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p><a href="../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png"><img class="alignnone wp-image-4572 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1440x753.png" alt="Ansible Create EC2" width="1440" height="753" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png 1440w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-300x157.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-768x402.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-1024x535.png 1024w" data-sizes="auto" /><noscript><img class="alignnone wp-image-4572 size-full" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png" alt="Ansible Create EC2" width="1440" height="753" srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM.png 1440w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-300x157.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-768x402.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-1024x535.png 1024w" sizes="(max-width: 1440px) 100vw, 1440px" data-eio="l" /></noscript></a></p>
+<p>Infrastructure as Code is getting all attention it deserves and everyone is trying to find their way to the `Completely automated Infrastructure Provisioning &amp; Management`</p>
+<p>While there are a lot of tools available now in the market starting from Terraform, AWS CloudFormation, Chef, Puppet, Salt Stack</p>
+<p>There are some differences between each tool. Some of them are configuration management tools (Ansible, Chef, Saltstack) and Some of them are purely provisioning tools (terraform, cloud formation). You have to choose your judgement based on various factors like Easy to learn, easy to adopt.</p>
+<p>Though Terraform is a wonderful cross-platform provisioning tool I feel it has a steep learning curve. while Ansible is not that complex to start with an easy to learn and adopt.</p>
+<p>So this post is for those ( including me ) who love ansible&#8217;s simplicity and structure and want to see how it works with AWS.</p>
+<p>This is going to be a quick introduction to Ansible AWS Ec2 module.</p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#How_Ansible_works_with_AWS_EC2_Setup_Boto_for_Ansible" title="How Ansible works with AWS EC2 &#8211; Setup Boto for Ansible">How Ansible works with AWS EC2 &#8211; Setup Boto for Ansible</a></li><li><a href="#Environment_Setup_for_Ansible_to_work_with_AWS_EC2_module" title="Environment Setup for Ansible to work with AWS EC2 module">Environment Setup for Ansible to work with AWS EC2 module</a></li><li><a href="#Ansible_Playbook_to_create_a_new_EC2_instance" title="Ansible Playbook to create a new EC2 instance">Ansible Playbook to create a new EC2 instance</a><ul><li><a href="#Setup_AWS_Authentication_Before_Running_the_Playbook_with_Ansible_EC2" title="Setup AWS Authentication Before Running the Playbook with Ansible EC2">Setup AWS Authentication Before Running the Playbook with Ansible EC2</a></li><li><a href="#Getting_ready_to_execute_the_playbook_Ansible_AWS_EC2" title="Getting ready to execute the playbook &#8211; Ansible AWS EC2">Getting ready to execute the playbook &#8211; Ansible AWS EC2</a></li><li><a href="#Execution_Part_Run_the_playbook_with_Ansible_EC2" title="Execution Part &#8211; Run the playbook with Ansible EC2">Execution Part &#8211; Run the playbook with Ansible EC2</a></li></ul></li><li><a href="#A_Playbook_with_Ansible_EC2_Ansible_Vault_Secure_Approach" title="A Playbook with Ansible EC2 &amp; Ansible Vault &#8211; Secure Approach">A Playbook with Ansible EC2 &amp; Ansible Vault &#8211; Secure Approach</a><ul><li><a href="#Saving_the_AWS_Secrets" title="Saving the AWS Secrets">Saving the AWS Secrets</a></li></ul></li><li><a href="#Execution_of_Ansible_AWS_Playbook_example" title="Execution of Ansible AWS Playbook example">Execution of Ansible AWS Playbook example</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="How_Ansible_works_with_AWS_EC2_Setup_Boto_for_Ansible">How <span style="color: #eb0e50;">Ansible</span> works with <span style="color: #eb0e50;">AWS</span> EC2 &#8211; Setup Boto for Ansible</span></h2>
+<p>Ansible AWS combo is more like Hobbs and Shah ( Sorry! I am Fast &amp; Furious Fan) while both of em have their own individual stardom they join together to create magic.</p>
+<p>Stupid analogy right.!!!</p>
+<p>Jokes Apart, But Ansible is a leader in configuration management tools and AWS is a leader in Cloud solutions and no doubt that they give best results as combined for the Infrastructure automation and management.</p>
+<p>In Ansible Parlance, Everything is a module and Yes ansible provides ample amount of modules to work with AWS resource. As I am typing this post, Ansible has 194 officially listed modules for aws. <a href="https://docs.ansible.com/ansible/latest/modules/list_of_cloud_modules.html#amazon">here is a list</a></p>
+<p>All these modules are helping us to accomplish a various level of tasks in AWS cloud resources creation, deletion, management, assessment etc</p>
+<p>Our objective is precise, we want to create an EC2 Instance using Ansible and Ansible has a module for that named <code>ec2</code></p>
+<p>Before we jump right into the playbooks and stuff. we need to do some environment setup.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Environment_Setup_for_Ansible_to_work_with_AWS_EC2_module">Environment Setup for Ansible to work with <span style="color: #e3104f;">AWS EC2</span> module</span></h2>
+<p>As we all know Ansible is pythonic and their modules are written in python as well. So for AWS modules to work you need to have Certain prerequisite elements installed on your Ansible Control machine ( where you have installed ansible )</p>
+<ul>
+<li>boto</li>
+<li>boto3</li>
+<li>botocore</li>
+<li>python version &gt;=  2.6</li>
+</ul>
+<p>You can install python easily but what is this boto. boto is one of the Amazon supported SDK. Boto3 is the latest version of boto.</p>
+<p>to make sure you have boto installed in your python. Just Launch your Python interactive terminal and type <code>import boto</code> and <code>import boto3</code> if it works fine ( shows no error) you are good.</p>
+<p><a href="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM.png"><img class="alignnone size-full wp-image-4564 lazyload" src="../../wp-content/ewww/lazy/placeholder-638x177.png" alt="" width="638" height="177" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM.png 638w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM-300x83.png 300w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4564" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM.png" alt="" width="638" height="177" srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM.png 638w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.05.02-PM-300x83.png 300w" sizes="(max-width: 638px) 100vw, 638px" data-eio="l" /></noscript></a></p>
+<p>to install boto and boto3 you must have <code>pip3</code> as well. If you are having <code>python 2.7</code> there are chances you might have this bundled in.</p>
+<p><a href="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM.png"><img class="alignnone size-full wp-image-4566 lazyload" src="../../wp-content/ewww/lazy/placeholder-1366x537.png" alt="" width="1366" height="537" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM.png 1366w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM-300x118.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM-768x302.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM-1024x403.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4566" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM.png" alt="" width="1366" height="537" srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM.png 1366w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM-300x118.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM-768x302.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-6.02.05-PM-1024x403.png 1024w" sizes="(max-width: 1366px) 100vw, 1366px" data-eio="l" /></noscript></a></p>
+<p>Some times when you have two versions of python installed in your system you have to try them out both and make sure which one has the boto installed. by performing the `import boto` command so that you can avoid some exceptions like this</p>
+<p><a href="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM.png"><img class="alignnone size-full wp-image-4569 lazyload" src="../../wp-content/ewww/lazy/placeholder-843x364.png" alt="" width="843" height="364" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM.png 843w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM-300x130.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM-768x332.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM-840x364.png 840w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4569" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM.png" alt="" width="843" height="364" srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM.png 843w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM-300x130.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM-768x332.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.18.41-PM-840x364.png 840w" sizes="(max-width: 843px) 100vw, 843px" data-eio="l" /></noscript></a></p>
+<p>If you take my  MAC, for example, I have two python version installed, One is at <code>/usr/local/bin/python</code> another one is at  <code>/usr/bin/python</code> One comes as built-in with OS another one is installed by `homebrew` , I had to lauch them both and check the if the boto package is present in there like shown below.</p>
+<p><a href="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM.png"><img class="alignnone size-full wp-image-4570 lazyload" src="../../wp-content/ewww/lazy/placeholder-653x297.png" alt="" width="653" height="297" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM.png 653w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM-300x136.png 300w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4570" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM.png" alt="" width="653" height="297" srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM.png 653w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-7.35.06-PM-300x136.png 300w" sizes="(max-width: 653px) 100vw, 653px" data-eio="l" /></noscript></a></p>
+<p>You could see that my <code>/usr/local/bin/python3</code> all necessary modules installed,</p>
+<blockquote><p> Note:</p>
+<p>It is known that Python3 may not work properly with Ansible old versions. In that case, you can  choose  to install your boto libraries in <code>python 2.7.*</code> version and it use it as your primary version in <code>ansible_python_interpreter</code></p>
+<p>&nbsp;</p></blockquote>
+<p>This is just a method to find the right python package to use it with <code>ansible</code></p>
+<p>The path and everything could be different for you. Before executing these commands, update the paths based on your local installation.</p>
+<p>Now I presume that you have a python with these necessary modules installed.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Playbook_to_create_a_new_EC2_instance">Ansible <span style="color: #e3104f;">Playbook</span> to create a new EC2 instance</span></h2>
+<p>Here is the playbook to create EC2 instances and also to get the list of in your AWS Cloud account.</p>
+<p>We have used two blocks here (a block is just a group of tasks )</p>
+<ul>
+<li>The first block is to just get the instances information</li>
+<li>The second block is to create the instance</li>
+</ul>
+<p>For security reasons, we made the Second block to run only when it is being explicitly called with <code>--tags</code></p>
+<p>this has been done by using the tag  <code>never</code> in the block</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Create Ec2 instances
+  hosts: localhost
+  gather_facts: false
+  tasks:
+
+  # Block is a Group of Tasks combined together
+  - name: Get Info Block
+    block: 
+      - name: Get Running instance Info
+        
+        ec2_instance_info:
+        register: ec2info 
+
+      - name: Print info
+        debug: var="ec2info.instances"
+             
+
+    # By specifying always on the tag, 
+    # I let this block to run all the time by module_default
+    # this is for security to net create ec2 instances accidentally
+    tags: ['always', 'getinfoonly']
+
+  - name: Create EC2 Block
+    block: 
+
+      - name: Launch ec2 instances
+        tags: create_ec2
+        ec2:
+          region: us-east-1
+          key_name: SaravAK-PrivateKey 
+          group: app_sec_group
+          instance_type: t2.medium
+          image: ami-2051294a
+          wait: yes
+          wait_timeout: 500
+          count: 2
+          instance_tags:
+            name: appservers
+            os: ubuntu
+          monitoring: no
+          vpc_subnet_id: subnet-3d3ef270
+          assign_public_ip: yes
+        register: ec2
+        delegate_to: localhost
+
+      - name : Add instance to host group
+        add_host:
+          hostname: "{{ item.public_ip }}"
+          groupname: launched
+        loop: "{{ ec2.instances }}"
+
+      - name: Wait for SSH to come up
+        local_action:
+          module: wait_for
+          host: "{{ item.public_ip }}"
+          port: 22
+          delay: 10
+          timeout: 120
+        loop: "{{ ec2.instances }}"
+    # By specifying never on the tag of this block, 
+    # I let this block to run only when explicitely being called
+    tags: ['never', 'ec2-create']
+</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>You might wonder where is my AWS Key and SECRET mentioned. How would I be able to login to my AWS account? How the authentication will be done.</p>
+<p>I hear ya.</p>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="Setup_AWS_Authentication_Before_Running_the_Playbook_with_Ansible_EC2">Setup <span style="color: #e3104f;">AWS Authentication</span> Before Running the Playbook with Ansible EC2</span></h3>
+<p>To make this article precise, I just assume that you know how to create programmatic access for your AWS account and get your <code>AWS_ACCESS_KEY</code> and <code>AWS_SECRET</code></p>
+<p>Once you have the keys, the easiest but an unsecured way is to save it as Environment Variables like this and we are all set.</p>
+<p><a href="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM.png"><img class="alignnone size-full wp-image-4571 lazyload" src="../../wp-content/ewww/lazy/placeholder-858x52.png" alt="" width="858" height="52" data-src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM.png 858w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM-300x18.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM-768x47.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM-840x52.png 840w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4571" src="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM.png" alt="" width="858" height="52" srcset="../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM.png 858w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM-300x18.png 300w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM-768x47.png 768w, ../../wp-content/uploads/2019/12/Screenshot-2019-12-01-at-9.43.36-PM-840x52.png 840w" sizes="(max-width: 858px) 100vw, 858px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Getting_ready_to_execute_the_playbook_Ansible_AWS_EC2">Getting ready to execute the playbook &#8211; Ansible AWS EC2</span></h3>
+<p>Before executing the playbook you must be sure which python interpreter you are going to use which has `boto` libraries installed.</p>
+<p>When it comes to using EC2 modules, It is always better to tell ansible explicitly which python interpreter it has to use.</p>
+<p>In my case, as I have said before my <code>/usr/local/bin/python3</code> has the necessary boto libraries and I have to tell ansible to use that python.</p>
+<p>to do that, I can use <code>ansible.cfg</code> file or  <code>ansible inventory file</code> but I prefer to do it in a command line as a runtime variable</p>
+<p>Here is the command I supposed to use</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible-playbook ec2-creation.yml  \
+--connection=local  \
+-e "ansible_python_interpreter=/usr/local/bin/python3"</pre>
+<p>&nbsp;</p>
+<p>Here</p>
+<p><strong>&#8211;connection</strong>  tells Ansible to run this task locally and not look for any remote server or hosts file</p>
+<p><strong>&#8211;e </strong>extra args or variables where we gave the python interpreter by setting the python full location to <code>ansible_python_interpreter</code> variable</p>
+<p>when I run this, I would get only the info of existing instances. it would not create the instances yet. as we have the info as the default block</p>
+<p>Now to create the ec2 instance or to run that block, I need to call the tag of that block using <code>--tags</code> like shown below.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible-playbook ec2-creation.yml \ 
+--connection=local \ 
+--tags=ec2-create \ 
+-e "ansible_python_interpreter=/usr/local/bin/python3"</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="Execution_Part_Run_the_playbook_with_Ansible_EC2">Execution Part &#8211; Run the playbook with Ansible EC2</span></h3>
+<p>Here is the execution and the result of this playbook.</p>
+<p><script id="asciicast-B0Ne4005TZvOqWGtvv20lIfPC" src="https://asciinema.org/a/B0Ne4005TZvOqWGtvv20lIfPC.js" async></script></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="A_Playbook_with_Ansible_EC2_Ansible_Vault_Secure_Approach">A <span style="color: #eb0e50;">Playbook</span> with Ansible EC2 &amp; Ansible Vault &#8211; Secure Approach</span></h2>
+<p>to use the Ansible vault to securely store your AWS Keys, You might need one more file on the same directory where you can save your credentials as variables and encrypt it with the vault.</p>
+<p>The file can be imported later within the playbook.</p>
+<p>Here is the modified playbook with a secure approach, Ansible Vault</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Create Ec2 instances
+  hosts: localhost
+  # import the secret file
+  vars_files:
+    - secrets.yml
+  gather_facts: false
+  tasks:
+
+  # Block is a Group of Tasks combined together
+  - name: Get Info Block
+    block: 
+      - name: Get Running instance Info
+        
+        ec2_instance_info:
+        register: ec2info 
+
+      - name: Print info
+        debug: var="ec2info.instances"
+             
+
+    # By specifying always on the tag, 
+    # I let this block to run all the time by module_default
+    # this is for security to net create ec2 instances accidentally
+    tags: ['always', 'getinfoonly']
+
+  - name: Create EC2 Block
+    block: 
+
+      - name: Launch ec2 instances
+        tags: create_ec2
+        ec2:
+          region: us-east-1
+          key_name: SaravAK-PrivateKey
+          group: app_sec_group
+          instance_type: t2.medium
+          image: ami-2051294a
+          wait: yes
+          wait_timeout: 500
+          count: 2
+          instance_tags:
+            name: appservers
+            os: ubuntu
+          monitoring: no
+          vpc_subnet_id: subnet-3d3ef270
+          assign_public_ip: yes
+        register: ec2
+        delegate_to: localhost
+
+      - name : Add instance to host group
+        add_host:
+          hostname: "{{ item.public_ip }}"
+          groupname: launched
+        loop: "{{ ec2.instances }}"
+
+      - name: Wait for SSH to come up
+        local_action:
+          module: wait_for
+          host: "{{ item.public_ip }}"
+          port: 22
+          delay: 10
+          timeout: 120
+        loop: "{{ ec2.instances }}"
+    # By specifying never on the tag of this block, 
+    # I let this block to run only when explicitely being called
+    tags: ['never', 'ec2-create']</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Saving_the_AWS_Secrets">Saving the AWS Secrets</span></h3>
+<p>As we have included the <code>secrets.yml</code> file inside our playbook, Now we need to save our <code>AWS KEY</code> and <code>SECRET</code></p>
+<p>This is the content of the <code>secret.yml</code> file</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">➜ cat secrets.yml 
+AWS_ACCESS_KEY_ID: AKIATQ7Q7SGKYB4TT3DX 
+AWS_SECRET_ACCESS_KEY: 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</pre>
+<p>&nbsp;</p>
+<p>It is saved as clear text info within the file so whoever opens it can see what is inside.</p>
+<p><strong>So Encrypt it</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">➜ ansible-vault encrypt secrets.yml 
+New Vault password: 
+Confirm New Vault password: Encryption successful</pre>
+<p>&nbsp;</p>
+<p>Now you have to remember this password and use it while you are starting the playbook.</p>
+<p>For Ansible to ask you the password you should use a startup argument named <code>--ask-vault-pass</code></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible-playbook ec2-creation.yml \ 
+--connection=local \ 
+--tags=ec2-create \ 
+-e "ansible_python_interpreter=/usr/local/bin/python3" \ 
+--ask-vault-pass</pre>
+<p>&nbsp;</p>
+<p>It would prompt you for the password as it runs.</p>
+<p>See the following Screen record if you want to see how it works in realtime.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Execution_of_Ansible_AWS_Playbook_example">Execution of Ansible <span style="color: #eb0e50;">AWS</span> Playbook example</span></h2>
+<p><script id="asciicast-m3ZuoEOyrn7nk102S2s1VDQPE" src="https://asciinema.org/a/m3ZuoEOyrn7nk102S2s1VDQPE.js" async></script></p>
+<p>&nbsp;</p>
+<p>I know this is just a first step, Now you have got better things to do with that newly created server and install and configure it. you might have further questions on how to use these servers and configure them properly on the same playbook.</p>
+<p>Please stay connected and Lookup for my next article. I am already drafting it.</p>
+<p>hope this helps.</p>
+<p>Rate this article [ratings] if you would like to</p>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#b2dad7dededdf2d5c0dbc6d4cb9cd1dddf"> <span class="__cf_email__" data-cfemail="147c7178787b5473667d60726d3a777b79">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668108176" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="4561" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668108176" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668108176"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-ec2-ssh-key/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="add ssh key to EC2 instance" data-src="../../wp-content/uploads/2019/11/Screenshot-2020-11-07-at-7.00.04-AM-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/11/Screenshot-2020-11-07-at-7.00.04-AM-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="add ssh key to EC2 instance" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-ec2-ssh-key/index.html'>Add SSH Key to EC2 instances with Ansible - Automated</a><p>Whether it is On-Prem (or) Cloud-hosted, A Typical Non-Containerized Enterprise infrastructure would have ample of Virtual Machines aka Servers [ Linux ] Let us suppose that you work for the DevOps team of a Big Organization where you manage 100+ ec2 instances. You have a new hire in your team&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-sudo-ansible-become-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Sudo" data-src="../../wp-content/uploads/2019/08/Screenshot-2019-08-05-at-5.09.25-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/08/Screenshot-2019-08-05-at-5.09.25-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Sudo" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-sudo-ansible-become-example/index.html'>Ansible sudo - ansible become example</a><p>Ansible Sudo or Ansible become Introduction Ansible Sudo or become is a method to run a particular task in a playbook with Special Privileges like root user or some other user. In the earlier versions of ansible there is an option named as sudo which is deprecated now, Since ansible&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-playbook-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Playbook Examples" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-20-at-4.48.10-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Playbook Examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-playbook-example/index.html'>Ansible Playbook Examples - Sample Ansible Playbooks | Devops Junction</a><p>In this post, we are going to see examples of Ansible playbook and various different modules and playbook examples with various modules and multiple hosts. We will start with a basic Ansible playbook and learn what is task and play and what is playbook etc. What is Ansible Playbook It&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-dry-run-ansible-check-mode/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Dry run" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-21-at-12.06.34-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-21-at-12.06.34-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Dry run" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-dry-run-ansible-check-mode/index.html'>Ansible Dry Run - How to Run Playbook in Ansible Check mode</a><p>Ansible Dry Run or Ansible Check mode feature is to validate your playbook before execution With the Ansible Dry Run feature, you can execute the playbook without having to actually make changes on the server.  this enables us to see what changes are going to be made when the playbook&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../run-ansible-playbook-locally/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-17-at-6.08.06-PM-1-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-17-at-6.08.06-PM-1-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../run-ansible-playbook-locally/index.html'>How to Run Ansible Playbook Locally</a><p>In this post, we are going to see how to run the playbook locally on our Localhost on the control machine. How to run Ansible Playbook locally is one of the questions I used to have before I learnt it. Let me tell you how to Run Ansible Playbook Locally&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/ansible-and-aws/index.html" rel="tag">Ansible and AWS</a><a href="../tag/ansible-aws-boto/index.html" rel="tag">Ansible AWS Boto</a><a href="../tag/ansible-aws-example/index.html" rel="tag">Ansible AWS Example</a><a href="../tag/ansible-ec2/index.html" rel="tag">Ansible EC2</a><a href="../tag/ansible-ec2-creation/index.html" rel="tag">Ansible EC2 Creation</a><a href="../tag/ansible-ec2-example/index.html" rel="tag">Ansible EC2 example</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-async/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible Async Poll Examples &#8211; Ansible nohup, task in background</a></div><div class="nav-next"><a href="../ansible-unarchive-module-examples/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Ansible Unarchive Module Examples</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"4561 https:\/\/www.middlewareinventory.com\/?p=4561","disqusShortname":"mwinventory","disqusTitle":"Ansible EC2 Example \u2013 Create EC2 instance with Ansible","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-aws-ec2\/","postId":"4561"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"4561"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"148.64.9.214","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"4561","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-aws-ec2/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668108176;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

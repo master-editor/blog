@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Docker network between containers - Docker Networking Example</title>
+<meta name="description" content="Docker Networking between containers using Docker Link, Docker Compose and Docker Network. Docker networking example . How to setup Docker network between containers." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Docker network between containers - Docker Networking Example" />
+<meta property="og:description" content="Docker Networking between containers using Docker Link, Docker Compose and Docker Network. Docker networking example . How to setup Docker network between containers." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/docker-network-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-07-28T22:31:42+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:15:06+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png" />
+<meta property="og:image:width" content="911" />
+<meta property="og:image:height" content="507" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/docker-network-example/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png","width":911,"height":507,"caption":"docker link containers"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/docker-network-example/#webpage","url":"https://www.middlewareinventory.com/blog/docker-network-example/","name":"Docker network between containers - Docker Networking Example","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/docker-network-example/#primaryimage"},"datePublished":"2019-07-28T22:31:42+00:00","dateModified":"2022-11-10T19:15:06+00:00","description":"Docker Networking between containers using Docker Link, Docker Compose and Docker Network. Docker networking example . How to setup Docker network between containers.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/docker-network-example/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/docker-network-example/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/docker-network-example/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Docker network between containers &#8211; Docker Networking Example","datePublished":"2019-07-28T22:31:42+00:00","dateModified":"2022-11-10T19:15:06+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/docker-network-example/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/docker-network-example/#primaryimage"},"keywords":"Docker Compose example,docker compose link containers,docker compose links example,Docker Connect Containers,Docker connectivity,Docker Link Containers,Docker Link example,Docker Network example,docker networking","articleSection":"DevOps_Beginner,Docker","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/docker-network-example/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Docker network between containers &#8211; Docker Networking Example Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/4087.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-docker-network-example-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-docker-network-example-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h2
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+blockquote {
+     padding: 2%;
+}
+
+li {
+    padding: 2px;
+    margin-left: 4%;
+}
+
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-4087 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-4087" class="post-4087 post type-post status-publish format-standard has-post-thumbnail hentry category-devops_beginner category-docker tag-docker-compose-example tag-docker-compose-link-containers tag-docker-compose-links-example tag-docker-connect-containers tag-docker-connectivity tag-docker-link-containers tag-docker-link-example tag-docker-network-example tag-docker-networking wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Docker network between containers &#8211; Docker Networking Example</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="4:01 am" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Docker%20network%20between%20containers%20%E2%80%93%20Docker%20Networking%20Example&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-network-example%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="4087" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-network-example/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Docker+network+between+containers+%E2%80%93+Docker+Networking+Example&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-network-example%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="4087" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-network-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Docker%20network%20between%20containers%20%E2%80%93%20Docker%20Networking%20Example&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-network-example%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="4087" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-network-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-network-example%2F&subject=Docker%20network%20between%20containers%20%E2%80%93%20Docker%20Networking%20Example" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="4087" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-network-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="4087" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-network-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this post we are going to see How to establish docker network between containers,</p>
+<p>How to Link Docker Containers,</p>
+<p>How to Access one Container from Another,</p>
+<p>Docker inter-container communication,</p>
+<p>How to Connect to Container, etc.</p>
+<p>&nbsp;</p>
+<p>This post is to answer all that.</p>
+<p>So How do we connect a Container from Another Container? How to create communication network between docker containers?</p>
+<p>In this post, we are going to see multiple methods on How to Connect two or multiple containers and enable inter container connectivity</p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Three_methods_to_Create_Docker_network_between_containers" title="Three methods to Create Docker network between containers">Three methods to Create Docker network between containers</a></li><li><a href="#Pre_Requisites" title="Pre Requisites:">Pre Requisites:</a></li><li><a href="#The_Requirement_The_Objective" title="The Requirement / The Objective:">The Requirement / The Objective:</a></li><li><a href="#Environment_Setup" title="Environment Setup">Environment Setup</a></li><li><a href="#Create_Docker_Images_Locally" title="Create Docker Images Locally">Create Docker Images Locally</a></li><li><a href="#The_Visitor_Tracking_NodeJS_Application" title="The Visitor Tracking NodeJS Application.">The Visitor Tracking NodeJS Application.</a></li><li><a href="#Method1_Docker_Link_Containers" title="Method1: Docker Link Containers">Method1: Docker Link Containers</a></li><li><a href="#Clear_up_your_workspace_before_Switching_methods" title="Clear up your workspace before Switching methods">Clear up your workspace before Switching methods</a></li><li><a href="#Method_2_Docker_Network_Connect_Containers_Recommended" title="Method 2: Docker Network Connect Containers ( Recommended )">Method 2: Docker Network Connect Containers ( Recommended )</a></li><li><a href="#Method_3_Docker_Compose_Link_Containers" title="Method 3: Docker Compose Link Containers">Method 3: Docker Compose Link Containers</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Three_methods_to_Create_Docker_network_between_containers">Three methods to Create Docker network between containers</span></h2>
+<p>These are the methods we are going to be discussing in detail with examples in this post</p>
+<ol>
+<li><a href="index.html#method1"><strong>Docker Link </strong></a>&#8211; Linking One more Docker Containers</li>
+<li><a href="index.html#method2"><strong>Docker Compose </strong></a>&#8211; Using Docker Compose create an Auto Created Shared Network</li>
+<li><a href="index.html#method3"><strong>Docker Network</strong></a> &#8211; Create a Network and Connect the Containers to that network</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Pre_Requisites">Pre Requisites:</span></h2>
+<ol>
+<li>Docker CE and Docker CLI installed</li>
+<li>Internet Connectivity</li>
+<li>Basic Knowledge on What is Container,  What is Dockerfile and How to Create Container</li>
+<li>Basic Knowledge on Apache HTTPD web server and Tomcat (Optional)</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="The_Requirement_The_Objective">The Requirement / The Objective:</span></h2>
+<p>In order to demonstrate the various methods to connect docker containers, I need some easily relatable objective.</p>
+<p>Consider the following Design of infrastructure with three different technologies running in the container comes together to make an enterprise like web application.</p>
+<ul>
+<li>HA Proxy &#8211;  Edge Level Load Balancer and Reverse Proxy like F5 Big IP</li>
+<li>Node JS &#8211; Java Script based Application Server Framework where the App is hosted</li>
+<li>Redis DB &#8211;  A Small Key-Value Database to store data</li>
+</ul>
+<p><a href="../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png"><img class="alignnone size-full wp-image-4089 lazyload" src="../../wp-content/ewww/lazy/placeholder-911x507.png" alt="docker link containers" width="911" height="507" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png 911w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM-300x167.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM-768x427.png 768w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4089" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png" alt="docker link containers" width="911" height="507" srcset="../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM.png 911w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM-300x167.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-27-at-4.23.24-PM-768x427.png 768w" sizes="(max-width: 911px) 100vw, 911px" data-eio="l" /></noscript></a></p>
+<p>Note*: Though we have different methods to achieve the same docker container intercommunication or connectivity between containers. All these methods do the same thing at the backend which is creating a shared bridged network and attaching these containers to them.</p>
+<p>Once the containers are connected on the same network they can communicate to the other container docked to the same network freely by just knowing the name of the other container.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="Environment_Setup">Environment Setup</span></h2>
+<p>we are going to use three technologies in this post and we are going to create our own Docker images by writing <code>Dockerfile</code> and we also need to write some configuration files for HAProxy and Javascript program files for NodeJS containers.</p>
+<p>Refer to the following Directory Structure tree with all necessary files we need for this post.</p>
+<p><span style="color: #0a508a;"><span style="font-size: 14pt;">You can simply download the resources required for this post as a <a href="https://github.com/AKSarav/haproxy-nodejs-redis/archive/master.zip"><span style="color: #e81c78;">ZIP file</span></a> or  clone my <a href="https://github.com/AKSarav/haproxy-nodejs-redis"><span style="color: #e81c78;">Github</span></a> Repository</span></span></p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;">➜ tree haproxy-nodejs-redis
+haproxy-nodejs-redis <span style="color: #ffff99;">## Root Directory</span>
+├── docker-compose
+│   └── docker-compose.yml
+├── haproxy
+│   ├── Dockerfile
+│   └── haproxy.cfg
+└── nodejs
+    ├── Dockerfile
+    ├── index.js
+    └── package.json
+
+3 directories, 6 files</pre>
+<p>I presume that you have downloaded these files in the same directory structure. [ It would be helpful to follow along]</p>
+<p>Let&#8217;s move on.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Create_Docker_Images_Locally">Create Docker Images Locally</span></h2>
+<p>The first step to create a container is to have the image ready. In our case, we are going to build our images using the Dockerfile</p>
+<p>Now let us go and create the Docker Images.</p>
+<p>I request you to name these images as same as I do so that you can follow along without getting lost in the middle.</p>
+<p>Now go to the root directory of our Directory structure in your terminal [ <em>terminal</em> or <em>iterm2</em> for mac &amp; <em>Git Bash</em> for Windows ]</p>
+<p><strong>What is Root Directory</strong></p>
+<p>If you have downloaded the Directory as zip file the root directory name would be <code>haproxy-nodejs-redis-master</code>  If you have gone with Git clone your root directory name would be <code>haproxy-nodejs-redis</code></p>
+<p>You can refer the tree diagram given in the <em>Environment setup</em> section if you still have a question.</p>
+<p>Here are the commands that you need to execute in the same order as it is given.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;">cd haproxy-nodejs-redis
+cd haproxy
+docker build -t my-haproxy .
+cd ../nodejs
+docker build -t my-nodejs .</pre>
+<p>For better understanding, I have copied the results along with the commands as it was executed in my terminal.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;">➜  /tmp <span style="color: #ffff00;">cd haproxy-nodejs-redis</span>
+
+➜  haproxy-nodejs-redis git:(master) <span style="color: #ffff00;">cd haproxy</span>
+
+➜  haproxy git:(master) <span style="color: #ffff00;">docker build -t my-haproxy .</span>
+Sending build context to Docker daemon  <span class="hljs-number" style="color: #ffc58f;">3.584</span>kB
+Step <span class="hljs-number" style="color: #ffc58f;">1</span>/<span class="hljs-number" style="color: #ffc58f;">2</span> : <span class="hljs-type" style="color: #ffc58f;">FROM</span> haproxy
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; 914693575d71</span>
+Step <span class="hljs-number" style="color: #ffc58f;">2</span>/<span class="hljs-number" style="color: #ffc58f;">2</span> : <span class="hljs-type" style="color: #ffc58f;">COPY</span> haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; bcefbfb501fe</span>
+Successfully built bcefbfb501fe
+Successfully <span class="hljs-keyword" style="color: #ebbbff;">tagged</span> my-haproxy:latest
+
+➜  haproxy git:(master) <span style="color: #ffff00;">cd ../nodejs</span>
+
+➜  nodejs git:(master) <span style="color: #ffff00;">docker build -t my-nodejs .</span>
+Sending build context to Docker daemon  <span class="hljs-number" style="color: #ffc58f;">4.608</span>kB
+Step <span class="hljs-number" style="color: #ffc58f;">1</span>/<span class="hljs-number" style="color: #ffc58f;">6</span> : <span class="hljs-type" style="color: #ffc58f;">FROM</span> node:alpine
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; 5206c0dd451a</span>
+Step <span class="hljs-number" style="color: #ffc58f;">2</span>/<span class="hljs-number" style="color: #ffc58f;">6</span> : <span class="hljs-type" style="color: #ffc58f;">WORKDIR</span> <span class="hljs-string" style="color: #d1f1a9;">"/app"</span>
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; Using cache</span>
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; 7850f098dfd7</span>
+Step <span class="hljs-number" style="color: #ffc58f;">3</span>/<span class="hljs-number" style="color: #ffc58f;">6</span> : <span class="hljs-type" style="color: #ffc58f;">COPY</span> <span class="hljs-keyword" style="color: #ebbbff;">package</span>.json .
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; Using cache</span>
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; 724a794795e2</span>
+Step <span class="hljs-number" style="color: #ffc58f;">4</span>/<span class="hljs-number" style="color: #ffc58f;">6</span> : <span class="hljs-type" style="color: #ffc58f;">RUN</span> npm install
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; Using cache</span>
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; e75ab380acda</span>
+Step <span class="hljs-number" style="color: #ffc58f;">5</span>/<span class="hljs-number" style="color: #ffc58f;">6</span> : <span class="hljs-type" style="color: #ffc58f;">COPY</span> . .
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; 1842d18166f2</span>
+Step <span class="hljs-number" style="color: #ffc58f;">6</span>/<span class="hljs-number" style="color: #ffc58f;">6</span> : <span class="hljs-type" style="color: #ffc58f;">CMD</span> [<span class="hljs-string" style="color: #d1f1a9;">"npm"</span>, <span class="hljs-string" style="color: #d1f1a9;">"start"</span>]
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; Running in fb2d11819180</span>
+Removing intermediate container fb2d11819180
+ <span class="hljs-comment" style="color: #7285b7;">---&gt; 7ba992104be2</span>
+Successfully built <span class="hljs-number" style="color: #ffc58f;">7</span>ba992104be2
+Successfully <span class="hljs-keyword" style="color: #ebbbff;">tagged</span> my-nodejs:latest</pre>
+<p>Now we have Successfully created images  named <code>my-haproxy</code> and <code>my-nodejs</code>.</p>
+<p>Now, these images are created and stored in your local. You can verify the same using <code>docker images</code> command</p>
+<p>If you have noticed, we have not created an image for Redis,  The reason is that the default <code>redis</code> image is sufficient for us.</p>
+<p>Now our Images are ready and they can be containerized anytime. But before creating it as container we need to set somethings clear.</p>
+<p>What are we building?  what should be the outcome?</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="The_Visitor_Tracking_NodeJS_Application">The Visitor Tracking NodeJS Application.</span></h2>
+<p>In the root directory, If you go into the nodejs directory you can find a Javascript file named <code>index.js</code> If you take a look you can understand it tries to connect to the Redis server and update the value for the key named visit</p>
+<p>So the Application that we have taken for this post is designed to track the number of visits made to the NodeJS website.</p>
+<p>The Data [ number of visits] is saved and retrieved from the Redis database running on the container named <code>redisnode01</code></p>
+<p>Here is our final expected web page. the Visits count would increase as you refresh the page.</p>
+<p><a href="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM.png"><img class="alignnone size-full wp-image-4109 lazyload" src="../../wp-content/ewww/lazy/placeholder-876x334.png" alt="" width="876" height="334" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM.png 876w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM-300x114.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM-768x293.png 768w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4109" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM.png" alt="" width="876" height="334" srcset="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM.png 876w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM-300x114.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.18.17-AM-768x293.png 768w" sizes="(max-width: 876px) 100vw, 876px" data-eio="l" /></noscript></a></p>
+<p>I hope everything is clear till here.</p>
+<p>Now we are going to create three containers and establish a network between them using different methods and validate the communication.</p>
+<p>Besides that, we are also going to create an enterprise like NODEJS application which tracks the number of visits and stores the visitor information in REDIS DB.</p>
+<p>&nbsp;</p>
+<h2 id="method1"><span class="ez-toc-section" id="Method1_Docker_Link_Containers"><span style="color: #d10f7a;">Method1</span>: Docker Link Containers</span></h2>
+<p>Docker Link container is a legacy method to connect containers together by linking the containers we form a Shared network to enable communication channel so that the containers can talk within themselves and transmit packets on bidirectional channels.</p>
+<p>If everything is done right. These three commands would complete and finish our requirement.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span style="color: #ffcc99;"># Start the Redis Container</span>
+➜  docker container <span class="hljs-built_in" style="color: #6d9cbe;">run</span> -<span class="hljs-keyword" style="color: #c26230;">it</span> -d <span class="hljs-comment" style="color: #bc9458; font-style: italic;">--name <span style="color: #ffff00;">redisnode01</span> redis</span>
+<span class="hljs-number" style="color: #a5c261;">75126420</span>ab18faaf3bd68e18fb7f6201c29a91c8b96f56e3673e8b81388d5146
+
+<span style="color: #ffcc99;"># Start the NodeJS Container and link it with Redis Container</span>
+➜  docker container <span class="hljs-built_in" style="color: #6d9cbe;">run</span> -<span class="hljs-keyword" style="color: #c26230;">it</span> -d <span class="hljs-comment" style="color: #bc9458; font-style: italic;">--name <span style="color: #00ffff;">nodejsserver01</span> &#8211; link <span style="color: #ffff00;">redisnode01</span> my-nodejs</span>
+<span class="hljs-number" style="color: #a5c261;">3</span>eb4a3bf3e70686259d4e66e607144dc9145f464c599333b36c2f3628634c112
+
+<span style="color: #ffcc99;"># Start the Haproxy Container and link it with NodeJS Container</span>
+➜  docker container <span class="hljs-built_in" style="color: #6d9cbe;">run</span> -<span class="hljs-keyword" style="color: #c26230;">it</span> -d <span class="hljs-comment" style="color: #bc9458; font-style: italic;">--name haproxyserver &#8211; publish 90:80 &#8211; link <span style="color: #00ffff;">nodejsserver01</span> my-haproxy</span>
+<span class="hljs-number" style="color: #a5c261;">567</span>c7d3aceb3b900194fd62e157a1bab6b8798aa208f9bd1911c0833ec39c03c
+</pre>
+<p>On your host machine where you are executing these Docker CLI commands. you can access the webpage in the following URL<code>http://localhost:90/</code></p>
+<p>The commands are already self-explanatory.  If you are still having a question, just look at the <code>--name </code> and  <code>--link</code> flags of each command.</p>
+<p>Let&#8217;s decrypt what commands are given below</p>
+<ul>
+<li>We have Started the Redis container in the name <code>redisnode01</code></li>
+<li>Started the nodejs container in the name <code>nodejsserver01</code> and linked it with <code>redisnode01</code> container which I created in the previous step</li>
+<li>Have also started the haproxy container in the name <code>haproxyserver</code> and linked it with <code>nodejsserver01</code> container which I created in the previous step</li>
+</ul>
+<p>Like a Chain reaction? Is not it.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Clear_up_your_workspace_before_Switching_methods">Clear up your workspace before Switching methods</span></h2>
+<p>Before proceeding to the next method, you must stop the containers you have created in the previous method and also you need to remove them to save space and to reclaim the name.</p>
+<p><span style="color: #18588c;">To see what Containers are running/stopped</span></p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;"><span class="hljs-attribute" style="color: #ffeead;">docker</span> ps -a</pre>
+<p><span style="color: #18588c;">Stop the containers</span></p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;"><span style="color: #ffff00;">docker</span> stop &lt;container id&gt; [or] &lt;container name&gt;</pre>
+<p><span style="color: #18588c;">To Remove the container and reclaim the Name and Space</span></p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;"><span style="color: #ffff00;">docker</span> stop &lt;container id&gt; [or] &lt;container name&gt;</pre>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2></h2>
+<h2 id="method2"><span class="ez-toc-section" id="Method_2_Docker_Network_Connect_Containers_Recommended"><span style="color: #d10f7a;">Method 2</span>: Docker Network Connect Containers ( Recommended )</span></h2>
+<p>This is a recommended and widely accepted method to connect two containers together, this exactly does the same thing as Docker Link which is connecting the containers to the same network.</p>
+<p>While Docker Link is doing the task in an abstracted manner Docker Network is doing the same in a Sophisticated manner.</p>
+<p>let us do our objective of creating the NodeJS Visitor management Application using this method.</p>
+<p>These are the commands that I had to execute to bring the environment up. If you notice the text in the green color you can understand that I have created a network and using the same network all the way down with my containers.</p>
+<p>Note*: There is an order to start the containers as they are integrated and have dependencies. so execute the commands in the same order.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;"><span style="color: #ffcc99;"># Create a Network</span>
+➜ <span style="color: #ffff00;">docker</span> <span style="color: #ffcc00;">network</span> <span style="color: #ffcc00;">create</span> <span style="color: #ccffcc;">internal-container-network</span>
+ac3f833da3297899d5ef461da39420b39bbe4ca988f481b785d7577c129b1277
+
+<span style="color: #ffcc99;"># Start the Redis Container and Attach to the Created Network</span>
+➜ <span style="color: #ffff00;">docker</span> <span style="color: #ffcc00;">container run</span> -it -d &#8211; name redisnode01 <span style="color: #ccffcc;">--network internal-container-network</span> redis
+a915154432d17e02965d7af4aa9277fedea34e5502dab428d05a90c529372411
+
+<span style="color: #ffcc99;"># Start the NodeJS Container and Attach to the Created Network</span>
+➜ <span style="color: #ffff00;">docker</span> <span style="color: #ffcc00;">container run</span> -it -d &#8211; name nodejsserver01 <span style="color: #ccffcc;">--network internal-container-network</span> my-nodejs
+4b6159c8e5fc6842ca267d78579316b7a836734004e68ae01da68588bfa3b883
+
+<span style="color: #ffcc99;"># Start the HaProxy Container and Attach to the Created Network</span>
+➜ <span style="color: #ffff00;">docker</span> <span style="color: #ffcc00;">container run</span> -it -d &#8211; name haproxyserver &#8211; publish <span class="hljs-number" style="color: #ffc58f;">90</span>:<span class="hljs-number" style="color: #ffc58f;">80</span> <span style="color: #ccffcc;">--network internal-container-network</span> my-haproxy
+2486a7589706904392d167148d2585e9268edf398f7dff6a47c5ddf7da9bdd3d</pre>
+<p>Should I remember you to clear your workspace and stop the remove the containers before going to the next method?</p>
+<p>&nbsp;</p>
+<h2 id="method3"><span class="ez-toc-section" id="Method_3_Docker_Compose_Link_Containers"><span style="color: #d10f7a;">Method 3</span>: Docker Compose Link Containers</span></h2>
+<p>Docker-compose is the most predominant method out of these three and a programmatic approach used in enterprises to start an enterprise application like what we are developing</p>
+<p>As I said this is a programmatic approach. we are going to use the <code>docker-compose.yml</code> manifest file which was already downloaded as part of the <span style="color: #993366;"><em>Environment setup </em></span>step</p>
+<p>Go into the <span style="color: #993366;"><em>docker-compose </em><span style="color: #000000;">directory beneath the root directory. You will find the <code>docker-compose.yml</code> which has everything already pre-written. </span></span></p>
+<p><span style="color: #993366;"><span style="color: #000000;">All you have do is execute the following command </span></span></p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;"><span style="color: #ffff00;">docker-compose</span> <span class="hljs-meta" style="color: #ffc58f;">up</span></pre>
+<p>docker-compose creates a network and connect all the containers together in the same network and make sure they are communicating with each other with no issues.</p>
+<p>Here is the snapshot of me executing the same command and the result.</p>
+<p><a href="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM.png"><img class="alignnone size-full wp-image-4107 lazyload" src="../../wp-content/ewww/lazy/placeholder-1437x578.png" alt="Docker Compose Example" width="1437" height="578" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM.png 1437w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM-300x121.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM-768x309.png 768w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM-1024x412.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4107" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM.png" alt="Docker Compose Example" width="1437" height="578" srcset="../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM.png 1437w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM-300x121.png 300w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM-768x309.png 768w, ../../wp-content/uploads/2019/07/Screenshot-2019-07-29-at-3.05.37-AM-1024x412.png 1024w" sizes="(max-width: 1437px) 100vw, 1437px" data-eio="l" /></noscript></a></p>
+<p><span style="color: #0a528a;">Besides that, Docker compose can help you set up a reliable environment that can auto start the containers in case of failure. </span></p>
+<p>To stop the infrastructure you have brought up with docker-compose all you need to is executing the following command</p>
+<pre class="hljs" style="display: block; overflow-x: auto; background: #002451; color: #ffffff; padding: 0.5em;"><span style="color: #ffff00;">docker-compose</span> <span class="hljs-meta" style="color: #ffc58f;">down</span></pre>
+<p>&nbsp;</p>
+<p><span style="color: #c9147e;">Do you have any questions? <span style="color: #000000;">feel free to ask</span></span></p>
+<p>If you have questions or need some support or find any bug in here. Please do let me know over the comments.</p>
+<p>Hope it Helps.  Rate this article [ratings]</p>
+<p>Cheers,<br />
+Rumen Lishkov<br />
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#2048454c4c4f604752495446590e434f4d"> <span class="__cf_email__" data-cfemail="5b333e3737341b3c29322f3d2275383436">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668108463" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="4087" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/docker-network-example/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668108463" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668108463"></span>
+</div>
+</div>
+<hr></p>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-docker/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/11/Screen-Shot-2018-11-21-at-5.30.59-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/11/Screen-Shot-2018-11-21-at-5.30.59-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-docker/index.html'>Docker Weblogic : Run Oracle Weblogic 12c on Docker</a><p>The Introduction to Docker Weblogic In this post, we are going to be exploring the quick and easy option available to get started with weblogic and Docker.  In this post, we are going to see how to create a weblogic container in docker in a few easy steps. The post's&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-tomcat-example-dockerfile-sample/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Docker tomcat Container" data-src="../../wp-content/uploads/2019/04/ContainerSky-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/ContainerSky-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Docker tomcat Container" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-tomcat-example-dockerfile-sample/index.html'>Docker Tomcat Example - Dockerfile for Tomcat, Docker Tomcat Image</a><p>In this post, we are going to learn how to install a Tomcat Application Server or Web Container on Docker and Deploy web applications into the Tomcat running inside Docker.  This post is all about Docker Tomcat and deploying war web application into tomcat docker, Sample Docker Tomcat image, Dockerfile&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-run-image-as-container/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-09-at-7.31.14-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-09-at-7.31.14-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-run-image-as-container/index.html'>Docker Run Image as Container - Create Container From Docker Image</a><p>In this post, we are going to see how to create an image and run the image as a container and manage it. Before we proceed further, it is indispensable, that we are aware of what is an Image and What is a Container. So let us begin from there.&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-reverse-proxy-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Docker HTTPD" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-14-at-1.14.17-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-14-at-1.14.17-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Docker HTTPD" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-reverse-proxy-example/index.html'>Docker Reverse Proxy - Docker httpd apache example</a><p>Introduction: In this post, we are going to see how to use docker httpd image and extend it to suit our needs and run the Apache web server as a Docker container. We are also going to implement a docker reverse proxy as an additional example Since we have targeted&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-ssh-into-container-howto/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="How to SSH into Docker Container" data-src="../../wp-content/uploads/2019/04/GetIntoContainer-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/GetIntoContainer-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="How to SSH into Docker Container" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-ssh-into-container-howto/index.html'>Docker SSH Into the Container - How to SSH to Container</a><p>The Docker container is a Process and Not a Virtual Machine. So You do not need any protocol like SSH to get into the container Shell.  Docker CLI has given us special commands to get into the Container like docker exec -it and docker run -it In this post, we&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/docker-compose-example/index.html" rel="tag">Docker Compose example</a><a href="../tag/docker-compose-link-containers/index.html" rel="tag">docker compose link containers</a><a href="../tag/docker-compose-links-example/index.html" rel="tag">docker compose links example</a><a href="../tag/docker-connect-containers/index.html" rel="tag">Docker Connect Containers</a><a href="../tag/docker-connectivity/index.html" rel="tag">Docker connectivity</a><a href="../tag/docker-link-containers/index.html" rel="tag">Docker Link Containers</a><a href="../tag/docker-link-example/index.html" rel="tag">Docker Link example</a><a href="../tag/docker-network-example/index.html" rel="tag">Docker Network example</a><a href="../tag/docker-networking/index.html" rel="tag">docker networking</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-dry-run-ansible-check-mode/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible Dry Run &#8211; How to Run Playbook in Ansible Check mode</a></div><div class="nav-next"><a href="../weblogic-remote-code-execution-vulnerability/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>WebLogic Remote Code Execution Vulnerability (CVE-2019-2725)</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"4087 https:\/\/www.middlewareinventory.com\/?p=4087","disqusShortname":"mwinventory","disqusTitle":"Docker network between containers \u2013 Docker Networking Example","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/docker-network-example\/","postId":"4087"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"4087"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"2a02:590:a03:f500:f0e6:2cdb:ee93:2c92","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"4087","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/docker-network-example/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668108463;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Ansible AD HOC Command Examples - Ansible Cheat Sheet | Devops Junction</title>
+<meta name="description" content="Ansible Ad hoc commands and an ansible cheat sheet. Examples on how to use Ad hoc commands for tasks like Disk Space check, Creating file, Create user, Creating Directory, copy file, copy directory, check service status, reboot the server etc. Ansible ad hoc commands explained with examples and a cheat sheet for ansible." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible AD HOC Command Examples - Ansible Cheat Sheet | Devops Junction" />
+<meta property="og:description" content="Ansible Ad hoc commands and an ansible cheat sheet. Examples on how to use Ad hoc commands for tasks like Disk Space check, Creating file, Create user, Creating Directory, copy file, copy directory, check service status, reboot the server etc. Ansible ad hoc commands explained with examples and a cheat sheet for ansible." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-01-16T00:29:58+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:13:26+00:00" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png" />
+<meta property="og:image:width" content="790" />
+<meta property="og:image:height" content="580" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#primaryimage","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.23.23-AM.png","width":790,"height":580},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/","name":"Ansible AD HOC Command Examples - Ansible Cheat Sheet | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#primaryimage"},"datePublished":"2019-01-16T00:29:58+00:00","dateModified":"2022-11-10T19:13:26+00:00","description":"Ansible Ad hoc commands and an ansible cheat sheet. Examples on how to use Ad hoc commands for tasks like Disk Space check, Creating file, Create user, Creating Directory, copy file, copy directory, check service status, reboot the server etc. Ansible ad hoc commands explained with examples and a cheat sheet for ansible.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible AD HOC Command Examples &#8211; Ansible Cheat Sheet | Devops Junction","datePublished":"2019-01-16T00:29:58+00:00","dateModified":"2022-11-10T19:13:26+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#primaryimage"},"keywords":"ansible ad hoc commands,ansible ad hoc systemctl,ansible ad-hoc commands list,ansible cheatsheet,ansible command examples,ansible for beginners,ansible mkdir,ansible modules examples,ansible playbook example,ansible playbook examples,ansible playbook with multiple hosts,how to learn ansible","articleSection":"Ansible,DevOps_Beginner","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible AD HOC  Command Examples &#8211; Ansible Cheat Sheet | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/2742.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-ad-hoc-commands-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-ad-hoc-commands-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+li
+{
+    padding: 2px;
+    margin-left: 2%;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-2742 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-2742" class="post-2742 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible category-devops_beginner tag-ansible-ad-hoc-commands tag-ansible-ad-hoc-systemctl tag-ansible-ad-hoc-commands-list tag-ansible-cheatsheet tag-ansible-command-examples tag-ansible-for-beginners tag-ansible-mkdir tag-ansible-modules-examples tag-ansible-playbook-example tag-ansible-playbook-examples tag-ansible-playbook-with-multiple-hosts tag-how-to-learn-ansible wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible AD HOC Command Examples &#8211; Ansible Cheat Sheet | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="5:59 am" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20AD%20HOC%20%20Command%20Examples%20%E2%80%93%20Ansible%20Cheat%20Sheet%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-ad-hoc-commands%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="2742" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+AD+HOC++Command+Examples+%E2%80%93+Ansible+Cheat+Sheet+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-ad-hoc-commands%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="2742" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20AD%20HOC%20%20Command%20Examples%20%E2%80%93%20Ansible%20Cheat%20Sheet%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-ad-hoc-commands%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="2742" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-ad-hoc-commands%2F&subject=Ansible%20AD%20HOC%20%20Command%20Examples%20%E2%80%93%20Ansible%20Cheat%20Sheet%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="2742" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="2742" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div style="display: none;"></div>
+<div style="display: none;"></div>
+<div style="display: none;"></div>
+<div style="display: none;"></div>
+<p>Ansible ad hoc commands are one-liners designed to achieve a very specific task they are like quick snippets and your compact swiss army knife when you want to do a quick task across multiple machines.</p>
+<p>To put simply, Ansible ad hoc commands are one-liner Linux shell commands and playbooks are like a shell script, a collective of many commands with logic.</p>
+<p>Ansible ad hoc commands come handy when you want to perform a quick task.</p>
+<p>We have collected 20+ examples which will help you to get started with Ansible AD HOC commands. It is your Ansible AD HOC command Cheat Sheet or Ansible Cheat Sheet.</p>
+<p>Come on Pal, Let&#8217;s Ansible.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li><li><a href="#What_is_Ansible_ad_hoc_commands" title="What is Ansible ad hoc commands">What is Ansible ad hoc commands</a></li><li><a href="#Ansible_ad_hoc_commands_Syntax" title="Ansible ad_hoc commands Syntax">Ansible ad_hoc commands Syntax</a></li><li><a href="#Ansible_Ad_Hoc_Command_Examples" title="Ansible Ad Hoc Command Examples">Ansible Ad Hoc Command Examples</a><ul><li><a href="#Example1_ansible_ad_hoc_ping_example" title="Example1:  ansible ad hoc ping example">Example1:  ansible ad hoc ping example</a></li><li><a href="#Example_2_ansible_ad_hoc_command_to_check_uptime" title="Example 2:  ansible ad hoc command to check uptime">Example 2:  ansible ad hoc command to check uptime</a></li><li><a href="#Example_3_How_to_check_the_free_memory_or_memory_usage_of_hosts_using_ansible_ad_hoc_command" title="Example 3:  How to check the free memory or memory usage of  hosts using ansible ad hoc command">Example 3:  How to check the free memory or memory usage of  hosts using ansible ad hoc command</a></li><li><a href="#Example_4_ansible_ad_hoc_command_to_get_physical_memory_allocated_to_the_host" title="Example 4:  ansible ad hoc command to get physical memory allocated to the host">Example 4:  ansible ad hoc command to get physical memory allocated to the host</a></li><li><a href="#Example_5_ansible_ad_hoc_become_Execute_a_command_as_root_user_sudo_host" title="Example 5:  ansible ad hoc become &#8211;  Execute a command as root user (sudo) host">Example 5:  ansible ad hoc become &#8211;  Execute a command as root user (sudo) host</a></li><li><a href="#Example_6_ansible_ad_hoc_become_Execute_a_command_as_a_different_user_sudo_su" title="Example 6:  ansible ad hoc become &#8211; Execute a command as a different user  (sudo su)">Example 6:  ansible ad hoc become &#8211; Execute a command as a different user  (sudo su)</a></li><li><a href="#Example_7_Create_a_user_group_with_ansible_ad_hoc_command" title="Example 7: Create a user group with ansible ad hoc command">Example 7: Create a user group with ansible ad hoc command</a></li><li><a href="#Example_8_Create_a_unix_user_with_ansible_ad_hoc_command" title="Example 8: Create a unix user with ansible ad hoc command">Example 8: Create a unix user with ansible ad hoc command</a></li><li><a href="#Example_9_Create_a_Directory_with_755_permission_using_ansible_ad_hoc_command" title="Example 9: Create a Directory with 755 permission using ansible ad hoc command">Example 9: Create a Directory with 755 permission using ansible ad hoc command</a></li><li><a href="#Example_10_Create_a_file_with_755_permission_using_ansible_ad_hoc_commands" title="Example 10: Create a file with 755 permission using ansible ad hoc commands">Example 10: Create a file with 755 permission using ansible ad hoc commands</a></li><li><a href="#Example_11_Change_ownership_of_a_file_using_ansible_ad_hoc_command" title="Example 11: Change ownership of a file using ansible ad hoc command">Example 11: Change ownership of a file using ansible ad hoc command</a></li><li><a href="#Example_12_how_to_check_free_disk_space_of_hosts_using_ansible_ad_hoc_commands" title="Example 12: how to check free disk space of hosts using ansible ad hoc commands">Example 12: how to check free disk space of hosts using ansible ad hoc commands</a></li><li><a href="#Example_13_ad_hoc_command_to_Install_a_package_using_yum_module" title="Example 13: ad hoc command to Install a package using yum module">Example 13: ad hoc command to Install a package using yum module</a></li><li><a href="#Example_14_ad_hoc_command_to_Start_or_stop_the_service" title="Example 14: ad hoc command to Start or stop the service">Example 14: ad hoc command to Start or stop the service</a></li><li><a href="#Example_15_Install_and_configure_python_Django_application_server_with_ansible_ad_hoc_commands" title="Example 15: Install and configure python Django application server with ansible ad hoc commands">Example 15: Install and configure python Django application server with ansible ad hoc commands</a></li><li><a href="#Example_16_Managing_Cron_Job_and_Scheduling_with_Ansible_ad_hoc" title="Example 16: Managing Cron Job and Scheduling with Ansible ad hoc">Example 16: Managing Cron Job and Scheduling with Ansible ad hoc</a></li><li><a href="#Example_17_Running_operations_in_the_background_asynchronous_with_Polling_ansible" title="Example 17: Running operations in the background asynchronous with Polling ansible">Example 17: Running operations in the background asynchronous with Polling ansible</a></li><li><a href="#Example_18_ansible_ad_hoc_command_to_reboot_the_system" title="Example 18: ansible ad hoc command to reboot the system">Example 18: ansible ad hoc command to reboot the system</a></li><li><a href="#Example_19_ansible_ad_hoc_command_to_check_the_service_status" title="Example 19: ansible ad hoc command to check the service status">Example 19: ansible ad hoc command to check the service status</a></li><li><a href="#Example_20_ansible_ad_hoc_command_to_copy_file_Local_to_remote" title="Example 20: ansible ad hoc command to copy file &#8211; Local to remote">Example 20: ansible ad hoc command to copy file &#8211; Local to remote</a></li><li><a href="#Example_21_ansible_ad_hoc_command_to_copy_directory_Local_to_remote" title="Example 21: ansible ad hoc command to copy directory &#8211; Local to remote">Example 21: ansible ad hoc command to copy directory &#8211; Local to remote</a></li><li><a href="#Example_22_ad_hoc_command_to_list_nfs_mounts" title="Example 22: ad hoc command to list nfs mounts">Example 22: ad hoc command to list nfs mounts</a></li><li><a href="#Example_23_ad_hoc_command_to_display_memory_cpu_and_OS_distribution_and_version" title="Example 23:  ad hoc command to display memory, cpu and OS distribution and version">Example 23:  ad hoc command to display memory, cpu and OS distribution and version</a></li><li><a href="#Example_24_ad_hoc_command_to_stop_start_restart_service_Ansible_SystemD" title="Example 24:  ad hoc command to stop, start, restart service &#8211; Ansible SystemD">Example 24:  ad hoc command to stop, start, restart service &#8211; Ansible SystemD</a></li><li><a href="#Example_25_ansible_ad_hoc_command_to_download_a_file_from_URL" title="Example 25: ansible ad hoc command to download a file from URL">Example 25: ansible ad hoc command to download a file from URL</a></li><li><a href="#Example_26_ansible_ad_hoc_command_to_check_listening_ports" title="Example 26: ansible ad hoc command to check listening ports">Example 26: ansible ad hoc command to check listening ports</a></li></ul></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Prerequisites">Prerequisites</span></h2>
+<ol>
+<li>Ansible must be installed ( only in control machine, remember this is agentless)</li>
+<li>some remote Virtual machines to test, you can use vagrant to build them ( <a href="../vagrant-ansible-example/index.html">this article would help you get started)</a></li>
+<li>Make sure that the control machine and VM has SSH connectivity</li>
+<li>I recommend you enable SSH key-based authentication for efficiency  ( <a href="../enable-ssh-key-based-authentication-ssh-without-password/index.html">refer this article to enable SSH key based auth</a>)</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="What_is_Ansible_ad_hoc_commands">What is Ansible ad hoc commands</span></h2>
+<p>ad hoc in Latin means something done for a very precise and particular purpose.  As the word suggests, ansible ad hoc commands are written for a very particular task. Some of the ad hoc scenarios are given below</p>
+<ol>
+<li>Just validate the uptime of 1 to 200 remote servers</li>
+<li>Just get the disk space of remote hosts</li>
+<li>Ping and validate if the server is alive and responds</li>
+<li>shutdown multiple remote hosts at a single command</li>
+</ol>
+<p>I have given 22 real-time examples of ansible ad hoc commands and I know that is just a little but it will help you start your journey towards ansible automation.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_ad_hoc_commands_Syntax">Ansible ad_hoc commands Syntax</span></h2>
+<p>Refer the following diagram to understand how the ansible ad hoc commands are framed.</p>
+<p><a href="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM.png"><img class="alignnone size-full wp-image-2786 lazyload" src="../../wp-content/ewww/lazy/placeholder-967x542.png" alt="ansible ad hoc commands" width="967" height="542" data-src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM.png 967w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM-300x168.png 300w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM-768x430.png 768w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2786" src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM.png" alt="ansible ad hoc commands" width="967" height="542" srcset="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM.png 967w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM-300x168.png 300w, ../../wp-content/uploads/2019/01/Screen-Shot-2019-01-16-at-4.48.32-AM-768x430.png 768w" sizes="(max-width: 967px) 100vw, 967px" data-eio="l" /></noscript></a></p>
+<p>To run an ad hoc command, the command must be framed or have the following syntax.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;">ansible &lt;host-pattern&gt; [options]</pre>
+<p>for example. the command should be written as follows.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;">ansible appserverhostgroup -m &lt;modulename&gt; -a &lt;arguments to the module<span class="hljs-string" style="color: #a5c261;">&gt;</span></pre>
+<p>A single ansible ad hoc command can have multiple options. <code>-m</code> and <code>-a</code> are one amongst them and widely used.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Ad_Hoc_Command_Examples">Ansible Ad Hoc Command Examples</span></h2>
+<p>Here are the 17 selected examples of ansible ad hoc commands and you can directly go to your desired example or scroll through to see them all.</p>
+<ol>
+<li><a href="index.html#ex1">ansible ad hoc <span style="color: #003366;">ping</span> command example</a></li>
+<li><a href="index.html#ex2">ansible ad hoc command to check <span style="color: #003366;">uptime</span></a></li>
+<li><a href="index.html#ex3">ansible ad hoc command to <span style="color: #003366;">check memory usage</span></a></li>
+<li><a href="index.html#ex4">ansible ad hoc command to <span style="color: #003366;">get physical memory</span> allocated to the host</a></li>
+<li><a href="index.html#ex5">Execute a<span style="color: #003366;"> command as root user</span> (sudo) on host with ansible ad hoc command</a></li>
+<li><a href="index.html#ex6">ansible ad hoc command to Execute a command as a different user  (sudo su)</a></li>
+<li><a href="index.html#ex7">ad hoc command to<span style="color: #003366;"> Create a unix user group</span> </a></li>
+<li><a href="index.html#ex8">ad hoc command to <span style="color: #003366;">Create a unix user</span></a></li>
+<li><a href="index.html#ex9">ansible ad hoc command to <span style="color: #003366;">Create a Directory</span> with 755 permission </a>&#8211; ansible mkdir</li>
+<li><a href="index.html#ex10">ansible ad hoc command to <span style="color: #003366;">Create a file</span> with 755 permission</a></li>
+<li><a href="index.html#ex11">ad hoc command to<span style="color: #003366;"> Change ownership</span> of a file</a></li>
+<li><a href="index.html#ex12">ansible ad hoc command to <span style="color: #003366;"> check free disk space</span> of hosts </a></li>
+<li><a href="index.html#ex13">ansible ad hoc command to <span style="color: #003366;">Install a package using yum</span> command</a></li>
+<li><a href="index.html#ex14">ansible ad hoc command to <span style="color: #003366;">Start or stop the service</span></a></li>
+<li><a href="index.html#ex14">Install and configure python Django application server with ansible ad hoc </a></li>
+<li><a href="index.html#ex16">Managing <span style="color: #003366;">Cron Job and Scheduling</span> with Ansible ad hoc</a></li>
+<li><a href="index.html#ex17">Running <span style="color: #003366;">operations in the background</span> asynchronous with Polling ansible</a></li>
+<li><a href="index.html#ex18">ansible ad hoc command to <span style="color: #003366;">reboot remote system</span></a></li>
+<li><a href="index.html#ex19">ansible ad hoc command to <span style="color: #003366;">check service status</span></a></li>
+<li><a href="#Example_20_ansible_ad_hoc_command_to_copy_file_Local_to_remote">ansible ad hoc command to <span style="color: #003366;">copy file local to remote</span></a></li>
+<li><a href="#Example_21_ansible_ad_hoc_command_to_copy_directory_Local_to_remote">ansible ad hoc command to <span style="color: #003366;">copy directory local to remote</span></a></li>
+<li><a href="#Example_22_ad_hoc_command_to_list_nfs_mounts">ansible ad hoc command to </a><a href="#Example_22_ad_hoc_command_to_list_nfs_mounts">list<span style="color: #000000;"> NFS mounts</span></a></li>
+<li><a href="#Example_23_ad_hoc_command_to_display_memory_cpu_and_OS_distribution_and_version">adhoc command to <span style="color: #003366;">collect memory, cpu and OS distribution of a host</span></a></li>
+<li><a href="#Example_24_ad_hoc_command_to_stop_start_restart_service_Ansible_SystemD">ansible ad hoc command to <span style="color: #003366;">stop, start, restart, reload service</span></a></li>
+<li><a href="#Example_25_ansible_ad_hoc_command_to_download_a_file_from_URL">ad hoc command to<span style="color: #003366;"> download file from URL</span></a></li>
+<li><a href="#Example_26_ansible_ad_hoc_command_to_check_listening_ports">ad hoc command to <span style="color: #003366;">check listening ports</span></a></li>
+</ol>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3></h3>
+<h3 id="ex1"><span class="ez-toc-section" id="Example1_ansible_ad_hoc_ping_example">Example1:  ansible ad hoc ping example</span></h3>
+<p>In this example, we are going to test the remote nodes or hosts and make sure they respond back using Ansible&#8217;s default SSH channel</p>
+<details>
+<summary>What is Ansible Module? Quick summary</summary>
+<pre>Ansible modules are more like unix commands they have built to 
+help you accomplish a single and a specific task. 
+
+</pre>
+<p><strong>ping</strong></p>
+<pre> : to check the connectivity
+</pre>
+<p><strong>shell</strong></p>
+<pre>: to run shell scripts
+</pre>
+<p><strong>command</strong></p>
+<pre>: to run commands in remote
+</pre>
+<p><strong>raw</strong></p>
+<pre>: Execute some very basic SSH commands</pre>
+</details>
+<p>We presume that you have set up SSH key based auth between the control machine and the hosts. If yes then there is no need to enter the credentials and command would be simple.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -m ping -i ansible_hosts &#8211; user=vagrant 
+
+SSH password:
+mwivmapp02 | SUCCESS =&gt; {
+"changed": false,
+"ping": "pong"
+}
+mwisqldb01 | SUCCESS =&gt; {
+"changed": false,
+"ping": "pong"
+}
+mwivmapp01 | SUCCESS =&gt; {
+"changed": false,
+"ping": "pong"
+}
+mwiweb02 | SUCCESS =&gt; {
+"changed": false,
+"</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>What if you do not have SSH key-based authentication</strong>, then enter the user name and password while invoking the command as shown below.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -m ping -i ansible_hosts &#8211; user=vagrant &#8211; ask-pass
+
+SSH password:
+mwivmapp02 | SUCCESS =&gt; {
+"changed": false,
+"ping": "pong"
+}
+mwisqldb01 | SUCCESS =&gt; {
+"changed": false,
+"ping": "pong"
+}
+mwivmapp01 | SUCCESS =&gt; {
+"changed": false,
+"ping": "pong"
+}
+mwiweb02 | SUCCESS =&gt; {
+"changed": false,
+"</pre>
+<p>you can read how to transfer <a href="../ansible-ssh-key-exchange.html">SSH key using ansible in this article</a></p>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<details open="open">
+<summary>FAQ: Why the servers are not in order?</summary>
+<p>Thanks to ansible parallel nature, Ansible runs commands in remote hosts using multiple forks or simply put executing the task by parallel across all the servers. this would save lot of your time.</p>
+<p>The Setting of how many forks (or) parallel process that ansible can run can be configured by using <strong>-f </strong>(fork) flag.</p>
+<p>Try running the same command with the following command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible multi -m ping -i ansible_hosts &#8211; user=vagrant -f 1</pre>
+<p>&nbsp;</p>
+<p>The command restricts ansible to use only one fork (or) limit the parallel process to only one. Now you can see the servers are in order but takes longer time than earlier.</p>
+<p>&nbsp;</p>
+</details>
+<h3 id="ex2"><span class="ez-toc-section" id="Example_2_ansible_ad_hoc_command_to_check_uptime">Example 2:  ansible ad hoc command to check uptime</span></h3>
+<p>In this example, we are going to know the uptime of the hosts. Ansible provides two major modules to run the command over the host group or on the remote server.</p>
+<p>Which one to pick is not a big confusion if you know what are they and their capabilities</p>
+<details>
+<summary>FAQ: Ansible command vs shell module</summary>
+<p>Both ansible shell and command modules can be used to run SHELL commands on the nodes. but one difference is that command module does not support piping the output to another command, In other words, it will support the only command whereas shell module support complicated pipes and every shell command you use day to day</p>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr style="height: 56px;">
+<td style="width: 33.3333%; height: 56px;"><strong>The UNIX Command</strong></td>
+<td style="width: 33.3333%; height: 56px;"><strong>  Supported in command module</strong></td>
+<td style="width: 33.3333%; height: 56px;"><strong>Supported in Shell module</strong></td>
+</tr>
+<tr style="height: 10px;">
+<td style="width: 33.3333%; height: 10px;">cat /etc/passwd</td>
+<td style="width: 33.3333%; height: 10px;"> YES</td>
+<td style="width: 33.3333%; height: 10px;"> YES</td>
+</tr>
+<tr style="height: 28px;">
+<td style="width: 33.3333%; height: 28px;">cat /etc/passwd|grep &#8220;^saravak&#8221;</td>
+<td style="width: 33.3333%; height: 28px;">NO ( Since it has Pipe)</td>
+<td style="width: 33.3333%; height: 28px;"> YES</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>Here are the commands you can use to get the uptime. All three commands would yield you the same results.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible multi -m command -a uptime 
+
+ansible multi -m shell -a uptime 
+
+ansible multi -a uptime</pre>
+<p>&nbsp;</p>
+<p>as you could have already figured out<strong> -m</strong> is the module and <strong>-a</strong> should contain the command it should run which goes as an argument to command and shell.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3 id="ex3"><span class="ez-toc-section" id="Example_3_How_to_check_the_free_memory_or_memory_usage_of_hosts_using_ansible_ad_hoc_command">Example 3:  How to check the free memory or memory usage of  hosts using ansible ad hoc command</span></h3>
+<p>The following ansible ad hoc command would help you get the free memory of all the hosts in the host group named <em>multi</em></p>
+<p>As you could see we are running the<code> free -m</code> command on the remote hosts and collecting the information</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -a "free -m" -i ansible_hosts
+
+mwivmapp01 | SUCCESS | rc=0 &gt;&gt;
+              total        used        free      shared  buff/cache   available
+Mem:           1839         108        1570           8         160        1563
+Swap:          1023           0        1023
+
+mwisqldb01 | SUCCESS | rc=0 &gt;&gt;
+              total        used        free      shared  buff/cache   available
+Mem:           1839         100        1578           8         160        1571
+Swap:          1023           0        1023
+
+mwiweb02 | SUCCESS | rc=0 &gt;&gt;
+              total        used        free      shared  buff/cache   available
+Mem:           1839         100        1581           8         157        1573
+Swap:          1023           0        1023
+
+mwivmapp02 | SUCCESS | rc=0 &gt;&gt;
+              total        used        free      shared  buff/cache   available
+Mem:           1839         109        1569           8         160        1562
+Swap:          1023           0        1023</pre>
+<p>&nbsp;</p>
+<h3 id="ex4"><span class="ez-toc-section" id="Example_4_ansible_ad_hoc_command_to_get_physical_memory_allocated_to_the_host">Example 4:  ansible ad hoc command to get physical memory allocated to the host</span></h3>
+<p>To accomplish this example we are going to use two commands together so we must opt to shell module.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -m shell -a "cat /proc/meminfo|head -2" 
+
+mwisqldb01 | SUCCESS | rc=0 &gt;&gt;
+MemTotal:        1883428 kB
+MemFree:         1616460 kB
+
+mwivmapp02 | SUCCESS | rc=0 &gt;&gt;
+MemTotal:        1883428 kB
+MemFree:         1607372 kB
+
+mwiweb02 | SUCCESS | rc=0 &gt;&gt;
+MemTotal:        1883428 kB
+MemFree:         1619612 kB
+
+mwivmapp01 | SUCCESS | rc=0 &gt;&gt;
+MemTotal:        1883428 kB
+MemFree:         1607908 kB</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex5"><span class="ez-toc-section" id="Example_5_ansible_ad_hoc_become_Execute_a_command_as_root_user_sudo_host">Example 5:  ansible ad hoc become &#8211;  Execute a command as root user (sudo) host</span></h3>
+<p>In the earlier versions of ansible there is an option named as <strong>sudo </strong>(deprecated), Since ansible 2.0 there are two new options named as <strong>become</strong> and <strong>become_user</strong></p>
+<p>In this example, we are going to access one of the privileged configuration files. We are going to check if the user exists by searching the <code>/etc/passwd</code> file</p>
+<p><span style="color: #0c4370;">Using <strong>SUDO</strong> module ( deprecated and will be removed in ansible 2.6 )  use ansible become instead</span></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -m shell -a "cat /etc/passwd|grep -i vagrant" -s &#8211; ask-sudo-pass
+
+SUDO password:
+
+mwivmapp02 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash
+
+mwivmapp01 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash
+
+mwisqldb01 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash
+
+mwiweb02 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash</pre>
+<p>&nbsp;</p>
+<p><a href="../ansible-sudo-ansible-become-example/index.html"><span style="color: #0c4370;">Using <strong>become</strong> module</span></a></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -m shell -a "cat /etc/passwd|grep -i vagrant" -b -K
+
+[DEPRECATION WARNING]: The sudo command line option has been deprecated in favor of the "become" command line arguments. This feature will be removed in version 2.6.
+ Deprecation warnings can be disabled by setting deprecation_warnings=False in ansible.cfg.
+
+SUDO password:
+mwivmapp02 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash
+
+mwivmapp01 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash
+
+mwisqldb01 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash
+
+mwiweb02 | SUCCESS | rc=0 &gt;&gt;
+vagrant:x:1000:1000:vagrant:/home/vagrant:/bin/bash</pre>
+<p>&nbsp;</p>
+<p>here</p>
+<p><strong>-b</strong> is the option for become and by default it will become root user</p>
+<p>&#8211;<strong>K </strong>is to tell ansible to ask for SUDO password</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3 id="ex6"><span class="ez-toc-section" id="Example_6_ansible_ad_hoc_become_Execute_a_command_as_a_different_user_sudo_su">Example 6:  ansible ad hoc become &#8211; Execute a command as a different user  (sudo su)</span></h3>
+<p>In this example, we are going to create a new file inside a directory <strong>/opt/oracle</strong> which is owned by <strong>weblogic</strong> user</p>
+<p>In the following ad-hoc command snapshot you can see we have given the username we want to switch to  using <code>--become-user=weblogic</code> option</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -m file -a "path=/opt/oracle/binaries state=directory mode=0755" -i ansible_hosts -b &#8211; become-user=weblogic
+
+mwivmapp01 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 1001,
+    "group": "weblogic",
+    "mode": "0755",
+    "owner": "weblogic",
+    "path": "/opt/oracle/binaries",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 1001
+}
+mwivmapp02 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 1001,
+    "group": "weblogic",
+    "mode": "0755",
+    "owner": "weblogic",
+    "path": "/opt/oracle/binaries",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 1001
+}</pre>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3 id="ex7"><span class="ez-toc-section" id="Example_7_Create_a_user_group_with_ansible_ad_hoc_command">Example 7: Create a user group with ansible ad hoc command</span></h3>
+<p>Here we are creating a user name group named weblogic using the ansible <code>group</code> module, the same task can be reversed to delete the group if you change the <code>state</code> to <code>absent</code></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -s -m group -a "name=weblogic state=present" 
+
+mwivmapp02 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 1001,
+    "name": "weblogic",
+    "state": "present",
+    "system": false
+}
+mwivmapp01 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 1001,
+    "name": "weblogic",
+    "state": "present",
+    "system": false
+}</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex8"><span class="ez-toc-section" id="Example_8_Create_a_unix_user_with_ansible_ad_hoc_command">Example 8: Create a unix user with ansible ad hoc command</span></h3>
+<p>In this example, we are going to create a UNIX user using the ansible user module</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -m user -a "name=weblogic group=weblogic createhome=yes" -b
+
+mwivmapp01 | SUCCESS =&gt; {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/weblogic",
+    "name": "weblogic",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}
+mwivmapp02 | SUCCESS =&gt; {
+    "changed": true,
+    "comment": "",
+    "create_home": true,
+    "group": 1001,
+    "home": "/home/weblogic",
+    "name": "weblogic",
+    "shell": "/bin/bash",
+    "state": "present",
+    "system": false,
+    "uid": 1001
+}</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex9"><span class="ez-toc-section" id="Example_9_Create_a_Directory_with_755_permission_using_ansible_ad_hoc_command">Example 9: Create a Directory with 755 permission using ansible ad hoc command</span></h3>
+<p>In this example, we are going to create a new directory with 755 permisssion this is done using the ansible <code>file</code> module</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -m file -a "path=/opt/oracle state=directory mode=0755" -b
+
+mwivmapp01 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 0,
+    "group": "root",
+    "mode": "0755",
+    "owner": "root",
+    "path": "/opt/oracle",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 0
+}
+mwivmapp02 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 0,
+    "group": "root",
+    "mode": "0755",
+    "owner": "root",
+    "path": "/opt/oracle",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 0
+}</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex10"><span class="ez-toc-section" id="Example_10_Create_a_file_with_755_permission_using_ansible_ad_hoc_commands">Example 10: Create a file with 755 permission using ansible ad hoc commands</span></h3>
+<p>Like the previous example, we are going to create a file this time with 755 permission</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -m file -a "path=/tmp/testfile state=touch mode=0755"
+
+mwivmapp02 | SUCCESS =&gt; {
+    "changed": true,
+    "dest": "/tmp/testfile",
+    "gid": 1000,
+    "group": "vagrant",
+    "mode": "0755",
+    "owner": "vagrant",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 1000
+}
+mwivmapp01 | SUCCESS =&gt; {
+    "changed": true,
+    "dest": "/tmp/testfile",
+    "gid": 1000,
+    "group": "vagrant",
+    "mode": "0755",
+    "owner": "vagrant",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 0,
+    "state": "file",
+    "uid": 1000
+}</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex11"><span class="ez-toc-section" id="Example_11_Change_ownership_of_a_file_using_ansible_ad_hoc_command">Example 11: Change ownership of a file using ansible ad hoc command</span></h3>
+<p>In this example, we are going to change the ownership of the file using ansible ad hoc command with ansible <code>file</code> module</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -m file -a "path=/opt/oracle group=weblogic owner=weblogic" -i ansible_hosts -b
+
+mwivmapp01 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 1001,
+    "group": "weblogic",
+    "mode": "0755",
+    "owner": "weblogic",
+    "path": "/opt/oracle",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 1001
+}
+mwivmapp02 | SUCCESS =&gt; {
+    "changed": true,
+    "gid": 1001,
+    "group": "weblogic",
+    "mode": "0755",
+    "owner": "weblogic",
+    "path": "/opt/oracle",
+    "secontext": "unconfined_u:object_r:usr_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 1001
+}</pre>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3 id="ex12"><span class="ez-toc-section" id="Example_12_how_to_check_free_disk_space_of_hosts_using_ansible_ad_hoc_commands">Example 12: how to check free disk space of hosts using ansible ad hoc commands</span></h3>
+<p>Most of us would like to quickly check the disk space of many machines with a single command. this is that command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-lineoffset="2" data-enlighter-linenumbers="false">ansible multi -a "df -h"</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex13"><span class="ez-toc-section" id="Example_13_ad_hoc_command_to_Install_a_package_using_yum_module">Example 13: ad hoc command to Install a package using yum module</span></h3>
+<p>How to install a package or software in linux using yum module of ansible</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible multi -s -m yum -a "name=httpd state=installed"</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex14"><span class="ez-toc-section" id="Example_14_ad_hoc_command_to_Start_or_stop_the_service">Example 14: ad hoc command to Start or stop the service</span></h3>
+<p>You really do not have to log in to start or stop the service running in your Linux system. you can simply use this ansible service module ad hoc command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"># To Start
+ansible multi -s -m service -a "name=httod state=started enabled=yes"
+
+# To Stop
+ansible multi -s -m service -a "name=httpd state=stop enabled=yes"</pre>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3 id="ex15"><span class="ez-toc-section" id="Example_15_Install_and_configure_python_Django_application_server_with_ansible_ad_hoc_commands">Example 15: Install and configure python Django application server with ansible ad hoc commands</span></h3>
+<p>These are set of commands you have to execute to install the Django application server and Mysql libraries. Here we are using <strong>easy_install</strong> which is an ansible module it helps to find the easy installation option from <strong>ansible galaxy</strong></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible app -s -m yum -a "name=MySQL-python state=present"
+
+$ ansible app -s -m yum -a "name=python-setuptools state=present"
+
+$ ansible app -s -m easy_install -a "name=django"</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 id="ex16"><span class="ez-toc-section" id="Example_16_Managing_Cron_Job_and_Scheduling_with_Ansible_ad_hoc">Example 16: Managing Cron Job and Scheduling with Ansible ad hoc</span></h3>
+<p>We can easily manage the Cron jobs with Ansible cron module. Here are the list commands you can keep handy</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">#  Run the job every 15 minutes
+$ ansible multi -s -m cron -a "name='daily-cron-all-servers' minute=*/15 
+job='/path/to/minute-script.sh'"
+
+# Run the job every four hours
+$ ansible multi -s -m cron -a "name='daily-cron-all-servers' hour=4 
+job='/path/to/hour-script.sh'"
+
+# Enabling a Job to run at system reboot
+$ ansible multi -s -m cron -a "name='daily-cron-all-servers' special_time=reboot 
+job='/path/to/startup-script.sh'"
+
+# Scheduling a Daily job
+$ ansible multi -s -m cron -a "name='daily-cron-all-servers' special_time=daily 
+job='/path/to/daily-script.sh'"
+
+# Scheduling a Weekly job
+$ ansible multi -s -m cron -a "name='daily-cron-all-servers' special_time=weekly 
+job='/path/to/daily-script.sh'"</pre>
+<p>&nbsp;</p>
+<h3 id="ex17"><span class="ez-toc-section" id="Example_17_Running_operations_in_the_background_asynchronous_with_Polling_ansible">Example 17: Running operations in the background asynchronous with Polling ansible</span></h3>
+<p>You can use AD-HOC commands to run the operations background using <strong>-B </strong>and poll the job in the frequent interval <strong>-P</strong></p>
+<p>ansible ad-hoc command  to perform yum update and frequently poll and check the status of the job</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible multi -s -B 3600 -a "yum -y update" 
+
+$ ansible multi -m async_status -a "jid=763350539037"</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>By Default the polling interval is 10 seconds, but can modify it using <strong>-P </strong>option</p>
+<p>If you set <strong>-P</strong> as 0 it called as <strong>fire and forget</strong>, The job id would not be given and you cannot track the job using async_status as shown above.</p>
+<p>&nbsp;</p>
+<h3 id="ex18"><span class="ez-toc-section" id="Example_18_ansible_ad_hoc_command_to_reboot_the_system">Example 18: ansible ad hoc command to reboot the system</span></h3>
+<p>In this example we are going to reboot the remote system using the shell module and Poll 0, it represents fire and forget</p>
+<p>To know more about Ansible async and poll<a href="../ansible-async/index.html"> refer this article</a></p>
+<p>Rebooting the host in the background is the best example for fire and forget or async and poll.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible all -i inventory -b -B 1 -P 0 -m shell -a "sleep 5 &amp;&amp; reboot"</pre>
+<p>&nbsp;</p>
+<p>there is another ad hoc command available with reboot module to reboot the remote system</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible all -m reboot -a reboot_timeout=3600 -u vagrant -i ansible_hosts -b</pre>
+<p>&nbsp;</p>
+<p>Here</p>
+<p>-m &#8211; represents the module</p>
+<p>-a &#8211; additional parameter to the reboot module to set the timeout to 3600 seconds</p>
+<p>-u &#8211; remote SSH user</p>
+<p>-i &#8211; inventory file</p>
+<p>-b &#8211; to instruct ansible to become root user before executing the task</p>
+<p>Here is the execution output of this ad hoc command. we have three commands in this screenshot, First is to check the status and second to reboot and third one is to check the uptime</p>
+<p><a href="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM.png"><img class="alignnone size-full wp-image-5800 lazyload" src="../../wp-content/ewww/lazy/placeholder-1822x646.png" alt="ansible ad hoc command" width="1822" height="646" data-src="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM.png 1822w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM-300x106.png 300w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM-768x272.png 768w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM-1024x363.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-5800" src="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM.png" alt="ansible ad hoc command" width="1822" height="646" srcset="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM.png 1822w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM-300x106.png 300w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM-768x272.png 768w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-1.45.46-AM-1024x363.png 1024w" sizes="(max-width: 1822px) 100vw, 1822px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3 id="ex19"><span class="ez-toc-section" id="Example_19_ansible_ad_hoc_command_to_check_the_service_status">Example 19: ansible ad hoc command to check the service status</span></h3>
+<p>In this example, we are going to see how to check the status of service using ansible ad hoc command</p>
+<p>For example, let&#8217;s suppose we want to check the status and more information about the <code>httpd</code> service the following ad hoc command with ansible service module would help</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible testserver -m service -a "name=httpd" -i ansible_hosts -u vagrant</pre>
+<p>&nbsp;</p>
+<p>The following screenshot shows the realtime output showing the status and more information about the httpd service.</p>
+<p><a href="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM.png"><img class="alignnone size-full wp-image-5801 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1079.png" alt="" width="2338" height="1314" data-src="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM.png 2338w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM-300x169.png 300w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM-768x432.png 768w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM-1024x576.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-5801" src="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM.png" alt="" width="2338" height="1314" srcset="../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM.png 2338w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM-300x169.png 300w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM-768x432.png 768w, ../../wp-content/uploads/2019/01/Screenshot-2020-09-26-at-2.00.38-AM-1024x576.png 1024w" sizes="(max-width: 2338px) 100vw, 2338px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_20_ansible_ad_hoc_command_to_copy_file_Local_to_remote">Example 20: ansible ad hoc command to copy file &#8211; Local to remote</span></h3>
+<p>The following ad hoc command with copy module copies the file from Src location on the local control machine to the specified location on the remote server</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible testserver -m copy -a "src=~/Downloads/index.html dest=/var/www/html owner=apache group=apache mode=0644"</pre>
+<p>&nbsp;</p>
+<p>to know more about this in detail  refer to this article</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_21_ansible_ad_hoc_command_to_copy_directory_Local_to_remote">Example 21: ansible ad hoc command to copy directory &#8211; Local to remote</span></h3>
+<p>This is an ansible AD HOC command to copy a directory to the remote server</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-lineoffset="2" data-enlighter-linenumbers="false">ansible testserver -m copy -a "src=~/Downloads/logos dest=/var/www/html/ owner=apache group=apache mode=0644 " -i ansible_hosts -b</pre>
+<p>You need to notice that there is no <code>/</code> at the end of src path. It is just <code>~/Downloads/logos</code></p>
+<p>If you put a slash at the end. It would copy only the contents of the directory alone but not the directory.</p>
+<p>read more about this in detail in here</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_22_ad_hoc_command_to_list_nfs_mounts">Example 22: ad hoc command to list nfs mounts</span></h3>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ansible testservers -m shell -a 'df -h -T|grep -i nfs'  -i ansible_hosts</pre>
+<p>we are using the shell module and executing <code>df -h -T</code> to display the type of mount and filtering only <code>nfs</code> type mounts with the help of grep command.</p>
+<p>There is a more efficient way to do it with <code>ansible setup</code> module. which is <a href="../ansible-facts-list-how-to-use-ansible-facts/index.html">discussed here in detail</a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_23_ad_hoc_command_to_display_memory_cpu_and_OS_distribution_and_version">Example 23:  ad hoc command to display memory, cpu and OS distribution and version</span></h3>
+<p>Here we have given a Ansible Ad hoc command to display system information like memory, cpu etc.</p>
+<p>we have used Ansible <code>setup</code> module with <code>filter</code>  to select necassary attributes of a system.</p>
+<p>to know more about what other <code>ansible_facts</code> or variables you can possibly use in this filter. <a href="../ansible-facts-list-how-to-use-ansible-facts.html">read our detail article on ansible facts</a></p>
+<p>But this ad hoc command would help you solve things up.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible appservers -m setup -i ansible_hosts -a 'filter=ansible_distribution,ansible_distribution_version,ansible_memfree_mb,ansible_memtotal_mb,ansible_processor_cores*,ansible_architecture' 2&gt;/dev/null
+10.0.4.26 | SUCCESS =&gt; {
+    "ansible_facts": {
+        "ansible_architecture": "x86_64",
+        "ansible_distribution": "Ubuntu",
+        "ansible_distribution_version": "20.04",
+        "ansible_memfree_mb": 127,
+        "ansible_memtotal_mb": 3933,
+        "ansible_processor_cores": 2,
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false
+}
+10.0.1.120 | SUCCESS =&gt; {
+    "ansible_facts": {
+        "ansible_architecture": "x86_64",
+        "ansible_distribution": "Ubuntu",
+        "ansible_distribution_version": "18.04",
+        "ansible_memfree_mb": 134,
+        "ansible_memtotal_mb": 3943,
+        "ansible_processor_cores": 2,
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": false
+}</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_24_ad_hoc_command_to_stop_start_restart_service_Ansible_SystemD">Example 24:  ad hoc command to stop, start, restart service &#8211; Ansible SystemD</span></h3>
+<p>Simple way to restart any service with Ansible ad hoc command is to use <code>Shell</code> module with the actual <code>service</code> or <code>systemctl</code> command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">$ ansible webservers -m shell -a "service nginx restart" -b
+
+$ ansible webservers -m shell -a "systemctl restart nginx" -b
+</pre>
+<p>You can also use Ansible&#8217;s built in <code>systemd</code> module otherwise like this.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ansible webservers  -m systemd -a "name=nginx state=reloaded" -i prod-ansible-hosts
+
+$ ansible webservers -m systemd -a "name=nginx state=restarted" -i prod-ansible-hosts
+
+$ ansible webservers -m systemd -a "name=nginx state=started" -i prod-ansible-hosts
+
+$ ansible webservers -m systemd -a "name=nginx state=stopped" -i prod-ansible-hosts</pre>
+<p>So this is how you can manage to start, stop , restart services using ansible ad hoc</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_25_ansible_ad_hoc_command_to_download_a_file_from_URL">Example 25: ansible ad hoc command to download a file from URL</span></h3>
+<p>To download a file from URL in ansible ad hoc. You can either invoke linux commands like <code>CURL</code> or <code>WGET</code>  but the preferred way is to use the <code>get_url</code> module of Ansible.</p>
+<p>This is how you can use <code>get_url</code> module in Ansible ad hoc to download a file in remote system</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4">$ ansible testserver -m get_url -a "url=https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz dest=/tmp mode=0755" -i prod-ansible-hosts
+testserver | CHANGED =&gt; {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python"
+    },
+    "changed": true,
+    "checksum_dest": null,
+    "checksum_src": "8ea8ea5e5b34da3e3d81e557d373ab3ffdae91cd",
+    "dest": "/tmp/node-v14.17.4-linux-x64.tar.xz",
+    "elapsed": 0,
+    "gid": 1000,
+    "group": "ubuntu",
+    "md5sum": "9613888c2a5ad0cbe83f03e0b8ed8707",
+    "mode": "0755",
+    "msg": "OK (21754020 bytes)",
+    "owner": "ubuntu",
+    "size": 21754020,
+    "src": "/home/ubuntu/.ansible/tmp/ansible-tmp-1627824782.251616-27135-120094112712777/tmpa148e1",
+    "state": "file",
+    "status_code": 200,
+    "uid": 1000,
+    "url": "https://nodejs.org/dist/v14.17.4/node-v14.17.4-linux-x64.tar.xz"
+}</pre>
+<p>You just have to pass the necassary parameters to the get_url</p>
+<p><code>dest</code> : Destination directory where the file should be downloaded</p>
+<p><code>url</code>: From where the file should be obtained</p>
+<p><code>mode</code>:  The file permission mode of the file once downloaded. we are setting <code>755</code></p>
+<p><a href="../ansible-get_url-examples-how-to-download-file-from-url/index.html">read more about <code>get_url</code> module in our dedicated article</a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Example_26_ansible_ad_hoc_command_to_check_listening_ports">Example 26: ansible ad hoc command to check listening ports</span></h3>
+<p>To check the list of open ports you can use <code>netstat</code> or <code>ss</code>  commands over the Ansible shell module but the preferred way is to use the ansible community plugin <code>listen_ports_facts</code> module</p>
+<p>This is how you can use ansible <code>listen_ports_facts</code> to get a list of TCP and UDP ports listening on the servers (or) hostgroup</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">$ ansible testserver -m listen_ports_facts -i prod-ansible-hosts
+
+testserver | SUCCESS =&gt; {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python",
+        "tcp_listen": [
+            {
+                "address": "127.0.0.1",
+                "name": "",
+                "pid": 0,
+                "port": 5000,
+                "protocol": "tcp",
+                "stime": "",
+                "user": ""
+            },
+            {
+                "address": "127.0.0.1",
+                "name": "",
+                "pid": 0,
+                "port": 5001,
+                "protocol": "tcp",
+                "stime": "",
+                "user": ""
+            },
+            {
+                "address": "127.0.0.1",
+                "name": "",
+                "pid": 0,
+                "port": 587,
+                "protocol": "tcp",
+                "stime": "",
+                "user": ""
+            },
+            {
+                "address": "127.0.0.1",
+                "name": "",
+                "pid": 0,
+                "port": 6062,
+                "protocol": "tcp",
+                "stime": "",
+                "user": ""
+            },</pre>
+<p>The output can be further filtered or optimized, If the module is used on the <a href="../ansible-playbook-example/index.html">ansible  playbook. </a></p>
+<p>&nbsp;</p>
+<p>Thanks<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#ea828f868685aa8d98839e8c93c4898587"> <span class="__cf_email__" data-cfemail="147c7178787b5473667d60726d3a777b79">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668107618" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="2742" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668107618" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668107618"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-command-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Command" data-src="../../wp-content/uploads/2019/04/AnsibleCommand-1-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/AnsibleCommand-1-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Command" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-command-examples/index.html'>Ansible Command Module Examples</a><p>Ansible Command Module Introduction Ansible Command module is used to execute commands on a remote node. The Command module, is used mostly to run simple Linux commands on a remote node/server which is part of a host group or Stand alone server mentioned in the host group. If you want&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-when-variable-is-defined-or-undefined-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/12/Screen-Shot-2018-12-01-at-7.06.23-AM-150x150.png.html" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/12/Screen-Shot-2018-12-01-at-7.06.23-AM-150x150.png.html" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-when-variable-is-defined-or-undefined-examples/index.html'>Ansible When Variable is defined or undefined Examples</a><p>The Purpose The purpose of this post is to give you a real-time example and explanation of how ansible variable is defined and not defined (undefined) conditionals are working along with "when" conditional statement and how it controls the flow of the task and the play. The following ansible playbook is&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-replace-line-in-file-ansible-replace-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible replace examples" data-src="../../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible replace examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-replace-line-in-file-ansible-replace-examples/index.html'>Ansible replace line in file - Ansible Replace Examples | Devops Junction</a><p>This article is about "how to replace a line in file using ansible and seeing various other examples of ansible replace module".  Ansible facilitates us with a dedicated module named as replace The working principle of this module is more like find and replace in your favourite editor and it also supports&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-wait_for-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible wait_for examples" data-src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible wait_for examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-wait_for-examples/index.html'>Ansible wait_for module examples - How to | Devops Junction</a><p>Introduction to Ansible wait_for module Ansible wait_for module can be used to pause your playbook execution and to wait for many different things or conditions before continuing with the execution. The wait_for module of ansible is to make your playbook or task execution halt or pause for various reasons and for&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-lineinfile-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible lineinfile examples" data-src="../../wp-content/uploads/2019/03/photo-1461360228754-6e81c478b882-1-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/03/photo-1461360228754-6e81c478b882-1-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible lineinfile examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-lineinfile-examples/index.html'>Ansible lineinfile examples - Add, Modify, Delete, Replace lines</a><p>Ansible lineinfile module could be the saviour of your day when you want to work with files and especially modify their content on the run, like adding a new line in the file or updating a line in the file or replace a line in the file when certain text&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/ansible-ad-hoc-commands/index.html" rel="tag">ansible ad hoc commands</a><a href="../tag/ansible-ad-hoc-systemctl/index.html" rel="tag">ansible ad hoc systemctl</a><a href="../tag/ansible-ad-hoc-commands-list/index.html" rel="tag">ansible ad-hoc commands list</a><a href="../tag/ansible-cheatsheet/index.html" rel="tag">ansible cheatsheet</a><a href="../tag/ansible-command-examples/index.html" rel="tag">ansible command examples</a><a href="../tag/ansible-for-beginners/index.html" rel="tag">ansible for beginners</a><a href="../tag/ansible-mkdir/index.html" rel="tag">ansible mkdir</a><a href="../tag/ansible-modules-examples/index.html" rel="tag">ansible modules examples</a><a href="../tag/ansible-playbook-example/index.html" rel="tag">ansible playbook example</a><a href="../tag/ansible-playbook-examples/index.html" rel="tag">ansible playbook examples</a><a href="../tag/ansible-playbook-with-multiple-hosts/index.html" rel="tag">ansible playbook with multiple hosts</a><a href="../tag/how-to-learn-ansible/index.html" rel="tag">how to learn ansible</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-search-string-file-check-if-string-exists/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>ansible search for string in file or check if string exists in file</a></div><div class="nav-next"><a href="../set-heapmemory-jvm-arguments-tomcat/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>How to set HeapMemory or JVM Arguments in Tomcat</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (2)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"2742 https:\/\/www.middlewareinventory.com\/?p=2742","disqusShortname":"mwinventory","disqusTitle":"Ansible AD HOC  Command Examples \u2013 Ansible Cheat Sheet | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-ad-hoc-commands\/","postId":"2742"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"2742"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"69.150.27.32","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"2742","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668107618;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

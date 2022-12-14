@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><style id="et-builder-googlefonts-cached-inline">/* Original: https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Roboto:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,900,900italic|Alegreya+Sans:100,100italic,300,300italic,regular,italic,500,500italic,700,700italic,800,800italic,900,900italic&#038;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin,latin-ext,vietnamese&#038;display=swap *//* User Agent: Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) Safari/538.1 Daum/4.1 */@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUv9_-1phKLFgshYDvh6Vwt7V9V3G1W.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VFE92jg.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUt9_-1phKLFgshYDvh6Vwt7V9tuA.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VTE52jg.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VBEh2jg.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 800;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VGEt2jg.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VPEp2jg.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUt9_-1phKLFgshYDvh6Vwt5TltuA.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5fFPmE0.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUz9_-1phKLFgshYDvh6Vwt3V0.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5alOmE0.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5eFImE0.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 800;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5f1LmE0.ttf") format('truetype');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5dlKmE0.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 300;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk5hkaVc.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 400;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkaVc.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 600;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkxhjaVc.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 700;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkyFjaVc.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 800;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk0ZjaVc.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 300;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0C4n.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 400;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4n.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 600;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1y4n.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 700;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1y4n.ttf") format('truetype');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 800;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgshZ1y4n.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOiCnqEu92Fr1Mu51QrIzc.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TjARc9.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1Mu52xP.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51S7ABc9.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TzBhc9.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TLBBc9.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1MmgWxP.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5vAw.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5Q.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vAw.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlvAw.ttf") format('truetype');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmYUtvAw.ttf") format('truetype');}/* User Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:27.0) Gecko/20100101 Firefox/27.0 */@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUv9_-1phKLFgshYDvh6Vwt7V9V3G1V.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VFE92jQ.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUt9_-1phKLFgshYDvh6Vwt7V9tuw.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VTE52jQ.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VBEh2jQ.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 800;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VGEt2jQ.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VPEp2jQ.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUt9_-1phKLFgshYDvh6Vwt5Tltuw.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5fFPmE4.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUz9_-1phKLFgshYDvh6Vwt3V4.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5alOmE4.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5eFImE4.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 800;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5f1LmE4.woff") format('woff');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5dlKmE4.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 300;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk5hkaVQ.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 400;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkaVQ.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 600;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkxhjaVQ.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 700;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkyFjaVQ.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 800;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk0ZjaVQ.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 300;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0C4k.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 400;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4k.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 600;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1y4k.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 700;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1y4k.woff") format('woff');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 800;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgshZ1y4k.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOiCnqEu92Fr1Mu51QrIzQ.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TjARc-.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1Mu52xM.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51S7ABc-.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TzBhc-.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TLBBc-.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1MmgWxM.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5vAA.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me5g.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vAA.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlvAA.woff") format('woff');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmYUtvAA.woff") format('woff');}/* User Agent: Mozilla/5.0 (Windows NT 6.3; rv:39.0) Gecko/20100101 Firefox/39.0 */@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUv9_-1phKLFgshYDvh6Vwt7V9V3G1T.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VFE92iw.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUt9_-1phKLFgshYDvh6Vwt7V9tvQ.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VTE52iw.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VBEh2iw.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 800;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VGEt2iw.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: italic;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUo9_-1phKLFgshYDvh6Vwt7V9VPEp2iw.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUt9_-1phKLFgshYDvh6Vwt5TltvQ.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5fFPmEg.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUz9_-1phKLFgshYDvh6Vwt3Vg.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5alOmEg.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5eFImEg.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 800;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5f1LmEg.woff2") format('woff2');}@font-face {font-family: 'Alegreya Sans';font-style: normal;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/alegreyasans/v24/5aUu9_-1phKLFgshYDvh6Vwt5dlKmEg.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 300;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk5hkaVI.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 400;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk8ZkaVI.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 600;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkxhjaVI.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 700;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0RkyFjaVI.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: italic;font-weight: 800;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memQYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWq8tWZ0Pw86hd0Rk0ZjaVI.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 300;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsiH0C4i.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 400;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsjZ0C4i.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 600;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsgH1y4i.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 700;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgsg-1y4i.woff2") format('woff2');}@font-face {font-family: 'Open Sans';font-style: normal;font-weight: 800;font-stretch: normal;font-display: swap;src: url("https://fonts.gstatic.com/s/opensans/v34/memSYaGs126MiZpBA-UvWbX2vVnXBbObj2OVZyOOSr4dVJWUgshZ1y4i.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOiCnqEu92Fr1Mu51QrIzI.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TjARc4.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1Mu52xK.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51S7ABc4.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TzBhc4.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: italic;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOjCnqEu92Fr1Mu51TLBBc4.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 100;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOkCnqEu92Fr1MmgWxK.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 300;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmSU5vBg.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 400;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOmCnqEu92Fr1Me4A.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 500;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmEU9vBg.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 700;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmWUlvBg.woff2") format('woff2');}@font-face {font-family: 'Roboto';font-style: normal;font-weight: 900;font-display: swap;src: url("https://fonts.gstatic.com/s/roboto/v30/KFOlCnqEu92Fr1MmYUtvBg.woff2") format('woff2');}</style>
+
+<title>DevOps Junction - Learning Junction for Cloud, DevOps and Platform Engineering</title>
+<meta name="description" content="DevOps Junction is a place for Learning DevOps for all Beginner to Pro architects. Learn DevOps technologies, tools and best practices. DevOps Support and Consulting." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="../../index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="DevOps Junction - Learning Junction for Cloud, DevOps and Platform Engineering" />
+<meta property="og:description" content="DevOps Junction is a place for Learning DevOps for all Beginner to Pro architects. Learn DevOps technologies, tools and best practices. DevOps Support and Consulting." />
+<meta property="og:url" content="https://www.middlewareinventory.com/devops-junction/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:modified_time" content="2022-11-10T19:39:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/devops-junction/#webpage","url":"https://www.middlewareinventory.com/devops-junction/","name":"DevOps Junction - Learning Junction for Cloud, DevOps and Platform Engineering","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"datePublished":"2019-03-30T21:19:08+00:00","dateModified":"2022-11-10T19:39:00+00:00","description":"DevOps Junction is a place for Learning DevOps for all Beginner to Pro architects. Learn DevOps technologies, tools and best practices. DevOps Support and Consulting.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/devops-junction/"]}]}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../../comments/feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../../wp-content/cache/minify/89532.css" media="all" />
+<script src="../../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../../wp-json/wp/v2/pages/3148.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='../../index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-devops-junction-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-devops-junction-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BB7M7WEJH2');
+</script><noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="paged page-template page-template-template-fullwidth page-template-template-fullwidth-php page page-id-3148 wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"><a href="../../../index.html" rel="home">Middleware Inventory</a></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../../../blog/category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../../../blog/category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../../../blog/category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../../../blog/category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../../../blog/category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../../../blog/category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../../../blog/category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../../../blog/category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../../../blog/category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../../../blog/category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../../../blog/category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../../../blog/category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-3148 current_page_item menu-item-has-children menu-item-3157"><a href="../../index.html" aria-current="page">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../../../blog/category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../../../blog/category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../../../blog/category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../../../blog/category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../../../blog/category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../../../blog/category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../../../blog/category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../../../blog/category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="fullwidth-content-area content-area">
+<main id="main" class="site-main" role="main">
+<article id="post-3148" class="post-3148 page type-page status-publish hentry wpautop">
+<header class="entry-header">
+</header>
+<div class="entry-content clearfix">
+<div id="et-boc" class="et-boc">
+<div id="et_builder_outer_content" class="et_builder_outer_content">
+<div class="et-l et-l--post">
+<div class="et_builder_inner_content et_pb_gutters3"><div class="et_pb_section et_pb_section_0 et_section_regular et_section_transparent">
+<div class="et_pb_row et_pb_row_0 et_pb_equal_columns">
+<div class="et_pb_with_border et_pb_column_3_5 et_pb_column et_pb_column_0  et_pb_css_mix_blend_mode_passthrough">
+<div class="et_pb_with_border et_pb_module et_pb_blog_0 et_pb_posts et_pb_bg_layout_light ">
+<div class="et_pb_ajax_pagination_container">
+<article id="post-6949" class="et_pb_post clearfix et_pb_blog_item_0_0 post-6949 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<a href="../../../blog/ansible-bastion-ssh/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Ansible Bastion &#8211; SSH to remote hosts using Bastion' width='1080' height='675' data-src="../../../wp-content/uploads/2021/05/Screenshot-2021-05-23-at-6.07.43-PM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/05/Screenshot-2021-05-23-at-6.07.43-PM.png" alt='Ansible Bastion &#8211; SSH to remote hosts using Bastion' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/ansible-bastion-ssh/index.html">Ansible Bastion &#8211; SSH to remote hosts using Bastion</a></h1>
+<p class="post-meta"><a href="../../../blog/category/ansible/index.html" rel="tag">Ansible</a></p><div class="post-content"><div class="post-content-inner"><p>In this article we are going to see how to connect to remote hosts using Bastion host or Jump Server for Ansible playbook or Adhoc command execution. In General, We know it is a an easy job to connect to remote hosts from Ansible control machine ( where you execute...</p>
+</div></div>
+</article>
+<article id="post-6914" class="et_pb_post clearfix et_pb_blog_item_0_1 post-6914 post type-post status-publish format-standard has-post-thumbnail hentry category-kubernetes wpautop">
+<a href="../../../blog/manage-and-monitor-kubernetes-with-ease-lens-ide/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Manage and Monitor Kubernetes with ease &#8211; Lens IDE' width='1080' height='675' data-src="../../../wp-content/uploads/2021/05/Screenshot-2021-05-03-at-1.45.32-AM-scaled.jpg" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/05/Screenshot-2021-05-03-at-1.45.32-AM-scaled.jpg" alt='Manage and Monitor Kubernetes with ease &#8211; Lens IDE' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/manage-and-monitor-kubernetes-with-ease-lens-ide/index.html">Manage and Monitor Kubernetes with ease &#8211; Lens IDE</a></h1>
+<p class="post-meta"><a href="../../../blog/category/kubernetes/index.html" rel="tag">Kubernetes</a></p><div class="post-content"><div class="post-content-inner"><p>I came across a wonderful solution for managing and monitoring the Kubernetes cluster and wanted to share my experience in this post with screenshots. While there are a lot of ways to monitor the Kubernetes cluster like setting up Prometheus, Grafana Deamon set and...</p>
+</div></div>
+</article>
+<article id="post-6885" class="et_pb_post clearfix et_pb_blog_item_0_2 post-6885 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<a href="../../../blog/ansible-firewalld/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Ansible FirewallD Example &#8211; Managing Firewall Rules' width='1080' height='675' data-src="../../../wp-content/uploads/2021/04/Screenshot-2021-04-25-at-12.54.58-PM.jpg" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/04/Screenshot-2021-04-25-at-12.54.58-PM.jpg" alt='Ansible FirewallD Example &#8211; Managing Firewall Rules' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/ansible-firewalld/index.html">Ansible FirewallD Example &#8211; Managing Firewall Rules</a></h1>
+<p class="post-meta"><a href="../../../blog/category/ansible/index.html" rel="tag">Ansible</a></p><div class="post-content"><div class="post-content-inner"><p>Managing firewall rules are a tedious task but indispensable for a secure infrastructure.  While all the cloud providers are having their own ACL and firewall rule offerings to protect your cloud resources. Some of us are still using the firewall-d for...</p>
+</div></div>
+</article>
+<article id="post-6859" class="et_pb_post clearfix et_pb_blog_item_0_3 post-6859 post type-post status-publish format-standard has-post-thumbnail hentry category-ibm-websphere category-middleware category-sre category-tomcat category-weblogic category-websphere wpautop">
+<a href="../../../blog/jmx-monitoring-sre-tools/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='JMX Monitoring Then and Now &#8211; SRE Tools' width='1080' height='675' data-src="../../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" alt='JMX Monitoring Then and Now &#8211; SRE Tools' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/jmx-monitoring-sre-tools/index.html">JMX Monitoring Then and Now &#8211; SRE Tools</a></h1>
+<p class="post-meta"><a href="../../../blog/category/ibm-websphere/index.html" rel="tag">IBM Websphere</a>, <a href="../../../blog/category/middleware/index.html" rel="tag">Middleware</a>, <a href="../../../blog/category/sre/index.html" rel="tag">SRE</a>, <a href="../../../blog/category/tomcat/index.html" rel="tag">tomcat</a>, <a href="../../../blog/category/weblogic/index.html" rel="tag">weblogic</a>, <a href="../../../blog/category/websphere/index.html" rel="tag">Websphere</a></p><div class="post-content"><div class="post-content-inner"><p>Evolution of JMX monitoring Monitoring is an essential part of Site Reliability Engineering and Infrastructure Services. I have started my career a decade ago when there was no many JMX monitoring tools and APMs(Application Performance Monitoring) available. I have...</p>
+</div></div>
+</article>
+<article id="post-6798" class="et_pb_post clearfix et_pb_blog_item_0_4 post-6798 post type-post status-publish format-standard has-post-thumbnail hentry category-aws wpautop">
+<a href="../../../blog/aws-vpc-peering-tutorial/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='How to create AWS VPC Peering &#8211; Step by Step Tutorial' width='1080' height='675' data-src="../../../wp-content/uploads/2021/03/Screenshot-2021-03-21-at-12.31.23-AM-scaled.jpg" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/03/Screenshot-2021-03-21-at-12.31.23-AM-scaled.jpg" alt='How to create AWS VPC Peering &#8211; Step by Step Tutorial' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/aws-vpc-peering-tutorial/index.html">How to create AWS VPC Peering &#8211; Step by Step Tutorial</a></h1>
+<p class="post-meta"><a href="../../../blog/category/aws/index.html" rel="tag">AWS</a></p><div class="post-content"><div class="post-content-inner"><p>In this article, we are going to see how to create AWS VPC peering in detail. Refer to the following diagram that represents the expected architecture we are trying to achieve or implement. There are two VPCs isolated by default ( as it supposed to be ) but with a...</p>
+</div></div>
+</article>
+<article id="post-6743" class="et_pb_post clearfix et_pb_blog_item_0_5 post-6743 post type-post status-publish format-standard has-post-thumbnail hentry category-cloud category-gcp-googlecloud category-terraform wpautop">
+<a href="../../../blog/create-linux-vm-in-gcp-with-terraform-remote-exec/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Terraform google_compute_instance Example &#8211; with Remote Exec' width='1080' height='675' data-src="../../../wp-content/uploads/2021/02/gcp-image.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/02/gcp-image.png" alt='Terraform google_compute_instance Example &#8211; with Remote Exec' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/create-linux-vm-in-gcp-with-terraform-remote-exec/index.html">Terraform google_compute_instance Example &#8211; with Remote Exec</a></h1>
+<p class="post-meta"><a href="../../../blog/category/cloud/index.html" rel="tag">Cloud</a>, <a href="../../../blog/category/gcp-googlecloud/index.html" rel="tag">GCP - GoogleCloud</a>, <a href="../../../blog/category/terraform/index.html" rel="tag">Terraform</a></p><div class="post-content"><div class="post-content-inner"><p>In this article, we are going to see how to create a Linux Virtual machine and provision it using the Terraform remote execution strategy. We are going to be using SSH method to connect to the Virtual machine and provision it on the go by executing some startup Shell...</p>
+</div></div>
+</article>
+<article id="post-6660" class="et_pb_post clearfix et_pb_blog_item_0_6 post-6660 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<a href="../../../blog/ansible-copy-file-or-directory-local-to-remote/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Ansible Copy file or Directory &#8211; Local to Remote | Devops Junction' width='1080' height='675' data-src="../../../wp-content/uploads/2021/01/Screenshot-2021-01-30-at-5.10.15-AM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/01/Screenshot-2021-01-30-at-5.10.15-AM.png" alt='Ansible Copy file or Directory &#8211; Local to Remote | Devops Junction' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/ansible-copy-file-or-directory-local-to-remote/index.html">Ansible Copy file or Directory &#8211; Local to Remote | Devops Junction</a></h1>
+<p class="post-meta"><a href="../../../blog/category/ansible/index.html" rel="tag">Ansible</a></p><div class="post-content"><div class="post-content-inner"><p>In this article, we are going to see how to copy or SCP files and directories from local to remote. Control machine to the remote server. We are going to learn how to SCP files from local to the remote host Ansible has dedicated modules to support the copy between...</p>
+</div></div>
+</article>
+<article id="post-6611" class="et_pb_post clearfix et_pb_blog_item_0_7 post-6611 post type-post status-publish format-standard has-post-thumbnail hentry category-weblogic wpautop">
+<a href="../../../blog/weblogic-datasource-creation-wlst-script-ansible-playbook/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Weblogic Datasource Creation WLST script &#038; Ansible Playbook' width='1080' height='675' data-src="../../../wp-content/uploads/2021/01/Screenshot-2021-01-20-at-9.57.39-PM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/01/Screenshot-2021-01-20-at-9.57.39-PM.png" alt='Weblogic Datasource Creation WLST script &#038; Ansible Playbook' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/weblogic-datasource-creation-wlst-script-ansible-playbook/index.html">Weblogic Datasource Creation WLST script &#038; Ansible Playbook</a></h1>
+<p class="post-meta"><a href="../../../blog/category/weblogic/index.html" rel="tag">weblogic</a></p><div class="post-content"><div class="post-content-inner"><p>In this post, we are going to see how to create a weblogic data source using WLST script and an Ansible Playbook. For this example, we are going to create a simple generic data source. &nbsp; What is DataSource? Quick intro A Datasource or Connection Pool is simply a...</p>
+</div></div>
+</article>
+<article id="post-6514" class="et_pb_post clearfix et_pb_blog_item_0_8 post-6514 post type-post status-publish format-standard has-post-thumbnail hentry category-efk category-elastic-search category-fluentd wpautop">
+<a href="../../../blog/fluentd-tomcat-elastic-search-example-efk/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='FluentD Tomcat Elastic Search Example &#8211; EFK' width='1080' height='675' data-src="../../../wp-content/uploads/2021/01/Screenshot-2021-01-08-at-6.28.10-AM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2021/01/Screenshot-2021-01-08-at-6.28.10-AM.png" alt='FluentD Tomcat Elastic Search Example &#8211; EFK' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/fluentd-tomcat-elastic-search-example-efk/index.html">FluentD Tomcat Elastic Search Example &#8211; EFK</a></h1>
+<p class="post-meta"><a href="../../../blog/category/efk/index.html" rel="tag">EFK</a>, <a href="../../../blog/category/elastic-search/index.html" rel="tag">Elastic Search</a>, <a href="../../../blog/category/fluentd/index.html" rel="tag">FluentD</a></p><div class="post-content"><div class="post-content-inner"><p>In this article, we are going to see, How to collect tomcat logs with FluentD and send to Elastic Search. FluentD Tomcat Elastic Search (EFK) setup would be covered in detail. Technically this is known as  EFK stack.  an efficient and better alternative for the ELK...</p>
+</div></div>
+</article>
+<article id="post-6546" class="et_pb_post clearfix et_pb_blog_item_0_9 post-6546 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible category-oracle-weblogic wpautop">
+<a href="../../../blog/weblogic-jms-queue-creation-wlst-script-and-ansible-playbook/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Weblogic JMS Queue Creation WLST script and Ansible Playbook' width='1080' height='675' data-src="../../../wp-content/uploads/2020/12/weblogicJMS.jpg" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2020/12/weblogicJMS.jpg" alt='Weblogic JMS Queue Creation WLST script and Ansible Playbook' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/weblogic-jms-queue-creation-wlst-script-and-ansible-playbook/index.html">Weblogic JMS Queue Creation WLST script and Ansible Playbook</a></h1>
+<p class="post-meta"><a href="../../../blog/category/ansible/index.html" rel="tag">Ansible</a>, <a href="../../../blog/category/oracle-weblogic/index.html" rel="tag">Oracle Weblogic</a></p><div class="post-content"><div class="post-content-inner"><p>In this post, we are going to share a WLST jython script and an ansible playbook to create JMS Queues in weblogic 12c Here is the simple jython/python WLST script. The script is simply designed to create and set up a fully functioning JMS Queue in weblogic. It creates...</p>
+</div></div>
+</article>
+<article id="post-5805" class="et_pb_post clearfix et_pb_blog_item_0_10 post-5805 post type-post status-publish format-standard has-post-thumbnail hentry category-fluentd category-kubernetes tag-fluent-bit-kubernetes-example tag-kubernetes-fluentd wpautop">
+<a href="../../../blog/kubernetes-sidecar-logging-with-fluentd-to-efk/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Kubernetes Sidecar &#8211; Logging with FluentD to EFK' width='1080' height='675' data-src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png" alt='Kubernetes Sidecar &#8211; Logging with FluentD to EFK' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/kubernetes-sidecar-logging-with-fluentd-to-efk/index.html">Kubernetes Sidecar &#8211; Logging with FluentD to EFK</a></h1>
+<p class="post-meta"><a href="../../../blog/category/fluentd/index.html" rel="tag">FluentD</a>, <a href="../../../blog/category/kubernetes/index.html" rel="tag">Kubernetes</a></p><div class="post-content"><div class="post-content-inner"><p>Introduction Log management in Infrastructure has changed tremendously in recent few years and we are a having wonderful products in the market to manage, parse, analyze log files These tools are being used extensively for incident management, alerting, security...</p>
+</div></div>
+</article>
+<article id="post-6470" class="et_pb_post clearfix et_pb_blog_item_0_11 post-6470 post type-post status-publish format-standard has-post-thumbnail hentry category-middleware category-opensource category-tomcat category-tools category-weblogic category-websphere wpautop">
+<a href="../../../blog/cpu-and-memory-consuming-java-webapp-for-testing/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='CPU and Memory consuming Java WebApp &#8211; For testing' width='1080' height='675' data-src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-23-at-3.14.10-PM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-23-at-3.14.10-PM.png" alt='CPU and Memory consuming Java WebApp &#8211; For testing' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/cpu-and-memory-consuming-java-webapp-for-testing/index.html">CPU and Memory consuming Java WebApp &#8211; For testing</a></h1>
+<p class="post-meta"><a href="../../../blog/category/middleware/index.html" rel="tag">Middleware</a>, <a href="../../../blog/category/opensource/index.html" rel="tag">OpenSource</a>, <a href="../../../blog/category/tomcat/index.html" rel="tag">tomcat</a>, <a href="../../../blog/category/tools/index.html" rel="tag">tools</a>, <a href="../../../blog/category/weblogic/index.html" rel="tag">weblogic</a>, <a href="../../../blog/category/websphere/index.html" rel="tag">Websphere</a></p><div class="post-content"><div class="post-content-inner"><p>There might be times where we might wonder what process is consuming all the system memory or CPU. We invest a lot of time debugging it and looking at the JMX graphs and then we finally find a bug in the code and fix it for good. On the other hand, there are times...</p>
+</div></div>
+</article>
+<article id="post-6449" class="et_pb_post clearfix et_pb_blog_item_0_12 post-6449 post type-post status-publish format-standard has-post-thumbnail hentry category-aws category-oracle-db wpautop">
+<a href="../../../blog/backup-oracle-db-to-amazon-s3/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Automated Oracle Database Backup to S3' width='1080' height='675' data-src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-22-at-9.54.12-PM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-22-at-9.54.12-PM.png" alt='Automated Oracle Database Backup to S3' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/backup-oracle-db-to-amazon-s3/index.html">Automated Oracle Database Backup to S3</a></h1>
+<p class="post-meta"><a href="../../../blog/category/aws/index.html" rel="tag">AWS</a>, <a href="../../../blog/category/oracle-db/index.html" rel="tag">Oracle DB</a></p><div class="post-content"><div class="post-content-inner"><p>The Beautiful thing about Digital world is that we have a Ctrl+z button, snapshots and backups to go back in time and correct our mistakes, which is not possible in our real life. Enough with a philosophy. I would not have to tell you how crucial backups are and when...</p>
+</div></div>
+</article>
+<article id="post-6433" class="et_pb_post clearfix et_pb_blog_item_0_13 post-6433 post type-post status-publish format-standard has-post-thumbnail hentry category-oracle-db wpautop">
+<a href="../../../blog/how-to-get-or-set-undo_retention-parameter-oracle/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='How to get or set UNDO_RETENTION parameter &#8211; Oracle' width='1080' height='675' data-src="../../../wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.52.44-AM.png" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.52.44-AM.png" alt='How to get or set UNDO_RETENTION parameter &#8211; Oracle' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/how-to-get-or-set-undo_retention-parameter-oracle/index.html">How to get or set UNDO_RETENTION parameter &#8211; Oracle</a></h1>
+<p class="post-meta"><a href="../../../blog/category/oracle-db/index.html" rel="tag">Oracle DB</a></p><div class="post-content"><div class="post-content-inner"><p>I have recently encountered an issue while trying to export the Oracle DB using the expdp command and my database size was huge, therefore I got an error stating that Snapshot is too old When I researched further I noticed that my UNDO_RETENTION was too less and set...</p>
+</div></div>
+</article>
+<article id="post-6411" class="et_pb_post clearfix et_pb_blog_item_0_14 post-6411 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible category-aws wpautop">
+<a href="../../../blog/add-users-to-ec2-instances-with-ssh-access-ansible/index.html" class="entry-featured-image-url"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1080 675'%3E%3C/svg%3E" alt='Add users to EC2 instances with SSH Access &#8211; Ansible' width='1080' height='675' data-src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-09-at-6.58.35-AM.jpg" loading="lazy" class="lazyload" /><noscript><img src="../../../wp-content/uploads/2020/11/Screenshot-2020-11-09-at-6.58.35-AM.jpg" alt='Add users to EC2 instances with SSH Access &#8211; Ansible' width='1080' height='675' data-eio="l" /></noscript></a>
+<h1 class="entry-title"><a href="../../../blog/add-users-to-ec2-instances-with-ssh-access-ansible/index.html">Add users to EC2 instances with SSH Access &#8211; Ansible</a></h1>
+<p class="post-meta"><a href="../../../blog/category/ansible/index.html" rel="tag">Ansible</a>, <a href="../../../blog/category/aws/index.html" rel="tag">AWS</a></p><div class="post-content"><div class="post-content-inner"><p>The objective of this article is to talk about how to add new users to EC2 instances and copy their SSH Keys to grant them SSH access. Consider yourself managing an AWS Infra with 100+ EC2 instances and you have a new hire in your team who should have his SSH access...</p>
+</div></div>
+</article>
+<div><div class="pagination clearfix">
+<div class="alignleft">
+<a href="../7/index-et_blog.html">&laquo; Older Entries</a> </div>
+<div class="alignright">
+<a href="../5/index-et_blog.html">Next Entries &raquo;</a> </div>
+</div></div></div>
+</div>
+</div><div class="et_pb_with_border et_pb_column_2_5 et_pb_column et_pb_column_1  et_pb_css_mix_blend_mode_passthrough et-last-child">
+<div class="et_pb_module et_pb_text et_pb_text_0  et_pb_text_align_left et_pb_bg_layout_light">
+<div class="et_pb_text_inner"><h2>Articles for DevOps Beginner</h2></div>
+</div><div class="et_pb_with_border et_pb_module et_pb_blog_1 et_pb_posts et_pb_bg_layout_light ">
+<div class="et_pb_ajax_pagination_container">
+<div class="entry">
+
+<h2 class="not-found-title">No Results Found</h2>
+<p>The page you requested could not be found. Try refining your search, or use the navigation above to locate the post.</p>
+</div>
+
+</div>
+</div> <div class="et_pb_module et_pb_sidebar_0 et_pb_widget_area clearfix et_pb_widget_area_left et_pb_bg_layout_light">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../../../blog/category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../../../blog/category/ansible/index.html">Ansible</a> (68)
+</li>
+<li class="cat-item cat-item-10"><a href="../../../blog/category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../../../blog/category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../../../blog/category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../../../blog/category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../../../blog/category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../../../blog/category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../../../blog/category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../../../blog/category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../../../blog/category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../../../blog/category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../../../blog/category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../../../blog/category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../../../blog/category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../../../blog/category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../../../blog/category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../../../blog/category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../../../blog/category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../../../blog/category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../../../blog/category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../../../blog/category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../../../blog/category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../../../blog/category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../../../blog/category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../../../blog/category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../../../blog/category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../../../blog/category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../../../blog/category/kubernetes/index.html">Kubernetes</a> (25)
+</li>
+<li class="cat-item cat-item-191"><a href="../../../blog/category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../../../blog/category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../../../blog/category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../../../blog/category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../../../blog/category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../../../blog/category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../../../blog/category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../../../blog/category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../../../blog/category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../../../blog/category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../../../blog/category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../../../blog/category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../../../blog/category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../../../blog/category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../../../blog/category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../../../blog/category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../../../blog/category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../../../blog/category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../../../blog/category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../../../blog/category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../../../blog/category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../../../blog/category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../../../blog/category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../../../blog/category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../../../blog/category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../../../blog/category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../../../blog/category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../../../blog/category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../../../blog/category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../../../blog/category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../../../blog/category/uncategorized/index.html">Uncategorized</a> (8)
+</li>
+<li class="cat-item cat-item-7"><a href="../../../blog/category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../../../blog/category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../../../blog/category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../../../blog/category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../../../blog/category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../../../blog/category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../../../blog/category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../../../blog/category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../../../blog/category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../../../blog/category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../../../blog/category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</div>
+</div>
+</div><div class="et_pb_row et_pb_row_1 et_pb_section_parallax">
+<div class="et_pb_column et_pb_column_4_4 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
+<div id="et_pb_contact_form_0" class="et_pb_module et_pb_contact_form_0 et_pb_contact_form_container clearfix" data-form_unique_num="0" data-form_unique_id="8402b742-6246-4a7f-b0cc-69c66f440b54">
+<h1 class="et_pb_contact_main_title">Join the Devops Junction Community.</h1>
+<div class="et-pb-contact-message"></div>
+<div class="et_pb_contact">
+<form class="et_pb_contact_form clearfix" method="post" action="index-et_blog.html">
+<p class="et_pb_contact_field et_pb_contact_field_0 et_pb_contact_field_half" data-id="name" data-type="input">
+<label for="et_pb_contact_name_0" class="et_pb_contact_form_label">Name</label>
+<input type="text" id="et_pb_contact_name_0" class="input" value="" name="et_pb_contact_name_0" data-required_mark="required" data-field_type="input" data-original_id="name" placeholder="Name">
+</p><p class="et_pb_contact_field et_pb_contact_field_1 et_pb_contact_field_half et_pb_contact_field_last" data-id="email" data-type="email">
+<label for="et_pb_contact_email_0" class="et_pb_contact_form_label">Email Address</label>
+<input type="text" id="et_pb_contact_email_0" class="input" value="" name="et_pb_contact_email_0" data-required_mark="required" data-field_type="email" data-original_id="email" placeholder="Email Address">
+</p>
+<input type="hidden" value="et_contact_proccess" name="et_pb_contactform_submit_0" />
+<div class="et_contact_bottom_container">
+<div class="et_pb_contact_right">
+<p class="clearfix">
+<span class="et_pb_contact_captcha_question">1 + 9</span> = <input type="text" size="2" class="input et_pb_contact_captcha" data-first_digit="1" data-second_digit="9" value="" name="et_pb_contact_captcha_0" data-required_mark="required" autocomplete="off">
+</p>
+</div>
+<button type="submit" name="et_builder_submit_button" class="et_pb_contact_submit et_pb_button" data-icon="&#xe010;">Join</button>
+</div>
+<input type="hidden" id="_wpnonce-et-pb-contact-form-submitted-0" name="_wpnonce-et-pb-contact-form-submitted-0" value="b6e07b85c0" /><input type="hidden" name="_wp_http_referer" value="/devops-junction/page/6/?et_blog" />
+</form>
+</div>
+</div>
+</div>
+<span class="et_parallax_bg_wrap"><span class="et_parallax_bg lazyload" style="" data-bg="https://www.middlewareinventory.com/wp-content/uploads/2022/11/email-subscribe.png"></span></span>
+</div>
+</div> </div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="comments" class="comments-area">
+</div>
+</main>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">
+Powered by <a href="../../../index.html" title="MiddlewareInventory">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Gritfy">Studio-1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type="text/javascript" data-cfasync="false">var bU="https://www.middlewareinventory.com/wp-content/plugins/wp-youtube-lyte/lyte/";var mOs=navigator.userAgent.match(/(iphone|ipad|ipod|android)/i);style = document.createElement("style");style.type = "text/css";rules = document.createTextNode(".lyte-wrapper-audio div, .lyte-wrapper div {margin:0px; overflow:hidden;} .lyte,.lyMe{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background-color:#777;} .fourthree .lyMe, .fourthree .lyte {padding-bottom:75%;} .lidget{margin-bottom:5px;} .lidget .lyte, .widget .lyMe {padding-bottom:0!important;height:100%!important;} .lyte-wrapper-audio .lyte{height:38px!important;overflow:hidden;padding:0!important} .lyMe iframe, .lyte iframe,.lyte .pL{position:absolute !important;top:0;left:0;width:100%;height:100%!important;background:no-repeat scroll center #000;background-size:cover;cursor:pointer} .tC{left:0;position:absolute;top:0;width:100%} .tC{background-image:linear-gradient(to bottom,rgba(0,0,0,0.6),rgba(0,0,0,0))} .tT{color:#FFF;font-family:Roboto,sans-serif;font-size:16px;height:auto;text-align:left;padding:5px 10px 50px 10px} .play{background:no-repeat scroll 0 0 transparent;width:88px;height:63px;position:absolute;left:43%;left:calc(50% - 44px);left:-webkit-calc(50% - 44px);top:38%;top:calc(50% - 31px);top:-webkit-calc(50% - 31px);} .widget .play {top:30%;top:calc(45% - 31px);top:-webkit-calc(45% - 31px);transform:scale(0.6);-webkit-transform:scale(0.6);-ms-transform:scale(0.6);} .lyte:hover .play{background-position:0 -65px;} .lyte-audio .pL{max-height:38px!important} .lyte-audio iframe{height:438px!important} .ctrl{background:repeat scroll 0 -220px rgba(0,0,0,0.3);width:100%;height:40px;bottom:0px;left:0;position:absolute;} .lyte-wrapper .ctrl{display:none}.Lctrl{background:no-repeat scroll 0 -137px transparent;width:158px;height:40px;bottom:0;left:0;position:absolute} .Rctrl{background:no-repeat scroll -42px -179px transparent;width:117px;height:40px;bottom:0;right:0;position:absolute;padding-right:10px;}.lyte-audio .play{display:none}.lyte-audio .ctrl{background-color:rgba(0,0,0,1)}.lyte .hidden{display:none}");if(style.styleSheet) { style.styleSheet.cssText = rules.nodeValue;} else {style.appendChild(rules);}document.getElementsByTagName("head")[0].appendChild(style);</script><script async src="../../../wp-content/cache/minify/718e6.js"></script>
+<link rel="stylesheet" href="../../../wp-content/cache/minify/d5ca8.css" media="all" />
+<script src="../../../wp-content/cache/minify/bdf1e.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"de926cbabd"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"d9b098ba23","post_id":"3148"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"afdf2a277d","ip":"84.238.170.29","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/2c87b.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../../wp-content/cache/minify/a2684.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"74f15b319c","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"e0ef1c8ab1","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"3148","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../../wp-content/cache/minify/13d7d.js"></script>
+<script type='text/javascript' id='mediaelement-core-js-before'>
+var mejsL10n = {"language":"en","strings":{"mejs.download-file":"Download File","mejs.install-flash":"You are using a browser that does not have Flash player enabled or installed. Please turn on your Flash player plugin or download the latest version from https:\/\/get.adobe.com\/flashplayer\/","mejs.fullscreen":"Fullscreen","mejs.play":"Play","mejs.pause":"Pause","mejs.time-slider":"Time Slider","mejs.time-help-text":"Use Left\/Right Arrow keys to advance one second, Up\/Down arrows to advance ten seconds.","mejs.live-broadcast":"Live Broadcast","mejs.volume-help-text":"Use Up\/Down Arrow keys to increase or decrease volume.","mejs.unmute":"Unmute","mejs.mute":"Mute","mejs.volume-slider":"Volume Slider","mejs.video-player":"Video Player","mejs.audio-player":"Audio Player","mejs.captions-subtitles":"Captions\/Subtitles","mejs.captions-chapters":"Chapters","mejs.none":"None","mejs.afrikaans":"Afrikaans","mejs.albanian":"Albanian","mejs.arabic":"Arabic","mejs.belarusian":"Belarusian","mejs.bulgarian":"Bulgarian","mejs.catalan":"Catalan","mejs.chinese":"Chinese","mejs.chinese-simplified":"Chinese (Simplified)","mejs.chinese-traditional":"Chinese (Traditional)","mejs.croatian":"Croatian","mejs.czech":"Czech","mejs.danish":"Danish","mejs.dutch":"Dutch","mejs.english":"English","mejs.estonian":"Estonian","mejs.filipino":"Filipino","mejs.finnish":"Finnish","mejs.french":"French","mejs.galician":"Galician","mejs.german":"German","mejs.greek":"Greek","mejs.haitian-creole":"Haitian Creole","mejs.hebrew":"Hebrew","mejs.hindi":"Hindi","mejs.hungarian":"Hungarian","mejs.icelandic":"Icelandic","mejs.indonesian":"Indonesian","mejs.irish":"Irish","mejs.italian":"Italian","mejs.japanese":"Japanese","mejs.korean":"Korean","mejs.latvian":"Latvian","mejs.lithuanian":"Lithuanian","mejs.macedonian":"Macedonian","mejs.malay":"Malay","mejs.maltese":"Maltese","mejs.norwegian":"Norwegian","mejs.persian":"Persian","mejs.polish":"Polish","mejs.portuguese":"Portuguese","mejs.romanian":"Romanian","mejs.russian":"Russian","mejs.serbian":"Serbian","mejs.slovak":"Slovak","mejs.slovenian":"Slovenian","mejs.spanish":"Spanish","mejs.swahili":"Swahili","mejs.swedish":"Swedish","mejs.tagalog":"Tagalog","mejs.thai":"Thai","mejs.turkish":"Turkish","mejs.ukrainian":"Ukrainian","mejs.vietnamese":"Vietnamese","mejs.welsh":"Welsh","mejs.yiddish":"Yiddish"}};
+</script>
+<script src="../../../wp-content/cache/minify/864c2.js"></script>
+<script type='text/javascript' id='mediaelement-js-extra'>
+/* <![CDATA[ */
+var _wpmejsSettings = {"pluginPath":"\/wp-includes\/js\/mediaelement\/","classPrefix":"mejs-","stretching":"responsive"};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/b0646.js"></script>
+<script type='text/javascript' id='et-builder-modules-script-motion-js-extra'>
+/* <![CDATA[ */
+var et_pb_motion_elements = {"desktop":[],"tablet":[],"phone":[]};
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/4e88a.js"></script>
+<script type='text/javascript' id='et-builder-modules-script-sticky-js-extra'>
+/* <![CDATA[ */
+var et_pb_sticky_elements = [];
+/* ]]> */
+</script>
+<script src="../../../wp-content/cache/minify/d7cd6.js"></script>
+<style id="et-builder-module-design-deferred-3148-cached-inline-styles">.et-db #et-boc .et-l .et_pb_section_0,.et-db .pum .et-l .et_pb_section_0{margin-top:0px}.et-db #et-boc .et-l .et_pb_row_0,.et-db .pum .et-l .et_pb_row_0{background-color:#FFFFFF}.et-db #et-boc .et-l .et_pb_row_0.et_pb_row,.et-db .pum .et-l .et_pb_row_0.et_pb_row{padding-top:50px!important;padding-right:50px!important;padding-bottom:50px!important;padding-left:50px!important;padding-top:50px;padding-right:50px;padding-bottom:50px;padding-left:50px}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .entry-title a,.et-db #et-boc .et-l .et_pb_blog_0 .not-found-title,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .entry-title a,.et-db .pum .et-l .et_pb_blog_0 .not-found-title{font-family:'Open Sans',Helvetica,Arial,Lucida,sans-serif!important;font-weight:700!important;color:#000000!important}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .entry-title,.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .entry-title a,.et-db #et-boc .et-l .et_pb_blog_0 .not-found-title,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .entry-title,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .entry-title a,.et-db .pum .et-l .et_pb_blog_0 .not-found-title{font-size:25px!important;line-height:160%!important}.et-db #et-boc .et-l .et_pb_text_0.et_pb_text,.et-db .pum .et-l .et_pb_text_0.et_pb_text,.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post,.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .post-content *,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .post-content *{color:#000000!important}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post p,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post p{line-height:180%}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post .post-content p,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post .post-content p,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post a.more-link,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post a.more-link,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post .post-content p,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post .post-content p,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post a.more-link,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post a.more-link{font-family:'Open Sans',Helvetica,Arial,Lucida,sans-serif;font-weight:500;font-size:16px;line-height:180%}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .post-meta,.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .post-meta a,.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .post-meta span,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .post-meta,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .post-meta a,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .post-meta span{font-family:'Roboto',Helvetica,Arial,Lucida,sans-serif;color:#1D4EFF!important;line-height:180%}.et-db #et-boc .et-l .et_pb_blog_0:not(.et_pb_blog_grid_wrapper) .et_pb_post,.et-db .pum .et-l .et_pb_blog_0:not(.et_pb_blog_grid_wrapper) .et_pb_post{border-bottom-color:#E5E5E5}.et-db #et-boc .et-l .et_pb_text_0,.et-db .pum .et-l .et_pb_text_0{font-family:'Alegreya Sans',Helvetica,Arial,Lucida,sans-serif}.et-db #et-boc .et-l .et_pb_blog_1 .et_pb_post .entry-title a,.et-db #et-boc .et-l .et_pb_blog_1 .not-found-title,.et-db .pum .et-l .et_pb_blog_1 .et_pb_post .entry-title a,.et-db .pum .et-l .et_pb_blog_1 .not-found-title{color:#286491!important}.et-db #et-boc .et-l .et_pb_blog_1 .et_pb_post .entry-title,.et-db #et-boc .et-l .et_pb_blog_1 .et_pb_post .entry-title a,.et-db #et-boc .et-l .et_pb_blog_1 .not-found-title,.et-db .pum .et-l .et_pb_blog_1 .et_pb_post .entry-title,.et-db .pum .et-l .et_pb_blog_1 .et_pb_post .entry-title a,.et-db .pum .et-l .et_pb_blog_1 .not-found-title{font-size:21px!important}.et-db #et-boc .et-l .et_pb_blog_1 .et_pb_post .post-meta,.et-db #et-boc .et-l .et_pb_blog_1 .et_pb_post .post-meta a,.et-db #et-boc .et-l .et_pb_blog_1 .et_pb_post .post-meta span,.et-db .pum .et-l .et_pb_blog_1 .et_pb_post .post-meta,.et-db .pum .et-l .et_pb_blog_1 .et_pb_post .post-meta a,.et-db .pum .et-l .et_pb_blog_1 .et_pb_post .post-meta span{color:#a3177d!important}.et-db #et-boc .et-l .et_pb_blog_1,.et-db .pum .et-l .et_pb_blog_1{background-color:RGBA(255,255,255,0);padding-bottom:2px}.et-db #et-boc .et-l .et_pb_blog_1:not(.et_pb_blog_grid_wrapper) .et_pb_post,.et-db .pum .et-l .et_pb_blog_1:not(.et_pb_blog_grid_wrapper) .et_pb_post{border-bottom-width:1px}.et-db #et-boc .et-l .et_pb_sidebar_0.et_pb_widget_area,.et-db .pum .et-l .et_pb_sidebar_0.et_pb_widget_area{background-color:RGBA(255,255,255,0)}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container h1,.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container h2.et_pb_contact_main_title,.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container h3.et_pb_contact_main_title,.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container h4.et_pb_contact_main_title,.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container h5.et_pb_contact_main_title,.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container h6.et_pb_contact_main_title,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container h1,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container h2.et_pb_contact_main_title,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container h3.et_pb_contact_main_title,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container h4.et_pb_contact_main_title,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container h5.et_pb_contact_main_title,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container h6.et_pb_contact_main_title{font-weight:800;color:#000000!important}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container{padding-top:5vh;padding-right:50vh;padding-bottom:5vh;padding-left:10vh}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button{color:#FFFFFF!important;border-width:0px!important;font-family:'Alegreya Sans',Helvetica,Arial,Lucida,sans-serif!important;background-image:linear-gradient(180deg,#ed2f81 0%,#e82ec2 100%)!important}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:hover:after,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:hover:after{margin-left:.3em;left:auto;margin-left:.3em;opacity:1}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:after,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:after{color:#FFFFFF;line-height:inherit;font-size:inherit!important;margin-left:-1em;left:auto;font-family:ETmodules!important;font-weight:400!important}.et-db #et-boc .et-l .et_pb_column_0,.et-db .pum .et-l .et_pb_column_0,.et-db #et-boc .et-l .et_pb_column_1,.et-db .pum .et-l .et_pb_column_1{border-bottom-width:2px;border-bottom-color:#E5E5E5}@media only screen and (max-width:980px){.et-db #et-boc .et-l div.et_pb_section.et_pb_section_0,.et-db .pum .et-l div.et_pb_section.et_pb_section_0{background-image:initial!important}.et-db #et-boc .et-l .et_pb_row_0.et_pb_row,.et-db .pum .et-l .et_pb_row_0.et_pb_row{padding-top:30px!important;padding-right:30px!important;padding-bottom:30px!important;padding-left:30px!important;padding-top:30px!important;padding-right:30px!important;padding-bottom:30px!important;padding-left:30px!important}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .entry-title,.et-db #et-boc .et-l .et_pb_blog_0 .not-found-title,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .entry-title,.et-db .pum .et-l .et_pb_blog_0 .not-found-title{font-size:16px!important}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .post-content,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post .post-content p,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post .post-content p,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .post-content,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post .post-content p,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post .post-content p{font-size:15px}.et-db #et-boc .et-l .et_pb_blog_0:not(.et_pb_blog_grid_wrapper) .et_pb_post,.et-db .pum .et-l .et_pb_blog_0:not(.et_pb_blog_grid_wrapper) .et_pb_post{border-bottom-color:#E5E5E5}.et-db #et-boc .et-l .et_pb_blog_1:not(.et_pb_blog_grid_wrapper) .et_pb_post,.et-db .pum .et-l .et_pb_blog_1:not(.et_pb_blog_grid_wrapper) .et_pb_post{border-bottom-width:1px}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container{padding-top:0vh;padding-right:0vh;padding-bottom:0vh;padding-left:0vh}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:after,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:after{line-height:inherit;font-size:inherit!important;margin-left:-1em;left:auto;display:inline-block;opacity:0;content:attr(data-icon);font-family:ETmodules!important;font-weight:400!important}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:before,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:before{display:none}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:hover:after,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:hover:after{margin-left:.3em;left:auto;margin-left:.3em;opacity:1}.et-db #et-boc .et-l .et_pb_column_0,.et-db .pum .et-l .et_pb_column_0,.et-db #et-boc .et-l .et_pb_column_1,.et-db .pum .et-l .et_pb_column_1{border-bottom-width:2px;border-bottom-color:#E5E5E5}}@media only screen and (max-width:767px){.et-db #et-boc .et-l div.et_pb_section.et_pb_section_0,.et-db .pum .et-l div.et_pb_section.et_pb_section_0{background-image:initial!important}.et-db #et-boc .et-l .et_pb_row_0.et_pb_row,.et-db .pum .et-l .et_pb_row_0.et_pb_row{padding-top:20px!important;padding-right:20px!important;padding-bottom:20px!important;padding-left:20px!important;padding-top:20px!important;padding-right:20px!important;padding-bottom:20px!important;padding-left:20px!important}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .entry-title,.et-db #et-boc .et-l .et_pb_blog_0 .not-found-title,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .entry-title,.et-db .pum .et-l .et_pb_blog_0 .not-found-title{font-size:14px!important}.et-db #et-boc .et-l .et_pb_blog_0 .et_pb_post .post-content,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post .post-content p,.et-db #et-boc .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post .post-content p,.et-db .pum .et-l .et_pb_blog_0 .et_pb_post .post-content,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_light .et_pb_post .post-content p,.et-db .pum .et-l .et_pb_blog_0.et_pb_bg_layout_dark .et_pb_post .post-content p{font-size:13px}.et-db #et-boc .et-l .et_pb_blog_0:not(.et_pb_blog_grid_wrapper) .et_pb_post,.et-db .pum .et-l .et_pb_blog_0:not(.et_pb_blog_grid_wrapper) .et_pb_post{border-bottom-color:#E5E5E5}.et-db #et-boc .et-l .et_pb_blog_1:not(.et_pb_blog_grid_wrapper) .et_pb_post,.et-db .pum .et-l .et_pb_blog_1:not(.et_pb_blog_grid_wrapper) .et_pb_post{border-bottom-width:1px}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container{padding-top:0vh;padding-right:0vh;padding-bottom:0vh;padding-left:0vh}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:after,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:after{line-height:inherit;font-size:inherit!important;margin-left:-1em;left:auto;display:inline-block;opacity:0;content:attr(data-icon);font-family:ETmodules!important;font-weight:400!important}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:before,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:before{display:none}.et-db #et-boc .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:hover:after,.et-db .pum .et-l .et_pb_contact_form_0.et_pb_contact_form_container.et_pb_module .et_pb_button:hover:after{margin-left:.3em;left:auto;margin-left:.3em;opacity:1}.et-db #et-boc .et-l .et_pb_column_0,.et-db .pum .et-l .et_pb_column_0,.et-db #et-boc .et-l .et_pb_column_1,.et-db .pum .et-l .et_pb_column_1{border-bottom-width:2px;border-bottom-color:#E5E5E5}}</style>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/devops-junction/page/6/?et_blog" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

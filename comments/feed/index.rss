@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments for Middleware Inventory	</title>
+	<atom:link href="https://www.middlewareinventory.com/comments/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.middlewareinventory.com</link>
+	<description>An inventory of [i]nformation, Middleware and much more.</description>
+	<lastBuildDate>Sun, 19 Jun 2022 06:04:50 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=5.5.6</generator>
+	<item>
+		<title>
+		Comment on ansible update /etc/hosts file with IP of all hosts across all hosts by Ansible: Add IP of all hosts to /etc/hosts of all other hosts &#8211; Config9.com		</title>
+		<link>https://www.middlewareinventory.com/blog/ansible-update-etc-hosts-file-across-all-hosts/#comment-579</link>
+
+		<dc:creator><![CDATA[Ansible: Add IP of all hosts to /etc/hosts of all other hosts &#8211; Config9.com]]></dc:creator>
+		<pubDate>Wed, 04 Mar 2020 14:49:43 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=2715#comment-579</guid>
+
+					<description><![CDATA[[&#8230;] combined gbolo&#8217;s solution and this solution with addition to add local hostname to /etc/hosts and also make sure not to mistake [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] combined gbolo&#8217;s solution and this solution with addition to add local hostname to /etc/hosts and also make sure not to mistake [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on ansible update /etc/hosts file with IP of all hosts across all hosts by Ansible: Add IP of all hosts to /etc/hosts of all other hosts &#8211; Config9.com		</title>
+		<link>https://www.middlewareinventory.com/blog/ansible-update-etc-hosts-file-across-all-hosts/#comment-578</link>
+
+		<dc:creator><![CDATA[Ansible: Add IP of all hosts to /etc/hosts of all other hosts &#8211; Config9.com]]></dc:creator>
+		<pubDate>Wed, 04 Mar 2020 14:49:43 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=2715#comment-578</guid>
+
+					<description><![CDATA[[&#8230;] combined gbolo&#8217;s solution and this solution with addition to add local hostname to /etc/hosts and also make sure not to mistake [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] combined gbolo&#8217;s solution and this solution with addition to add local hostname to /etc/hosts and also make sure not to mistake [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on Ansible apt module Examples  &#8211; install packages with apt &#124; Devops Junction by AffiliateLabz		</title>
+		<link>https://www.middlewareinventory.com/blog/ansible-apt-examples/#comment-577</link>
+
+		<dc:creator><![CDATA[AffiliateLabz]]></dc:creator>
+		<pubDate>Mon, 24 Feb 2020 10:33:38 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=5138#comment-577</guid>
+
+					<description><![CDATA[Great content! Super high-quality! Keep it up! :)]]></description>
+			<content:encoded><![CDATA[<p>Great content! Super high-quality! Keep it up! 🙂</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on Enabling Two Factor Authentication for EC2 SSH &#8211; AWS MFA Setup by AffiliateLabz		</title>
+		<link>https://www.middlewareinventory.com/blog/aws-mfa-ssh-ec2-setup/#comment-575</link>
+
+		<dc:creator><![CDATA[AffiliateLabz]]></dc:creator>
+		<pubDate>Sat, 15 Feb 2020 20:24:27 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=4602#comment-575</guid>
+
+					<description><![CDATA[Great content! Super high-quality! Keep it up! :)]]></description>
+			<content:encoded><![CDATA[<p>Great content! Super high-quality! Keep it up! 🙂</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on Troubleshooting Load Balancing Issues in Weblogic by Weblogic Cluster &#124; ivannexus		</title>
+		<link>https://www.middlewareinventory.com/blog/troubleshooting-load-balancing-issues-in-weblogic/#comment-571</link>
+
+		<dc:creator><![CDATA[Weblogic Cluster &#124; ivannexus]]></dc:creator>
+		<pubDate>Mon, 04 Nov 2019 19:36:07 +0000</pubDate>
+		<guid isPermaLink="false">http://www.mwinventory.in/?p=766#comment-571</guid>
+
+					<description><![CDATA[[&#8230;] Troubleshooting Load Balancing Issues in Weblogic [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] Troubleshooting Load Balancing Issues in Weblogic [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on How to Ignore SSH Host Key Verification by How do I copy built jar from Jenkins to remote server using Ansible scripts? - FeuTex - #ForAuthors		</title>
+		<link>https://www.middlewareinventory.com/blog/how-to-ignore-ssh-host-key-verification/#comment-569</link>
+
+		<dc:creator><![CDATA[How do I copy built jar from Jenkins to remote server using Ansible scripts? - FeuTex - #ForAuthors]]></dc:creator>
+		<pubDate>Tue, 25 Jun 2019 09:50:18 +0000</pubDate>
+		<guid isPermaLink="false">http://www.mwinventory.in/?p=586#comment-569</guid>
+
+					<description><![CDATA[[&#8230;] https://www.middlewareinventory.com/blog/how-to-ignore-ssh-host-key-verification/ [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] <a href="https://www.middlewareinventory.com/blog/how-to-ignore-ssh-host-key-verification/" rel="nofollow ugc">https://www.middlewareinventory.com/blog/how-to-ignore-ssh-host-key-verification/</a> [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on A Simple SOAP Web service Application for Weblogic &#8211; Development and Testing by A Simple SOAP Web service Application for Weblogic - Development and Testing - Coding Videos		</title>
+		<link>https://www.middlewareinventory.com/blog/simple-soap-web-sevice-for-weblogic-development-testing/#comment-567</link>
+
+		<dc:creator><![CDATA[A Simple SOAP Web service Application for Weblogic - Development and Testing - Coding Videos]]></dc:creator>
+		<pubDate>Fri, 24 Aug 2018 15:07:27 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=1543#comment-567</guid>
+
+					<description><![CDATA[[&#8230;] A Simple SOAP Web Service in Weblogic &#8211; Develop &#8211; Demonstrate &#8211; Test [&#8230;]]]></description>
+			<content:encoded><![CDATA[<p>[&#8230;] A Simple SOAP Web Service in Weblogic &#8211; Develop &#8211; Demonstrate &#8211; Test [&#8230;]</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on How to Enable JMX port in weblogic 10, 11g, 12c by admin		</title>
+		<link>https://www.middlewareinventory.com/blog/how-to-enable-jmx-port-in-weblogic-10-11g-12c/#comment-565</link>
+
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Fri, 20 Jul 2018 19:24:12 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=1496#comment-565</guid>
+
+					<description><![CDATA[test]]></description>
+			<content:encoded><![CDATA[<p>test</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on Vagrant Private key &#8211; Ansible SSH Permission Denied &#8211; How to resolve. by admin		</title>
+		<link>https://www.middlewareinventory.com/blog/vagrant-private-key-ansible-ssh-permission-denied-resolve-how/#comment-564</link>
+
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 11 Jul 2018 04:28:18 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=1388#comment-564</guid>
+
+					<description><![CDATA[test]]></description>
+			<content:encoded><![CDATA[<p>test</p>
+]]></content:encoded>
+		
+			</item>
+		<item>
+		<title>
+		Comment on How to create ssh public key from private key &#8211; Vagrant &#038; Linux by admin		</title>
+		<link>https://www.middlewareinventory.com/blog/create-ssh-public-key-private-key/#comment-563</link>
+
+		<dc:creator><![CDATA[admin]]></dc:creator>
+		<pubDate>Wed, 11 Jul 2018 04:05:06 +0000</pubDate>
+		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=1392#comment-563</guid>
+
+					<description><![CDATA[Test Comment]]></description>
+			<content:encoded><![CDATA[<p>Test Comment</p>
+]]></content:encoded>
+		
+			</item>
+	</channel>
+</rss>
+
+<!--
+Performance optimized by W3 Total Cache. Learn more: https://www.boldgrid.com/w3-total-cache/
+
+Page Caching using disk: enhanced (Page is feed) 
+Minified using disk
+
+Served from: www.middlewareinventory.com @ 2022-12-09 14:35:13 by W3 Total Cache
+-->

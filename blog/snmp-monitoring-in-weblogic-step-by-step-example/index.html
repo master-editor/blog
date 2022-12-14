@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+
+<title>Weblogic SNMP Monitoring Setup - Step By Step</title>
+<meta name="description" content="Weblogic SNMP monitoring setup configuration example with step by step instructions and a video guide. This Post covers Weblogic SNMP model and how it works and how to setup and monitor any Runtime MBeans and monitor server state, Connection Pool state, Connection pool usage, and trigger trap notifications." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Weblogic SNMP Monitoring Setup - Step By Step" />
+<meta property="og:description" content="Weblogic SNMP monitoring setup configuration example with step by step instructions and a video guide. This Post covers Weblogic SNMP model and how it works and how to setup and monitor any Runtime MBeans and monitor server state, Connection Pool state, Connection pool usage, and trigger trap notifications." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2018-01-11T11:35:44+00:00" />
+<meta property="article:modified_time" content="2020-08-16T14:43:50+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg" />
+<meta property="og:image:width" content="837" />
+<meta property="og:image:height" content="513" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg","width":837,"height":513},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#webpage","url":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/","name":"Weblogic SNMP Monitoring Setup - Step By Step","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#primaryimage"},"datePublished":"2018-01-11T11:35:44+00:00","dateModified":"2020-08-16T14:43:50+00:00","description":"Weblogic SNMP monitoring setup configuration example with step by step instructions and a video guide. This Post covers Weblogic SNMP model and how it works and how to setup and monitor any Runtime MBeans and monitor server state, Connection Pool state, Connection pool usage, and trigger trap notifications.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Weblogic SNMP Monitoring Setup &#8211; Step By Step","datePublished":"2018-01-11T11:35:44+00:00","dateModified":"2020-08-16T14:43:50+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#primaryimage"},"keywords":"how snmp works in weblogic,weblogic snmp,weblogic snmp example,weblogic snmp setup step by step,weblogic snmp setup video,Weblogic SNMP Trap Destinations setup example,weblogic snmp trap setup","articleSection":"weblogic","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Weblogic SNMP Monitoring Setup &#8211; Step By Step Comments Feed" href="feed/index.rss" />
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.12.2';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-84162240-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	if ( 'undefined' === typeof gaOptout ) {
+		function gaOptout() {
+			__gaTrackerOptout();
+		}
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-84162240-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+
+<script type="text/javascript" data-cfasync="false">
+			window.google_analytics_uacct = 'UA-84162240-1';
+
+        </script>
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/404f7.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/88e5e.css" media="all" />
+<script type='text/javascript' id='monsterinsights-frontend-script-js-extra'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"https:\/\/www.middlewareinventory.com","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1058f.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1de0a.js"></script>
+<script type='text/javascript' id='ssb-front-js-js-extra'>
+/* <![CDATA[ */
+var SSB = {"ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","fb_share_nonce":"bd4b40f4fe"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/268e7.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/760.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-snmp-monitoring-in-weblogic-step-by-step-example-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-snmp-monitoring-in-weblogic-step-by-step-example-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script> <style media="screen">/*inline margin*/
+	
+	
+	
+	
+	
+	
+			 /*margin-digbar*/
+
+	
+	
+	
+	
+	   div[class*="simplesocialbuttons-float"].simplesocialbuttons.simplesocial-round-icon button{
+	 margin: ;
+   }
+	
+	
+	
+</style>
+
+<meta property="og:title" content="Weblogic SNMP Monitoring Setup &#8211; Step By Step - Middleware Inventory" />
+<meta property="og:description" content="The Objective of this post is cover the Weblogic SNMP monitoring in a practical manner. This post will have both theoretical and practical information and a video to help you understand things better.
+Let's start!.
+
+&nbsp;
+What is SNMP and How it works
+SNMP - Simple Network Management Protocol is a protocol and a specification widely used for collecting information from, and configuring, network devices, such" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="og:image" content="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="The Objective of this post is cover the Weblogic SNMP monitoring in a practical manner. This post will have both theoretical and practical information and a video to help you understand things better.
+Let's start!.
+
+&nbsp;
+What is SNMP and How it works
+SNMP - Simple Network Management Protocol is a protocol and a specification widely used for collecting information from, and configuring, network devices, such" />
+<meta name="twitter:title" content="Weblogic SNMP Monitoring Setup &#8211; Step By Step - Middleware Inventory" />
+<meta property="twitter:image" content="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg" />
+<style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-760 single-format-standard wp-custom-logo cookies-not-set elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-760" class="post-760 post type-post status-publish format-standard has-post-thumbnail hentry category-weblogic tag-how-snmp-works-in-weblogic tag-weblogic-snmp tag-weblogic-snmp-example tag-weblogic-snmp-setup-step-by-step tag-weblogic-snmp-setup-video tag-weblogic-snmp-trap-destinations-setup-example tag-weblogic-snmp-trap-setup wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Weblogic SNMP Monitoring Setup &#8211; Step By Step</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="5:05 pm" rel="bookmark"><time class="entry-date published updated" datetime="August 16, 2020">August 16, 2020</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Weblogic%20SNMP%20Monitoring%20Setup%20%E2%80%93%20Step%20By%20Step&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fsnmp-monitoring-in-weblogic-step-by-step-example%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="760" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Weblogic+SNMP+Monitoring+Setup+%E2%80%93+Step+By+Step&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fsnmp-monitoring-in-weblogic-step-by-step-example%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="760" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Weblogic%20SNMP%20Monitoring%20Setup%20%E2%80%93%20Step%20By%20Step&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fsnmp-monitoring-in-weblogic-step-by-step-example%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="760" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fsnmp-monitoring-in-weblogic-step-by-step-example%2F&subject=Weblogic%20SNMP%20Monitoring%20Setup%20%E2%80%93%20Step%20By%20Step" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="760" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="760" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p style="text-align: left;">The Objective of this post is cover the Weblogic SNMP monitoring in a practical manner. This post will have both theoretical and practical information and a video to help you understand things better.</p>
+<p>Let&#8217;s start!.</p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#What_is_SNMP_and_How_it_works" title="What is SNMP and How it works">What is SNMP and How it works</a></li><li><a href="#Weblogic_and_SNMP" title="Weblogic and SNMP">Weblogic and SNMP</a></li><li><a href="#How_SNMP_Works_in_Weblogic" title="How SNMP Works in Weblogic">How SNMP Works in Weblogic</a></li><li><a href="#Models_of_SNMP_in_Weblogic" title="Models of SNMP in Weblogic">Models of SNMP in Weblogic</a></li><li><a href="#Assumptions" title="Assumptions:">Assumptions:</a></li><li><a href="#Environment" title="Environment:">Environment:</a></li><li><a href="#Configure_Domain_SNMP_Agent" title="Configure Domain SNMP Agent">Configure Domain SNMP Agent</a></li><li><a href="#Create_String_Monitors" title="Create String Monitors">Create String Monitors</a></li><li><a href="#Create_Trap_Destinations" title="Create Trap Destinations">Create Trap Destinations</a></li><li><a href="#Validate_the_Trap_Notification_using_Weblogic_Built-in_SNMP_Trap_Monitor" title="Validate the Trap Notification using Weblogic Built-in SNMP Trap Monitor">Validate the Trap Notification using Weblogic Built-in SNMP Trap Monitor</a></li><li><a href="#Decoding_the_Trap_Notification_Received" title="Decoding the Trap Notification Received">Decoding the Trap Notification Received</a></li></ul></nav></div>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="What_is_SNMP_and_How_it_works">What is SNMP and How it works</span></h3>
+<p><strong>SNMP &#8211; Simple Network Management Protocol </strong>is a protocol and a specification widely used for collecting information from, and configuring, network devices, such as servers, printers, hubs, switches, and routers on an Internet Protocol (IP) network. That&#8217;s OK but what is relation between SNMP with a middleware component like WebLogic Server?.  Want to know? Then Continue to read.</p>
+<p>SNMP has a simple architecture based on a client-server model. The servers are called <strong>managers</strong>, collect and process information about devices on the network.</p>
+<p>The clients, called <strong>agents. </strong>An agent can be any network endpoint like Hub, Switch, Router, etc. (or) a Servers. (So why cannot WebLogic be ?)</p>
+<figure id="attachment_761" aria-describedby="caption-attachment-761" style="width: 469px" class="wp-caption aligncenter"><a href="http://www.mwinventory.in/wp-content/uploads/2018/01/snmpbasics.jpg"><img class="wp-image-761 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-469x474.png" alt="Weblogic SNMP monitoring setup" width="469" height="474" data-src="../../wp-content/uploads/2018/01/snmpbasics.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2018/01/snmpbasics.jpg 469w, ../../wp-content/uploads/2018/01/snmpbasics-297x300.jpg 297w, ../../wp-content/uploads/2018/01/snmpbasics-150x152.jpg 150w" data-sizes="auto" /><noscript><img class="wp-image-761 size-full" src="../../wp-content/uploads/2018/01/snmpbasics.jpg" alt="Weblogic SNMP monitoring setup" width="469" height="474" srcset="../../wp-content/uploads/2018/01/snmpbasics.jpg 469w, ../../wp-content/uploads/2018/01/snmpbasics-297x300.jpg 297w, ../../wp-content/uploads/2018/01/snmpbasics-150x152.jpg 150w" sizes="(max-width: 469px) 100vw, 469px" data-eio="l" /></noscript></a><figcaption id="caption-attachment-761" class="wp-caption-text">Image Credits to www.networkmanagementsoftware.com</figcaption></figure>
+<h4></h4>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Weblogic_and_SNMP">Weblogic and SNMP</span></h3>
+<p>We can use the <strong>Simple Network Management Protocol</strong> (SNMP) to provide monitoring data to enterprise-wide management systems. With SNMP, we configure agents in WebLogic to gather and send data about managed resources in response to a request from managers. We can also configure agents to issue reports to managers when they detect predefined thresholds or conditions on a managed resource.</p>
+<p>Some of the thresholds and conditions would be as follows</p>
+<ol>
+<li>When a Server instance goes down</li>
+<li>When a Server instance goes to Admin mode</li>
+<li>When instance have stuck thread</li>
+<li>When any configuration attribute changed in WebLogic domain like someone changes listen-port number on server instances</li>
+<li>When Connection Pool usage is reaching the maximum threshold.</li>
+</ol>
+<p>The preceding examples are very few, and the possibility of SNMP monitoring can go more and more.</p>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="How_SNMP_Works_in_Weblogic">How SNMP Works in Weblogic</span></h3>
+<p>WebLogic Server SNMP agents query the WebLogic Server management system and communicate the results over the SNMP protocol. The WebLogic Server management system exposes management data through a collection of managed beans (MBeans).</p>
+<h5></h5>
+<p><em>When a WebLogic Server SNMP agent receives a request from a manager, it determines which MBean corresponds to the OID  in the manager’s request. Then it retrieves the data and wraps it in an SNMP response.</em></p>
+<p>&nbsp;</p>
+<p>So its a manager initiated request and this is how it looks like in a pictorial representation</p>
+<p><a href="http://www.mwinventory.in/wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg"><img class="alignnone wp-image-784 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-837x513.png" alt="Weblogic SNMP monitoring setup" width="837" height="513" data-src="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg 837w, ../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-300x184.jpg 300w, ../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-768x471.jpg 768w, ../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-150x92.jpg 150w" data-sizes="auto" /><noscript><img class="alignnone wp-image-784 size-full" src="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg" alt="Weblogic SNMP monitoring setup" width="837" height="513" srcset="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent.jpg 837w, ../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-300x184.jpg 300w, ../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-768x471.jpg 768w, ../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-150x92.jpg 150w" sizes="(max-width: 837px) 100vw, 837px" data-eio="l" /></noscript></a></p>
+<p>In the preceding illustration, SNMP Manager Connects to SNMP Agent ( Not to the Trap Destination) to request for a specific data by explicitly mentioning the OID</p>
+
+<p>Here Get, GetNext, Walk and others are the SNMP Tasks/Requests  SNMP manager could  initiate</p>
+<p>&nbsp;</p>
+<p>For example, the following <em>snmp.cmdline.manager</em> command will give you the complete list of servers in your domain from <em>ServerLifeCycleRuntime</em> tree</p>
+<pre>mwidomain aksarav$ <strong>java weblogic.diagnostics.snmp.cmdline.Manager SnmpWalk -m BEA-WEBLOGIC-MIB -M /weblogic/diagnostics/snmp/mib -c saravak serverLifeCycleRuntimeName -p 1610</strong>
+serverLifeCycleRuntimeName.''2167c59bd9a1f6a92fec9fb870c3c1dd'H'=AdminServer
+serverLifeCycleRuntimeName.''37f3f44ef992bc1c33107785af6f2c8a'H'=mwiserver4
+serverLifeCycleRuntimeName.''40adfead9a56e60483183ae5a487b498'H'=mwiserver1
+serverLifeCycleRuntimeName.''43f1085eb5d674d290610af1e4ab10b3'H'=mwiserver3
+serverLifeCycleRuntimeName.''98213829e01fa338a2c9ded2f1636711'H'=mwiserver2
+DONE</pre>
+<p>&nbsp;</p>
+<hr />
+<p><em>We can also configure agents to issue unsolicited reports (notifications) to managers when they detect predefined thresholds or conditions on a managed resource. that&#8217;s where monitors and TrapDestinations are used.</em></p>
+<p>&nbsp;</p>
+<p>When a Monitor (StringMonitor, Gaugemontor or any) finds a matching threshold or condition it will generate trap notification and sends it to TrapDestination.</p>
+<p>&nbsp;</p>
+<p>TrapDestination will be constantly monitored by <strong>TrapReceiver/Monitor </strong>will get the Trap notification generated as soon its created. In other words, TrapMonitor will connect itself to the TrapDestination and listen for any activity.</p>
+<p>&nbsp;</p>
+<p>Hope the following pictorial representation helps you understand this</p>
+<p><a href="http://www.mwinventory.in/wp-content/uploads/2018/01/SNMP_To_Manager.jpg"><img class="alignnone wp-image-785 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-907x513.png" alt="Weblogic SNMP monitoring setup" width="907" height="513" data-src="../../wp-content/uploads/2018/01/SNMP_To_Manager.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2018/01/SNMP_To_Manager.jpg 907w, ../../wp-content/uploads/2018/01/SNMP_To_Manager-300x170.jpg 300w, ../../wp-content/uploads/2018/01/SNMP_To_Manager-768x434.jpg 768w, ../../wp-content/uploads/2018/01/SNMP_To_Manager-150x85.jpg 150w" data-sizes="auto" /><noscript><img class="alignnone wp-image-785 size-full" src="../../wp-content/uploads/2018/01/SNMP_To_Manager.jpg" alt="Weblogic SNMP monitoring setup" width="907" height="513" srcset="../../wp-content/uploads/2018/01/SNMP_To_Manager.jpg 907w, ../../wp-content/uploads/2018/01/SNMP_To_Manager-300x170.jpg 300w, ../../wp-content/uploads/2018/01/SNMP_To_Manager-768x434.jpg 768w, ../../wp-content/uploads/2018/01/SNMP_To_Manager-150x85.jpg 150w" sizes="(max-width: 907px) 100vw, 907px" data-eio="l" /></noscript></a></p>
+<p>In the preceding illustration, you can see SNMP Trap Monitor is listening on the Trap Destination Port. We will cover this practically in the upcoming chapter &#8220;Validate the Trap Notification<strong> using Weblogic Built-in SNMP Trap Monitor</strong></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Models_of_SNMP_in_Weblogic">Models of SNMP in Weblogic</span></h3>
+<p>&nbsp;</p>
+<p>In each WebLogic Server domain, you can create multiple SNMP agents and organize them into a <strong>centralized</strong> or <strong>de-centralized model</strong> for SNMP monitoring and communication:</p>
+<ul>
+<li><strong>In a centralized model</strong>, you configure an SNMP agent only on the Administration Server. This agent communicates with all Managed Servers in the domain. Your SNMP manager communicates only with the SNMP agent on the Administration Server. This model is convenient but introduces performance overhead in WebLogic Server. Also, <strong>if the Administration Server is unavailable, you cannot monitor the domain through SNMP.</strong></li>
+</ul>
+<p>&nbsp;</p>
+<ul>
+<li><strong>In a de-centralized model,</strong> you configure SNMP agents on each Managed Server. Your SNMP manager must communicate with the agents on individual Managed Servers.</li>
+</ul>
+<p>&nbsp;</p>
+<p>Hope we set the context and ready to go Realtime mode and create SNMP and see how it works. We will cover the Centralized Model in this post ( we will soon update it with De-Centralized Model)</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Assumptions">Assumptions:</span></h3>
+<ol>
+<li>This post believes that you know WebLogic and its terminologies</li>
+<li>This post considers that you already have a working WebLogic setup with managed servers and clusters etc.. In case you are looking for how to install WebLogic and create a domain. Read these articles first and then come back here. <a href="http://www.mwinventory.in/blog/weblogic-12c-installation-linux/">http://www.mwinventory.in/blog/weblogic-12c-installation-linux/</a> and <a href="http://www.mwinventory.in/blog/weblogic-domain-creation-script-wlst/">http://www.mwinventory.in/blog/weblogic-domain-creation-script-wlst/</a></li>
+</ol>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Environment">Environment:</span></h3>
+<p>I am using my WebLogic 12c domain for this post; same instructions could be applied for 11g and 10. I am going to setup the Centralized  Model ( Domain Scope SNMP Agent hosted on AdminServer) in this post</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<blockquote><p>Note*: Keeping the page loading time in mind, I have not attached the snapshot for all the preceding steps but the video available at the end of this post with more detailed information.</p></blockquote>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Configure_Domain_SNMP_Agent">Configure Domain SNMP Agent</span></h3>
+<p>&nbsp;</p>
+<ol>
+<li>Login to the Weblogic Administration Console.</li>
+<li>Click <strong>Lock&amp;Edit </strong>in case you have not done it already</li>
+<li>On the left pane (DomainStructure wizard) click on <strong>Diagnostics </strong> and then <strong>SNMP</strong></li>
+<li>On the right, you will be able to see the <strong>Domain SNMP Agent</strong> , <strong>General</strong> Configuration Tab</li>
+<li>Check the <strong>Enabled</strong> box and mention the <strong>SNMP UDP Port</strong> and <strong>AgentX Port </strong>and check <strong>Community based access enabled</strong></li>
+<li>In trap Version, Select <strong>V2</strong></li>
+</ol>
+<h5 style="text-align: center;"></h5>
+<h5 style="text-align: center;"></h5>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Create_String_Monitors">Create String Monitors</span></h3>
+<p>&nbsp;</p>
+<ol>
+<li>Click <strong>Lock&amp;Edit </strong>in case you have not done it already</li>
+<li>On the left pane (DomainStructure wizard) click on <strong>Diagnostics </strong> and then <strong>SNMP</strong></li>
+<li>On the right, you will be able to see the <strong>Domain SNMP Agent</strong></li>
+<li>Now Click on the <strong>String Monitors </strong>tab and click on <strong>New  </strong>and create new String monitor</li>
+<li>In the Next screen Enter the Name for the <strong>String Monitor </strong>and in <strong>Monitored MBean Type </strong>select <strong>&#8220;ServerLifeCycleRunTime&#8221; </strong>from the drop-down</li>
+<li>Click Next and in <strong>Monitored Attribute Name </strong>Select <strong>&#8220;State&#8221; </strong>from the drop-down and click Next</li>
+<li>Now Enter the String to Compare in the <strong>String to Compare </strong>text box [ I want to be notified when the corresponding Managed Server Transition from <strong>RUNNING</strong> to <strong>FORCE_SHUTTING_DOWN </strong>So I am using FORCE_SHUTTING_DOWN as the string to Compare]</li>
+<li>click<strong> Finish</strong></li>
+<li>Once you are redirected to the <strong>String Monitors</strong> tab, you will be able to see the String Monitor you have just created in the table. Click on the newly created String Monitor</li>
+<li>Update the <strong>Monitored MBean Name </strong>field<strong> </strong>with the <strong>Managed Server Name</strong> you want to be monitored.</li>
+<li>click on<strong> Save </strong>and <strong>Activate Changes </strong></li>
+</ol>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Create_Trap_Destinations">Create Trap Destinations</span></h3>
+<p>&nbsp;</p>
+<ol>
+<li> Click <strong>Lock&amp;Edit </strong>in case you have not done it already</li>
+<li>On the left pane (DomainStructure wizard) click on <strong>Diagnostics </strong> and then <strong>SNMP</strong></li>
+<li>On the right, you will be able to see the <strong>Domain SNMP Agent</strong></li>
+<li>Now click on the Trap Destinations tab</li>
+<li>Click New and create new <strong>SNMP Trap Destination</strong></li>
+<li>Enter the Name as you desired</li>
+<li><strong>Community</strong> value should match to the <strong>Community Password</strong> in the Domain SNMP Agent -&gt; General tab ( if you have not updated anything, by default both will be public)</li>
+<li>Change the Port number (optional, I am using <strong>1622 </strong>as port number) or let it be default [Make a note of this port number, this is where you should point you SNMP Manager]<strong>+</strong></li>
+</ol>
+<p>&nbsp;</p>
+<h5 style="text-align: center;"></h5>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Validate_the_Trap_Notification_using_Weblogic_Built-in_SNMP_Trap_Monitor">Validate the Trap Notification using Weblogic Built-in SNMP Trap Monitor</span></h3>
+<p>&nbsp;</p>
+<p>Use WebLogic built-in SNMP Manager to review the trap and to verify if the trap notification is receiving to the Trap Destination</p>
+<ol>
+<li>Go to your Domain Directory/bin</li>
+<li>Execute <strong>. ./setDomainEnv.sh</strong> script to set environment ( There is two dots, First one is sourcing)</li>
+<li> Execute the following command ( use the port number you have used at Trap Destination Creation Step 8 <strong>+</strong>)
+<pre>java weblogic.diagnostics.snmp.cmdline.Manager SnmpTrapMonitor -p 1622</pre>
+</li>
+</ol>
+<p>&nbsp;</p>
+<h5 style="text-align: center;"></h5>
+<p>&nbsp;</p>
+<h3 style="text-align: left;"><span class="ez-toc-section" id="Decoding_the_Trap_Notification_Received">Decoding the Trap Notification Received</span></h3>
+<p>&nbsp;</p>
+<p>The Trap Notification generated would be something like below.</p>
+<pre>--- Snmp Trap Received ---
+ Version : v2
+ Source : UdpEntity:127.0.0.1:1612
+ Community : public
+ Enterprise : enterprises.140.625
+ TrapOID : enterprises.140.625.0.70
+ RawTrapOID : 1.3.6.1.4.1.140.625.0.70
+ Trap Objects : {
+ { enterprises.140.625.100.5=Sat Jan 06 17:43:07 IST 2018 }
+ { enterprises.140.625.100.10=mwiserver1 }
+}
+ Raw VarBinds : {
+ { sysUpTime.0=60049 }
+ { snmpTrapOID.0=enterprises.140.625.0.70 }
+ { enterprises.140.625.100.5=Sat Jan 06 17:43:07 IST 2018 }
+ { enterprises.140.625.100.10=mwiserver1 }
+}</pre>
+<p>Here we have a server name, but how do we know if it is for <em>SHUTDOWN</em> event?  It would be more confusing if you have two string monitoring setup, one for <em>SHUTDOWN</em> and another for <em>RUNNING</em></p>
+<p>That&#8217;s where the OID comes to the picture.</p>
+<p>In the preceding sample SNMP Trap, look at this line</p>
+<pre>snmpTrapOID.0=enterprises.140.625.0.<span style="color: #ff6600;">70</span></pre>
+<p>This last two digits of OID indicates what type of action has been performed. Is it a SHUTDOWN (or) START  etc</p>
+<blockquote><p>70 indicates that the server was running is now shutdown</p>
+<p>65 indicates that the server was shutdown is now Running</p></blockquote>
+<p>List of OIDs and its description could be found here <a href="https://docs.oracle.com/cd/E24329_01/web.1211/e24424/snmptraps.htm#SNMPA153">https://docs.oracle.com/cd/E24329_01/web.1211/e24424/snmptraps.htm#SNMPA153</a></p>
+<p>SNMP Trap notification has other informaiton like community name and trap version etc.</p>
+<pre>Community : public</pre>
+<p style="text-align: left;">Here the community is <strong>public. </strong>As a convention all network devices who used SNMP V1&amp;V2 use public as the community name, you can change it to anything you desire.</p>
+<p style="text-align: left;">In the video, we have covered that part as well.</p>
+<h5 style="text-align: center;"></h5>
+<h5 style="text-align: center;"></h5>
+<h5 style="text-align: center;"><b>The Video </b>( Has more information that we cannot cover in this post. Plese see)</h5>
+<p style="text-align: center;">
+<p>&nbsp;</p>
+<p>Hope this post is helpful and I am already working regarding the advanced JMX and SNMP in Weblogic it will cover the MIB, MIB Browser and other various monitoring possibilities in Weblogic with SNMP..  Stay connected for updates.</p>
+<p>I would like to hear your feedback. Feel free to comment how do you feel about this article</p>
+<p>Cheers,</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Find me on Linkedin <a href="https://www.linkedin.com/in/rumen-lishkov/">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#0a626f6666654a6d78637e6c7324696567"> <span class="__cf_email__" data-cfemail="3159545d5d5e715643584557481f525e5c">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1657280709" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="760" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="fdf26bd6a5" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1657280709" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1657280709"></span>
+</div>
+</div>
+<hr>
+<p>&nbsp;</p>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-tenant-monitoring-use-step-step/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/02/Screen-Shot-2018-02-11-at-3.49.42-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/02/Screen-Shot-2018-02-11-at-3.49.42-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-tenant-monitoring-use-step-step/index.html'>What is weblogic tenant monitoring and how to use it - Step by Step</a><p>Weblogic Tenant monitoring is a predominant feature in weblogic REST API management services.&nbsp; Tenant monitoring enables you to monitor the weblogic resources&nbsp;fast and effective way.&nbsp; Tenant monitoring feature is available in both legacy 12.1 and 12.2 versions. Weblogic Tenant monitoring requires weblogic RESTful management services enabled at the weblogic domain.&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../how-to-download-and-applyremove-patch-in-weblogic-step-by-step/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/03/Screen-Shot-2018-03-20-at-1.24.09-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/03/Screen-Shot-2018-03-20-at-1.24.09-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../how-to-download-and-applyremove-patch-in-weblogic-step-by-step/index.html'>How to download and apply/remove patch in weblogic - step by step</a><p>Oracle Weblogic Server 12c has replaced the legacy BSU&nbsp;utility with the OPatch utility from Oracle weblogic server 12c version.&nbsp; The objective of this post is to&nbsp;provide the practical view of how to download the Oracle weblogic server patch from support.oracle.com and Applying it with Opatch We Assume: (Prerequisites) That you&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-config-xml-reader/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2016/11/wls_01-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2016/11/wls_01-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-config-xml-reader/index.html'>Weblogic Config XML reader</a><p>Have you ever wanted to get the server configuration information of WebLogic directly from config.xml without using WLST. I recently had the same requirement and spent a little time ( I think ) to create this simple XML parser in python which helped me in reading the config.xml file's content&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../recover-weblogic-password-in-4-steps/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Recover weblogic password" data-src="../../wp-content/uploads/2019/01/Security-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/Security-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Recover weblogic password" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../recover-weblogic-password-in-4-steps/index.html'>Recover weblogic password in 4 steps - Weblogic 12c</a><p>The Objective In this post, we will see the easiest way possible to decrypt the WebLogic&nbsp;admin server password. in other words, recovering WebLogic password. You do not need to create a JAR file or copy any security-related files etc. You do not even need your AdminServer to be running. Just&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-content'>
+<a href='../weblogic-application-deployment-parser/index.html'>Weblogic Application Deployment Parser</a><p>Let me introduce&nbsp; Weblogic Application Deployment Parser , A tool designed to list all the application (app-deployment) configuration from the config.xml file of weblogic. It uses the same core of Weblogic Config XML Reader you can find it here Though there are&nbsp; weblogic.Admin and WLST ways to get the deployed&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/how-snmp-works-in-weblogic/index.html" rel="tag">how snmp works in weblogic</a><a href="../tag/weblogic-snmp/index.html" rel="tag">weblogic snmp</a><a href="../tag/weblogic-snmp-example/index.html" rel="tag">weblogic snmp example</a><a href="../tag/weblogic-snmp-setup-step-by-step/index.html" rel="tag">weblogic snmp setup step by step</a><a href="../tag/weblogic-snmp-setup-video/index.html" rel="tag">weblogic snmp setup video</a><a href="../tag/weblogic-snmp-trap-destinations-setup-example/index.html" rel="tag">Weblogic SNMP Trap Destinations setup example</a><a href="../tag/weblogic-snmp-trap-setup/index.html" rel="tag">weblogic snmp trap setup</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../troubleshooting-load-balancing-issues-in-weblogic/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Troubleshooting Load Balancing Issues in Weblogic</a></div><div class="nav-next"><a href="../get-running-weblogic-processes-domain-ports-used-information/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>WLPS &#8211; Get Running weblogic processes with domain and ports used information</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (28)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (1)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (16)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (5)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><div class="simplesocialbuttons simplesocial-round-icon simplesocialbuttons-float-left-center post-760 post  ssb_counter-activate simplesocialbuttons-slide-bottom-in">
+<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
+<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=Weblogic+SNMP+Monitoring+Setup+%E2%80%93+Step+By+Step&url=https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
+<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
+<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=Weblogic+SNMP+Monitoring+Setup+%E2%80%93+Step+By+Step&body=https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/"><span class="simplesocialtxt">Email</span></button>
+<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://api.whatsapp.com/send?text=https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/"><span class="simplesocialtxt">WhatsApp</span></button>
+</div>
+<script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"760 http:\/\/www.mwinventory.in\/?p=760","disqusShortname":"mwinventory","disqusTitle":"Weblogic SNMP Monitoring Setup \u2013 Step By Step","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/snmp-monitoring-in-weblogic-step-by-step-example\/","postId":"760"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"4b1d573e8a"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"67781edd37","post_id":"760"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"a0c6e2d9cd","ip":"3.87.177.87","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f2bcf.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/129c2.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/snmp-monitoring-in-weblogic-step-by-step-example/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script> 
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1657280709;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

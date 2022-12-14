@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Ansible Wait for URL to respond or Retry - WEB and API | Devops Junction</title>
+<meta name="description" content="Ansible Wait for URL to respond a status code or a message . Ansible URL retry until 200. Ansible API and WEB Url validate response and retry. Ansible HTTP example" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible Wait for URL to respond or Retry - WEB and API | Devops Junction" />
+<meta property="og:description" content="Ansible Wait for URL to respond a status code or a message . Ansible URL retry until 200. Ansible API and WEB Url validate response and retry. Ansible HTTP example" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-11-09T09:11:47+00:00" />
+<meta property="article:modified_time" content="2022-11-09T09:18:47+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg","width":1748,"height":1240,"caption":"ansible uri retry"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/","name":"Ansible Wait for URL to respond or Retry - WEB and API | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#primaryimage"},"datePublished":"2022-11-09T09:11:47+00:00","dateModified":"2022-11-09T09:18:47+00:00","description":"Ansible Wait for URL to respond a status code or a message . Ansible URL retry until 200. Ansible API and WEB Url validate response and retry. Ansible HTTP example","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-wait-for-url/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible Wait for URL to respond or Retry &#8211; WEB and API | Devops Junction","datePublished":"2022-11-09T09:11:47+00:00","dateModified":"2022-11-09T09:18:47+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-wait-for-url/#primaryimage"},"articleSection":"Ansible","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-wait-for-url/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible Wait for URL to respond or Retry &#8211; WEB and API  | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/9260.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-wait-for-url-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-wait-for-url-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h2
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+b,strong{
+  color: black;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+    background: #eaeef3 none repeat scroll 0% 0% !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-9260 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-9260" class="post-9260 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible Wait for URL to respond or Retry &#8211; WEB and API | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="2:41 pm" rel="bookmark"><time class="entry-date published updated" datetime="November 9, 2022">November 9, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20Wait%20for%20URL%20to%20respond%20or%20Retry%20%E2%80%93%20WEB%20and%20API%20%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-wait-for-url%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="9260" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+Wait+for+URL+to+respond+or+Retry+%E2%80%93+WEB+and+API++%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-wait-for-url%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="9260" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20Wait%20for%20URL%20to%20respond%20or%20Retry%20%E2%80%93%20WEB%20and%20API%20%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-wait-for-url%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="9260" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-wait-for-url%2F&subject=Ansible%20Wait%20for%20URL%20to%20respond%20or%20Retry%20%E2%80%93%20WEB%20and%20API%20%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="9260" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="9260" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>Ansible is used for various types of Automations and use cases. Web Automation, Web Scraping and API Automation are some of them</p>
+<p>when it comes to Web or API automation there are a lot of URLs and endpoints</p>
+<p>Sometimes they respond immediately the first time, and sometimes you have to retry a few times or wait for them to return a specific status code or content</p>
+<p>For example, when you are waiting for the  health check URL to return a message <code>OK</code></p>
+<p>Or waiting for your Autosys Job be completed and return <code>Completed</code> Message</p>
+<p>Or simply waiting for any application to come up and return a specific HTTP status code like <code>200</code> or <code>201</code> or <code>302</code> or any other</p>
+<p>All of these use cases can be done and automated in Ansible. There are multiple ways to do it and let us explore some in this article</p>
+<p><a href="../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg"><img class="post-img alignnone wp-image-9280 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="ansible uri retry" width="1748" height="1240" data-src="../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg 1748w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-300x213.jpg 300w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-1024x726.jpg 1024w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-768x545.jpg 768w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-400x284.jpg 400w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-1080x766.jpg 1080w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9280 size-full" src="../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg" alt="ansible uri retry" width="1748" height="1240" srcset="../../wp-content/uploads/2022/11/ansible-url-wait-for.jpg 1748w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-300x213.jpg 300w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-1024x726.jpg 1024w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-768x545.jpg 768w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-400x284.jpg 400w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-1080x766.jpg 1080w, ../../wp-content/uploads/2022/11/ansible-url-wait-for-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Ansible_Wait_for_the_URL_to_return_status_200_status_code" title="Ansible Wait for the URL to return status 200 status code">Ansible Wait for the URL to return status 200 status code</a></li><li><a href="#Ansible_wait_for_POST_call_to_return_201_status_code_API" title="Ansible wait for POST call to return 201 status code &#8211; API">Ansible wait for POST call to return 201 status code &#8211; API</a></li><li><a href="#Ansible_wait_for_a_message_or_specific_string_in_response" title="Ansible wait for a message or specific string in response">Ansible wait for a message or specific string in response</a></li><li><a href="#Where_to_go_from_here" title="Where to go from here">Where to go from here</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Ansible_Wait_for_the_URL_to_return_status_200_status_code">Ansible Wait for the URL to return status 200 status code</span></h2>
+<p>This is one of the most sought-after use cases in web automation.</p>
+<p>As we all know the status 200 means the website is up and online and not just 200 we can look for any specific status code</p>
+<p>here is the playbook that connects to the URL and waits for it to return status 200</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Playbook for Web automation 
+  hosts: localhost
+  tasks:
+  - name: Check if devopsjunction.com is available and returning status 200
+    uri:
+      url: https://devopsjunction.com
+    register: result
+    until: "result.status == 200"
+    retries: 5
+    delay: 10</pre>
+<p>In this playbook, we have one play and one task with the module <code>uri</code></p>
+<p>We are connecting to the url <code>https://devopsjunction.com</code>  and waiting for the response to be 200,</p>
+<p>This is done using ansible <code>retry until</code> feature. I wrote an exclusive article on <a href="../ansible-retry-examples/index.html" target="_blank" rel="noopener noreferrer">until</a> you can check</p>
+<p>If at the first time it does not respond with status 200 it keeps trying until it gets 200 as a response for the number of times defined in <code>retries</code> with the interval defined in <code>delay</code> in seconds.</p>
+<p>In our case, we try <strong>5 times</strong> with a delay of <strong>10 seconds</strong> before it returns a failure</p>
+<p>Here is the execution output of this playbook, I have added <code>-vv</code> more little extra verbose output</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM.png"><img class="alignnone size-full wp-image-9261 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1393.png" alt="ansible wait for url to respond" width="2020" height="1466" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM.png 2020w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-300x218.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-1024x743.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-768x557.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-1536x1115.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-1080x784.png 1080w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-90x65.png 90w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-9261" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM.png" alt="ansible wait for url to respond" width="2020" height="1466" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM.png 2020w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-300x218.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-1024x743.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-768x557.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-1536x1115.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-1080x784.png 1080w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-5.16.36-PM-90x65.png 90w" sizes="(max-width: 2020px) 100vw, 2020px" data-eio="l" /></noscript></a></p>
+<p>You can modify the playbook to any other status code too, as per your requirement</p>
+<p>All you have to do is to update the <code>until</code> condition, in our case, our condition is to check if the <code>result.status</code> variable is equal to <code>200</code> ( string comparison)</p>
+<pre>until: "result.status == 200"</pre>
+<p>here is one more example where we are looking for status code 201 for the API endpoint</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_wait_for_POST_call_to_return_201_status_code_API">Ansible wait for POST call to return 201 status code &#8211; API</span></h2>
+<p>For this example, I am using the publically available test API platform https://reqres.in/</p>
+<p>In this example, we are going to send a payload to the API endpoint over the HTTP POST method and wait for it to return the 201 status code</p>
+<p>Here is the playbook</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Playbook for Web automation 
+  hosts: localhost
+  tasks:
+  - name: Wait for API endpoint to return 201 created
+    uri:
+      url: https://reqres.in/api/users
+      method: POST
+      body: |-
+        {
+          "name": "Sarav",
+          "job": "leader"
+        }
+      return_content: yes
+      status_code: 201
+    register: result
+    until: "result.status == 201"
+    retries: 5
+    delay: 10
+
+  - debug: var=result.content</pre>
+<p>You can try this playbook as it is, as this is a publically available API</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM.png"><img class="alignnone size-full wp-image-9263 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1013.png" alt="ansible url check status code" width="2164" height="1142" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM.png 2164w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-300x158.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-1024x540.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-768x405.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-1536x811.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-2048x1081.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-1080x570.png 1080w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-9263" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM.png" alt="ansible url check status code" width="2164" height="1142" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM.png 2164w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-300x158.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-1024x540.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-768x405.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-1536x811.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-2048x1081.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-06-at-7.08.48-PM-1080x570.png 1080w" sizes="(max-width: 2164px) 100vw, 2164px" data-eio="l" /></noscript></a></p>
+<p>You can see that we are making an HTTP POST request with a Payload in <code>body</code>  to the API endpoint and waiting for the status code 201.</p>
+<p>This endpoint creates a new user and returns a JSON of the newly created user</p>
+<p>We have updated our <code>until</code> condition to look for <code>201</code> text in the result variable. if not it would retry the specified no of times before failing</p>
+<pre>until: "result.status == 201"</pre>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_wait_for_a_message_or_specific_string_in_response">Ansible wait for a message or specific string in response</span></h2>
+<p>Unlike the last two examples where we looked for the HTTP status code of our request, in this example, we are going to see how to wait for a specific string or message in the response</p>
+<p>We are going to use the same <code>reqres.in</code> API we have used earlier but different endpoint or URL</p>
+<p><a href="../../wp-content/uploads/2022/11/devopsjunction-content.png"><img class="alignnone size-full wp-image-9269 lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x768.png" alt="ansible wait for url" width="1024" height="768" data-src="../../wp-content/uploads/2022/11/devopsjunction-content.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/devopsjunction-content.png 1024w, ../../wp-content/uploads/2022/11/devopsjunction-content-300x225.png 300w, ../../wp-content/uploads/2022/11/devopsjunction-content-768x576.png 768w, ../../wp-content/uploads/2022/11/devopsjunction-content-510x382.png 510w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-9269" src="../../wp-content/uploads/2022/11/devopsjunction-content.png" alt="ansible wait for url" width="1024" height="768" srcset="../../wp-content/uploads/2022/11/devopsjunction-content.png 1024w, ../../wp-content/uploads/2022/11/devopsjunction-content-300x225.png 300w, ../../wp-content/uploads/2022/11/devopsjunction-content-768x576.png 768w, ../../wp-content/uploads/2022/11/devopsjunction-content-510x382.png 510w" sizes="(max-width: 1024px) 100vw, 1024px" data-eio="l" /></noscript></a></p>
+<p>For the login API to work you need to pass the username and password as JSON over HTTP POST to the remote URL `https://reqres.in/api/login`</p>
+<p>Now here is the playbook where we pass the JSON data of  email and password to the login API</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">---
+- name: Playbook for Web automation 
+  hosts: localhost
+  tasks:
+  - name: Wait for API endpoint to return a specific message response
+    uri:
+      url: https://reqres.in/api/login
+      method: POST
+      body_format: json
+      body: |-
+        {
+          "email": "<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="f1948794df999e9d85b1839480839482df989f">[email&#160;protected]</a>",
+          "password": "cityslicka"
+        }
+      return_content: yes
+    register: result
+    until: "'token' in result.content"
+    retries: 2
+    delay: 10
+
+  - debug: var=result.content</pre>
+<p>&nbsp;</p>
+<p>As per the API documentation, only the following email and password combination would let you log in or Succeed. Let us first try it and see the response.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">{ 
+  "email": "<a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="66031003480e090a1226140317140315480f08">[email&#160;protected]</a>",
+  "password": "cityslicka"
+}</pre>
+<p>Since our credentials are valid we should get a token and ansible looking for the <code>token</code> string/text in the response would also succeed</p>
+<p>Here is the execution and the response with the correct user credentials.</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM.png"><img class="post-img alignnone wp-image-9271 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x702.png" alt="ansible wait for url" width="3730" height="1364" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM.png 3730w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-300x110.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-1024x374.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-768x281.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-1536x562.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-2048x749.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-1080x395.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9271 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM.png" alt="ansible wait for url" width="3730" height="1364" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM.png 3730w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-300x110.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-1024x374.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-768x281.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-1536x562.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-2048x749.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-1.17.43-PM-1080x395.png 1080w" sizes="(max-width: 3730px) 100vw, 3730px" data-eio="l" /></noscript></a></p>
+<p>In the preceding screenshot, You can see the response has the <code>token</code> on the ansible-playbook output shown on the right</p>
+<p>&nbsp;</p>
+<p>Let us modify the email ID to something else and try to log in, it should fail or not allow us to login</p>
+<p><a href="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM.png"><img class="post-img alignnone wp-image-9272 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x714.png" alt="ansible url" width="3718" height="1382" data-src="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM.png 3718w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-300x112.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-1024x381.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-768x285.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-1536x571.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-2048x761.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-1080x401.png 1080w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-9272 size-full" src="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM.png" alt="ansible url" width="3718" height="1382" srcset="../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM.png 3718w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-300x112.png 300w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-1024x381.png 1024w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-768x285.png 768w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-1536x571.png 1536w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-2048x761.png 2048w, ../../wp-content/uploads/2022/11/Screenshot-2022-11-09-at-2.12.53-PM-1080x401.png 1080w" sizes="(max-width: 3718px) 100vw, 3718px" data-eio="l" /></noscript></a></p>
+<p>As shown in the preceding image,  you can see that we have updated the username to <code><a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="621607111622160711164c010d0f">[email&#160;protected]</a></code> when retried, it threw an error <code>user not found</code>  after two retries</p>
+<blockquote><p>Remember in ideal scenarios we do not retry if the login fails with some credentials, Your account would be locked, this example is just to show you how message/text validation works with ansible url retry</p></blockquote>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Where_to_go_from_here">Where to go from here</span></h2>
+<p>we have seen how to connect to a URL or API endpoint and validate the response status code or content and retry until the requirement is met.</p>
+<p>We have used the following modules and features of Ansible to get this done.</p>
+<ul>
+<li>URI module &#8211; For connecting to API and WEB URLs</li>
+<li>retry until &#8211; to validate and retry until a condition is met</li>
+</ul>
+<p>we have an exclusive article on these subjects for you to read</p>
+<blockquote class="wp-embedded-content" data-secret="V2FvZHuK7e"><p><a href="../ansible-retry-examples/index.html">Ansible Retry Examples &#8211; Retry a task until condition met | DevopsJunction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Ansible Retry Examples &#8211; Retry a task until condition met |  DevopsJunction&#8221; &#8212; Middleware Inventory" src="../ansible-retry-examples/embed/index.html#?secret=V2FvZHuK7e" data-secret="V2FvZHuK7e" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>There is one more way to connect to the remote URL to make sure that it works.  it is done using <code>wait_for</code> module</p>
+<p>You can find more on the wait_for module here</p>
+<blockquote class="wp-embedded-content" data-secret="esoishNHKH"><p><a href="../ansible-wait_for-examples/index.html">Ansible wait_for module examples &#8211; How to | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Ansible wait_for module examples &#8211; How to | Devops Junction&#8221; &#8212; Middleware Inventory" src="../ansible-wait_for-examples/embed/index.html#?secret=esoishNHKH" data-secret="esoishNHKH" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<p>Hope this helps, Let me know if you have any questions on the comments section</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#3e565b5252517e594c574a5847105d5153"> <span class="__cf_email__" data-cfemail="3159545d5d5e715643584557481f525e5c">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1667985565" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="9260" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="76ddd9f5a9" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1667985565" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1667985565"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-get_url-examples-how-to-download-file-from-url/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/04/download-url-ansible-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/download-url-ansible-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-get_url-examples-how-to-download-file-from-url/index.html'>Ansible get_url Examples - How to download file from URL</a><p>In this post, we are going to see how to download a file from URL using ansible get_url module in other words ansible curl.  As we know it already, Ansible has a lot of built-in modules to accomplish all the tasks we might need for configuration management and automation. Ansible&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible_wait_for_reboot_to_complete/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible wait for reboot" data-src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-02-at-3.29.36-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-02-at-3.29.36-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible wait for reboot" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible_wait_for_reboot_to_complete/index.html'>Ansible Reboot system and wait_for reboot to complete</a><p>The Objective The purpose of this post is to explain with an example of how ansible initiate the reboot and wait for the reboot to complete There are cases where we want our remote nodes to be rebooted or restarted. For example, Take the Patching as an example. As part&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-retry-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible retry" data-src="../../wp-content/uploads/2022/05/ansible-retry-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/05/ansible-retry-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible retry" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-retry-examples/index.html'>Ansible Retry Examples - Retry a task until condition met | DevopsJunction</a><p>in this article, we are going to see how to retry an ansible task until it meets a certain condition or validation. It is more like do sometask until somecondition kind of setup available in all the programming and scripting languages Ansible lets you execute a task until a condition&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-inventory_hostname-ansible_hostname-variables/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible_hostname" data-src="../../wp-content/uploads/2020/11/IMG_0005-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/11/IMG_0005-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible_hostname" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-inventory_hostname-ansible_hostname-variables/index.html'>Ansible Inventory_hostname & ansible_hostname Examples</a><p>In this post, we are going to see two built-in variables of ansible mostly used in Ansible playbooks and they are inventory_hostname and ansible_hostname while both these variables are to give you the hostname of the machine. they differ in a way, where it comes from. So in this article,&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-wait_for-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible wait_for examples" data-src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible wait_for examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-wait_for-examples/index.html'>Ansible wait_for module examples - How to | Devops Junction</a><p>Introduction to Ansible wait_for module Ansible wait_for module can be used to pause your playbook execution and to wait for many different things or conditions before continuing with the execution. The wait_for module of ansible is to make your playbook or task execution halt or pause for various reasons and for&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-tomcat-installation/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible Playbook to install Tomcat &#8211; how-to guide | Devops Junction</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"9260 https:\/\/www.middlewareinventory.com\/?p=9260","disqusShortname":"mwinventory","disqusTitle":"Ansible Wait for URL to respond or Retry \u2013 WEB and API  | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-wait-for-url\/","postId":"9260"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"16f2f57883"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"041cc9abc8","post_id":"9260"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"87397fc61b","ip":"34.98.143.139","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"58d1284d2f","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"0d32e72868","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"9260","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-wait-for-url/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1667985566;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

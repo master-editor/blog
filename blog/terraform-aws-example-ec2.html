@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Terraform AWS Example - Create EC2 instance with Terraform | DevOps Junction</title>
+<meta name="description" content="Terraform AWS Example. Create EC2 instance with Terraform. Terraform AWS example on how to create AWS resources with Terraform. Create a Security Group using Terraform. Infrastructure as Code Example. Terraform aws Configuration file example and terraform plan and terraform apply command real-time usage and examples." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="terraform-aws-example-ec2/index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Terraform AWS Example - Create EC2 instance with Terraform | DevOps Junction" />
+<meta property="og:description" content="Terraform AWS Example. Create EC2 instance with Terraform. Terraform AWS example on how to create AWS resources with Terraform. Create a Security Group using Terraform. Infrastructure as Code Example. Terraform aws Configuration file example and terraform plan and terraform apply command real-time usage and examples." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2020-01-14T00:00:38+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:18:12+00:00" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2020/01/TerraformAWS-1.png" />
+<meta property="og:image:width" content="1747" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#primaryimage","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/01/TerraformAWS-1.png","width":1747,"height":1240},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#webpage","url":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/","name":"Terraform AWS Example - Create EC2 instance with Terraform | DevOps Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#primaryimage"},"datePublished":"2020-01-14T00:00:38+00:00","dateModified":"2022-11-10T19:18:12+00:00","description":"Terraform AWS Example. Create EC2 instance with Terraform. Terraform AWS example on how to create AWS resources with Terraform. Create a Security Group using Terraform. Infrastructure as Code Example. Terraform aws Configuration file example and terraform plan and terraform apply command real-time usage and examples.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Terraform AWS Example &#8211; Create EC2 instance with Terraform","datePublished":"2020-01-14T00:00:38+00:00","dateModified":"2022-11-10T19:18:12+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#primaryimage"},"keywords":"Terraform Apply example,Terraform AWS,Terraform AWS example,Terraform config file example,Terraform example,Terraform Plan example","articleSection":"DevOps_Beginner,Terraform","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Terraform AWS Example &#8211; Create EC2 instance with Terraform Comments Feed" href="terraform-aws-example-ec2/feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../wp-json/index.json" /><link rel="alternate" type="application/json" href="../wp-json/wp/v2/posts/4709.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='terraform-aws-example-ec2/index.html' />
+<link rel="alternate" type="application/json+oembed" href="../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-terraform-aws-example-ec2-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-terraform-aws-example-ec2-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+strong
+{
+  color: black;
+}
+code
+{
+  color: rgb(232, 44, 88);
+}
+
+blockquote {
+    padding: 2%;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-4709 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3220"><a href="category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-4709" class="post-4709 post type-post status-publish format-standard has-post-thumbnail hentry category-devops_beginner category-terraform tag-terraform-apply-example tag-terraform-aws tag-terraform-aws-example tag-terraform-config-file-example tag-terraform-example tag-terraform-plan-example wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Terraform AWS Example &#8211; Create EC2 instance with Terraform</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="terraform-aws-example-ec2/index.html" title="5:30 am" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Terraform%20AWS%20Example%20%E2%80%93%20Create%20EC2%20instance%20with%20Terraform&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-aws-example-ec2%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="4709" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Terraform+AWS+Example+%E2%80%93+Create+EC2+instance+with+Terraform&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-aws-example-ec2%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="4709" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Terraform%20AWS%20Example%20%E2%80%93%20Create%20EC2%20instance%20with%20Terraform&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-aws-example-ec2%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="4709" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-aws-example-ec2%2F&subject=Terraform%20AWS%20Example%20%E2%80%93%20Create%20EC2%20instance%20with%20Terraform" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="4709" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="4709" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>Terraform, An outstanding and innovative product from hashicorp and it is a leader in Infrastructure as Code tools Segment.  Before I go any further, I think I should set the context.</p>
+<p>In this article, we are going to learn how to use Terraform to create AWS EC2 instance and create a Terraform AWS infrastructure.  We will cover few basic elements like what is Infrastructure as code, What is Terraform etc and setup AWS API authentication and start creating Terraform configuration files for AWS provisioning</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#What_is_Infrastructure_as_Code_Terraform" title="What is Infrastructure as Code &#8211; Terraform
+">What is Infrastructure as Code &#8211; Terraform
+</a></li><li><a href="#What_tools_are_used_in_Infrastructure_as_Code" title="What tools are used in Infrastructure as Code">What tools are used in Infrastructure as Code</a></li><li><a href="#What_is_Terraform" title="What is Terraform">What is Terraform</a></li><li><a href="#Terraform_AWS_Example" title="Terraform AWS Example">Terraform AWS Example</a></li><li><a href="#Authentication_with_AWS" title="Authentication with AWS">Authentication with AWS</a></li><li><a href="#Setup_Programmatic_Access" title="Setup  Programmatic Access">Setup  Programmatic Access</a><ul><li><a href="#As_Environment_Variable" title="As Environment Variable">As Environment Variable</a></li><li><a href="#_As_an_AWS_config_Profile" title=" As an AWS config Profile"> As an AWS config Profile</a></li></ul></li><li><a href="#Download_and_Install_Terraform_CLI" title="Download and Install Terraform CLI">Download and Install Terraform CLI</a></li><li><a href="#Terraform_Configuration_file_A_Quick_intro" title="Terraform Configuration file &#8211; A Quick intro">Terraform Configuration file &#8211; A Quick intro</a></li><li><a href="#Create_EC2_instance_with_Terraform_Terraform_EC2" title="Create EC2 instance with Terraform &#8211; Terraform EC2">Create EC2 instance with Terraform &#8211; Terraform EC2</a><ul><li><a href="#Step1_Creating_a_Configuration_file_for_Terraform_AWS" title="Step1: Creating a Configuration file for Terraform AWS">Step1: Creating a Configuration file for Terraform AWS</a></li><li><a href="#The_Terraform_AWS_Example_configuration_file" title="The Terraform AWS Example configuration file">The Terraform AWS Example configuration file</a></li><li><a href="#Step2_Initialize_Terraform" title="Step2: Initialize Terraform">Step2: Initialize Terraform</a></li><li><a href="#Step3_Pre-Validate_the_change_A_pilot_run" title="Step3: Pre-Validate the change &#8211; A pilot run">Step3: Pre-Validate the change &#8211; A pilot run</a></li><li><a href="#Step4_Go_ahead_and_Apply_it_with_Terraform_apply" title="Step4:   Go ahead and Apply it with Terraform apply">Step4:   Go ahead and Apply it with Terraform apply</a></li></ul></li><li><a href="#How_to_Create_EC2_instance_with_user_data_Custom_Startup_Script" title="How to Create EC2 instance with user_data &#8211; Custom Startup Script">How to Create EC2 instance with user_data &#8211; Custom Startup Script</a></li><li><a href="#How_to_Create_Multiple_EC2_instances_with_different_Configuration" title="How to Create Multiple EC2 instances with different Configuration">How to Create Multiple EC2 instances with different Configuration</a></li><li><a href="#Our_Other_Terraform_Articles" title="Our Other Terraform Articles">Our Other Terraform Articles</a></li><li><a href="#Further_reads" title="Further reads">Further reads</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="What_is_Infrastructure_as_Code_Terraform">What is <span style="color: #e60b6e;">Infrastructure as Code &#8211; Terraform<br />
+</span></span></h2>
+<p>Infrastructure as Code often referred to as IaC, is where the developer or system admins write code to achieve the end state of the infrastructure or server they desire. For example, Let&#8217;s suppose You want to create an infrastructure of LAMP (Linux Apache MySql PHP) along with some other Linux tools like <code>nc, curl, Openssl</code> etc</p>
+<p>The traditional approach is to build the Virtual machine and install these tools one after another. While this sounds convenient. It takes hours of productivity and creates a huge delay for the server setup or provisioning</p>
+<p>While the world is moving towards containers and desired state and auto-scale. We need something powerful to help us create instances/Infra in a single click.</p>
+<p>Thanks to IaC.!!  it helps us set up even a complicated infrastructure in a short span of time.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="What_tools_are_used_in_Infrastructure_as_Code">What <span style="color: #e81067;">tools</span> are used in <span style="color: #e81067;">Infrastructure as Code</span></span></h2>
+<p>There are so many tools in the market helps you to achieve the IaC. Some of them are listed below.</p>
+<ul class="">
+<li id="050f" class="ih ii dt bg ij b ik il im in io ip iq ir is it iu jb jc jd" data-selectable-paragraph="">Chef</li>
+<li id="27c3" class="ih ii dt bg ij b ik je im jf io jg iq jh is ji iu jb jc jd" data-selectable-paragraph="">Puppet</li>
+<li id="5e54" class="ih ii dt bg ij b ik je im jf io jg iq jh is ji iu jb jc jd" data-selectable-paragraph="">Ansible</li>
+<li id="b842" class="ih ii dt bg ij b ik je im jf io jg iq jh is ji iu jb jc jd" data-selectable-paragraph="">SaltStack</li>
+<li id="682e" class="ih ii dt bg ij b ik je im jf io jg iq jh is ji iu jb jc jd" data-selectable-paragraph="">CloudFormation</li>
+<li id="71f7" class="ih ii dt bg ij b ik je im jf io jg iq jh is ji iu jb jc jd" data-selectable-paragraph="">Terraform</li>
+</ul>
+<p>All of these can manage IaC and work with different cloud providers except Cloud Formation as it was limited only to AWS.  Almost all of them are OpenSource as well backed by a large community. It is always a tough choice to choose the right product from this.</p>
+<p>While everything has its pros and cons. Terraform outruns them for the right reasons.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="What_is_Terraform"><span style="color: #000000;">What is</span> <span style="color: #e81067;">Terraform</span></span></h2>
+<p><strong>Terraform typically means transforming (a planet) so as to resemble the earth, especially so that it can support human life.</strong></p>
+<p>I would say they named this product right. Terraform. In a universe of various Cloud technologies (planets) like AWS, Azure, Digital Ocean etcetera,</p>
+<p>Terraform is an open-source <strong>infrastructure as code</strong> software tool created by HashiCorp. It enables users to define and provision a data center infrastructure using a high-level configuration language known as Hashicorp Configuration Language (HCL), or optionally JSON.</p>
+<p>Terraform supports a number of cloud infrastructure providers such as Amazon Web Services, IBM Cloud (formerly Bluemix), Google Cloud Platform, Linode, Microsoft Azure, Oracle Cloud Infrastructure, or VMware vSphere as well as OpenStack</p>
+<p>Since this is going to be the process of  <strong>Infrastructure as a Code </strong>paradigm. We need a API programmatic access for AWS.</p>
+<p>So we are going to programmatically create terraform ec2 instance. This article is going to all about Terraform AWS Example and how to Create EC2 instance with Terraform.</p>
+<p>&nbsp;</p>
+<blockquote><p>If you want to compare Terraform with other <strong>IaC</strong> products like Ansible, Cloudformation. Don&#8217;t worry!. Terraform (hashicorp) themselves have done that job for you  on their <a href="https://www.terraform.io/intro/vs/index.html" target="_blank" rel="noopener noreferrer">website</a></p></blockquote>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Terraform_AWS_Example">Terraform <span style="color: #e81546;">AWS</span> Example</span></h2>
+<p>While AWS or Amazon web services being a leader in the cloud industry with a market share 70 percentage.  I thought it would be wiser to choose AWS as our cloud provider for this post.</p>
+<p>This post is about Terraform AWS and how to create AWS resources like EC2 instance and SecurityGroup with Terraform. Let us call it a Terraform AWS example.</p>
+<p>Terraform and AWS go hand in hand and terraform has a lot of resources and configurations that support the entire AWS Infrastructure management tasks like AWS EC2 instance creation, Security Group creation, Virtual Private Cloud (VPC) Setup,  Serverless set up, etc.</p>
+<p>So let us go and do some farming in the AWS planet.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Authentication_with_AWS">Authentication with <span style="color: #eb0c69;">AWS</span></span></h2>
+<p>In order to connect to AWS. Terraform has to successfully authenticate. It is done with the help of Programmatic API Keys (Access Key and Secret.)</p>
+<p>Some Sample usage of these API Keys in a terraform configuration.</p>
+<pre class="highlight hcl"><span class="n">provider</span> <span class="s2">"aws"</span> <span class="p">{</span>
+  <span class="n">region</span>     <span class="o">=</span> <span class="s2">"us-west-2"</span>
+  <span class="n">access_key</span> <span class="o">=</span> <span class="s2">"my-access-key"</span>
+  <span class="n">secret_key</span> <span class="o">=</span> <span class="s2">"my-secret-key"</span>
+<span class="p">}</span></pre>
+<p>So now, we should go and create these access and secret keys for your AWS account.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="Setup_Programmatic_Access">Setup <span style="color: #e60b6e;"> Programmatic Access</span></span></h2>
+<div>Login to AWS Console, In the services, go to IAM and perform the following steps</div>
+<div></div>
+<p><strong>Step1: Add new user and key in the UserName  </strong></p>
+<details>
+<summary>Click to view the image</summary>
+<p>&nbsp;</p>
+<p><a href="../wp-content/uploads/2019/06/AWS_UserCreation_Screen1.png"><img class="alignnone size-full wp-image-3920 lazyload" src="../wp-content/ewww/lazy/placeholder-1055x528.png" alt="" width="1055" height="528" data-src="../wp-content/uploads/2019/06/AWS_UserCreation_Screen1.png" loading="lazy" data-srcset="../wp-content/uploads/2019/06/AWS_UserCreation_Screen1.png 1055w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-300x150.png 300w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-768x384.png 768w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-1024x512.png 1024w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-840x420.png 840w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-3920" src="../wp-content/uploads/2019/06/AWS_UserCreation_Screen1.png" sizes="(max-width: 1055px) 100vw, 1055px" srcset="../wp-content/uploads/2019/06/AWS_UserCreation_Screen1.png 1055w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-300x150.png 300w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-768x384.png 768w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-1024x512.png 1024w, ../wp-content/uploads/2019/06/AWS_UserCreation_Screen1-840x420.png 840w" alt="" width="1055" height="528" data-eio="l" /></noscript></a></p>
+</details>
+<p><strong>Step2: Attach Existing Policies and Select Admin</strong></p>
+<details>
+<summary>Click to view the image</summary>
+<p><a href="../wp-content/uploads/2019/06/AWS_User_Creation_Screen2.png"><img class="alignnone size-full wp-image-3921 lazyload" src="../wp-content/ewww/lazy/placeholder-1032x378.png" alt="" width="1032" height="378" data-src="../wp-content/uploads/2019/06/AWS_User_Creation_Screen2.png" loading="lazy" data-srcset="../wp-content/uploads/2019/06/AWS_User_Creation_Screen2.png 1032w, ../wp-content/uploads/2019/06/AWS_User_Creation_Screen2-300x110.png 300w, ../wp-content/uploads/2019/06/AWS_User_Creation_Screen2-768x281.png 768w, ../wp-content/uploads/2019/06/AWS_User_Creation_Screen2-1024x375.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-3921" src="../wp-content/uploads/2019/06/AWS_User_Creation_Screen2.png" sizes="(max-width: 1032px) 100vw, 1032px" srcset="../wp-content/uploads/2019/06/AWS_User_Creation_Screen2.png 1032w, ../wp-content/uploads/2019/06/AWS_User_Creation_Screen2-300x110.png 300w, ../wp-content/uploads/2019/06/AWS_User_Creation_Screen2-768x281.png 768w, ../wp-content/uploads/2019/06/AWS_User_Creation_Screen2-1024x375.png 1024w" alt="" width="1032" height="378" data-eio="l" /></noscript></a></p>
+</details>
+<p>Let the Values be Default Click Next till you see the following Screen</p>
+<p><strong>Step3: Completion and Download</strong></p>
+<details>
+<summary>Click to view the image</summary>
+<p><a href="../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png"><img class="size-full wp-image-3140 lazyload" src="../wp-content/ewww/lazy/placeholder-996x385.png" alt="" width="996" height="385" data-src="../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png 996w, ../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-300x116.png 300w, ../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-768x297.png 768w" data-sizes="auto" /><noscript><img class="size-full wp-image-3140" src="../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png" sizes="(max-width: 996px) 100vw, 996px" srcset="../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM.png 996w, ../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-300x116.png 300w, ../wp-content/uploads/2019/03/Screen-Shot-2019-03-31-at-2.20.07-AM-768x297.png 768w" alt="" width="996" height="385" data-eio="l" /></noscript></a></p>
+<figure id="attachment_3140" class="wp-caption alignleft"><figcaption class="wp-caption-text">API key creation Successful Message Banner</figcaption></figure>
+<p>&nbsp;</p>
+</details>
+<p>&nbsp;</p>
+<blockquote><p><strong>Note*:</strong> Once the Access Key ID and Secret Access Key is created you can download and save them somewhere safe and if you lost it you cannot recover (or) re-download it.  You would have to create a new API key.</p>
+<p>The best practice is to keep changing the API Access Key and recreating it. The older your API keys are the prone they are to Malicious attacks. So you should keep updating the API key and should not use the Same API key for a long period of time.</p></blockquote>
+<p>&nbsp;</p>
+<p>As you have downloaded the API Access and Secret keys. You need to save it right so that you can use it in terraform.</p>
+<p>Though terraform accepts the Access Key and Secret Key hardcoded with in the configuration file. It is not recommended.</p>
+<p>Either you should save these Keys as Environment variables (or) save it as a AWS Config profile.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="As_Environment_Variable"><strong>As Environment Variable</strong></span></h3>
+<p>In your terminal, you just have run these commands with your Access and Secret key.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: #333333; background: #f8f8f8;">$ <span class="hljs-built_in" style="color: #0086b3;">export</span> AWS_ACCESS_KEY_ID=AK************IEVXQ
+$ <span class="hljs-built_in" style="color: #0086b3;">export</span> AWS_SECRET_ACCESS_KEY=gbaIbK*********************iwN0dGfS</pre>
+<h3><span class="ez-toc-section" id="_As_an_AWS_config_Profile"><strong> As an AWS config Profile</strong></span></h3>
+<p>In order to do this, The Simplest way is to download and setup <code>AWS CLI</code></p>
+<p>You can <a href="aws-cli-ec2/index.html#install-cli">refer to this document</a> how to setup AWS CLI</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Download_and_Install_Terraform_CLI"><strong><span style="color: #000000;">Download</span> and <span style="color: #e60b6e;">Install</span> Terraform CLI</strong></span></h2>
+<p>Terraform is a Single file binary which you can download and run it without any additional installation.</p>
+<p>To make this precise and Short I have not added the installation instruction of Terraform. You can find the instructions here <a href="https://learn.hashicorp.com/terraform/getting-started/install" rel="noopener">Installing Terraform CLI</a></p>
+<p>Now Let me proceed further with an assumption that you have installed the Terraform CLI.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="Terraform_Configuration_file_A_Quick_intro">Terraform <span style="color: #de1256;">Configuration</span> file &#8211; A Quick intro</span></h2>
+<p>The input file for terraform is known as Terraform Configuration. Terraform configuration is written in a specific language named  Hashicorp Configuration Language and it can optionally be written in JSON as well.</p>
+<p>Here is the sample Terraform Configuration file saved with <code>*.tf</code> extension</p>
+<p>The following file presumes that you are using the AWS Config profile. So it refers to the <strong>profile: default</strong> for the authentication.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: #333333; background: #f8f8f8;">provider <span class="hljs-string" style="color: #dd1144;">"aws"</span> {
+  <span class="hljs-attr">profile</span>    = <span class="hljs-string" style="color: #dd1144;">"default"</span>
+  <span class="hljs-attr">region</span>     = <span class="hljs-string" style="color: #dd1144;">"us-east-1"</span>
+}
+
+resource <span class="hljs-string" style="color: #dd1144;">"aws_instance"</span> <span class="hljs-string" style="color: #dd1144;">"example"</span> {
+  <span class="hljs-attr">ami</span>           = <span class="hljs-string" style="color: #dd1144;">"ami-2757f631"</span>
+  <span class="hljs-attr">instance_type</span> = <span class="hljs-string" style="color: #dd1144;">"t2.micro"</span>
+}</pre>
+<p>In case if you are using the Environment variables method. You can remove the profile line alone and that should be it.</p>
+<p>Terraform configuration file would ideally have lot of elements known as <code>blocks</code> such as provider , resource etcetera.</p>
+<p>This is a Syntax of how Terraform Configuration file block is formatted</p>
+<pre class="highlight hcl"><span class="n">resource</span> <span class="s2">"aws_vpc"</span> <span class="s2">"main"</span> <span class="p">{</span>
+  <span class="n">cidr_block</span> <span class="o">=</span> <span class="n">var</span><span class="p">.</span><span class="nf">base_cidr_block</span>
+<span class="p">}</span>
+
+<span class="o">&lt;</span><span class="no">BLOCK</span> <span class="no">TYPE</span><span class="o">&gt;</span> <span class="s2">"&lt;BLOCK NAME&gt;"</span> <span class="s2">"&lt;BLOCK LABEL&gt;"</span> <span class="p">{</span>
+  <span class="c1"># Block body</span>
+  <span class="o">&lt;</span><span class="no">IDENTIFIER</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="no">EXPRESSION</span><span class="o">&gt;</span> <span class="c1"># Argument</span>
+<span class="p">}</span></pre>
+<p>There are ample amount of <code>BLOCK_TYPE</code> available in Terraform and the <code>resource</code> is primary and all others are to support building that specified resource.</p>
+<blockquote><p>Some of the Terraform blocks (elements) and their purpose is given below</p>
+<ul>
+<li>providers &#8211; the provider name aws, google, azure etc</li>
+<li>resources &#8211; a specific resource with in the provide such as aws_instance for aws</li>
+<li>variable &#8211; to declare input variables</li>
+<li>output &#8211; to declare output variables which would be retained the Terraform state file</li>
+<li>local &#8211; to assign value to an expression, these are local temporary variables work with in a module</li>
+<li>module &#8211; A <em>module</em> is a container for multiple resources that are used together.</li>
+<li>data &#8211; To Collect data from the remote provider and save it as a data source</li>
+</ul>
+</blockquote>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Create_EC2_instance_with_Terraform_Terraform_EC2">Create <span style="color: #de1256;">EC2</span> instance with Terraform &#8211; Terraform EC2</span></h2>
+<p>As we have crossed all the sections of basic and prerequisites. We are now ready to move forward to the practical application of Terraform and we are going to create an EC2 instance with terraform.</p>
+<p>These are the list of steps we are going to perform</p>
+<ol>
+<li>Create a Directory and Download the following file and save it as <code>main.tf</code></li>
+<li>Execute the command <code>terraform init</code> to initialize</li>
+<li>Execute the command <code>terraform plan</code> to check what change would be made. ( Should always do it)</li>
+<li>If you are happy with the changes it is claiming to make, then execute <code>terraform apply</code> to commit and start the build</li>
+</ol>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step1_Creating_a_Configuration_file_for_Terraform_AWS">Step1: Creating a Configuration file for Terraform AWS</span></h3>
+<p>Copy the following content and save it as <code>main.tf</code>  and make sure that the directory has no other <code>*.tf</code> files present, as terraform would consider all the files ending with <strong>.tf</strong> extension</p>
+<p>I have given some explanation before each block on the configuration to explain the purpose of the block.</p>
+<p>In an overview, This is what we are doing in this configuration file.</p>
+<ul>
+<li>A Variable block where we define all the resource names that we are going to be using within the Terraform configuration</li>
+<li>The second block is to tell Terraform to choose the right provider, in our case it is <code>aws</code> and we are also defining the region in this block on which our resources should be created</li>
+<li>Creating a Security Group with <strong>inbound</strong> and <strong>outbound</strong> rules. We have two inbound rules and one outbound rule. we use <strong>lifecycle</strong> block to tell terraform to create the replacement resources first before destroying the live ones. this way we reduce downtime</li>
+<li>Creating an EC2 instance, The instance type would be picked up from the <strong>variables</strong> block and we give some meaningful <code>tags</code> for management and future identification</li>
+<li>Once the EC2 instance created, we would get the public IP of the instance. We are saving it as an output variable. The output variables would be saved locally and can be viewed anytime in the future with <code>terraform output</code> command</li>
+</ul>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="The_Terraform_AWS_Example_configuration_file">The Terraform AWS Example configuration file</span></h3>
+<p>Here is the Terraform configuration file or manifest to create EC2 instance.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span style="color: #68e8dd;">variable</span> <span class="hljs-string" style="color: #a5c261;">"awsprops"</span> {
+    type = <span class="hljs-attr" style="color: #6d9cbe;">"map"</span>
+    default = {
+    region = <span class="hljs-attr" style="color: #6d9cbe;">"us-east-1"</span>
+    vpc = <span class="hljs-attr" style="color: #6d9cbe;">"vpc-5234832d"</span>
+    ami = <span class="hljs-attr" style="color: #6d9cbe;">"ami-0c1bea58988a989155"</span>
+    itype = <span class="hljs-attr" style="color: #6d9cbe;">"t2.micro"</span>
+    subnet = <span class="hljs-attr" style="color: #6d9cbe;">"subnet-81896c8e"</span>
+    publicip = true
+    keyname = <span class="hljs-attr" style="color: #6d9cbe;">"myseckey"</span>
+    secgroupname = <span class="hljs-attr" style="color: #6d9cbe;">"IAC-Sec-Group"</span>
+  }
+}
+
+<span style="color: #68e8dd;">provider</span> <span class="hljs-string" style="color: #a5c261;">"aws"</span> {
+  region = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"region"</span>)
+}
+
+<span style="color: #68e8dd;">resource</span> <span class="hljs-string" style="color: #a5c261;">"aws_security_group"</span> <span class="hljs-string" style="color: #a5c261;">"project-iac-sg"</span> {
+  name = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"secgroupname"</span>)
+  description = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"secgroupname"</span>)
+  vpc_id = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"vpc"</span>)
+
+  // To Allow SSH Transport
+  ingress {
+    from_port = 22
+    protocol = <span class="hljs-attr" style="color: #6d9cbe;">"tcp"</span>
+    to_port = 22
+    cidr_blocks = [<span class="hljs-attr" style="color: #6d9cbe;">"0.0.0.0/0"</span>]
+  }
+
+  // To Allow Port <span class="hljs-number" style="color: #a5c261;">80</span> Transport
+  ingress {
+    from_port = 80
+    protocol = <span class="hljs-attr" style="color: #6d9cbe;">""</span>
+    to_port = 80
+    cidr_blocks = [<span class="hljs-attr" style="color: #6d9cbe;">"0.0.0.0/0"</span>]
+  }
+
+  egress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = <span class="hljs-attr" style="color: #6d9cbe;">"-1"</span>
+    cidr_blocks     = [<span class="hljs-attr" style="color: #6d9cbe;">"0.0.0.0/0"</span>]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+
+<span style="color: #68e8dd;">resource</span> <span class="hljs-string" style="color: #a5c261;">"aws_instance"</span> <span class="hljs-string" style="color: #a5c261;">"project-iac"</span> {
+  ami = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"ami"</span>)
+  instance_type = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"itype"</span>)
+  subnet_id = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"subnet"</span>) #FFXsubnet2
+  associate_public_ip_address = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"publicip"</span>)
+  key_name = lookup(var.awsprops, <span class="hljs-attr" style="color: #6d9cbe;">"keyname"</span>)
+
+
+  vpc_security_group_ids = [
+    aws_security_group.project-iac-sg.id
+  ]
+  root_block_device {
+    delete_on_termination = true
+    iops = 150
+    volume_size = 50
+    volume_type = <span class="hljs-attr" style="color: #6d9cbe;">"gp2"</span>
+  }
+  tags = {
+    Name =<span class="hljs-attr" style="color: #6d9cbe;">"SERVER01"</span>
+    Environment = <span class="hljs-attr" style="color: #6d9cbe;">"DEV"</span>
+    OS = <span class="hljs-attr" style="color: #6d9cbe;">"UBUNTU"</span>
+    Managed = <span class="hljs-attr" style="color: #6d9cbe;">"IAC"</span>
+  }
+
+  depends_on = [ aws_security_group.project-iac-sg ]
+}
+
+
+<span style="color: #68e8dd;">output</span> <span class="hljs-string" style="color: #a5c261;">"ec2instance"</span> {
+  value = aws_instance.project-iac.public_ip
+}
+</pre>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="Step2_Initialize_Terraform">Step2: Initialize Terraform</span></h3>
+<p>Once we have saved the File in the newly created directory, we need to initialize terraform</p>
+<p>If you have used <code>Git</code> this is similar to <code>git init</code>  where we set up some local repository and initialize</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: #333333; background: #f8f8f8;">➜  <span style="color: #003366;"><strong>terraform init</strong></span>
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Checking <span class="hljs-keyword" style="color: #333333; font-weight: bold;">for</span> available provider plugins...
+- Downloading plugin <span class="hljs-keyword" style="color: #333333; font-weight: bold;">for</span> provider <span class="hljs-string" style="color: #dd1144;">"aws"</span> (hashicorp/aws) 2.44.0...
+
+The following providers <span class="hljs-keyword" style="color: #333333; font-weight: bold;">do</span> not have any version constraints <span class="hljs-keyword" style="color: #333333; font-weight: bold;">in</span> configuration,
+so the latest version was installed.
+
+To prevent automatic upgrades to new major versions that may contain breaking
+changes, it is recommended to add version = <span class="hljs-string" style="color: #dd1144;">"..."</span> constraints to the
+corresponding provider blocks <span class="hljs-keyword" style="color: #333333; font-weight: bold;">in</span> configuration, with the constraint strings
+suggested below.
+
+* provider.aws: version = <span class="hljs-string" style="color: #dd1144;">"~&gt; 2.44"</span>
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running <span class="hljs-string" style="color: #dd1144;">"terraform plan"</span> to see
+any changes that are required <span class="hljs-keyword" style="color: #333333; font-weight: bold;">for</span> your infrastructure. All Terraform commands
+should now work.
+
+If you ever <span class="hljs-built_in" style="color: #0086b3;">set</span> or change modules or backend configuration <span class="hljs-keyword" style="color: #333333; font-weight: bold;">for</span> Terraform,
+rerun this <span class="hljs-built_in" style="color: #0086b3;">command</span> to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to <span class="hljs-keyword" style="color: #333333; font-weight: bold;">do</span> so <span class="hljs-keyword" style="color: #333333; font-weight: bold;">if</span> necessary.
+
+</pre>
+<p>Once the Initialization completed. You can execute the <code>terraform plan</code> command to see what changes are going to be made.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step3_Pre-Validate_the_change_A_pilot_run">Step3: Pre-Validate the change &#8211; A pilot run</span></h3>
+<p>Execute the <code>terraform plan</code> command and it would present some detailed info on what changes are going to be made into your AWS infra.</p>
+<p>the <code>-out tfplan</code> is to save the result given by plan so that we can refer it later and apply it as it is without any modification.</p>
+<p>It also guarantees that what we see in the planning phase would be applied when we go for committing it.</p>
+<details>
+<summary>Click to expand</summary>
+<p>&nbsp;</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: #333333; background: #f8f8f8;">➜</pre>
+<p><strong><span style="color: #003366;">terraform plan -out tfplan</span></strong></p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: #333333; background: #f8f8f8;">Refreshing Terraform state <span class="hljs-keyword" style="color: #333333; font-weight: bold;">in</span>-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to <span class="hljs-built_in" style="color: #0086b3;">local</span> or remote state storage.
+
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  <span class="hljs-comment" style="color: #999988; font-style: italic;"># aws_instance.project-iac will be created</span>
+  + resource <span class="hljs-string" style="color: #dd1144;">"aws_instance"</span> <span class="hljs-string" style="color: #dd1144;">"project-iac"</span> {
+      + ami                          = <span class="hljs-string" style="color: #dd1144;">"ami-0c1beas670a989155"</span>
+      + arn                          = (known after apply)
+      + associate_public_ip_address  = <span class="hljs-literal" style="color: teal;">true</span>
+      + availability_zone            = (known after apply)
+      + cpu_core_count               = (known after apply)
+      + cpu_threads_per_core         = (known after apply)
+      + get_password_data            = <span class="hljs-literal" style="color: teal;">false</span>
+      + host_id                      = (known after apply)
+      + id                           = (known after apply)
+      + instance_state               = (known after apply)
+      + instance_<span class="hljs-built_in" style="color: #0086b3;">type</span>                = <span class="hljs-string" style="color: #dd1144;">"t2.micro"</span>
+      + ipv6_address_count           = (known after apply)
+      + ipv6_addresses               = (known after apply)
+      + key_name                     = <span class="hljs-string" style="color: #dd1144;">"mysecurekey"</span>
+      + network_interface_id         = (known after apply)
+      + password_data                = (known after apply)
+      + placement_group              = (known after apply)
+      + primary_network_interface_id = (known after apply)
+      + private_dns                  = (known after apply)
+      + private_ip                   = (known after apply)
+      + public_dns                   = (known after apply)
+      + public_ip                    = (known after apply)
+      + security_groups              = (known after apply)
+      + <span class="hljs-built_in" style="color: #0086b3;">source</span>_dest_check            = <span class="hljs-literal" style="color: teal;">true</span>
+      + subnet_id                    = <span class="hljs-string" style="color: #dd1144;">"subnet-81b8c8e"</span>
+      + tags                         = {
+          + <span class="hljs-string" style="color: #dd1144;">"Environment"</span> = <span class="hljs-string" style="color: #dd1144;">"DEV"</span>
+          + <span class="hljs-string" style="color: #dd1144;">"Managed"</span>     = <span class="hljs-string" style="color: #dd1144;">"IAC"</span>
+          + <span class="hljs-string" style="color: #dd1144;">"Name"</span>        = <span class="hljs-string" style="color: #dd1144;">"SERVER01"</span>
+          + <span class="hljs-string" style="color: #dd1144;">"OS"</span>          = <span class="hljs-string" style="color: #dd1144;">"UBUNTU"</span>
+        }
+      + tenancy                      = (known after apply)
+      + volume_tags                  = (known after apply)
+      + vpc_security_group_ids       = (known after apply)
+
+      + ebs_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + snapshot_id           = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_<span class="hljs-built_in" style="color: #0086b3;">type</span>           = (known after apply)
+        }
+
+      + ephemeral_block_device {
+          + device_name  = (known after apply)
+          + no_device    = (known after apply)
+          + virtual_name = (known after apply)
+        }
+
+      + network_interface {
+          + delete_on_termination = (known after apply)
+          + device_index          = (known after apply)
+          + network_interface_id  = (known after apply)
+        }
+
+      + root_block_device {
+          + delete_on_termination = <span class="hljs-literal" style="color: teal;">true</span>
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = 50
+          + volume_<span class="hljs-built_in" style="color: #0086b3;">type</span>           = <span class="hljs-string" style="color: #dd1144;">"gp2"</span>
+        }
+    }
+
+  <span class="hljs-comment" style="color: #999988; font-style: italic;"># aws_security_group.project-iac-sg will be created</span>
+  + resource <span class="hljs-string" style="color: #dd1144;">"aws_security_group"</span> <span class="hljs-string" style="color: #dd1144;">"project-iac-sg"</span> {
+      + arn                    = (known after apply)
+      + description            = <span class="hljs-string" style="color: #dd1144;">"IAC-Sec-Group"</span>
+      + egress                 = [
+          + {
+              + cidr_blocks      = [
+                  + <span class="hljs-string" style="color: #dd1144;">"0.0.0.0/0"</span>,
+                ]
+              + description      = <span class="hljs-string" style="color: #dd1144;">""</span>
+              + from_port        = 0
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = <span class="hljs-string" style="color: #dd1144;">"-1"</span>
+              + security_groups  = []
+              + self             = <span class="hljs-literal" style="color: teal;">false</span>
+              + to_port          = 0
+            },
+        ]
+      + id                     = (known after apply)
+      + ingress                = [
+          + {
+              + cidr_blocks      = [
+                  + <span class="hljs-string" style="color: #dd1144;">"0.0.0.0/0"</span>,
+                ]
+              + description      = <span class="hljs-string" style="color: #dd1144;">""</span>
+              + from_port        = 22
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = <span class="hljs-string" style="color: #dd1144;">"tcp"</span>
+              + security_groups  = []
+              + self             = <span class="hljs-literal" style="color: teal;">false</span>
+              + to_port          = 22
+            },
+          + {
+              + cidr_blocks      = [
+                  + <span class="hljs-string" style="color: #dd1144;">"0.0.0.0/0"</span>,
+                ]
+              + description      = <span class="hljs-string" style="color: #dd1144;">""</span>
+              + from_port        = 80
+              + ipv6_cidr_blocks = []
+              + prefix_list_ids  = []
+              + protocol         = <span class="hljs-string" style="color: #dd1144;">""</span>
+              + security_groups  = []
+              + self             = <span class="hljs-literal" style="color: teal;">false</span>
+              + to_port          = 80
+            },
+        ]
+      + name                   = <span class="hljs-string" style="color: #dd1144;">"IAC-Sec-Group"</span>
+      + owner_id               = (known after apply)
+      + revoke_rules_on_delete = <span class="hljs-literal" style="color: teal;">false</span>
+      + vpc_id                 = <span class="hljs-string" style="color: #dd1144;">"vpc-5629832d"</span>
+    }
+<span style="color: #008080;">
+Plan: 2 to add, 0 to change, 0 to destroy.</span>
+
+------------------------------------------------------------------------
+
+This plan was saved to: tfplan
+
+To perform exactly these actions, run the following command to apply:
+    terraform apply "tfplan"
+
+</pre>
+</details>
+<p>You can verify the outputs shown and what resources are going to be created or destroyed. Sometimes while doing a modification to the existing resources, Terraform would have to destroy the resource first and recreate it. in such cases, It would mention that it is going to destroy.</p>
+<p>You should always look for the <code>+</code> and <code>-</code> signs on the <code>terraform plan</code> output.</p>
+<p>Besides that, you should also monitor this line every time you run this command to make sure that no unintended result happen</p>
+<pre><span style="color: #000000;">Plan: 2 to add, 0 to change, 0 to destroy.
+</span></pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step4_Go_ahead_and_Apply_it_with_Terraform_apply">Step4:   Go ahead and Apply it with Terraform apply</span></h3>
+<p>When you execute the <code>terraform apply</code> command the changes would be applied to the AWS Infra.</p>
+<p>If <code>terraform plan</code> is a trial run and test.  <code>terraform apply</code> is real-time and production.</p>
+<p>Since we have saved the plan output to a file named <code>tfplan</code> to guarantee the changes. we need to use this file as an input while running the <code>apply</code> command</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; color: #333333; background: #f8f8f8;">➜  <span style="color: #800000;">terraform apply <span class="hljs-string">"tfplan"</span></span>
+aws_security_group.project-iac-sg: Creating...
+aws_security_group.project-iac-sg: Still creating... [<span class="hljs-number" style="color: teal;">10</span>s elapsed]
+aws_security_group.project-iac-sg: Creation complete after <span class="hljs-number" style="color: teal;">15</span>s [id=sg-<span class="hljs-number" style="color: teal;">0</span>fd7db3ea267c2527]
+aws_instance.project-iac: Creating...
+aws_instance.project-iac: Still creating... [<span class="hljs-number" style="color: teal;">10</span>s elapsed]
+aws_instance.project-iac: Still creating... [<span class="hljs-number" style="color: teal;">20</span>s elapsed]
+aws_instance.project-iac: Still creating... [<span class="hljs-number" style="color: teal;">30</span>s elapsed]
+aws_instance.project-iac: Creation complete after <span class="hljs-number" style="color: teal;">31</span>s [id=i-<span class="hljs-number" style="color: teal;">0</span>d93c366fb2c4a3eb]
+
+Apply complete! Resources: <span class="hljs-number" style="color: teal;">2</span> added, <span class="hljs-number" style="color: teal;">0</span> changed, <span class="hljs-number" style="color: teal;">0</span> destroyed.
+
+The <span class="hljs-keyword" style="color: #333333; font-weight: bold;">state</span> of your infrastructure has been saved <span class="hljs-keyword" style="color: #333333; font-weight: bold;">to</span> the path
+below. This <span class="hljs-keyword" style="color: #333333; font-weight: bold;">state</span> is required <span class="hljs-keyword" style="color: #333333; font-weight: bold;">to</span> modify and destroy your
+infrastructure, so <span class="hljs-keyword" style="color: #333333; font-weight: bold;">keep</span> it safe. To inspect the complete <span class="hljs-keyword" style="color: #333333; font-weight: bold;">state</span>
+use the `terraform show` command.
+
+State path: terraform.tfstate
+
+Outputs:
+
+ec2instance = <span class="hljs-number" style="color: teal;">18.207</span>.<span class="hljs-number" style="color: teal;">239.217</span></pre>
+<p>From the preceding output, you can see the instance creation took only 31 seconds and it completed and gave us the <code>public ip</code> as an output</p>
+<p>Whenever we want this IP, we can come to this directory and execute <code>terraform output</code> to get it.</p>
+<p>Refer the following snapshot where I have successfully <code>SSHed</code> to the server using  the <code>public IP</code></p>
+<p>&nbsp;</p>
+<p><a href="../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM.png"><img class="alignnone size-full wp-image-4717 lazyload" src="../wp-content/ewww/lazy/placeholder-1920x1920.png" alt="" width="1948" height="2100" data-src="../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM.png 1948w, ../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM-278x300.png 278w, ../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM-768x828.png 768w, ../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM-950x1024.png 950w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-4717" src="../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM.png" alt="" width="1948" height="2100" srcset="../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM.png 1948w, ../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM-278x300.png 278w, ../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM-768x828.png 768w, ../wp-content/uploads/2020/01/Screenshot-2020-01-13-at-7.48.24-PM-950x1024.png 950w" sizes="(max-width: 1948px) 100vw, 1948px" data-eio="l" /></noscript></a></p>
+<p>So we have Successfully created an EC2 instance and a Security Group and logged into the Server.</p>
+<p>Since this is a test instance, I want to destroy the resources I have created and I can do it by executing <code>terraform destroy</code> command.</p>
+<p>Hope this article helps you understand, How Terraform AWS or Terraform EC2 instance creation works in real-time.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="How_to_Create_EC2_instance_with_user_data_Custom_Startup_Script">How to Create <span style="color: #e31966;">EC2 instance with user_data</span> &#8211; Custom Startup Script</span></h2>
+<p>So far we have seen all the basics of Terraform and how to create our first EC2 instance with Terraform.</p>
+<p>In real time, we might need more than just creating a single instance. we might want to run some custom startup shell scripts and do some installations etc.</p>
+<p>In such cases, we can use EC2 <code>user_data</code> feature and define a set of commands or scripts that needs to be executed during the server initialization.</p>
+<p><a href="terraform-aws-ec2-user_data-example/index.html">we have a dedicated article</a> that talks about this in detail. Please read the same <a href="terraform-aws-ec2-user_data-example/index.html">here</a></p>
+<blockquote class="wp-embedded-content" data-secret="UqwWQiMqDg"><p><a href="terraform-aws-ec2-user_data-example/index.html">Terraform AWS EC2 user_data example &#8211; aws_instance| Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Terraform AWS EC2 user_data example &#8211; aws_instance| Devops Junction&#8221; &#8212; Middleware Inventory" src="terraform-aws-ec2-user_data-example/embed/index.html#?secret=UqwWQiMqDg" data-secret="UqwWQiMqDg" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<div class="c-message_actions__group" role="group" aria-label="Message shortcuts" data-qa="message-actions"></div>
+<div role="group" aria-label="Message shortcuts" data-qa="message-actions"></div>
+<div role="group" aria-label="Message shortcuts" data-qa="message-actions">
+<h2><span class="ez-toc-section" id="How_to_Create_Multiple_EC2_instances_with_different_Configuration">How to Create Multiple <span style="color: #e31966;">EC2 instances with different Configuration</span></span></h2>
+<p>Now you have learnt how to create EC2 instance with Terraform and with <code>user_data</code> as well.</p>
+<p>In real-time use cases you would not be created just once EC2 instance but many at once.</p>
+<p>To address the same I have written an article to cover how to create multiple Ec2 instances with different instance types and configuration</p>
+<blockquote class="wp-embedded-content" data-secret="igqvB1FSgW"><p><a href="terraform-create-multiple-ec2-different-config/index.html">Terraform Create Multiple EC2 with different Configs &#8211; for_each and count together</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Terraform Create Multiple EC2 with different Configs &#8211; for_each and count together&#8221; &#8212; Middleware Inventory" src="terraform-create-multiple-ec2-different-config/embed/index.html#?secret=igqvB1FSgW" data-secret="igqvB1FSgW" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+</div>
+<div role="group" aria-label="Message shortcuts" data-qa="message-actions"></div>
+<div role="group" aria-label="Message shortcuts" data-qa="message-actions"></div>
+<h2 role="group" aria-label="Message shortcuts" data-qa="message-actions"><span class="ez-toc-section" id="Our_Other_Terraform_Articles">Our Other Terraform Articles</span></h2>
+<p>We have various articles on Terraform that covers basic to advanced topics of Terraform.</p>
+<p>If you in the learning path. <a href="category/terraform/index.html">please do take a look by following this link</a></p>
+<p>&nbsp;</p>
+<div role="group" aria-label="Message shortcuts" data-qa="message-actions"></div>
+<h2><span class="ez-toc-section" id="Further_reads">Further reads</span></h2>
+<p>If you would like to give a chance to Terraform and want to learn all the bits and pieces of it. Read this book and I highly recommend it</p>
+<p>Click anywhere on the image to buy it on <a href="https://www.amazon.in/gp/product/1492046906/ref=as_li_tl?ie=UTF8&amp;camp=3638&amp;creative=24630&amp;creativeASIN=1492046906&amp;linkCode=as2&amp;tag=saravak-21&amp;linkId=8f2214a0bbd598ee035cee0bd9be0366">amazon</a>.</p>
+<figure style="width: 191px" class="wp-caption alignnone"><a href="https://www.amazon.in/gp/product/1492046906/ref=as_li_tl?ie=UTF8&amp;camp=3638&amp;creative=24630&amp;creativeASIN=1492046906&amp;linkCode=as2&amp;tag=saravak-21&amp;linkId=8f2214a0bbd598ee035cee0bd9be0366" target="_blank" rel="noopener noreferrer"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 191 250'%3E%3C/svg%3E" alt="" width="191" height="250" border="0" data-src="https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=IN&amp;ASIN=1492046906&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=saravak-21" loading="lazy" class="lazyload" /><noscript><img src="https://ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&amp;MarketPlace=IN&amp;ASIN=1492046906&amp;ServiceVersion=20070822&amp;ID=AsinImage&amp;WS=1&amp;Format=_SL250_&amp;tag=saravak-21" alt="" width="191" height="250" border="0" data-eio="l" /></noscript></a><figcaption class="wp-caption-text">Terraform UP &amp; Running Second Edition</figcaption></figure>
+<p>&nbsp;</p>
+<p>Hope this article is helpful, If you have any feedback or issues please let me know on the comments section.</p>
+<p>Rate this article [ratings]</p>
+<p>Cheers<br />
+Sarav</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../cdn-cgi/l/email-protection.html#5038353c3c3f103722392436297e333f3d"> <span class="__cf_email__" data-cfemail="325a575e5e5d7255405b46544b1c515d5f">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668108258" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="4709" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668108258" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668108258"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-aws-ec2/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible EC2 Create" data-src="../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/12/Screenshot-2019-12-02-at-2.07.39-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible EC2 Create" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-aws-ec2/index.html'>Ansible EC2 Example - Create EC2 instance with Ansible</a><p>Infrastructure as Code is getting all attention it deserves and everyone is trying to find their way to the `Completely automated Infrastructure Provisioning &amp; Management` While there are a lot of tools available now in the market starting from Terraform, AWS CloudFormation, Chef, Puppet, Salt Stack There are some differences&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='packer-aws-terraform-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../wp-content/uploads/2019/03/cloud-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/03/cloud-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='packer-aws-terraform-example/index.html'>Packer AWS Example with Terraform</a><p>In this article, we are going to see a quick packer aws example setup and provide the steps to create an AWS Image (AMI) using Packer and we are also going to Create Amazon EC2 Instance ( Elastic Bean Stack - EBS)  from the same AMI Image we have created,&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='aws-cli-ec2/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../wp-content/uploads/2020/01/Screenshot-2019-11-22-at-4.24.52-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2020/01/Screenshot-2019-11-22-at-4.24.52-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='aws-cli-ec2/index.html'>AWS EC2 CLI List Examples - Describe instances | Devops Junction</a><p>AWS CLI is a very great help when it comes to efficiently managing your AWS Cloud Infrastructure and your EC2 instances. While we are managing our AWS Infrastructure,  we cannot always afford to login to the AWS console all the time and it is not recommended from the security perspective&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-ec2-ssh-key/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="add ssh key to EC2 instance" data-src="../wp-content/uploads/2019/11/Screenshot-2020-11-07-at-7.00.04-AM-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/11/Screenshot-2020-11-07-at-7.00.04-AM-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="add ssh key to EC2 instance" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-ec2-ssh-key/index.html'>Add SSH Key to EC2 instances with Ansible - Automated</a><p>Whether it is On-Prem (or) Cloud-hosted, A Typical Non-Containerized Enterprise infrastructure would have ample of Virtual Machines aka Servers [ Linux ] Let us suppose that you work for the DevOps team of a Big Organization where you manage 100+ ec2 instances. You have a new hire in your team&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='build-packer-aws-image-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../wp-content/uploads/2019/06/PackerAWS-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/06/PackerAWS-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='build-packer-aws-image-example/index.html'>Packer Build - Create and Build Packer Templates and Images for AWS</a><p>Infrastructure as Code is a Brilliant Concept in DevOps and Packer and Terraform are two major technologies/products in this segment. Thanks to HashiCorp Imagine that you need to create an AWS EC2 instance for your company or for learning purpose with your AWS free tier account. How do you do&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="tag/terraform-apply-example/index.html" rel="tag">Terraform Apply example</a><a href="tag/terraform-aws/index.html" rel="tag">Terraform AWS</a><a href="tag/terraform-aws-example/index.html" rel="tag">Terraform AWS example</a><a href="tag/terraform-config-file-example/index.html" rel="tag">Terraform config file example</a><a href="tag/terraform-example/index.html" rel="tag">Terraform example</a><a href="tag/terraform-plan-example/index.html" rel="tag">Terraform Plan example</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="aws-cli-ec2/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>AWS EC2 CLI List Examples &#8211; Describe instances | Devops Junction</a></div><div class="nav-next"><a href="aws-change-instance-type-ec2/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>AWS change instance type &#8211; From Console or AWS CLI</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">
+Powered by <a href="../index.html" title="MiddlewareInventory">MiddlewareInventory</a> and <a href="https://www.gritfy.com/" title="Gritfy">gritfy</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"4709 https:\/\/www.middlewareinventory.com\/?p=4709","disqusShortname":"mwinventory","disqusTitle":"Terraform AWS Example \u2013 Create EC2 instance with Terraform","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/terraform-aws-example-ec2\/","postId":"4709"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"4709"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"2.138.122.244","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"4709","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/terraform-aws-example-ec2/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668108258;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

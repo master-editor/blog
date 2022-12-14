@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Terraform For Each Examples - How to use for_each | Devops Junction</title>
+<meta name="description" content="Terraform for each example. how to use for each with Terraform. Examples for Terraform for-each looping. How to use loop in Terraform. For each iteration example Terraform" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Terraform For Each Examples - How to use for_each | Devops Junction" />
+<meta property="og:description" content="Terraform for each example. how to use for each with Terraform. Examples for Terraform for-each looping. How to use loop in Terraform. For each iteration example Terraform" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-02-12T16:45:35+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:18:12+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/02/terraform_for_each.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/02/terraform_for_each.jpg","width":1748,"height":1240},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#webpage","url":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/","name":"Terraform For Each Examples - How to use for_each | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#primaryimage"},"datePublished":"2022-02-12T16:45:35+00:00","dateModified":"2022-11-10T19:18:12+00:00","description":"Terraform for each example. how to use for each with Terraform. Examples for Terraform for-each looping. How to use loop in Terraform. For each iteration example Terraform","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/terraform-for-each-examples/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/a3628fb28665348f6aab4f472ebf7837"},"headline":"Terraform For Each Examples &#8211; How to use for_each | Devops Junction","datePublished":"2022-02-12T16:45:35+00:00","dateModified":"2022-11-10T19:18:12+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/terraform-for-each-examples/#primaryimage"},"articleSection":"DevOps_Beginner,Terraform","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/terraform-for-each-examples/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/a3628fb28665348f6aab4f472ebf7837","name":"Tapan Hegde","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/cc6f526212cdbf66b6a32db548fa54b8?s=96&d=mm&r=g","caption":"Tapan Hegde"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Terraform For Each Examples &#8211; How to use for_each | Devops Junction Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/8080.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-terraform-for-each-examples-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-terraform-for-each-examples-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-8080 single-format-standard wp-custom-logo cookies-not-set et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-8080" class="post-8080 post type-post status-publish format-standard has-post-thumbnail hentry category-devops_beginner category-terraform wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Terraform For Each Examples &#8211; How to use for_each | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="10:15 pm" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/tapanh/index.html" title="View all posts by Tapan Hegde" rel="author">Tapan Hegde</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Terraform%20For%20Each%20Examples%20%E2%80%93%20How%20to%20use%20for_each%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-for-each-examples%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="8080" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Terraform+For+Each+Examples+%E2%80%93+How+to+use+for_each+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-for-each-examples%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="8080" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Terraform%20For%20Each%20Examples%20%E2%80%93%20How%20to%20use%20for_each%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-for-each-examples%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="8080" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fterraform-for-each-examples%2F&subject=Terraform%20For%20Each%20Examples%20%E2%80%93%20How%20to%20use%20for_each%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="8080" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="8080" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this post, we’ll try to cover Terraform looping constructs.</p>
+<p>We’ll cover the looping constructs that specifically work at the <strong>resource</strong> level. They handle resource creation itself.</p>
+<p>There are two Looping constructs.</p>
+<ol>
+<li><strong>count</strong>: This is often brought up when talking about looping with Terraform.</li>
+<li><strong>for_each</strong>: This technique is similar to the count method but has some advantages. It should be generally used overcount.</li>
+</ol>
+<p class="g-type-long-body">The <code>for_each</code> argument will iterate over a data structure to configure resources or modules with each item in turn.</p>
+<p class="g-type-long-body">It works best when the duplicate resources need to be configured differently but share the same lifecycle.</p>
+<p>It is more like any other <code>for_each</code> in any given programming language.</p>
+<p><a href="../../wp-content/uploads/2022/02/terraform_for_each.jpg"><img class="alignnone size-full wp-image-8197 lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="" width="1748" height="1240" data-src="../../wp-content/uploads/2022/02/terraform_for_each.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/02/terraform_for_each.jpg 1748w, ../../wp-content/uploads/2022/02/terraform_for_each-300x213.jpg 300w, ../../wp-content/uploads/2022/02/terraform_for_each-1024x726.jpg 1024w, ../../wp-content/uploads/2022/02/terraform_for_each-768x545.jpg 768w, ../../wp-content/uploads/2022/02/terraform_for_each-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/02/terraform_for_each-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-8197" src="../../wp-content/uploads/2022/02/terraform_for_each.jpg" alt="" width="1748" height="1240" srcset="../../wp-content/uploads/2022/02/terraform_for_each.jpg 1748w, ../../wp-content/uploads/2022/02/terraform_for_each-300x213.jpg 300w, ../../wp-content/uploads/2022/02/terraform_for_each-1024x726.jpg 1024w, ../../wp-content/uploads/2022/02/terraform_for_each-768x545.jpg 768w, ../../wp-content/uploads/2022/02/terraform_for_each-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/02/terraform_for_each-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Terraform_for_each_Simple_List_Example" title="Terraform for each Simple List Example">Terraform for each Simple List Example</a></li><li><a href="#Terraform_For_Each_with_Map_Example" title="Terraform For Each with Map Example">Terraform For Each with Map Example</a></li><li><a href="#Terraform_For_Each_Dynamic_block_example" title="Terraform For Each Dynamic block example">Terraform For Each Dynamic block example</a><ul><li><a href="#Dynamic_block_with_map_attributes" title="Dynamic block with map attributes">Dynamic block with map attributes</a></li></ul></li><li><a href="#Terraform_For_Each_General_AWS_example" title="Terraform For Each General AWS example">Terraform For Each General AWS example</a></li><li><a href="#Terraform_count_and_for_each_together" title="Terraform count and for_each together.">Terraform count and for_each together.</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Terraform_for_each_Simple_List_Example">Terraform for each Simple List Example</span></h2>
+<div>
+<p>Let&#8217;s look at below simple example of Terraform for each. Here we have used terraform null_resource</p>
+<p>Create main.tf file with below contents</p>
+</div>
+<div></div>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">locals {
+  avengers = ["ironman", "captain america", "thor","doctor strange","spider man","hulk","black panther","black widow"]
+}
+resource "null_resource" "avengers" {
+  for_each = toset(local.avengers)
+  triggers = {
+    name = each.value
+  }
+}
+output "avengers" {
+  value = null_resource.avengers
+}
+</pre>
+<ul>
+<li>The <code>null_resource</code> resource implements the standard resource lifecycle but takes no further action. The <code>triggers</code> argument allows specifying a random set of values.  These values when changed will cause the resource to be replaced.</li>
+<li>With <code class="language-plaintext highlighter-rouge">for_each</code>, we must convert the List type to a Set with <code class="language-plaintext highlighter-rouge">toset(local.avengers)</code>. Note, we could have also used a variable with <code class="language-plaintext highlighter-rouge">type = set(string)</code> instead of using the <code class="language-plaintext highlighter-rouge">toset</code> function.</li>
+<li>There’s a special <code class="language-plaintext highlighter-rouge">each</code> object that is assigned by Terraform.  The object has 2 attributes: <code class="language-plaintext highlighter-rouge">each.key</code> and <code class="language-plaintext highlighter-rouge">.each.value</code></li>
+</ul>
+<h3 id="for-each-argument-requirements"></h3>
+<p>In the previous example, we pointed out the conversion of the List to a Set with <code class="language-plaintext highlighter-rouge">toset(local.avengers)</code>. If we did not convert it and used this code instead:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4">resource "null_resource" "avengers" {
+  for_each = local.avengers # instead of toset(local.avengers)
+  triggers = {
+    name = each.value
+  }
+}</pre>
+<p>Terraform would produce an error like this</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="typescript" data-enlighter-theme="bootstrap4">Error: Invalid for_each argument
+
+  on main.tf line 28, in resource "null_resource" "avengers":
+  28:   for_each = local.avengers
+
+The given "for_each" argument value is unsuitable: the "for_each" argument
+must be a map, or set of strings, and you have provided a value of type tuple.</pre>
+<p>As per the above error snippet, it is confirmed that <code class="language-plaintext highlighter-rouge">for_each</code> can be assigned  to the following items</p>
+<ol>
+<li>a Map</li>
+<li>Set of Strings</li>
+</ol>
+<p>To get more clarity on this topic, let’s take a look at the difference between a Terraform List and a Set.</p>
+<div class="language-plaintext highlighter-rouge">
+<div class="highlight">
+<pre class="highlight">set = toset(["w", "x", "x"]) # =&gt; ["w", "x"] all elements are unique
+list = ["w", "x", "x"] # =&gt; ["w", "x", "x"] the elements don't have to be unique
+</pre>
+</div>
+</div>
+<p>So the difference between a List and a Set is that Set values are all guaranteed to be unique. Also, Sets do not have any particular ordering.</p>
+<p>And map structure looks like this:</p>
+<div class="language-plaintext highlighter-rouge">
+<div class="highlight">
+<pre class="highlight">map = {w = 1, x = 2}
+</pre>
+</div>
+</div>
+<p>With a map, the key naturally provides uniqueness already.</p>
+<p>So Terraform’s <code class="language-plaintext highlighter-rouge">for_each</code> type requirement stems from uniqueness.</p>
+<p>Each element in the iteration needs to have a unique key. Terraform did this by design. It allows us to reference resources by a unique identifier easily.</p>
+<p>Let&#8217;s apply changes with <code>terraform apply</code> command</p>
+<p>You should see output similar to below</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">Outputs:
+
+avengers = {
+  "balck panther" = {
+    "id" = "2802565293094280916"
+    "triggers" = tomap({
+      "name" = "balck panther"
+    })
+  }
+  "black widow" = {
+    "id" = "6013354124200750553"
+    "triggers" = tomap({
+      "name" = "black widow"
+    })
+  }
+  "captain america" = {
+    "id" = "5480470924120220280"
+    "triggers" = tomap({
+      "name" = "captain america"
+    })
+  }
+  "doctor strange" = {
+    "id" = "4072771293727751674"
+    "triggers" = tomap({
+      "name" = "doctor strange"
+    })
+  }
+  "hulk" = {
+    "id" = "7390401988508483769"
+    "triggers" = tomap({
+      "name" = "hulk"
+    })
+  }
+  "ironman" = {
+    "id" = "3593363658702079486"
+    "triggers" = tomap({
+      "name" = "ironman"
+    })
+  }
+  "spider man" = {
+    "id" = "3684530120944521232"
+    "triggers" = tomap({
+      "name" = "spider man"
+    })
+  }
+  "thor" = {
+    "id" = "9185261633914444058"
+    "triggers" = tomap({
+      "name" = "thor"
+    })
+  }
+}
+</pre>
+<p>By looking at Terraform output, we can confirm that resulting resources created with the <code class="language-plaintext highlighter-rouge">for_each</code> is a Map.</p>
+<p>The resulting object is a Map with unique keys that ties it back to the <code class="language-plaintext highlighter-rouge">for_each</code> assignment. This is why <code class="language-plaintext highlighter-rouge">for_each</code> can only be assigned a Map or a Set of Strings: uniqueness</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Terraform_For_Each_with_Map_Example">Terraform For Each with Map Example</span></h2>
+<p>The recommended way to use a <code class="language-plaintext highlighter-rouge">for_each</code> loop is with a Map value. It’s a natural fit since we don’t have to do any <code class="language-plaintext highlighter-rouge">toset</code> conversion.</p>
+<p>Look at the below snippet.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">locals {
+  strengths = {
+    "Ironman"         = "Artificial Intelligence"
+    "Captain America" = "Sheild"
+    "Hulk"            = "Muscle Power"
+    "Black widow"     = "Martial Arts"
+    "Thor"            = "Hammer"
+    "Spider Man"      = "Web"
+    "Black Panther"   = "Vibranium suit"
+  }
+}
+resource "null_resource" "strengths" {
+  for_each = local.strengths
+  triggers = {
+    name  = each.key
+    power = each.value
+  }
+}
+output "strengths" {
+  value = null_resource.strengths
+}
+</pre>
+<p>Here we are listing the name and power of marvel&#8217;s avengers in map format.</p>
+<p>This would result in the below output format</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">strengths = {
+  "Black Panther" = {
+    "id" = "6089652037089638193"
+    "triggers" = tomap({
+      "name" = "Black Panther"
+      "power" = "Vibranium suit"
+    })
+  }
+  "Black widow" = {
+    "id" = "3853301065318607159"
+    "triggers" = tomap({
+      "name" = "Black widow"
+      "power" = "Martial Arts"
+    })
+  }
+  "Captain America" = {
+    "id" = "182468351001110290"
+    "triggers" = tomap({
+      "name" = "Captain America"
+      "power" = "Sheild"
+    })
+  }
+  "Hulk" = {
+    "id" = "7283220352459556352"
+    "triggers" = tomap({
+      "name" = "Hulk"
+      "power" = "Muscle Power"
+    })
+  }
+  "Ironman" = {
+    "id" = "4223635774718233881"
+    "triggers" = tomap({
+      "name" = "Ironman"
+      "power" = "Artificial Intelligence"
+    })
+  }
+  "Spider Man" = {
+    "id" = "3262424659295311455"
+    "triggers" = tomap({
+      "name" = "Spider Man"
+      "power" = "Web"
+    })
+  }
+  "Thor" = {
+    "id" = "4876955704767038788"
+    "triggers" = tomap({
+      "name" = "Thor"
+      "power" = "Hammer"
+    })
+  }
+}
+</pre>
+<p>&nbsp;</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="Terraform_For_Each_Dynamic_block_example">Terraform For Each Dynamic block example</span></h2>
+<p>Here, In this section, We are going to discuss terraform looping construct, the dynamic nested block. The dynamic nested block provides a way to build repeated nested configuration blocks. This construct works at the <strong>attribute</strong> level.</p>
+<p>Take a look at below example</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">resource "aws_security_group" "foreachusecase" {
+  name        = "demo_for_foreach_usecase"
+  description = "demo_for_foreach_usecase"
+
+  ingress {
+    description = "rule for http"
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  ingress {
+    description = "rule for ssh"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}</pre>
+<p>Dynamic nested blocks can be used to assign multiple attributes. Now, the above code can be re-written as below</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">locals {
+  ports = [80, 22]
+}
+resource "aws_security_group" "foreachusecase" {
+  name        = "demo_for_foreach_usecase"
+  description = "demo_for_foreach_usecase"
+
+  dynamic "ingress" {
+    for_each = local.ports
+    content {
+      description = "description ${ingress.key}"
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+}</pre>
+<p>In the above code,</p>
+<ul>
+<li>The dynamic argument is the original attribute we declared with a configuration block: “ingress”</li>
+<li>A <code class="language-plaintext highlighter-rouge">for_each</code> assignment is used.</li>
+<li>The <code class="language-plaintext highlighter-rouge">content</code> block contains the original “ingress” block.</li>
+<li>Terraform implicitly provides an <code class="language-plaintext highlighter-rouge">ingress</code> object. The object name matches the dynamic argument “ingress”.</li>
+<li>The <code class="language-plaintext highlighter-rouge">ingress</code> object is a wrapper iterator object that contains info for each element that was assigned with <code class="language-plaintext highlighter-rouge">for_each = local.ports</code></li>
+</ul>
+<h3 id="for-each-map-example"><span class="ez-toc-section" id="Dynamic_block_with_map_attributes">Dynamic block with map attributes</span></h3>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">locals {
+  map = {
+    "http rule" = {
+      port = 80
+      cidr_blocks = ["0.0.0.0/0"],
+    }
+    "ssh rule" = {
+      port = 22
+      cidr_blocks = ["0.0.0.0/0"],
+    }
+  }
+}
+resource "aws_security_group" "foreachusecase" {
+  name        = "demo_for_foreach_usecase"
+  description = "demo_for_foreach_usecase"
+
+  dynamic "ingress" {
+    for_each = local.map
+    content {
+      description = ingress.key # IE: "demo_for_foreach_usecase"
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
+      protocol    = "tcp"
+      cidr_blocks = ingress.value.cidr_blocks
+    }
+  }
+}
+output "map" {
+  value = aws_security_group.foreachusecase
+}
+</pre>
+<p>Take a look at the below table, where each iteration is defined with proper values</p>
+<ul>
+<li>the <code class="language-plaintext highlighter-rouge">ingress</code> object is a wrapper object</li>
+<li>the <code class="language-plaintext highlighter-rouge">ingress.value</code> unravels the wrapper object and contains each element of the map</li>
+<li>the <code class="language-plaintext highlighter-rouge">ingress.key</code> is used because it contains the description (http rule and ssh rule)</li>
+</ul>
+<table style="border-collapse: collapse; width: 100%; height: 54px;" border="1">
+<tbody>
+<tr style="height: 22px;">
+<td style="width: 27.5904%; height: 22px; text-align: center;"><strong>Iteration</strong></td>
+<td style="width: 72.4096%; height: 22px; text-align: center;"><strong>Values</strong></td>
+</tr>
+<tr style="height: 54px;">
+<td style="width: 27.5904%; text-align: center; height: 54px;">1</td>
+<td style="width: 72.4096%; height: 54px;"><code class="language-plaintext highlighter-rouge">ingress.key = "http rule"</code> and <code class="language-plaintext highlighter-rouge">ingress.value = {port = 80, cidr_blocks = ["0.0.0.0/0"]</code></td>
+</tr>
+<tr style="height: 28px;">
+<td style="width: 27.5904%; height: 28px; text-align: center;">2</td>
+<td style="width: 72.4096%; height: 28px;"><code class="language-plaintext highlighter-rouge">ingress.key = "ssh rule"</code> and <code class="language-plaintext highlighter-rouge">ingress.value = {port = 22, cidr_blocks = ["0.0.0.0/0"]</code></td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Terraform_For_Each_General_AWS_example">Terraform For Each General AWS example</span></h2>
+<p>In this example, we shall see how we can create an auto-scaling group in AWS using terraform for_each capability.</p>
+<p>Let&#8217;s take a look at below example</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">terraform{
+  required_version = "&gt;=0.12"
+}
+
+provider "aws"{
+  region = "us-east-1"
+}
+
+data "aws_availability_zones" "all"{}
+
+resource "aws_autoscaling_group" "asg" {
+  launch_configuration = aws_launch_configuration.alc.id
+  availability_zones   = data.aws_availability_zones.all.names
+
+  min_size = 2
+  max_size = 2
+
+  # Use for_each to loop over var.custom_tags
+  dynamic "tag" {
+    for_each = var.custom_tags
+    content {
+      key                 = tag.key
+      value               = tag.value
+      propagate_at_launch = true
+    }
+  }
+}
+
+resource "aws_launch_configuration" "alc" {
+  image_id        = "ami-07ebfd5b3428b6f4d"
+  instance_type   = "t2.nano"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+</pre>
+<p>If you look at the resource <code>aws_autoscaling_group</code>  block, we have a dynamic block defined with &#8216;for_each&#8217; functionality.</p>
+<p>variable &#8216;custom_tag&#8217; is assigned to this for_each functionality.</p>
+<p>Now, take a look at the below <code>variables.tf</code> file contents</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="json" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">variable "custom_tags" {
+  description = "Custom tags to set on the Instances in the ASG"
+  type        = map(string)
+  default = {
+    "AAA" = "King"
+    "ZZZ" = "Lion"
+  }
+}
+</pre>
+<p>we have a default map with two keys namely <code>AAA</code> and <code>BBB</code> with values <code>King</code> and <code>Lion</code> respectively.</p>
+<p>Now, when we execute <code>main.tf</code> with <code>terraform apply</code> command, terraform will create ASG (Auto Scaling Group) in our AWS account with two tags namely</p>
+<pre>"AAA" = "King"
+"ZZZ" = "Lion"</pre>
+<p>Let&#8217;s run below terraform commands to see working in real action</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">terraform init
+terraform validate
+terraform plan
+terraform apply &#8211; auto-approve</pre>
+<p>you should see output similar to below</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">Plan: 2 to add, 0 to change, 0 to destroy.
+aws_launch_configuration.alc: Creating...
+aws_launch_configuration.alc: Creation complete after 5s [id=terraform-20220206141921193000000001]
+aws_autoscaling_group.asg: Creating...
+aws_autoscaling_group.asg: Still creating... [10s elapsed]
+aws_autoscaling_group.asg: Still creating... [20s elapsed]
+aws_autoscaling_group.asg: Still creating... [30s elapsed]
+aws_autoscaling_group.asg: Still creating... [40s elapsed]
+aws_autoscaling_group.asg: Still creating... [50s elapsed]
+aws_autoscaling_group.asg: Still creating... [1m0s elapsed]
+aws_autoscaling_group.asg: Still creating... [1m10s elapsed]
+aws_autoscaling_group.asg: Creation complete after 1m13s [id=terraform-20220206141926079900000002]</pre>
+<p>Now we can confirm the same by logging into the AWS console. Please see the below screenshot for reference</p>
+<p style="text-align: left;"><a href="../../wp-content/uploads/2022/02/ASG-01.png"><img class="post-img alignleft wp-image-8100 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x601.png" alt="" width="3248" height="1016" data-src="../../wp-content/uploads/2022/02/ASG-01.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/02/ASG-01.png 3248w, ../../wp-content/uploads/2022/02/ASG-01-300x94.png 300w, ../../wp-content/uploads/2022/02/ASG-01-1024x320.png 1024w, ../../wp-content/uploads/2022/02/ASG-01-768x240.png 768w, ../../wp-content/uploads/2022/02/ASG-01-1536x480.png 1536w, ../../wp-content/uploads/2022/02/ASG-01-2048x641.png 2048w" data-sizes="auto" /><noscript><img class="post-img alignleft wp-image-8100 size-full" src="../../wp-content/uploads/2022/02/ASG-01.png" alt="" width="3248" height="1016" srcset="../../wp-content/uploads/2022/02/ASG-01.png 3248w, ../../wp-content/uploads/2022/02/ASG-01-300x94.png 300w, ../../wp-content/uploads/2022/02/ASG-01-1024x320.png 1024w, ../../wp-content/uploads/2022/02/ASG-01-768x240.png 768w, ../../wp-content/uploads/2022/02/ASG-01-1536x480.png 1536w, ../../wp-content/uploads/2022/02/ASG-01-2048x641.png 2048w" sizes="(max-width: 3248px) 100vw, 3248px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Terraform_count_and_for_each_together">Terraform count and for_each together.</span></h2>
+<p>Sometimes you cannot just use <code>for_each</code> you might need a help of <code>count</code> too.</p>
+<p>But <code>count</code> and <code>for_each</code> are mutually exclusive and you cannot use them together but there is a way.</p>
+<p>we discussed the same in another article</p>
+<blockquote class="wp-embedded-content" data-secret="FSHpVZAcwI"><p><a href="../terraform-create-multiple-ec2-different-config/index.html">Terraform Create Multiple EC2 with different Configs &#8211; for_each and count together</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Terraform Create Multiple EC2 with different Configs &#8211; for_each and count together&#8221; &#8212; Middleware Inventory" src="../terraform-create-multiple-ec2-different-config/embed/index.html#?secret=FSHpVZAcwI" data-secret="FSHpVZAcwI" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Tapan Hegde</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#6008050c0c0f200712091406194e030f0d"> <span class="__cf_email__" data-cfemail="79111c151516391e0b100d1f00571a1614">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668108244" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="8080" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668108244" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668108244"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="aws s3 cp" data-src="../../wp-content/uploads/2021/09/awss3cp-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/09/awss3cp-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="aws s3 cp" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-s3-cp-examples-how-to-copy-files-with-s3-cli-devops-junction/index.html'>AWS S3 CP Examples - How to Copy Files with S3 CLI | Devops Junction</a><p>AWS CLI has become a life saver when you want to manage your AWS infrastructure efficiently. This also provides lot of possibilities for Automation and reduce the number of times that you have to login to AWS Management console. If you are new to AWS CLI. Please consider reading this&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-aws_s3-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible S3" data-src="../../wp-content/uploads/2021/12/Ansible-S3-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/12/Ansible-S3-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible S3" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-aws_s3-example/index.html'>How to use ansible with S3 - Ansible aws_s3 examples | Devops Junction</a><p>S3 has become the cheap and best object storage and it is used widely across enterprises and products, to securely save and access data over the internet. We have various ways to interact with the S3 bucket,  to upload, download and copy objects back and forth to S3. SDKs (&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../run-aws-cli-commands-on-all-regions-awsall/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="AWSALL" data-src="../../wp-content/uploads/2021/09/awsall-design-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/09/awsall-design-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="AWSALL" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../run-aws-cli-commands-on-all-regions-awsall/index.html'>Run AWS CLI commands on All regions - awsall | Devops Junction</a><p>What is awsall CLI tool This is a simple solution we have created to execute your AWS CLI commands on all AWS regions without having to mention --region argument all the time. Let's say you want to list the instances as a table with selected fields but you want to&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../terraform-aws-example-ec2/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2020/01/TerraformAWS-1-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/01/TerraformAWS-1-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../terraform-aws-example-ec2/index.html'>Terraform AWS Example - Create EC2 instance with Terraform</a><p>Terraform, An outstanding and innovative product from hashicorp and it is a leader in Infrastructure as Code tools Segment.  Before I go any further, I think I should set the context. In this article, we are going to learn how to use Terraform to create AWS EC2 instance and create&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../ansible-wait_for-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible wait_for examples" data-src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/wait-for-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible wait_for examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../ansible-wait_for-examples/index.html'>Ansible wait_for module examples - How to | Devops Junction</a><p>Introduction to Ansible wait_for module Ansible wait_for module can be used to pause your playbook execution and to wait for many different things or conditions before continuing with the execution. The wait_for module of ansible is to make your playbook or task execution halt or pause for various reasons and for&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-playbook-kafka/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible Playbook to install KAFKA on Ubuntu &#8211; How to | Devops Junction</a></div><div class="nav-next"><a href="../ansible-list-examples-how-to-create-and-append-items-to-list/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Ansible List Examples &#8211; How to create and append items to List</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"8080 https:\/\/www.middlewareinventory.com\/?p=8080","disqusShortname":"mwinventory","disqusTitle":"Terraform For Each Examples \u2013 How to use for_each | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/terraform-for-each-examples\/","postId":"8080"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"8080"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"167.99.213.108","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"8080","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/terraform-for-each-examples/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668108244;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

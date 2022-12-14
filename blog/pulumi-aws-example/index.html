@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Pulumi AWS Example - Creating VPC, Subnets, EC2, Bastion host</title>
+<meta name="description" content="Pulumi AWS Example. How to create AWS VPC, Private Public Subnets, EC2 instances, and Bastion hosts using Pulumi. Creating AWS EC2 instance with Pulumi." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Pulumi AWS Example - Creating VPC, Subnets, EC2, Bastion host" />
+<meta property="og:description" content="Pulumi AWS Example. How to create AWS VPC, Private Public Subnets, EC2 instances, and Bastion hosts using Pulumi. Creating AWS EC2 instance with Pulumi." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/pulumi-aws-example/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2022-05-03T19:09:42+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:18:12+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2022/05/mwi-2.jpg" />
+<meta property="og:image:width" content="1748" />
+<meta property="og:image:height" content="1240" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2022/05/mwi-2.jpg","width":1748,"height":1240,"caption":"pulumi aws"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#webpage","url":"https://www.middlewareinventory.com/blog/pulumi-aws-example/","name":"Pulumi AWS Example - Creating VPC, Subnets, EC2, Bastion host","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#primaryimage"},"datePublished":"2022-05-03T19:09:42+00:00","dateModified":"2022-11-10T19:18:12+00:00","description":"Pulumi AWS Example. How to create AWS VPC, Private Public Subnets, EC2 instances, and Bastion hosts using Pulumi. Creating AWS EC2 instance with Pulumi.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/pulumi-aws-example/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/a3628fb28665348f6aab4f472ebf7837"},"headline":"Pulumi AWS Example &#8211; Creating VPC, Subnets, EC2, Bastion host","datePublished":"2022-05-03T19:09:42+00:00","dateModified":"2022-11-10T19:18:12+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/pulumi-aws-example/#primaryimage"},"articleSection":"AWS,DevOps_Beginner","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/pulumi-aws-example/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/a3628fb28665348f6aab4f472ebf7837","name":"Tapan Hegde","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/cc6f526212cdbf66b6a32db548fa54b8?s=96&d=mm&r=g","caption":"Tapan Hegde"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Pulumi AWS Example &#8211; Creating VPC, Subnets, EC2, Bastion host Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/8394.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-pulumi-aws-example-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-pulumi-aws-example-&amp;format=xml.xml" />
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 400;
+    font-size: 22px;
+}
+#precode
+{
+  background-color: transparent !important;
+  color: #00193a !important;
+  font-size: 16px;
+}
+.post-img
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border: 1px solid lightgray;
+}
+article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+code
+{
+  color: black;
+}
+blockquote {
+    padding: 2%;
+    background-color: none !important;
+}
+div.enlighter{
+  font-size: 1.2em;  
+}
+.enlighter-default {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+b,strong{
+  font-weight: bold;
+  color: black;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-8394 single-format-standard wp-custom-logo cookies-set cookies-accepted et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-8394" class="post-8394 post type-post status-publish format-standard has-post-thumbnail hentry category-aws category-devops_beginner wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Pulumi AWS Example &#8211; Creating VPC, Subnets, EC2, Bastion host</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="12:39 am" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/tapanh/index.html" title="View all posts by Tapan Hegde" rel="author">Tapan Hegde</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Pulumi%20AWS%20Example%20%E2%80%93%20Creating%20VPC%2C%20Subnets%2C%20EC2%2C%20Bastion%20host&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpulumi-aws-example%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="8394" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/pulumi-aws-example/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Pulumi+AWS+Example+%E2%80%93+Creating+VPC%2C+Subnets%2C+EC2%2C+Bastion+host&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpulumi-aws-example%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="8394" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/pulumi-aws-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Pulumi%20AWS%20Example%20%E2%80%93%20Creating%20VPC%2C%20Subnets%2C%20EC2%2C%20Bastion%20host&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpulumi-aws-example%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="8394" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/pulumi-aws-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fpulumi-aws-example%2F&subject=Pulumi%20AWS%20Example%20%E2%80%93%20Creating%20VPC%2C%20Subnets%2C%20EC2%2C%20Bastion%20host" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="8394" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/pulumi-aws-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="8394" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/pulumi-aws-example/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this article, we are going to see how to set up compute infrastructure consisting of virtual private cloud, subnets, internet gateway,  NAT gateway, route tables and EC2 instances in Amazon web services using one of the most competent IaC tool &#8216;Pulumi&#8217;</p>
+<p>In addition to this, we shall see how to set up &#8216;bastion host&#8217; in order to connect to instances running in the private subnet.</p>
+<p>By following this article you should be able to set up your AWS infrastructure with following resources without any hustle</p>
+<ul>
+<li>A virtual private cloud (VPC) in your AWS account</li>
+<li>Two subnets inside VPC &#8211; 1 public subnet, 1 private subnet</li>
+<li>Internet gateway attached to VPC</li>
+<li>Elastic IP</li>
+<li>A NAT gateway attached to public subnet</li>
+<li>Route table attached to the<strong> internet gateway</strong> &#8211; public route table</li>
+<li>Route table attached to <strong>NAT gateway</strong> &#8211; private route table</li>
+<li>A security group consisting of inbound and outbound rules</li>
+<li>An ec2 key-pair</li>
+<li>Two ec2 instances &#8211; 1 public instance, 1 private instance</li>
+</ul>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/05/mwi-2.jpg"><img class="post-img alignnone wp-image-8435 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-1748x1240.png" alt="pulumi aws" width="1748" height="1240" data-src="../../wp-content/uploads/2022/05/mwi-2.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2022/05/mwi-2.jpg 1748w, ../../wp-content/uploads/2022/05/mwi-2-300x213.jpg 300w, ../../wp-content/uploads/2022/05/mwi-2-1024x726.jpg 1024w, ../../wp-content/uploads/2022/05/mwi-2-768x545.jpg 768w, ../../wp-content/uploads/2022/05/mwi-2-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/05/mwi-2-90x65.jpg 90w" data-sizes="auto" /><noscript><img class="post-img alignnone wp-image-8435 size-full" src="../../wp-content/uploads/2022/05/mwi-2.jpg" alt="pulumi aws" width="1748" height="1240" srcset="../../wp-content/uploads/2022/05/mwi-2.jpg 1748w, ../../wp-content/uploads/2022/05/mwi-2-300x213.jpg 300w, ../../wp-content/uploads/2022/05/mwi-2-1024x726.jpg 1024w, ../../wp-content/uploads/2022/05/mwi-2-768x545.jpg 768w, ../../wp-content/uploads/2022/05/mwi-2-1536x1090.jpg 1536w, ../../wp-content/uploads/2022/05/mwi-2-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Pre-requisites" title="Pre-requisites">Pre-requisites</a></li><li><a href="#Set-up_Instructions" title="Set-up Instructions">Set-up Instructions</a></li><li><a href="#Creating_a_workspace_and_Initialising_Pulumi" title="Creating a workspace and Initialising Pulumi">Creating a workspace and Initialising Pulumi</a></li><li><a href="#Pulumi_Python_script_to_set_up_infrastructure_in_AWS_Pulumi_AWS_Example" title="Pulumi Python script to set up infrastructure in AWS &#8211; Pulumi AWS Example ">Pulumi Python script to set up infrastructure in AWS &#8211; Pulumi AWS Example </a></li><li><a href="#Update_the_Values_in_the_Variables_file" title="Update the Values in the Variables file">Update the Values in the Variables file</a></li><li><a href="#Creating_SSH_Keys" title="Creating SSH Keys ">Creating SSH Keys </a></li><li><a href="#Creating_the_AWS_Infrastructure_with_Pulumi_up" title="Creating the AWS Infrastructure with Pulumi up">Creating the AWS Infrastructure with Pulumi up</a></li><li><a href="#Configuraing_SSH_to_connect_through_Bastion" title="Configuraing SSH to connect through Bastion">Configuraing SSH to connect through Bastion</a></li><li><a href="#SSH_to_Private_EC2_instance_using_Bastion_Validation" title="SSH to Private EC2 instance using Bastion &#8211; Validation">SSH to Private EC2 instance using Bastion &#8211; Validation</a></li><li><a href="#GitHub_Link_for_the_Sourcecode" title="GitHub Link for the Sourcecode">GitHub Link for the Sourcecode</a></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h3><span class="ez-toc-section" id="Pre-requisites"><span id="Pre-requisites" class="ez-toc-section">Pre-requisites</span></span></h3>
+<ul>
+<li>An AWS Account</li>
+<li>An AWS CLI needs to be installed</li>
+<li>Your AWS credentials.
+<ul>
+<li>You can create a new Access Key on this page. <a href="https://console.aws.amazon.com/iam/home?#/security_credentials" rel="nofollow">link</a></li>
+</ul>
+</li>
+<li>Python3 needs to be installed on the machine</li>
+<li>Pulumi Engine needs to be installed in the machine. <a href="https://www.pulumi.com/docs/get-started/aws/begin/" rel="nofollow">link</a></li>
+</ul>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Set-up_Instructions"><span id="Set-up_Instructions" class="ez-toc-section">Set-up Instructions</span></span></h3>
+<ul>
+<li>
+<p dir="auto">Install Python3, pulumi locally.</p>
+<ul>
+<li><a href="https://linuxconcept.com/how-to-install-python-3-on-rhel-8-red-hat-enterprise-linux/" rel="nofollow">Python3 installation</a></li>
+<li>Pulumi :
+<ul>
+<li><a href="https://www.pulumi.com/docs/get-started/aws/begin/" rel="nofollow">Download Pulumi</a></li>
+<li><a href="https://www.pulumi.com/docs/get-started/aws/begin/" rel="nofollow">Install Pulumi</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p dir="auto">Set up AWS credentials in ~/.aws/credentials.</p>
+<ul>
+<li>The easiest way to do so is by setting up the AWS CLI.
+<ul>
+<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html" rel="nofollow">Install CLI</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2-linux.html" rel="nofollow">Install CLI on Linux</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p dir="auto">once <code>aws-cli</code> is installed in the host machine, set up AWS credentials using the below command</p>
+<div class="snippet-clipboard-content position-relative overflow-auto">
+<pre class="notranslate"><code class="notranslate">$ aws configure
+</code></pre>
+</div>
+<ul>
+<li>This will ask for your AWS access key and AWS Secret as below
+<ul>
+<li>AWS Access Key ID [None] : ******</li>
+<li>AWS Secret Access Key [None] : ******</li>
+<li>Default region name : [leave it none, press enter]</li>
+<li>Default output format : [leave it none, press enter]</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Creating_a_workspace_and_Initialising_Pulumi"><span id="Creating_a_workspace_and_Initializing_Pulumi" class="ez-toc-section">Creating a workspace and Initialising Pulumi</span></span></h3>
+<p>Create an empty directory and then run the <strong>‘pulumi new’</strong> command as this command generates a set of pre-defined files (requirements.txt, Pulumi.yaml,__<strong>main__</strong>.py)</p>
+<div class="snippet-clipboard-content position-relative overflow-auto">
+<pre class="notranslate"><code class="notranslate">$ pulumi new
+</code></pre>
+</div>
+<p dir="auto">The pulumi new command creates a new Pulumi project with some basic set of files based on the cloud and language specified.</p>
+<p dir="auto">If you are running <code>pulumi new</code> or most other <code>pulumi</code> commands for the first time, you will be prompted to log in to the <a href="https://app.pulumi.com/" target="_blank" rel="noopener noreferrer">Pulumi service</a>. The <a href="https://www.pulumi.com/docs/reference/cli/">Pulumi CLI</a> works in the background with the Pulumi service in order to deliver a reliable experience. It is free for individual use.</p>
+<p>Create a directory with some valid name</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">mkdir pulumi-devops-junction</pre>
+<p>Get into that directory</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">cd pulumi-devops-junction</pre>
+<p>Inside that directory execute the <code>pulumi new</code> command</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">pulumi new</pre>
+<p>Once you execute the ‘Pulumi new’ command, you should see an output similar to below</p>
+<p><a href="../../wp-content/uploads/2022/04/p-new.png"><img class="post-img wp-image-8341 size-large lazyautosizes lazyloaded alignnone" src="../../wp-content/uploads/2022/04/p-new-1024x508.png" alt="" width="840" height="417" data-src="../../wp-content/uploads/2022/04/p-new-1024x508.png" data-srcset="../../wp-content/uploads/2022/04/p-new-1024x508.png 1024w, ../../wp-content/uploads/2022/04/p-new-300x149.png 300w, ../../wp-content/uploads/2022/04/p-new-768x381.png 768w, ../../wp-content/uploads/2022/04/p-new.png 1446w" data-sizes="auto" srcset="../../wp-content/uploads/2022/04/p-new-1024x508.png 1024w, ../../wp-content/uploads/2022/04/p-new-300x149.png 300w, ../../wp-content/uploads/2022/04/p-new-768x381.png 768w, ../../wp-content/uploads/2022/04/p-new.png 1446w" sizes="(max-width: 840px) 100vw, 840px" /></a></p>
+<p>Using the up-down arrow key, select the <code>aws-python</code> option. Press Enter</p>
+<p>Specify the following information</p>
+<ul>
+<li>Project Name</li>
+<li>Project Description</li>
+<li>Stack Name</li>
+<li>Aws Region</li>
+</ul>
+<p>If you hit enter without giving any values pulumi will consider default values.  Once you specify all details, pulumi will run and try to install all necessary libs. You should see output similar to below</p>
+<p><a href="../../wp-content/uploads/2022/04/p-values.png"><img class="post-img wp-image-8346 size-large lazyautosizes lazyloaded alignnone" src="../../wp-content/uploads/2022/04/p-values-1024x384.png" alt="" width="840" height="315" data-src="../../wp-content/uploads/2022/04/p-values-1024x384.png" data-srcset="../../wp-content/uploads/2022/04/p-values-1024x384.png 1024w, ../../wp-content/uploads/2022/04/p-values-300x113.png 300w, ../../wp-content/uploads/2022/04/p-values-768x288.png 768w, ../../wp-content/uploads/2022/04/p-values-1536x576.png 1536w, ../../wp-content/uploads/2022/04/p-values-2048x768.png 2048w" data-sizes="auto" srcset="../../wp-content/uploads/2022/04/p-values-1024x384.png 1024w, ../../wp-content/uploads/2022/04/p-values-300x113.png 300w, ../../wp-content/uploads/2022/04/p-values-768x288.png 768w, ../../wp-content/uploads/2022/04/p-values-1536x576.png 1536w, ../../wp-content/uploads/2022/04/p-values-2048x768.png 2048w" sizes="(max-width: 840px) 100vw, 840px" /></a><br />
+Now our pulumi project is set up and ready!! and we are ready to go and make changes in the placeholder code.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Pulumi_Python_script_to_set_up_infrastructure_in_AWS_Pulumi_AWS_Example"><span id="Pulumi_Python_script_to_Clone_EBS_Volumes_and_attach_to_other_EC2" class="ez-toc-section">Pulumi Python script to set up infrastructure in AWS &#8211; Pulumi AWS Example </span></span></h3>
+<p>Now we have the default files created, It&#8217;s time to update the placeholder file with our sourcecode.</p>
+<p>copy the below content into <code>__main.py__</code>and replace the existing content.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">"""An AWS Python Pulumi program"""
+
+
+import pulumi
+import pulumi_aws as aws
+from pulumi import export
+
+config = pulumi.Config()
+data = config.require_object("data")
+
+virtualprivatecloud = aws.ec2.Vpc(data.get("vpc_name"), cidr_block=data.get("vpc_cidr"))
+
+igw = aws.ec2.InternetGateway(data.get("igw_name"),
+    vpc_id=virtualprivatecloud.id,
+    tags={
+        "Name": data.get("igw_name"),
+    })
+
+privatesubnet = aws.ec2.Subnet(data.get("prv_subnet_name"),
+    vpc_id=virtualprivatecloud.id,
+    cidr_block=data.get("prv_cidr"),
+    map_public_ip_on_launch=False,
+    tags={
+        "Name": data.get("prv_subnet_name"),
+    })
+
+publicsubnet = aws.ec2.Subnet(data.get("pub_subnet_name"),
+    vpc_id=virtualprivatecloud.id,
+    cidr_block=data.get("pub_cidr"),
+    map_public_ip_on_launch=True,
+    tags={
+        "Name": data.get("pub_subnet_name"),
+    })
+
+eip = aws.ec2.Eip(data.get("eip_name"),
+    vpc=True)
+
+natgateway = aws.ec2.NatGateway(data.get("natgw_name"),
+    allocation_id=eip.allocation_id,
+    subnet_id=publicsubnet.id,
+    tags={
+        "Name": data.get("natgw_name"),
+    },
+    opts=pulumi.ResourceOptions(depends_on=[igw]))
+
+pubroutetable = aws.ec2.RouteTable(data.get("pubrttable_name"),
+    vpc_id=virtualprivatecloud.id,
+    routes=[
+        aws.ec2.RouteTableRouteArgs(
+            cidr_block="0.0.0.0/0",
+            gateway_id=igw.id,
+        )
+    ],
+    tags={
+        "Name": data.get("pubrttable_name"),
+    })
+
+prvroutetable = aws.ec2.RouteTable(data.get("prvrttable_name"),
+    vpc_id=virtualprivatecloud.id,
+    routes=[
+        aws.ec2.RouteTableRouteArgs(
+            cidr_block="0.0.0.0/0",
+            gateway_id=natgateway.id,
+        )
+    ],
+    tags={
+        "Name": data.get("prvrttable_name"),
+    })
+
+pub_route_association = aws.ec2.RouteTableAssociation(
+        data.get("pubrtasst_name"),
+        route_table_id=pubroutetable.id,
+        subnet_id=publicsubnet.id
+)
+
+prv_route_association = aws.ec2.RouteTableAssociation(
+        data.get("prvrtasst_name"),
+        route_table_id=prvroutetable.id,
+        subnet_id=privatesubnet.id
+)
+
+sg = aws.ec2.SecurityGroup(
+        data.get("sec_grp_name"),
+        description="Allow HTTP traffic to EC2 instance",
+        ingress=[{
+                "protocol": "tcp",
+                "from_port": 80,
+                "to_port": 80,
+                "cidr_blocks": ["0.0.0.0/0"],
+            },
+        {
+            "protocol": "tcp",
+            "from_port": 443,
+            "to_port": 443,
+            "cidr_blocks": ["0.0.0.0/0"],
+        },
+        {
+            "protocol": "tcp",
+            "from_port": 22,
+            "to_port": 22,
+            "cidr_blocks": ["0.0.0.0/0"],
+        }
+        ],
+    egress=[
+        {
+            "protocol": "-1",
+            "from_port": 0,
+            "to_port": 0,
+            "cidr_blocks": ["0.0.0.0/0"],
+
+        }
+    ],
+    vpc_id=virtualprivatecloud.id
+)
+
+keypair = aws.ec2.KeyPair("keypair", public_key=data.get("public_key"))
+
+ami = aws.ec2.get_ami(
+        most_recent="true",
+        owners=["099720109477"],
+)
+
+
+user_data = """
+#!/bin/bash
+echo "Hello, world!" &gt; index.html
+nohup python -m SimpleHTTPServer 80 &amp;
+"""
+
+bastion_ec2_instance = aws.ec2.Instance(
+        data.get("ec2_bastion_name"),
+        instance_type=data.get("ec2_bastion_type"),
+        vpc_security_group_ids=[sg.id],
+        ami=ami.id,
+        key_name=keypair.key_name,
+        user_data=user_data,
+        subnet_id=publicsubnet.id,
+        associate_public_ip_address=True,
+)
+
+
+private_ec2_instance = aws.ec2.Instance(
+        data.get("ec2_private_name"),
+        instance_type=data.get("ec2_private_type"),
+        vpc_security_group_ids=[sg.id],
+        ami=ami.id,
+        key_name=keypair.key_name,
+        subnet_id=privatesubnet.id,
+)
+</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Update_the_Values_in_the_Variables_file"><span id="Update_the_Values_and_Pulumi_up_Run_the_script" class="ez-toc-section">Update the Values in the Variables file</span></span></h3>
+<p>All the input parameters for this project is maintained in <strong>pulumi.dev.yaml</strong> file. Change values in this file as per your requirement</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">config:
+  aws:region: us-east-1
+  pulumi-ec2:data:
+    active: true
+    vpc_name: devopsjunc-vpc
+    vpc_cidr: 10.0.0.0/16
+    igw_name: devopsjunc-igw
+    prv_subnet_name: devopsjunc-private-subnet
+    pub_subnet_name: devopsjunc-public-subnet
+    prv_cidr: 10.0.1.0/24
+    pub_cidr: 10.0.0.0/24
+    eip_name: devopsjunc-eip
+    natgw_name: devopsjunc_ngw
+    pubrttable_name: devopsjunc_pubrttable
+    prvrttable_name: devopsjunc_prvrttable
+    pubrtasst_name: devopsjunc_pub_rt_asst
+    prvrtasst_name: devopsjunc_prv_rt_asst
+    sec_grp_name: devopsjunc_sec_grp
+    public_key: &lt;paste your public key content here&gt;
+    ec2_bastion_name: devopsjunc_ec2_bastion
+    ec2_bastion_type: t2.micro
+    ec2_private_name: devopsjunc_ec2_private
+    ec2_private_type: t2.micro</pre>
+<p><code>Pulumi.*.yaml</code> is a configuration file where we can maintain our input parameters and the same can be used in our code. more like a variables file. in terraform it is <code>*.tfvars</code> file</p>
+<p>In addition to this, you need to generate ssh keys which are used to get into the private instance</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Creating_SSH_Keys"><span id="Update_the_Values_and_Pulumi_up_Run_the_script" class="ez-toc-section">Creating SSH Keys </span></span></h3>
+<p>Create a directory called .ssh in your home directory. ( if not already exists)</p>
+<p>Execute the below-mentioned commands to generate SSH keys ( or you can choose to use your existing key)</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">mkdir .ssh
+cd .ssh
+ssh-keygen -f devopsjunckeypair
+</pre>
+<p>Next, you need to add the newly created ssh keys to a key chain. If you have chosen your existing key add that to <code>ssh-add</code></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">ssh-add -K devopsjunckeypair</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Creating_the_AWS_Infrastructure_with_Pulumi_up"><span id="Update_the_Values_and_Pulumi_up_Run_the_script" class="ez-toc-section">Creating the AWS Infrastructure with Pulumi up</span></span></h3>
+<p>As we have done all the planning tasks, Now run the <strong>Pulumi up</strong> command.</p>
+<p>Like <code>Terraform plan</code>  or <code>Terraform apply</code> command Pulumi will try to get your confirmation before moving on.</p>
+<p>You can simply choose <code>no</code> if you just want to plan or dry run and choose <code>yes</code> to apply the changes.</p>
+<p>You should see output similar to below</p>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM.png"><img class="post-img aligncenter wp-image-8395 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x394.png" alt="" width="840" height="323" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-1024x394.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-1024x394.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-300x116.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-768x296.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-1536x592.png 1536w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-2048x789.png 2048w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8395 size-large" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-1024x394.png" alt="" width="840" height="323" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-1024x394.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-300x116.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-768x296.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-1536x592.png 1536w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.38.05-PM-2048x789.png 2048w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p>Select <strong>Yes </strong>for the question <strong>Do you want to perform this update </strong>question and pulumi will create your desired infrastructure for you.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM.png"><img class="post-img aligncenter wp-image-8396 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x616.png" alt="" width="840" height="505" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-1024x616.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-1024x616.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-300x180.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-768x462.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM.png 1430w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8396 size-large" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-1024x616.png" alt="" width="840" height="505" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-1024x616.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-300x180.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM-768x462.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-12.51.13-PM.png 1430w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Configuraing_SSH_to_connect_through_Bastion">Configuraing SSH to connect through Bastion</span></h3>
+<p>Now, Create an ssh config file inside the <strong>.ssh</strong> directory (This directory you would have created in earlier steps)</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">cd ~/.ssh
+touch config
+</pre>
+<p>Add the below contents to your ssh config file , this is to tell your ssh to pass through bastion while reaching your private instance</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="raw" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">Host bastion-instance
+   HostName &lt;Bastion Public IP&gt;
+   User ubuntu
+
+Host private-instance
+   HostName &lt;Private IP&gt;
+   User ubuntu
+   ProxyCommand ssh -q -W %h:%p bastion-instance</pre>
+<p>Short note on ssh config file:-</p>
+<p>The <a class="components__RichTextLink-sc-1uxoc71-0 kjgQLy" href="https://www.ssh.com/ssh/">ssh</a> program on a host receives its configuration from either the command line or from configuration files <code>~/.ssh/config</code> and <code>/etc/ssh/ssh_config</code>.</p>
+<p><a class="components__RichTextLink-sc-1uxoc71-0 kjgQLy" href="https://www.ssh.com/ssh/command">Command-line</a> options take precedence over configuration files. The user-specific configuration file <code>~/.ssh/config</code> is used next. Finally, the global <code>/etc/ssh/ssh_config</code> file is used. The first obtained value for each configuration parameter will be used.</p>
+<p>You can get Bastion public IP and Private IP from AWS console</p>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM.png"><img class="post-img aligncenter wp-image-8398 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x566.png" alt="" width="840" height="464" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-1024x566.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-1024x566.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-300x166.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-768x424.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-1536x849.png 1536w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-2048x1132.png 2048w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8398 size-large" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-1024x566.png" alt="" width="840" height="464" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-1024x566.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-300x166.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-768x424.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-1536x849.png 1536w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.04.04-PM-2048x1132.png 2048w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM.png"><img class="post-img aligncenter wp-image-8397 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x556.png" alt="" width="840" height="456" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-1024x556.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-1024x556.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-300x163.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-768x417.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-1536x834.png 1536w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-2048x1112.png 2048w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8397 size-large" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-1024x556.png" alt="" width="840" height="456" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-1024x556.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-300x163.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-768x417.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-1536x834.png 1536w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.07.31-PM-2048x1112.png 2048w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="SSH_to_Private_EC2_instance_using_Bastion_Validation">SSH to Private EC2 instance using Bastion &#8211; Validation</span></h3>
+<p>Now let&#8217;s try to connect to these instances using ssh</p>
+<p>You should update your ssh config file with bastion host IP address and username (Ubuntu &#8211; in this case) and private instance IP address and username.</p>
+<p>Next, try to do ssh using the &#8216;<strong>bastion-instance</strong>&#8216; variable name</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false"># Connect to the bastion host:
+ssh -A bastion-instance</pre>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM.png"><img class="post-img aligncenter wp-image-8399 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x699.png" alt="" width="840" height="573" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-1024x699.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-1024x699.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-300x205.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-768x525.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM.png 1180w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8399 size-large" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-1024x699.png" alt="" width="840" height="573" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-1024x699.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-300x205.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM-768x525.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.18.20-PM.png 1180w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p>Perfect!!, We are able to connect to bastion host without any hustle.</p>
+<p>Next, we shall connect to a private instance. Since the private instance is not exposed to the outer internet, we cannot access it as it is using private IP.</p>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM.png"><img class="post-img aligncenter wp-image-8400 size-full lazyload" src="../../wp-content/ewww/lazy/placeholder-946x160.png" alt="" width="946" height="160" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM.png 946w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM-300x51.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM-768x130.png 768w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8400 size-full" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM.png" alt="" width="946" height="160" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM.png 946w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM-300x51.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.22.51-PM-768x130.png 768w" sizes="(max-width: 946px) 100vw, 946px" data-eio="l" /></noscript></a></p>
+<p>As expected, it failed. Hence we use a proxy command which uses bastion-host in turn gets connected to the private instance.</p>
+<p>Look for this below entry in your ssh config file</p>
+<pre><code class="notranslate">ProxyCommand ssh -q -W %h:%p bastion-instance</code></pre>
+<p>Now, let&#8217;s try to connect to the private instance using the &#8216;<strong>private-instance</strong>&#8216; variable name (As mentioned in the ssh config file)</p>
+<p><a href="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM.png"><img class="post-img aligncenter wp-image-8401 size-large lazyload" src="../../wp-content/ewww/lazy/placeholder-1024x762.png" alt="" width="840" height="625" data-src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-1024x762.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-1024x762.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-300x223.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-768x572.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM.png 1478w" data-sizes="auto" /><noscript><img class="post-img aligncenter wp-image-8401 size-large" src="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-1024x762.png" alt="" width="840" height="625" srcset="../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-1024x762.png 1024w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-300x223.png 300w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM-768x572.png 768w, ../../wp-content/uploads/2022/04/Screen-Shot-2022-04-30-at-1.27.39-PM.png 1478w" sizes="(max-width: 840px) 100vw, 840px" data-eio="l" /></noscript></a></p>
+<p>Voila!!, you got logged into your private instance using the ssh client. Now, you can play around and execute all commands as per your need.</p>
+<p>There we go, We have successfully created a fully functioning AWS infrastructure with VPC, Private and Public Subnets, Ec2 instances and Bastion with Pulumi.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="GitHub_Link_for_the_Sourcecode"><span id="GitHub_Link_for_the_Sourcecode" class="ez-toc-section">GitHub Link for the Sourcecode</span></span></h3>
+<p>You can download the source code from <a href="https://github.com/Gritfy/pulumi-aws-infra-bastion-host">this GitHub link </a></p>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Conclusion"><span id="Conclusion" class="ez-toc-section">Conclusion</span></span></h3>
+<p>We have learnt how to set up fully pledged to compute infra in AWS using pulumi</p>
+<p>During the implementation, we learned some details about bastion-hosts and their uses, and some information on the ssh config file.</p>
+<p>Hope you enjoyed this article and would give it a try on your own. Until then, Happy learning 🙂</p>
+<p>For any help, please reach out to us in the Comments</p>
+<p>For Professional help on DevOps, reach out to us at <a href="../../cdn-cgi/l/email-protection.html#157d7079797a5572677c61736c3b767a78"><span class="__cf_email__" data-cfemail="7d15181111123d1a0f14091b04531e1210">[email&#160;protected]</span></a></p>
+<a href="../../wp-content/uploads/2021/09/DaaS.svg"><img class="post-img lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1047 415'%3E%3C/svg%3E" alt="gritfy" width="1047" height="415" class="post-img lazyload" data-src="../../wp-content/uploads/2021/09/DaaS.svg" loading="lazy" /><noscript><img class="post-img" src="../../wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" data-eio="l" /></noscript></a>
+<p>&nbsp;</p>
+<p>Thanks and Regards,<br />
+Tapan Hegde</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Find me on Linkedin <a href="https://www.linkedin.com/in/tapanhegde/">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#b9d1dcd5d5d6f9decbd0cddfc097dad6d4"> <span class="__cf_email__" data-cfemail="751d1019191a3512071c01130c5b161a18">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668112002" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="8394" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/pulumi-aws-example/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668112002" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668112002"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-pulumi-ebs-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="AWS Pulumi" data-src="../../wp-content/uploads/2022/04/aws-pulumi-devopsjunction-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2022/04/aws-pulumi-devopsjunction-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="AWS Pulumi" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-pulumi-ebs-example/index.html'>Clone EBS Volumes between AWS EC2 with Pulumi | Devops Junction</a><p>I had an Infrastructure as an automation requirement recently, where I had to create a solution that will find EBS volumes attached to an EC2 instance and create snapshots of the same and clone it and attach these cloned volumes to another EC2 instance. I know it was a little&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-cli-stop-terminate-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2020/05/terminate-ec2-instance-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/05/terminate-ec2-instance-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-cli-stop-terminate-examples/index.html'>AWS CLI EC2 Stop and Terminate command Examples</a><p>In AWS infrastructure, We create a lot of EC2 instances on demand and we tend to forget about the stopped instances considering that it is stopped and not being billed for. But the fact is that Even the stopped instances would cost you a couple of pennies in various forms&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-cli-ec2/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2020/01/Screenshot-2019-11-22-at-4.24.52-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2020/01/Screenshot-2019-11-22-at-4.24.52-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-cli-ec2/index.html'>AWS EC2 CLI List Examples - Describe instances | Devops Junction</a><p>AWS CLI is a very great help when it comes to efficiently managing your AWS Cloud Infrastructure and your EC2 instances. While we are managing our AWS Infrastructure,  we cannot always afford to login to the AWS console all the time and it is not recommended from the security perspective&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-vpc-peering-tutorial/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="AWS VPC Peering" data-src="../../wp-content/uploads/2021/03/Screenshot-2021-03-21-at-12.31.23-AM-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/03/Screenshot-2021-03-21-at-12.31.23-AM-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="AWS VPC Peering" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-vpc-peering-tutorial/index.html'>How to create AWS VPC Peering - Step by Step Tutorial</a><p>In this article, we are going to see how to create AWS VPC peering in detail. Refer to the following diagram that represents the expected architecture we are trying to achieve or implement. There are two VPCs isolated by default ( as it supposed to be ) but with a&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../aws-block-ip/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2021/12/aws-ip-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2021/12/aws-ip-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../aws-block-ip/index.html'>How to Block IP in AWS VPC - by IP or CIDR Range | Devops Junction</a><p>Let's suppose your AWS infrastructure is under DDOS attack and your Load balancers and Applications are flooded with requests. The Immediate action you can take is to block the IP you have identified. If you have monitoring tools and Log management tools like Datadog, EFK, Splunk etc. they can be&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../redis-get-memory-usage-and-ttl-of-all-keys-devops-junction/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Redis &#8211; Get Memory Usage and TTL of all keys | Devops Junction</a></div><div class="nav-next"><a href="../ansible-slack-notification/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Ansible Slack &#8211; How to send Slack notification from Ansible</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"8394 https:\/\/www.middlewareinventory.com\/?p=8394","disqusShortname":"mwinventory","disqusTitle":"Pulumi AWS Example \u2013 Creating VPC, Subnets, EC2, Bastion host","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/pulumi-aws-example\/","postId":"8394"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"8394"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"2a02:8084:2843:a280:5d1f:55e5:dcb0:12e2","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"8394","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/pulumi-aws-example/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668112002;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="#" id="cn-refuse-cookie" data-cookie-set="refuse" class="cn-set-cookie cn-button bootstrap button">No</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+<div class="cookie-notice-revoke-container"><a href="#" class="cn-revoke-cookie cn-button bootstrap button">Revoke cookies</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+
+<title>Ansible replace line in file - Ansible Replace Examples | Devops Junction</title>
+<meta name="description" content="This article is about &quot;how to replace a line in file using ansible and seeing various other examples of ansible replace module&quot;.  Ansible facilitates us with a dedicated module named as replace The working principle of this module is more like find and replace in your favourite editor and it also supports regular expres" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="ansible-replace-line-in-file-ansible-replace-examples/index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Ansible replace line in file - Ansible Replace Examples | Devops Junction" />
+<meta property="og:description" content="This article is about &quot;how to replace a line in file using ansible and seeing various other examples of ansible replace module&quot;.  Ansible facilitates us with a dedicated module named as replace The working principle of this module is more like find and replace in your favourite editor and it also supports regular expres" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-02-07T11:59:15+00:00" />
+<meta property="article:modified_time" content="2022-02-10T19:44:38+00:00" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1.png" />
+<meta property="og:image:width" content="1437" />
+<meta property="og:image:height" content="715" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#primaryimage","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1.png","width":1437,"height":715,"caption":"Ansible replace examples"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#webpage","url":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/","name":"Ansible replace line in file - Ansible Replace Examples | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#primaryimage"},"datePublished":"2019-02-07T11:59:15+00:00","dateModified":"2022-02-10T19:44:38+00:00","description":"This article is about \"how to replace a line in file using ansible and seeing various other examples of ansible replace module\".\u00a0 Ansible facilitates us with a dedicated module named as replace\u00a0The working principle of this module is more like find and replace\u00a0in your favourite editor and it also supports regular expres","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Ansible replace line in file &#8211; Ansible Replace Examples | Devops Junction","datePublished":"2019-02-07T11:59:15+00:00","dateModified":"2022-02-10T19:44:38+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#primaryimage"},"keywords":"ansible combined before and after issue,ansible replace examples,ansible replace module between two lines,ansible replace module examples,ansible replace with after,ansible replace with before","articleSection":"Ansible","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Ansible replace line in file &#8211; Ansible Replace Examples | Devops Junction Comments Feed" href="ansible-replace-line-in-file-ansible-replace-examples/feed/index.rss" />
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.12.2';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-84162240-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	if ( 'undefined' === typeof gaOptout ) {
+		function gaOptout() {
+			__gaTrackerOptout();
+		}
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-84162240-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+
+<script type="text/javascript" data-cfasync="false">
+			window.google_analytics_uacct = 'UA-84162240-1';
+
+        </script>
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../wp-content/cache/minify/404f7.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../wp-content/cache/minify/88e5e.css" media="all" />
+<script type='text/javascript' id='monsterinsights-frontend-script-js-extra'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"https:\/\/www.middlewareinventory.com","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/1058f.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/1de0a.js"></script>
+<script type='text/javascript' id='ssb-front-js-js-extra'>
+/* <![CDATA[ */
+var SSB = {"ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","fb_share_nonce":"3d8661396b"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/268e7.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../wp-json/index.json" /><link rel="alternate" type="application/json" href="../wp-json/wp/v2/posts/2848.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='ansible-replace-line-in-file-ansible-replace-examples/index.html' />
+<link rel="alternate" type="application/json+oembed" href="../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-replace-line-in-file-ansible-replace-examples-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-ansible-replace-line-in-file-ansible-replace-examples-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script> <style media="screen">/*inline margin*/
+	
+	
+	
+	
+	
+	
+			 /*margin-digbar*/
+
+	
+	
+	
+	
+	   div[class*="simplesocialbuttons-float"].simplesocialbuttons.simplesocial-round-icon button{
+	 margin: ;
+   }
+	
+	
+	
+</style>
+
+<meta property="og:title" content="Ansible replace line in file &#8211; Ansible Replace Examples | Devops Junction - Middleware Inventory" />
+<meta property="og:description" content="This article is about " how to replace a line in file using ansible and seeing various other examples of ansible replace module".  Ansible facilitates us with a dedicated module named as replace The working principle of this module is more like find and replace in your favourite editor and it also supports regular expressions. There is one major difference between Ansible replace and" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="This article is about " how to replace a line in file using ansible and seeing various other examples of ansible replace module".  Ansible facilitates us with a dedicated module named as replace The working principle of this module is more like find and replace in your favourite editor and it also supports regular expressions. There is one major difference between Ansible replace and" />
+<meta name="twitter:title" content="Ansible replace line in file &#8211; Ansible Replace Examples | Devops Junction - Middleware Inventory" />
+<meta property="twitter:image" content="https://www.middlewareinventory.com/wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1.png" />
+<style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 24px;
+}
+article h3
+{
+    background-color: whitesmoke;
+    color: black;
+    padding-left: 1%;
+    border-left: 10px solid black;
+    font-weight: 800;
+    font-size: 22px;
+}
+blockquote {
+     padding: 2%;
+}
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-2848 single-format-standard wp-custom-logo cookies-not-set elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1513"><a href="category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-2848" class="post-2848 post type-post status-publish format-standard has-post-thumbnail hentry category-ansible tag-ansible-combined-before-and-after-issue tag-ansible-replace-examples tag-ansible-replace-module-between-two-lines tag-ansible-replace-module-examples tag-ansible-replace-with-after tag-ansible-replace-with-before wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Ansible replace line in file &#8211; Ansible Replace Examples | Devops Junction</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="ansible-replace-line-in-file-ansible-replace-examples/index.html" title="5:29 pm" rel="bookmark"><time class="entry-date published updated" datetime="February 11, 2022">February 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Ansible%20replace%20line%20in%20file%20%E2%80%93%20Ansible%20Replace%20Examples%20%7C%20Devops%20Junction&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-replace-line-in-file-ansible-replace-examples%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="2848" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Ansible+replace+line+in+file+%E2%80%93+Ansible+Replace+Examples+%7C+Devops+Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-replace-line-in-file-ansible-replace-examples%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="2848" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Ansible%20replace%20line%20in%20file%20%E2%80%93%20Ansible%20Replace%20Examples%20%7C%20Devops%20Junction&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-replace-line-in-file-ansible-replace-examples%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="2848" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fansible-replace-line-in-file-ansible-replace-examples%2F&subject=Ansible%20replace%20line%20in%20file%20%E2%80%93%20Ansible%20Replace%20Examples%20%7C%20Devops%20Junction" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="2848" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="2848" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>This article is about &#8220;how to replace a line in file using ansible and seeing various other examples of ansible replace module&#8221;.  Ansible facilitates us with a dedicated module named as <strong>replace</strong> The working principle of this module is more like find and replace in your favourite editor and it also supports regular expressions.</p>
+<p>There is one major difference between Ansible replace and Line in file.</p>
+<p>The <strong>Ansible REPLACE</strong> module will replace all the instances of a matching string in a file, while<strong> Line in file</strong> module replaces a single instance,</p>
+<p>If you are looking for changing a single instance of your match string consider using lineinfile module. Refer this  <a href="ansible-lineinfile-examples/index.html">Ansible Lineinfile examples</a> for more information</p>
+<p>Shortly put, Ansible REPLACE is to globally replace all the matching lines in a file with the String you have provided, on other hand LINEINFILE is to replace a matching string in a Single line Mostly First or Last appearance</p>
+<p>In this post, we are going to see various examples of ansible replace module framed as playbooks and we have also given the execution outputs of the same.</p>
+<p>&nbsp;</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Ansible_Replace_module_A_Quick_Summary" title="Ansible Replace module &#8211; A Quick Summary">Ansible Replace module &#8211; A Quick Summary</a></li><li><a href="#Ansible_replace_in_Action" title="Ansible replace in Action">Ansible replace in Action</a><ul><li><a href="#A_quick_introduction_to_Regular_Expressions_and_Why_it_is_necessary" title="A quick introduction to Regular Expressions and Why it is necessary">A quick introduction to Regular Expressions and Why it is necessary</a></li><li><a href="#Write_and_Test_your_Regular_Expressions_on_the_Go" title="Write and Test your Regular Expressions on the Go">Write and Test your Regular Expressions on the Go</a></li><li><a href="#Sample_Playbook_with_replace_module_to_replace_a_line_in_file" title="Sample Playbook with replace module to replace a line in file">Sample Playbook with replace module to replace a line in file</a></li><li><a href="#Explanation_of_playbook" title="Explanation of playbook">Explanation of playbook</a></li><li><a href="#Validating_the_Changes_before_committing" title="Validating the Changes before committing">Validating the Changes before committing</a></li></ul></li><li><a href="#Ansible_Replace_Examples" title="Ansible Replace Examples">Ansible Replace Examples</a><ul><li><a href="#Replace_all_the_Instances_of_a_Matching_String_in_a_file" title="Replace all the Instances of a Matching String in a file">Replace all the Instances of a Matching String in a file</a></li><li><a href="#Replacing_string_AFTER_the_Matching_Expression_till_the_End_Of_File" title="Replacing string AFTER the Matching Expression till the End Of File">Replacing string AFTER the Matching Expression till the End Of File</a></li><li><a href="#Start_Replacing_BEFORE_the_Matching_Expression_up_to_the_Beginning_of_File" title="Start Replacing BEFORE the Matching Expression up to the Beginning of File">Start Replacing BEFORE the Matching Expression up to the Beginning of File</a></li><li><a href="#Replacing_the_String_Between_matching_Expressions_or_Using_BEFORE_and_AFTER_together_in_ansible_replace" title="Replacing the String Between matching Expressions (or) Using BEFORE and AFTER together in ansible replace">Replacing the String Between matching Expressions (or) Using BEFORE and AFTER together in ansible replace</a></li></ul></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Ansible_Replace_module_A_Quick_Summary">Ansible Replace module &#8211; A Quick Summary</span></h2>
+<p><strong>Ansible Replace module</strong></p>
+<ul>
+<li>Used to replace <strong>ALL instances</strong> of a matching String in a file ( Can be used to modify a Single Instance if you are sure that the destination file have only one matching string)</li>
+<li>More like <strong>Find All and Replace All</strong></li>
+<li>Backup Option is available Before modifying the file</li>
+<li>Support Regular Expressions to Find a String</li>
+<li>Supports replacing before and after a Matching String/line</li>
+<li>Supports Replacing between two matching Strings or lines or two expressions using <strong>before and after at the same time.</strong></li>
+<li>Back References (Backrefs) are supported</li>
+<li><strong>Fail if the file is not available </strong></li>
+<li>Support for Validating the changes</li>
+</ul>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_replace_in_Action">Ansible replace in Action</span></h2>
+<p>In this chapter, we are going to take a quick overview of replace module and how it works and how it can be used for your requirements, it can be considered as more of an elevator pitch. In this we will cover the basic but indispensable key elements of ansible replace module</p>
+<p>You can find more examples of ansible replace in the next chapter.</p>
+<p>For now. Lets march on.</p>
+<h3></h3>
+<h3><span class="ez-toc-section" id="A_quick_introduction_to_Regular_Expressions_and_Why_it_is_necessary">A quick introduction to Regular Expressions and Why it is necessary</span></h3>
+<p>If you are any of Dev or Ops person. I bet you might have come across these term called Regular expressions.</p>
+<p>as per Wikipedia Regular Expression is</p>
+<blockquote><p>A <b>regular expression</b>, <b>regex</b> or <b>regexp </b><sup id="cite_ref-1" class="reference"></sup>(sometimes called a <b>rational expression</b>) <sup id="cite_ref-Mitkov2003_2-0" class="reference"></sup><sup id="cite_ref-Lawson2003_3-0" class="reference"></sup>is a sequence of <a title="Character (computing)" href="https://en.wikipedia.org/wiki/Character_(computing)">characters</a> that define a <i>search <a title="Pattern matching" href="https://en.wikipedia.org/wiki/Pattern_matching">pattern</a></i>. Usually this pattern is used by <a class="mw-redirect" title="String searching algorithm" href="https://en.wikipedia.org/wiki/String_searching_algorithm">string searching algorithms</a> for &#8220;find&#8221; or &#8220;find and replace&#8221; operations on <a title="String (computer science)" href="https://en.wikipedia.org/wiki/String_(computer_science)">strings</a>, or for input validation. It is a technique that developed in <a title="Theoretical computer science" href="https://en.wikipedia.org/wiki/Theoretical_computer_science">theoretical computer science</a> and <a title="Formal language" href="https://en.wikipedia.org/wiki/Formal_language">formal language</a> theory.</p></blockquote>
+<p>Whenever you want to Search something programmatically, There is 90% of chances that you might need a Simple to Complex regular expressions.</p>
+<p>Some of the Simple Regular Expressions and their purposes are given below.</p>
+<details>
+<summary>click to expand</summary>
+<table style="border-collapse: collapse; width: 100%;" border="1">
+<tbody>
+<tr>
+<td style="width: 33.3333%;"><strong>Regular Expression</strong></td>
+<td style="width: 33.3333%;"><strong>Test String</strong></td>
+<td style="width: 8.0522%;"><strong>Match/No Match</strong></td>
+<td style="width: 30.0639%;"><strong>Explanation</strong></td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">^ServerName</td>
+<td style="width: 33.3333%;">ServerName www.example.com</td>
+<td style="width: 8.0522%;">Match</td>
+<td style="width: 30.0639%;"><strong>^ </strong>represents the start of a line and <strong>ServerName </strong>is a literal String to search</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">^ServerName$</td>
+<td style="width: 33.3333%;">ServerName www.example.com</td>
+<td style="width: 8.0522%;">No Match</td>
+<td style="width: 30.0639%;">Here <strong>$ </strong>represents end of a line. As per the regex, the line should immediately end of a String <strong>ServerName </strong>which is not true in Test String.</td>
+</tr>
+<tr>
+<td style="width: 33.3333%;">^ServerName.*</td>
+<td style="width: 33.3333%;">ServerName www.example.com</td>
+<td style="width: 8.0522%;">Match</td>
+<td style="width: 30.0639%;">Here <strong>.* </strong>is the newly added expression, The <strong>.</strong> (period/dot) matches any character/number and <strong>* </strong>matches Zero or more of the preceding expression. Means anything after ServerName ( but in the same line)</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>The reason why we are insisting on the regular expression is. A Good Regular Expression can get you the String what you are searching for.  It is a must that we know HOW TO SEARCH before searching for something, It is true if we are searching for  A word or a string or a line or something in life 🙂</p>
+<p>Regular Expression is the tool when ansible replace is your workshop.</p>
+<p>Now the question is where will go and learn and test regular expressions. Is there any better way than wandering around and failing multiple times to get a perfect regex expression.</p>
+<p>yes, there is.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="Write_and_Test_your_Regular_Expressions_on_the_Go">Write and Test your Regular Expressions on the Go</span></h3>
+<p>Meet <a href="https://regex101.com/">REGEX 101 </a>A website to write and test a regular expression like a PRO but at free of cost</p>
+<p>Regex 101 have been my life saviour for years now. If you are not already aware, go ahead and try it now. You would blame yourself for not knowing this so far.</p>
+<p>A Simple Screenshot that explains all.   You can see everything,  what you are looking for.</p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM.png"><img class="alignnone size-full wp-image-2862 lazyload" src="../wp-content/ewww/lazy/placeholder-1440x854.png" alt="" width="1440" height="854" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM.png 1440w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM-300x178.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM-768x455.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM-1024x607.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2862" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM.png" alt="" width="1440" height="854" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM.png 1440w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM-300x178.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM-768x455.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-12.45.46-PM-1024x607.png 1024w" sizes="(max-width: 1440px) 100vw, 1440px" data-eio="l" /></noscript></a></p>
+<p>Back to the track.</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Sample_Playbook_with_replace_module_to_replace_a_line_in_file">Sample Playbook with replace module to replace a line in file</span></h3>
+<p>This is the playbook we are going to use and add more features and changes as we proceed.  This is to change the domain name of the Apache Virtual host from old domain to a new domain.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Replace line in file examples
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> web
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replace line in file examples"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /etc/httpd/conf/httpd.conf
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'(^ServerName\s)(.*)$'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'\1www.newdomain.com'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span></pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Explanation_of_playbook"><strong>Explanation of playbook</strong></span></h3>
+<p><strong>path:  </strong> A file name in which we are going to find and replace</p>
+<p><strong>regexp: </strong>the regular expression to search the string you want</p>
+<p>In our case,</p>
+<p><strong>()</strong> &#8211; Grouping of Regular Expression and to create backreferences, which will make it easy to perform backreference while replacing.<br />
+<strong>^</strong> &#8211; Matches the Start of a Line<br />
+<strong>ServerName</strong> &#8211; Matches a Literal String<br />
+<strong>\s</strong> &#8211; Matches a whitespace<br />
+<strong>.*</strong> &#8211; matches one or more of any character/numeral ( not new line)<br />
+<strong>$</strong> &#8211; matches the end of line</p>
+<p>&nbsp;</p>
+<p><strong>replace:  </strong>A string, with which you want to replace the matched String</p>
+<p>In our case,</p>
+<p><strong>\1</strong> &#8211; backreference indicator and represents the first group we have matched. in our case, it is the result of  <span class="hljs-string">(^ServerName\s)</span></p>
+<p><strong>backup: </strong> To tell ansible to backup the file before making any changes.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Validating_the_Changes_before_committing">Validating the Changes before committing</span></h3>
+<p>Replace module bundled with a cool feature with that you can actually validate the changes before committing the changes onto the file.</p>
+<p>Consider the same example we have given above which is changing the domain name.  Let us see how can we validate it before making the changes in to <code>/etc/httpd/conf</code> file.</p>
+<blockquote><p>If you are not aware, Ansible would not directly work with the destination file. It will clone it and keep the file in ansible_temp directory once the changes are completed it will copy the file over and replace the destination file with this working copy.</p></blockquote>
+<p>With that said, Now you know, how it is possible to validate your changes before it actually goes into your destination file.</p>
+<p>This is the same playbook with validate parameter added</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Replace line in file examples
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> web
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replace line in file apache conf"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /etc/httpd/conf/httpd.conf
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'(^ServerName\s)(.*)$'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'\1www.newdomain.com'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        validate:</span> apachectl -f %s -t</pre>
+<p>Here <strong>%s </strong>represents the temp or working copy of the destination file<br />
+Let us make some mistake intentionally to examine how this validate is working. In order to do that, I am changing a Single line from the preceding playbook</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-attr" style="color: #6d9cbe;"><span class="hljs-string" style="color: #a5c261;"><span style="color: #33cccc;"># Final String is "ServerName www.newdomain.com" </span></span>
+replace:</span> <span class="hljs-string" style="color: #a5c261;">'\1www.newdomain.com' </span>
+to
+<span class="hljs-string" style="color: #a5c261;"><span style="color: #33cccc;"># Final String is "www.newdomain.com"</span></span>
+<span class="hljs-attr" style="color: #6d9cbe;">replace:</span> <span class="hljs-string" style="color: #a5c261;">'www.newdomain.com'  </span></pre>
+<p>In the replace field, we are taking the reference indicator out. which will remove the String <strong>ServerName </strong>from the config file and ansible is supposed to throw an error and the playbook will fail if the validate command is returning a NON ZERO return code.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;">$ <span style="color: #33cccc;">ansible-playbook AnsibleWorkSpace/replace-ex1.yml -i ansible_hosts</span>
+
+PLAY <span class="hljs-string" style="color: #a5c261;">[Replace line in file examples]</span> ********************************************************************************************************
+
+TASK <span class="hljs-string" style="color: #a5c261;">[Gathering Facts]</span> **********************************************************************************************************************
+ok: <span class="hljs-string" style="color: #a5c261;">[mwiweb02]</span>
+
+TASK <span class="hljs-string" style="color: #a5c261;">[Replace line in file apache conf]</span> ********************************************************************************************************
+<span style="color: #ff6600;">fatal: <span class="hljs-string">[mwiweb02]</span>: FAILED! =&gt; {<span class="hljs-string">"changed"</span>: false, <span class="hljs-string">"msg"</span>: <span class="hljs-string">"failed to validate: 
+rc:1 error:AH00526: Syntax error on line 95 of 
+/home/vagrant/.ansible/tmp/ansible-tmp-1549278281.07-220158736541166/tmp6LJx9x:\n
+Invalid command 'www.newdomain.com', perhaps misspelled or defined by a module not included 
+in the server configuration\n"</span>}
+        to retry, use: --limit @/apps/vagrant/webinfra/AnsibleWorkSpace/replace-ex1.retry
+</span>
+PLAY RECAP **********************************************************************************************************************************
+mwiweb02                   : ok=<span class="hljs-number" style="color: #a5c261;">1</span>    changed=<span class="hljs-number" style="color: #a5c261;">0</span>    unreachable=<span class="hljs-number" style="color: #a5c261;">0</span>    failed=<span class="hljs-number" style="color: #a5c261;">1</span></pre>
+<p>You can see the temp file name with the validation failure note <code><span style="color: #ff6600;"><span class="hljs-string">/home/vagrant/.ansible/tmp/ansible-tmp-1549278281.07-220158736541166/tmp6LJx9x </span></span></code></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Ansible_Replace_Examples">Ansible Replace Examples</span></h2>
+<ol>
+<li><a title="Replace all the Instances of a Matching String in a file" href="ansible-replace-line-in-file-ansible-replace-examples/index-preview_id=2848&amp;preview_nonce=5fb03e483c&amp;_thumbnail_id=2876&amp;preview=true.html#Replace_all_the_Instances_of_a_Matching_String_in_a_file">Replace all the Instances of a Matching String in a file</a></li>
+<li><a title="Replacing string AFTER the Matching Expression till the End Of File" href="ansible-replace-line-in-file-ansible-replace-examples/index-preview_id=2848&amp;preview_nonce=5fb03e483c&amp;_thumbnail_id=2876&amp;preview=true.html#Replacing_string_AFTER_the_Matching_Expression_till_the_End_Of_File">Replacing string AFTER the Matching Expression till the End Of File</a></li>
+<li><a title="Start Replacing BEFORE the Matching Expression up to the Beginning of File" href="ansible-replace-line-in-file-ansible-replace-examples/index-preview_id=2848&amp;preview_nonce=5fb03e483c&amp;_thumbnail_id=2876&amp;preview=true.html#Start_Replacing_BEFORE_the_Matching_Expression_up_to_the_Beginning_of_File">Start Replacing BEFORE the Matching Expression up to the Beginning of File</a></li>
+<li><a title="Replacing the String Between matching Expressions (or) Using BEFORE and AFTER together in ansible replace" href="ansible-replace-line-in-file-ansible-replace-examples/index-preview_id=2848&amp;preview_nonce=5fb03e483c&amp;_thumbnail_id=2876&amp;preview=true.html#Replacing_the_String_Between_matching_Expressions_or_Using_BEFORE_and_AFTER_together_in_ansible_replace">Replacing the String Between matching Expressions (or) Using BEFORE and AFTER together in ansible replace</a></li>
+<li><a title="Workaround to use Ansible after and before combined" href="ansible-replace-line-in-file-ansible-replace-examples/index-preview_id=2848&amp;preview_nonce=5fb03e483c&amp;_thumbnail_id=2876&amp;preview=true.html#Workaround_to_use_Ansible_after_and_before_combined">Workaround to use Ansible after and before combined</a></li>
+</ol>
+<p>&nbsp;</p>
+<p><span style="color: #003366;"><strong><span style="font-size: 14pt;">Setting the Context</span></strong></span></p>
+<p>Before going to the examples,  we need some common file which we can use for all the upcoming examples. So I  have taken the famous FOX and GRAPE story and placed it as a web page in default doc root<code>/var/www/html</code> of apache web server.</p>
+<p>Now here is how it looks like at the browser</p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM.png"><img class="alignnone size-full wp-image-2864 lazyload" src="../wp-content/ewww/lazy/placeholder-1439x367.png" alt="" width="1439" height="367" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM.png 1439w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM-300x77.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM-768x196.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM-1024x261.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2864" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM.png" alt="" width="1439" height="367" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM.png 1439w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM-300x77.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM-768x196.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-04-at-5.15.39-PM-1024x261.png 1024w" sizes="(max-width: 1439px) 100vw, 1439px" data-eio="l" /></noscript></a></p>
+<details>
+<summary>The Html page &#8211; Click to expand</summary>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-tag" style="color: #e8bf6a;">&lt;<span class="hljs-name" style="color: #e8bf6a;">html</span>&gt;</span>
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;<span class="hljs-name" style="color: #e8bf6a;">head</span>&gt;</span>
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;<span class="hljs-name" style="color: #e8bf6a;">title</span>&gt;</span>TheStoryPage<span class="hljs-tag" style="color: #e8bf6a;">&lt;/<span class="hljs-name" style="color: #e8bf6a;">title</span>&gt;</span>
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;/<span class="hljs-name" style="color: #e8bf6a;">head</span>&gt;</span>
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;<span class="hljs-name" style="color: #e8bf6a;">body</span> <span class="hljs-attr" style="color: #6d9cbe;">style</span>=<span class="hljs-string" style="color: #a5c261;">"
+    font-family: serif;
+    font-size: 26px;
+"</span>&gt;</span>
+
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;<span class="hljs-name" style="color: #e8bf6a;">h2</span>&gt;</span> The Fox and Grape Story <span class="hljs-tag" style="color: #e8bf6a;">&lt;/<span class="hljs-name" style="color: #e8bf6a;">h2</span>&gt;</span>
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;<span class="hljs-name" style="color: #e8bf6a;">p</span> <span class="hljs-attr" style="color: #6d9cbe;">style</span>=<span class="hljs-string" style="color: #a5c261;">"
+    text-indent: 60px;
+    letter-spacing: 1.5px;
+    font-size: 26px;
+"</span>&gt;</span>
+
+A fox was once very hungry and went in search of some food. He searched everywhere, but he couldn’t find anything that he could eat. Finally, with his stomach rumbling, he came upon a farmer’s wall. On top of the wall were the biggest, juiciest grapes the fox had ever seen. The rich purple color told the fox that they were ready to be eaten. The fox jumped high in the air to catch the grapes in his mouth, but he missed. He tried again and missed again. He tried a few more times but missed each time. Finally, the fox decided to go home all the while muttering, ‘I’m sure the grapes were sour anyway’.
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;/<span class="hljs-name" style="color: #e8bf6a;">p</span>&gt;</span>
+
+
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;/<span class="hljs-name" style="color: #e8bf6a;">body</span>&gt;</span>
+<span class="hljs-tag" style="color: #e8bf6a;">&lt;/<span class="hljs-name" style="color: #e8bf6a;">html</span>&gt;</span></pre>
+</details>
+<p>As we have set the plot lets begin the play.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Replace_all_the_Instances_of_a_Matching_String_in_a_file">Replace all the Instances of a Matching String in a file</span></h3>
+<p>we are going to take the same FOX and GRAPE Story html page for this example and let us replace all the instances of the word &#8220;<strong>fox</strong>&#8221; with &#8220;<strong>raccoon</strong>&#8221;</p>
+<p>Come, let us create a new Story. The Racoon and Grape !.</p>
+<p>Let us see how to do the same with ansible replace module.  If you are following along, you know that I am using the apache web server and the story is inside the html page at <code>/var/www/html/index.html</code></p>
+<p>&nbsp;</p>
+<p><span style="color: #003366;"><strong><span style="font-size: 14pt;">The Playbook</span></strong></span></p>
+<p>In the following playbook, we have used the <strong>Handlers </strong>to restart the apache upon the replace task completion. It is more like a function.</p>
+<p>You can relate it like this, When Handlers is a function definition, notify is a function invocation or function call.</p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Replace line in file examples
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> web
+
+<span class="hljs-attr" style="color: #6d9cbe;">    handlers:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> restart apache
+<span class="hljs-attr" style="color: #6d9cbe;">        become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span> name=httpd state=restarted
+
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replace line in file examples"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'[F|f]ox'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'racoon'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">      notify:</span> restart apache</pre>
+<p>In the regexp section, we have used <strong><code>[F|f]ox</code></strong> which is to match both <strong>Fox</strong> and the <strong>fox</strong>. The usual case sensitive stuff.</p>
+<p>&nbsp;</p>
+<p><span style="color: #003366;"><strong><span style="font-size: 14pt;">The Execution Output</span></strong></span></p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM.png"><img class="alignnone size-full wp-image-2867 lazyload" src="../wp-content/ewww/lazy/placeholder-1163x277.png" alt="" width="1163" height="277" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM.png 1163w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM-300x71.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM-768x183.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM-1024x244.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2867" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM.png" alt="" width="1163" height="277" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM.png 1163w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM-300x71.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM-768x183.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.41.16-PM-1024x244.png 1024w" sizes="(max-width: 1163px) 100vw, 1163px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p><span style="color: #003366;"><strong><span style="font-size: 14pt;">The HTML Page result after the Replacements</span></strong></span></p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM.png"><img class="alignnone size-full wp-image-2868 lazyload" src="../wp-content/ewww/lazy/placeholder-1440x359.png" alt="" width="1440" height="359" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM.png 1440w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM-300x75.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM-768x191.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM-1024x255.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2868" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM.png" alt="" width="1440" height="359" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM.png 1440w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM-300x75.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM-768x191.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-1.28.58-PM-1024x255.png 1024w" sizes="(max-width: 1440px) 100vw, 1440px" data-eio="l" /></noscript></a></p>
+<p>From the preceding Snapshot of the web page. you can understand how the ansible replace module is working. It finds all and replaces them all, as simple as that.</p>
+<p>Before proceeding to the next example. Let me roll back my changes and make the racoon story as a Fox Story. A Quick Reset. I can do it either with replacing module as well (racoon to fox) or in the host, I can take the backed up file and copy it over the current.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Replacing_string_AFTER_the_Matching_Expression_till_the_End_Of_File"><span style="font-size: 14pt;">Replacing string <span style="color: #ff0000;">AFTER</span> the Matching Expression till the End Of File</span></span></h3>
+<p>We need a new plan or a requirement, As this is a little tricky but the most usual requirement.</p>
+<p>We are going to rewrite the story once again and going to name the fox as <strong>fofo</strong>.  The following Snapshot could help you understand the same, I hope.</p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM.png"><img class="alignnone size-full wp-image-2869 lazyload" src="../wp-content/ewww/lazy/placeholder-1416x812.png" alt="" width="1416" height="812" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM.png 1416w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM-300x172.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM-768x440.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM-1024x587.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2869" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM.png" alt="" width="1416" height="812" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM.png 1416w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM-300x172.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM-768x440.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-2.14.15-PM-1024x587.png 1024w" sizes="(max-width: 1416px) 100vw, 1416px" data-eio="l" /></noscript></a></p>
+<p>As you can see we are going to do two things to get the expected story at the bottom</p>
+<ol>
+<li> Adding a new Hero introduction lines at the start of story (Highlighted in Blue background)</li>
+<li>Replace all the presence of <strong>fox</strong> with <strong>fofo</strong></li>
+<li>While doing this, we have to leave the title untouched. It should remain having a fox not fofo.</li>
+<li>Should replace <strong>&#8220;The</strong> <strong>fofo</strong>&#8221; with &#8220;<strong>fofo</strong>&#8221; so it sounds grammatically correct.</li>
+</ol>
+<p>Complex,  is not it? Not if we split it into small tasks, after all thats what ansible suggests us to do.</p>
+<p><span style="font-size: 14pt;">Here is the Playbook to accomplish the same</span></p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Replace line in file examples
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> web
+
+<span class="hljs-attr" style="color: #6d9cbe;">    handlers:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> restart apache
+<span class="hljs-attr" style="color: #6d9cbe;">        become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span> name=httpd state=restarted
+
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replacing all fox with fofo - Leaving the title untouched"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'fox'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'fofo'</span>
+<span style="color: #ffff00;"><span class="hljs-attr">        after:</span> <span class="hljs-string">"The fox and Grape Story"</span></span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span> 
+    
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Naming our Hero and introduction line"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'A fofo was once'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'Once upon a time, There was a fox living in a forest named "fofo". One day fofo was'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span>    
+    
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Grammatical correction - The fofo to fofo"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'[T|t]he fofo'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'fofo'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span>    
+<span class="hljs-attr" style="color: #6d9cbe;">      notify:</span> restart apache</pre>
+<p>In the preceding playbook, You can see we have left the title unchanged with the help of <strong>after</strong> parameter in the replace module ( highlighted in yellow font colour)</p>
+<p>One more reset back to the Normal Fox and Grape Story before the further example.</p>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Start_Replacing_BEFORE_the_Matching_Expression_up_to_the_Beginning_of_File"><span style="font-size: 14pt;">Start Replacing <span style="color: #000000;">BEFORE</span> the Matching Expression up to the Beginning of File</span></span></h3>
+<p>For this example also we need a new requirement and here is what I have come up with.</p>
+<p>We are going to change the Headline of the Story and add some color formatting to it. The following diagram would help you understand our requirement</p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM.png"><img class="alignnone size-full wp-image-2870 lazyload" src="../wp-content/ewww/lazy/placeholder-1424x817.png" alt="" width="1424" height="817" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM.png 1424w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM-300x172.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM-768x441.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM-1024x588.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2870" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM.png" alt="" width="1424" height="817" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM.png 1424w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM-300x172.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM-768x441.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-5.26.25-PM-1024x588.png 1024w" sizes="(max-width: 1424px) 100vw, 1424px" data-eio="l" /></noscript></a></p>
+<p>We are basically going to replace the <code>&lt;h2&gt;</code> tag and add some <code>&lt;span&gt;</code> elements to it to change the color of the words Fox and Grape</p>
+<p>But our Search String remains just the word <strong>Fox</strong> and <strong>Grape</strong></p>
+<p>Here is the playbook to accomplish the same and we are going to use <strong>before</strong> in this example ( Just to change the color of the words Fox and Grape only in the headline, Not in the Story)</p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 14pt;">The Playbook</span></strong></p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Replace line in file examples
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> web
+
+<span class="hljs-attr" style="color: #6d9cbe;">    handlers:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> restart apache
+<span class="hljs-attr" style="color: #6d9cbe;">        become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span> name=httpd state=restarted
+
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replacing the Fox with Formatting only in headline before closing of H2"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'[F|f]ox'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'&lt;span style="color:crimson"&gt;Fox&lt;/span&gt;'</span>
+<span style="color: #ffff00;"><span class="hljs-attr">        before:</span> <span class="hljs-string">"&lt;/h2&gt;"</span></span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span>
+
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replacing the Grape with Formatting only in headline before closing of H2"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'[G|g]rape'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'&lt;span style="color:purple"&gt; Grape &lt;/span&gt;'</span>
+<span style="color: #ffff00;"><span class="hljs-attr">        before:</span> <span class="hljs-string">"&lt;/h2&gt;"</span></span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span>   
+<span class="hljs-attr" style="color: #6d9cbe;">      notify:</span> restart apache</pre>
+<p>You can see the before parameter is having the closing element of the H2 tag. In this way we are Restricting the change to happen only in the headline.</p>
+<p>Anyways for our next example, we are going to need all of the Fox and Grape be replaced with the color formatting.</p>
+<p>To do this, You just have to remove the before parameter from the Playbook. It will replace all the instance across the HTML page. I will let you do it, so you will get some exposure. Your end result should be like the following.</p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM.png"><img class="alignnone size-full wp-image-2871 lazyload" src="../wp-content/ewww/lazy/placeholder-1417x293.png" alt="" width="1417" height="293" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM.png 1417w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM-300x62.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM-768x159.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM-1024x212.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2871" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM.png" alt="" width="1417" height="293" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM.png 1417w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM-300x62.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM-768x159.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-06-at-6.00.46-PM-1024x212.png 1024w" sizes="(max-width: 1417px) 100vw, 1417px" data-eio="l" /></noscript></a></p>
+<p>In the preceding Snapshot, you can see all the instances of the word Fox and Grape has been replaced with Color formatting</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Replacing_the_String_Between_matching_Expressions_or_Using_BEFORE_and_AFTER_together_in_ansible_replace">Replacing the String Between matching Expressions (or) Using <span style="color: #000000;">BEFORE</span> and <span style="color: #000000;">AFTER</span> together in ansible replace</span></h3>
+<p>As the title of this example states, we are going to use Before and After Together in the same replace task to achieve replacing between two matching expressions.</p>
+<p>Let us set some requirement first, The Requirement for this example is to <strong>underline the word Fox</strong> only in the Story but not in the Headline.</p>
+<p>So we are going to set the opening of <code>&lt;p&gt;</code> tag as our start line(<strong>after</strong>) and the closing tag of <code>&lt;/p&gt;</code><strong>(before)</strong> as our end line</p>
+<p>The preceding illustration could help you understand it even better</p>
+<p><a href="../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM.png"><img class="alignnone size-full wp-image-2872 lazyload" src="../wp-content/ewww/lazy/placeholder-1437x715.png" alt="" width="1437" height="715" data-src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM.png" loading="lazy" data-srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM.png 1437w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-300x149.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-768x382.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1024x510.png 1024w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-2872" src="../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM.png" alt="" width="1437" height="715" srcset="../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM.png 1437w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-300x149.png 300w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-768x382.png 768w, ../wp-content/uploads/2019/02/Screen-Shot-2019-02-07-at-3.21.33-PM-1024x510.png 1024w" sizes="(max-width: 1437px) 100vw, 1437px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 14pt;">The Playbook</span></strong></p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-meta" style="color: #9b859d;">---</span>
+<span class="hljs-attr" style="color: #6d9cbe;">  - name:</span> Replace line in file examples
+<span class="hljs-attr" style="color: #6d9cbe;">    hosts:</span> web
+
+<span class="hljs-attr" style="color: #6d9cbe;">    handlers:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      - name:</span> restart apache
+<span class="hljs-attr" style="color: #6d9cbe;">        become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">        service:</span> name=httpd state=restarted
+
+<span class="hljs-attr" style="color: #6d9cbe;">    tasks:</span>
+<span class="hljs-attr" style="color: #6d9cbe;">    - name:</span> <span class="hljs-string" style="color: #a5c261;">"Replacing the Fox in the Story with Underline formatting"</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become:</span> <span class="hljs-literal">yes</span>
+<span class="hljs-attr" style="color: #6d9cbe;">      become_user:</span> root
+<span class="hljs-attr" style="color: #6d9cbe;">      replace:</span> 
+<span class="hljs-attr" style="color: #6d9cbe;">        path:</span> /var/www/html/index.html
+<span class="hljs-attr" style="color: #6d9cbe;">        regexp:</span> <span class="hljs-string" style="color: #a5c261;">'[F|f]ox'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        replace:</span> <span class="hljs-string" style="color: #a5c261;">'&lt;u&gt;Fox&lt;/u&gt;'</span>
+        <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># Matches the Start of P tag</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        after:</span> <span class="hljs-string" style="color: #a5c261;">'&lt;p\s[.|\w|=|\"|\r|\n|\s|\-|:|;]*&gt;'</span>
+        <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># Matches the End of P tag</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        before:</span> <span class="hljs-string" style="color: #a5c261;">'&lt;/p&gt;'</span>
+<span class="hljs-attr" style="color: #6d9cbe;">        backup:</span> <span class="hljs-literal">yes</span>  
+<span class="hljs-attr" style="color: #6d9cbe;">      notify:</span> restart apache</pre>
+<p>&nbsp;</p>
+<p>Hope you would find this article helpful.  Feel free to contact me for help and support over the comments section.</p>
+<p>Rate this article [ratings]</p>
+<p>Cheers,<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Find me on Linkedin <a href="https://www.linkedin.com/in/rumen-lishkov/">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../cdn-cgi/l/email-protection.html#7d15181111123d1a0f14091b04531e1210"> <span class="__cf_email__" data-cfemail="a6cec3cacac9e6c1d4cfd2c0df88c5c9cb">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1657191658" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="2848" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="915ddf1a10" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1657191658" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1657191658"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-lineinfile-multiple-lines-replace-multiple-lines/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible lineinfile multiple lines" data-src="../wp-content/uploads/2019/03/Screen-Shot-2019-03-24-at-2.27.35-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/03/Screen-Shot-2019-03-24-at-2.27.35-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible lineinfile multiple lines" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-lineinfile-multiple-lines-replace-multiple-lines/index.html'>Ansible lineinfile multiple lines - Replace multiple Lines | Devops Junction</a><p>In this post, we are going to see how to use Ansible lineinfile module to replace multiple Lines at the same time. How to use Multiple Regular Expressions or Regex at the same time. How to Match Multiple lines. For this example, we are going to take apache httpd.conf file&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-lineinfile-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="ansible lineinfile examples" data-src="../wp-content/uploads/2019/03/photo-1461360228754-6e81c478b882-1-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/03/photo-1461360228754-6e81c478b882-1-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="ansible lineinfile examples" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-lineinfile-examples/index.html'>Ansible lineinfile examples - Add, Modify, Delete, Replace lines</a><p>Ansible lineinfile module could be the saviour of your day when you want to work with files and especially modify their content on the run, like adding a new line in the file or updating a line in the file or replace a line in the file when certain text&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-search-string-file-check-if-string-exists/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../wp-content/uploads/2019/01/file_search-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/01/file_search-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-search-string-file-check-if-string-exists/index.html'>ansible search for string in file or check if string exists in file</a><p>The Objective of this post is to show how to search for a string in a file with ansible. ansible provides various ways to accomplish the same.&nbsp; We will cover,&nbsp; three major ways to search for a string in a file. Lineinfile module Using the Shell module and grep command&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-command-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Ansible Command" data-src="../wp-content/uploads/2019/04/AnsibleCommand-1-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2019/04/AnsibleCommand-1-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Ansible Command" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-command-examples/index.html'>Ansible Command Module Examples</a><p>Ansible Command Module Introduction Ansible Command module is used to execute commands on a remote node. The Command module, is used mostly to run simple Linux commands on a remote node/server which is part of a host group or Stand alone server mentioned in the host group. If you want&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='ansible-when-variable-is-defined-or-undefined-examples/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../wp-content/uploads/2018/12/Screen-Shot-2018-12-01-at-7.06.23-AM-150x150.png.html" loading="lazy" /><noscript><img width="150" height="150" src="../wp-content/uploads/2018/12/Screen-Shot-2018-12-01-at-7.06.23-AM-150x150.png.html" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='ansible-when-variable-is-defined-or-undefined-examples/index.html'>Ansible When Variable is defined or undefined Examples</a><p>The Purpose The purpose of this post is to give you a real-time example and explanation of how ansible variable is defined and not defined (undefined) conditionals are working along with "when"&nbsp;conditional statement and how it controls the flow of the task and the play. The following ansible playbook is&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="tag/ansible-combined-before-and-after-issue/index.html" rel="tag">ansible combined before and after issue</a><a href="tag/ansible-replace-examples/index.html" rel="tag">ansible replace examples</a><a href="tag/ansible-replace-module-between-two-lines/index.html" rel="tag">ansible replace module between two lines</a><a href="tag/ansible-replace-module-examples/index.html" rel="tag">ansible replace module examples</a><a href="tag/ansible-replace-with-after/index.html" rel="tag">ansible replace with after</a><a href="tag/ansible-replace-with-before/index.html" rel="tag">ansible replace with before</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="set-heapmemory-jvm-arguments-tomcat/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>How to set HeapMemory or JVM Arguments in Tomcat</a></div><div class="nav-next"><a href="f5-irule-log-tls-version-ssl-handshake-information/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>F5 irule to log TLS version and SSL Handshake Information</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="category/aws/index.html">AWS</a> (28)
+</li>
+<li class="cat-item cat-item-452"><a href="category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="category/boto/index.html">Boto</a> (1)
+</li>
+<li class="cat-item cat-item-399"><a href="category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="category/kubernetes/index.html">Kubernetes</a> (16)
+</li>
+<li class="cat-item cat-item-191"><a href="category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="category/uncategorized/index.html">Uncategorized</a> (5)
+</li>
+<li class="cat-item cat-item-7"><a href="category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">
+Powered by <a href="../index.html" title="MiddlewareInventory">MiddlewareInventory</a> and <a href="https://www.gritfy.com/" title="Gritfy">gritfy</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><div class="simplesocialbuttons simplesocial-round-icon simplesocialbuttons-float-left-center post-2848 post  ssb_counter-activate simplesocialbuttons-slide-bottom-in">
+<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
+<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=Ansible+replace+line+in+file+%E2%80%93+Ansible+Replace+Examples+%7C+Devops+Junction&url=https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
+<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
+<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=Ansible+replace+line+in+file+%E2%80%93+Ansible+Replace+Examples+%7C+Devops+Junction&body=https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/"><span class="simplesocialtxt">Email</span></button>
+<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://web.whatsapp.com/send?text=https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/"><span class="simplesocialtxt">WhatsApp</span></button>
+</div>
+<script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"2848 https:\/\/www.middlewareinventory.com\/?p=2848","disqusShortname":"mwinventory","disqusTitle":"Ansible replace line in file \u2013 Ansible Replace Examples | Devops Junction","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/ansible-replace-line-in-file-ansible-replace-examples\/","postId":"2848"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"2019084a26"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"b4d440853b","post_id":"2848"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"0b980bed5f","ip":"121.243.22.130","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/f2bcf.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../wp-content/cache/minify/129c2.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/ansible-replace-line-in-file-ansible-replace-examples/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script> 
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1657191658;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

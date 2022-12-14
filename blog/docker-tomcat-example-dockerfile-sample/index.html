@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>Docker Tomcat Example - Dockerfile for Tomcat, Docker Tomcat Image</title>
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Docker Tomcat Example - Dockerfile for Tomcat, Docker Tomcat Image" />
+<meta property="og:description" content="0 In this post, we are going to learn how to install a Tomcat Application Server or Web Container on Docker and Deploy web applications into the Tomcat running inside Docker.  This post is all about Docker Tomcat and deploying war web application into tomcat docker, Sample Docker Tomcat image,[...]" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2019-04-15T04:23:11+00:00" />
+<meta property="article:modified_time" content="2022-10-06T20:07:56+00:00" />
+<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2019/04/ContainerSky.jpeg" />
+<meta property="og:image:width" content="1081" />
+<meta property="og:image:height" content="692" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#primaryimage","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2019/04/ContainerSky.jpeg","width":1081,"height":692,"caption":"Docker tomcat Container"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#webpage","url":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/","name":"Docker Tomcat Example - Dockerfile for Tomcat, Docker Tomcat Image","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#primaryimage"},"datePublished":"2019-04-15T04:23:11+00:00","dateModified":"2022-10-06T20:07:56+00:00","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"Docker Tomcat Example &#8211; Dockerfile for Tomcat, Docker Tomcat Image","datePublished":"2019-04-15T04:23:11+00:00","dateModified":"2022-10-06T20:07:56+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#primaryimage"},"keywords":"Deploy Tomcat in Docker,Docker Tomcat,Docker Tomcat Container,Docker Tomcat Example,Tomcat In Docker","articleSection":"Docker","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Docker Tomcat Example &#8211; Dockerfile for Tomcat, Docker Tomcat Image Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/3028.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-docker-tomcat-example-dockerfile-sample-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-docker-tomcat-example-dockerfile-sample-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">article h2
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+}
+
+blockquote {
+     padding: 2%;
+}
+
+li {
+    padding: 2px;
+    margin-left: 2%;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-3028 single-format-standard wp-custom-logo cookies-set cookies-accepted et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-3028" class="post-3028 post type-post status-publish format-standard has-post-thumbnail hentry category-docker tag-deploy-tomcat-in-docker tag-docker-tomcat tag-docker-tomcat-container tag-docker-tomcat-example tag-tomcat-in-docker wpautop">
+<header class="entry-header">
+<h1 class="entry-title">Docker Tomcat Example &#8211; Dockerfile for Tomcat, Docker Tomcat Image</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="9:53 am" rel="bookmark"><time class="entry-date published updated" datetime="October 7, 2022">October 7, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=Docker%20Tomcat%20Example%20%E2%80%93%20Dockerfile%20for%20Tomcat%2C%20Docker%20Tomcat%20Image&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-tomcat-example-dockerfile-sample%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="3028" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=Docker+Tomcat+Example+%E2%80%93+Dockerfile+for+Tomcat%2C+Docker+Tomcat+Image&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-tomcat-example-dockerfile-sample%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="3028" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=Docker%20Tomcat%20Example%20%E2%80%93%20Dockerfile%20for%20Tomcat%2C%20Docker%20Tomcat%20Image&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-tomcat-example-dockerfile-sample%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="3028" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdocker-tomcat-example-dockerfile-sample%2F&subject=Docker%20Tomcat%20Example%20%E2%80%93%20Dockerfile%20for%20Tomcat%2C%20Docker%20Tomcat%20Image" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="3028" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="3028" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<p>In this post, we are going to learn how to install a Tomcat Application Server or Web Container on Docker and Deploy web applications into the Tomcat running inside Docker.  This post is all about Docker Tomcat and deploying war web application into tomcat docker, Sample Docker Tomcat image, Dockerfile for tomcat</p>
+<p>In this Docker tomcat example, We will start with Creating a Tomcat Docker Image and Create a Docker Container from that image and Learn how to Manage the Container and Deploy our Web Application to the Tomcat running on Docker.</p>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Steps_to_Build_Docker_Tomcat_Image" title="Steps to Build Docker Tomcat Image">Steps to Build Docker Tomcat Image</a></li><li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li><li><a href="#Step1_Creating_Docker_Tomcat_Image_Example" title="Step1: Creating Docker Tomcat Image &#8211; Example">Step1: Creating Docker Tomcat Image &#8211; Example</a><ul><li><a href="#Creating_a_Work_Space_Directory_or_Use_the_Existing_one" title="Creating a Work Space Directory (or) Use the Existing one.">Creating a Work Space Directory (or) Use the Existing one.</a></li><li><a href="#Creating_a_DockerFile_Docker_Tomcat_Image" title="Creating a DockerFile &#8211; Docker Tomcat Image">Creating a DockerFile &#8211; Docker Tomcat Image</a></li></ul></li><li><a href="#Step2_Build_the_Docker_Tomcat_Image" title="Step2: Build the Docker Tomcat Image">Step2: Build the Docker Tomcat Image</a></li><li><a href="#Step3_Publish_or_Push_the_image_to_DockerHub" title="Step3: Publish or Push the image to DockerHub">Step3: Publish or Push the image to DockerHub</a></li><li><a href="#Additional_How_to_download_this_Docker_Tomcat_Image" title="Additional: How to download this Docker Tomcat Image?">Additional: How to download this Docker Tomcat Image?</a><ul><li><a href="#Do_I_have_to_do_Docker_Pull_If_I_want_to_download_this_image_before_Running_it_as_a_container" title="Do I have to do Docker Pull If I want to download this image before Running it as a container?">Do I have to do Docker Pull If I want to download this image before Running it as a container?</a></li></ul></li><li><a href="#Step4_Run_Docker_Tomcat_image_as_a_container" title="Step4: Run Docker Tomcat image as a container.">Step4: Run Docker Tomcat image as a container.</a></li><li><a href="#Step5_Access_the_DeployedBuilt-In_SampleWebApp" title="Step5: Access the Deployed/Built-In SampleWebApp">Step5: Access the Deployed/Built-In SampleWebApp</a></li><li><a href="#Docker_Commands_Cheat_Sheet" title="Docker Commands Cheat Sheet">Docker Commands Cheat Sheet</a></li><li><a href="#Deploy_this_Tomcat_container_to_Kubernetes_Cluster" title="Deploy this Tomcat container to Kubernetes Cluster">Deploy this Tomcat container to Kubernetes Cluster</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Steps_to_Build_Docker_Tomcat_Image">Steps to Build Docker Tomcat Image</span></h2>
+<ul>
+<li>Step1: Creating Tomcat Docker Image ( Dockerfile)</li>
+<li>Step2: Build the Image</li>
+<li>Step3: Publishing to Docker ( So that you can reuse the image globally)</li>
+<li>Additional: How can you download and reuse this image</li>
+<li>Step4: Starting the Container from the Tomcat Docker Image</li>
+<li>Step5: Access the Sample Web Application Deployed already</li>
+<li>Commands to Manage your Docker Tomcat Container</li>
+<li>Way forward to Deploy this container to Kubernetes</li>
+</ul>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Prerequisites">Prerequisites</span></h2>
+<p>We are presuming that you have all these items checked from the following CheckList</p>
+<ol>
+<li>Prior Knowledge of Tomcat</li>
+<li>Basic Knowledge of Docker and Container ( <a href="../category/docker/index.html">Refer this articles, If you want to refresh</a>)</li>
+<li>Working Environment with Docker CE and Internet Connectivity</li>
+</ol>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Step1_Creating_Docker_Tomcat_Image_Example">Step1: Creating Docker Tomcat Image &#8211; Example</span></h2>
+<p>First Let us start with Creating a New Directory (workspace) in which we are going to create our Dockerfile and Copy the Web Applications and other configuration files which needs to be shared with the Container.</p>
+<p>You can also use the Existing directory but creating a new and Separate directory for your all your container projects are recommended for Clean infrastructure</p>
+<h3><span class="ez-toc-section" id="Creating_a_Work_Space_Directory_or_Use_the_Existing_one">Creating a Work Space Directory (or) Use the Existing one.</span></h3>
+<p>I have created a new directory named <code>"<span class="s1">/apps/docker/DockerTomcat"</span></code>  Along the way till the end of this article, I would refer this directory as  <code>WORKSPACE</code> directory</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Creating_a_DockerFile_Docker_Tomcat_Image">Creating a DockerFile &#8211; Docker Tomcat Image</span></h3>
+<p>Inside the workspace,  we are going to create a Dockerfile with the following content</p>
+<p>Note*: Dockerfile must start with &#8216;D&#8217; as upper case.</p>
+<blockquote><p> In the Dockerfile, I have used the tomcat download URL of my region. you can replace it with the functioning tomcat download url for your region.  You can get your download link <a href="https://downloads.apache.org/tomcat/tomcat-8/v8.5.40">here</a></p></blockquote>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;">FROM centos
+
+MAINTAINER <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="f29a979e9e9db295809b86948bdc919d9f">[email&#160;protected]</a>
+
+RUN mkdir /opt/tomcat/
+
+WORKDIR /opt/tomcat
+RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+RUN tar xvfz apache*.tar.gz
+RUN mv apache-tomcat-8.5.40/* /opt/tomcat/.
+RUN yum -y install java
+RUN java -version
+
+WORKDIR /opt/tomcat/webapps
+RUN curl -O -L https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
+
+EXPOSE 8080
+
+CMD [<span style="color: #aa5500;">"/opt/tomcat/bin/catalina.sh"</span>, <span style="color: #aa5500;">"run"</span>]
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>Here</p>
+<p><code>MAINTAINER</code> – Who Crate and manage this container image</p>
+<p><code>FROM</code> – What is the base image, we are going to use to host our container. you can either use a minimal OS image like CentOS, Alpine or you can create your own from the scratch by mentioning SCRATCH as a value to this.</p>
+<p><code>RUN</code> – Commands to Run to make the image( the future container) in the way you want</p>
+<p><code>EXPOSE</code> Do you want your image or application in the image to expose any port to the external world or at least to the host.  For example if you are building Apache HTTP server image you can EXPOSE port 80, In our case it is 8080</p>
+<p><code>CMD</code> The Default Command of the container which gets created using this image.  Every Container must have a Default Command. the Container would run as long as the Default Command is running.</p>
+<p><code>ADD</code> or <code>COPY</code> The files you want to copy into the container from your host.</p>
+<p><span style="color: #222222; font-family: courier;"><span style="font-size: 16px; background-color: #e9ebec;">WORKDIR</span></span> Define a workspace where the upcoming (or) following set of commands/instructions  should be executed in</p>
+<p>Here you can see we have used WORKDIR twice, One is to execute set of commands on the TOMCAT_HOME/CATALINA_HOME  another WORKDIR is to download the Sample Application WAR file and deploy the war into Docker Tomcat Container.</p>
+<blockquote><p><strong> Note*:  Built-In step for an Application Deployment</strong></p>
+<p>The Docker Container Image we are creating has an instruction to Deploy an application directly from one of our github page (download the war file) and the version of tomcat we are going to build is 8.5.40</p>
+<p>Make necassary Changes if you opt for a different version.</p>
+<p>Make you get the Downloadable Link of Tomcat right so that your image gets created with no issues.</p></blockquote>
+<h2><span class="ez-toc-section" id="Step2_Build_the_Docker_Tomcat_Image">Step2: Build the Docker Tomcat Image</span></h2>
+<p>On the same WorkSpace Directory where our Dockerfile is residing. Run the following command to build the image.</p>
+<p>The Syntax of the Docker Image command is</p>
+<p><code>docker build -t [Name Of the Image]  .</code></p>
+<p>Here the PERIOD . (DOT) represents the Current working directory which is also part of the syntax</p>
+<p>&nbsp;</p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #aa0000;">$ </span><span style="color: #993366;">docker build -t saravak/tomcat8 .
+</span>
+Sending build context to Docker daemon   38.4kB
+Step 1/13 : FROM centos
+ ---&gt; 1e1148e4cc2c
+Step 2/13 : MAINTAINER <a href="../../cdn-cgi/l/email-protection.html" class="__cf_email__" data-cfemail="92f3f9e1f3e0f3e4d2fffbf6f6fef7e5f3e0f7fbfce4f7fce6fde0ebbcf1fdff">[email&#160;protected]</a>
+ ---&gt; Using cache
+ ---&gt; af1217ce46de
+Step 3/13 : RUN mkdir /opt/tomcat/
+ ---&gt; Using cache
+ ---&gt; 4c38afae9d54
+Step 4/13 : WORKDIR /opt/tomcat
+ ---&gt; Using cache
+ ---&gt; a725d7431b50
+Step 5/13 : RUN curl -O https://www-eu.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+ ---&gt; Using cache
+ ---&gt; 91e7bc7726ff
+Step 6/13 : RUN tar xvfz apache*.tar.gz
+ ---&gt; Using cache
+ ---&gt; 629328c4f4d2
+Step 7/13 : RUN mv apache-tomcat-8.5.40/* /opt/tomcat/.
+ ---&gt; Using cache
+ ---&gt; f501f3c72f61
+Step 8/13 : RUN yum -y install java
+ ---&gt; Using cache
+ ---&gt; 345972c4e662
+Step 9/13 : RUN java -version
+ ---&gt; Using cache
+ ---&gt; ccb7b9f52541
+Step 10/13 : WORKDIR /opt/tomcat/webapps
+ ---&gt; Running in 83e328f92c1a
+Removing intermediate container 83e328f92c1a
+ ---&gt; 8e8d29c51fd8
+Step 11/13 : RUN curl -O https://github.com/AKSarav/SampleWebApp/raw/master/dist/SampleWebApp.war
+ ---&gt; Running in cdc45a9204a9
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   149  100   149    0     0     66      0  0:00:02  0:00:02 --:--:--    66
+FROM centos
+Removing intermediate container cdc45a9204a9
+ ---&gt; b064cd141999
+Step 12/13 : EXPOSE 8080
+ ---&gt; Running in dd17c8c97189
+Removing intermediate container dd17c8c97189
+ ---&gt; cc5acb3cb1f8
+Step 13/13 : CMD [<span style="color: #aa5500;">"/opt/tomcat/bin/catalina.sh"</span>, <span style="color: #aa5500;">"runt"</span>]
+ ---&gt; Running in f8bf12a4e567
+Removing intermediate container f8bf12a4e567
+ ---&gt; 2b61f132794e
+Successfully built 2b61f132794e
+Successfully tagged saravak/tomcat8:latest
+</pre>
+</div>
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p><span style="color: #156d99;">But why did I name my image as &#8220;saravak/tomcat8&#8221; instead of  just Tomcat8</span></p>
+<p>Here <code>saravak</code> is my Docker Login Name / Docker User Name.</p>
+<p>It is always recommended to Name the image you are creating with your Docker User Name, So that when you are publishing the Image to Docker hub. ( A Central Shared Repository) it would be easy and People across the world can just download your image by specifying the same name that you have set.</p>
+<p>For Example, If you want to download this image, you can simply use <code>docker pull saravak/tomcat8</code> That&#8217;s all.</p>
+<p>So when you create your images, Please make sure you use your Docker Login Name.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Step3_Publish_or_Push_the_image_to_DockerHub">Step3: Publish or Push the image to DockerHub</span></h2>
+<p>Before you start publishing the images to DockerHub. It is necessary that you have to create your Docker Hub (or) Docker Account.  Visit  <a href="https://hub.docker.com/">hub.docker.com</a></p>
+<p>Once you have set up your username in Docker Hub.</p>
+<p>Log in to Docker Hub from the Docker CLI</p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #aa0000;">$ </span><span style="color: #993366;">docker login</span>
+Login with your Docker ID to push and pull images from Docker Hub. If you don<span style="color: #ff0000; background-color: #ffaaaa;">'</span>t have a Docker ID, head over to https://hub.docker.com to create one.
+<span style="color: #156d99;">Username: saravak</span>
+Password:
+Login Succeeded
+
+</pre>
+</div>
+<p>Once the Login succeeded.</p>
+<p>Publish/Push the image you have created to Docker Hub. Based on your Internet speed you can see the Upload gets completed in a couple of minutes.</p>
+<p></p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #aa0000;">$ </span><span style="color: #993366;">docker push saravak/tomcat8
+</span>
+The push refers to repository [docker.io/saravak/tomcat8]
+bfc9fd0939b7: Pushed
+f6b1f20ff3ed: Pushed
+6d21360e64a0: Pushed
+4a62c00a3c78: Pushed
+0bc97febfdbb: Pushed
+0f861fa8dd99: Pushed
+c1117571ffb4: Pushed
+071d8bd76517: Mounted from library/centos
+latest: digest: sha256:8ede588ad0bb944e62765fdb40b21f7ebdc6587afa00efc7570ede4c7f0786fa size: 1996
+</pre>
+</div>
+<p>&nbsp;</p>
+<p>Once the image is uploaded (or) Pushed, The entire world can reuse your image as we have mentioned earlier using <strong>docker pull</strong></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Additional_How_to_download_this_Docker_Tomcat_Image">Additional: How to download this Docker Tomcat Image?</span></h2>
+<p>You can use docker CLI to download the image directly and create a container.</p>
+<p><span style="color: #156d99;">To Download this image Just use the following DOCKER CLI command</span></p>
+<p></p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #000000;">docker pull saravak/tomcat8
+</span></pre>
+</div>
+<p>Once you have downloaded this image, This image would be available in your local image repository.</p>
+<p>use either of following commands to make sure the image is present</p>
+<p><span style="color: #156d99;">to list all the images in your local repository use the following command</span></p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #000000;">docker images</span></pre>
+</div>
+<p><span style="color: #156d99;">to list only the subjected tomcat image use the following command</span></p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #000000;">docker image ls saravak/tomcat8
+</span></pre>
+</div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h3><span class="ez-toc-section" id="Do_I_have_to_do_Docker_Pull_If_I_want_to_download_this_image_before_Running_it_as_a_container"><span style="color: #db0d4e;">Do I have to do Docker Pull If I want to download this image before Running it as a container?</span></span></h3>
+<p>The Answer is <strong>NO</strong>, Docker By default, would download the image from Docker Hub if the image is not available in the local image repository.  So it is not necessary that you have to explicitly do the <strong>docker pull</strong></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Step4_Run_Docker_Tomcat_image_as_a_container">Step4: Run Docker Tomcat image as a container.</span></h2>
+<p>Now the Image is ready and available in Docker Hub. Irrespective of, If the image is available locally or not. You can start the image as a container.</p>
+<p>As mentioned earlier,  Docker would search for the image in DockerHub if it is not available in local.</p>
+<p><span style="color: #156d99; font-size: 14pt;">So the command given below can even be run at your Host from anywhere in the world. as long as you are connected to the internet. Docker would do the rest.</span></p>
+<p></p>
+<div style="background: #ffffff; overflow: auto; width: auto; border: solid gray; border-width: .1em .1em .1em .8em; padding: .2em .6em;">
+<pre style="margin: 0; line-height: 125%;"><span style="color: #aa0000;">$ </span><span style="color: #993366;">docker container run -it -d --name tomcatcontainer1 -p 8081:8080 saravak/tomcat8</span>
+d6f0859b69d216885e8671d9d024f7bdfb82e7a2af1b40fbc8016e36c51313a7
+</pre>
+</div>
+<p>Here</p>
+<p><code>-it:</code> to enable Interactive Session/SSH to get into the container at a later point in time</p>
+<p><code>-d:</code> Run the container in the background (always recommended)</p>
+<p><code>--name:</code> name your container</p>
+<p><code>saravak/tomcat8:</code> the Image used to create this container. the Image instantiated as a container</p>
+<p><code>-p 8081:8080:</code>  Forwarding the Container port 8080 to Host 8081</p>
+<p><span style="color: #156d99;">Congratz. we started a Docker Tomcat Container</span></p>
+<p>To quickly verify, if your container use <code>docker ps</code> command. Then at the end of this post, we will share more commands to manage your container</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Step5_Access_the_DeployedBuilt-In_SampleWebApp">Step5: Access the Deployed/Built-In SampleWebApp</span></h2>
+<p>Since we have port forwarding and redirecting the container 8080 to the Host (mac/windows/Linux) 8081. We can access the Sample Web Application installed inside the tomcat container at the following URL</p>
+<p><code>http://localhost:8081/SampleWebApp</code></p>
+<p>In my case, my Host machine is MAC OS so I can directly hit the URL in the browser.</p>
+<p><a href="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM.png"><img class="alignnone size-full wp-image-3307 lazyload" src="../../wp-content/ewww/lazy/placeholder-1146x826.png" alt="Docker Tomcat Container Deployment" width="1146" height="826" data-src="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM.png 1146w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-300x216.png 300w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-768x554.png 768w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-1024x738.png 1024w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-90x65.png 90w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-3307" src="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM.png" alt="Docker Tomcat Container Deployment" width="1146" height="826" srcset="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM.png 1146w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-300x216.png 300w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-768x554.png 768w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-1024x738.png 1024w, ../../wp-content/uploads/2019/04/Screen-Shot-2019-04-15-at-9.21.34-AM-90x65.png 90w" sizes="(max-width: 1146px) 100vw, 1146px" data-eio="l" /></noscript></a></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<h2><span class="ez-toc-section" id="Docker_Commands_Cheat_Sheet">Docker Commands Cheat Sheet</span></h2>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #232323; color: #e6e1dc;"><span class="hljs-comment" style="color: #bc9458; font-style: italic;"><span style="color: #00ff00;"># How to start and stop the container</span> </span>
+
+docker stop &lt;containername/<span class="hljs-built_in" style="color: #6d9cbe;">id</span>&gt;  <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># to stop the container which is running in background mode</span>
+docker container start &lt;containername/<span class="hljs-built_in" style="color: #6d9cbe;">id</span>&gt; <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># to start the already stopped container</span>
+
+<span class="hljs-comment" style="color: #00ff00; font-style: italic;"># monitoring the Container </span>
+
+docker container <span class="hljs-built_in" style="color: #6d9cbe;">list</span> <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># list the containers created</span>
+docker container ls -a  <span class="hljs-comment" style="color: #bc9458; font-style: italic;">#to list the containers including not running containers</span>
+docker ps    <span class="hljs-comment" style="color: #bc9458; font-style: italic;">#to list the running container</span>
+docker info <span class="hljs-comment" style="color: #bc9458; font-style: italic;">#docker engine status including container running/paused/stopped containers list</span>
+docker container stats &lt;containername/<span class="hljs-built_in" style="color: #6d9cbe;">id</span>&gt; <span class="hljs-comment" style="color: #bc9458; font-style: italic;">#prints the CPU and MEM usage data of the container name</span>
+docker container stats <span class="hljs-comment" style="color: #bc9458; font-style: italic;">#prints the CPU and MEM usage of all running containers</span>
+docker container top &lt;containername/<span class="hljs-built_in" style="color: #6d9cbe;">id</span>&gt; <span class="hljs-comment" style="color: #bc9458; font-style: italic;">#executes the top command in the container specified, fails if the specified container is not running</span>
+<span class="hljs-comment" style="color: #00ff00; font-style: italic;">
+# How to remove/delete the container</span>
+
+docker container rm &lt;containername/<span class="hljs-built_in" style="color: #6d9cbe;">id</span>&gt; <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># Remove the Container </span>
+
+<span class="hljs-comment" style="color: #00ff00; font-style: italic;"># How to remove/delete the image
+</span>
+docker container rmi &lt;imagename/imageid&gt; <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># Remove the image</span>
+<span class="hljs-comment" style="color: #00ff00; font-style: italic;"># How to view the logs of the running container</span>
+
+docker container logs &lt;containername/<span class="hljs-built_in" style="color: #6d9cbe;">id</span>&gt; <span class="hljs-comment" style="color: #bc9458; font-style: italic;"># to view the logs of the container </span></pre>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Deploy_this_Tomcat_container_to_Kubernetes_Cluster">Deploy this Tomcat container to Kubernetes Cluster</span></h2>
+<p>I have written a detailed and exclusive article on how to use this image in your Kubernetes cluster and deploy this tomcat image into Kubernetes cluster as a pod/deployment.</p>
+<p>Refer this article.</p>
+<blockquote class="wp-embedded-content" data-secret="RJQufbVTcc"><p><a href="../deploy-tomcat-kubernetes/index.html">How to Deploy Tomcat on Kubernetes Step by Step</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;How to Deploy Tomcat on Kubernetes Step by Step&#8221; &#8212; Middleware Inventory" src="../deploy-tomcat-kubernetes/embed/index.html#?secret=RJQufbVTcc" data-secret="RJQufbVTcc" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<p><strong>Further References:</strong></p>
+<ul>
+<li>Tomcat &#8211; <a href="https://tomcat.apache.org/">http://tomcat.apache.org/ </a></li>
+<li>Docker &#8211; <a href="https://www.docker.com/">https://www.docker.com/</a></li>
+</ul>
+<p>Hope this article helps</p>
+<p>Let me know how is this article by leaving a comment</p>
+<p>For any help or questions contact me on comments or write me an email</p>
+<p>Cheers,<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#8ee6ebe2e2e1cee9fce7fae8f7a0ede1e3"> <span class="__cf_email__" data-cfemail="442c2128282b0423362d30223d6a272b29">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1665086931" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="3028" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="fa74ed72d1" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1665086931" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1665086931"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-ssh-into-container-howto/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="How to SSH into Docker Container" data-src="../../wp-content/uploads/2019/04/GetIntoContainer-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/GetIntoContainer-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="How to SSH into Docker Container" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-ssh-into-container-howto/index.html'>Docker SSH Into the Container - How to SSH to Container</a><p>The Docker container is a Process and Not a Virtual Machine. So You do not need any protocol like SSH to get into the container Shell.  Docker CLI has given us special commands to get into the Container like docker exec -it and docker run -it In this post, we&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-run-image-as-container/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-09-at-7.31.14-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/Screen-Shot-2019-04-09-at-7.31.14-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-run-image-as-container/index.html'>Docker Run Image as Container - Create Container From Docker Image</a><p>In this post, we are going to see how to create an image and run the image as a container and manage it. Before we proceed further, it is indispensable, that we are aware of what is an Image and What is a Container. So let us begin from there.&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../deploy-docker-image-to-kubernetes/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/10/Screenshot-2020-02-27-at-4.45.47-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/10/Screenshot-2020-02-27-at-4.45.47-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../deploy-docker-image-to-kubernetes/index.html'>How to Deploy docker image to Kubernetes</a><p>In this post, we are going to see the Steps to create a Docker Image and Deploy to Kubernetes in 8 easy steps.  This post is about the title of this post which is "How to Deploy docker image to kubernetes" For this post, we have used minikube cluster and&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-docker/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/11/Screen-Shot-2018-11-21-at-5.30.59-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/11/Screen-Shot-2018-11-21-at-5.30.59-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-docker/index.html'>Docker Weblogic : Run Oracle Weblogic 12c on Docker</a><p>The Introduction to Docker Weblogic In this post, we are going to be exploring the quick and easy option available to get started with weblogic and Docker.  In this post, we are going to see how to create a weblogic container in docker in a few easy steps. The post's&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-pull-container-registry-oracle-com-access-denied-or-unauthorized/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/10/Screen-Shot-2018-10-28-at-9.51.22-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/10/Screen-Shot-2018-10-28-at-9.51.22-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-pull-container-registry-oracle-com-access-denied-or-unauthorized/index.html'>docker pull container-registry.oracle.com - access denied (or) Unauthorized</a><p>In this article we are going to see how to fix the access denied and unauthorized errors while using the containers of container-registry.oracle.com. Most of us at times might have got this exceptions access denied and unauthorized  while downloading the image using docker pull command. This article is all about&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/deploy-tomcat-in-docker/index.html" rel="tag">Deploy Tomcat in Docker</a><a href="../tag/docker-tomcat/index.html" rel="tag">Docker Tomcat</a><a href="../tag/docker-tomcat-container/index.html" rel="tag">Docker Tomcat Container</a><a href="../tag/docker-tomcat-example/index.html" rel="tag">Docker Tomcat Example</a><a href="../tag/tomcat-in-docker/index.html" rel="tag">Tomcat In Docker</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../ansible-command-examples/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>Ansible Command Module Examples</a></div><div class="nav-next"><a href="../ansible-get_url-examples-how-to-download-file-from-url/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Ansible get_url Examples &#8211; How to download file from URL</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (20)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"3028 https:\/\/www.middlewareinventory.com\/?p=3028","disqusShortname":"mwinventory","disqusTitle":"Docker Tomcat Example \u2013 Dockerfile for Tomcat, Docker Tomcat Image","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/docker-tomcat-example-dockerfile-sample\/","postId":"3028"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"14a811b585"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"4ffd25fbae","post_id":"3028"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"67bd778a01","ip":"50.205.158.30","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"8ec1dbc0b6","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"0d70614b44","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"3028","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/aa60f.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/53887.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1665086931;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<title>How to Deploy Tomcat on Kubernetes Step by Step | Devops Junction</title>
+<meta name="description" content="How to Deploy Tomcat on Kubernetes example. Kubernetes Tomcat Yaml file example. Tomcat Kubernetes Deployment example Step by Step." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="How to Deploy Tomcat on Kubernetes Step by Step | Devops Junction" />
+<meta property="og:description" content="How to Deploy Tomcat on Kubernetes example. Kubernetes Tomcat Yaml file example. Tomcat Kubernetes Deployment example Step by Step." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2020-09-29T15:16:38+00:00" />
+<meta property="article:modified_time" content="2022-11-10T19:14:19+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" />
+<meta property="og:image:width" content="2560" />
+<meta property="og:image:height" content="1436" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg","width":2560,"height":1436,"caption":"Tomcat Kubernetes"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#webpage","url":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/","name":"How to Deploy Tomcat on Kubernetes Step by Step | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#primaryimage"},"datePublished":"2020-09-29T15:16:38+00:00","dateModified":"2022-11-10T19:14:19+00:00","description":"How to Deploy Tomcat on Kubernetes example. Kubernetes Tomcat Yaml file example. Tomcat Kubernetes Deployment example Step by Step.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"How to Deploy Tomcat on Kubernetes Step by Step","datePublished":"2020-09-29T15:16:38+00:00","dateModified":"2022-11-10T19:14:19+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#primaryimage"},"keywords":"deploy tomcat in kubernetes,Kubernetes Tomcat Deployment,Kubernetes Tomcat yaml,Tomcat Kubernetes","articleSection":"DevOps_Beginner,Kubernetes","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; How to Deploy Tomcat on Kubernetes Step by Step Comments Feed" href="feed/index.rss" />
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/09591.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/551a8.css" media="all" />
+<script src="../../wp-content/cache/minify/c7035.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2975f.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/5806.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-deploy-tomcat-kubernetes-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-deploy-tomcat-kubernetes-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script><style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css">pre
+{
+  display: block; 
+  overflow-x: auto; 
+  padding-left: 2em;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  background: #eaeef3 none repeat scroll 0% 0%; 
+  color: #00193a;
+}
+article h3
+{
+    background-color: #29558c;
+    color: white;
+    padding-left: 1%;
+    border-left: 15px solid crimson;
+    font-weight: 400;
+    font-size: 22px;
+}
+</style>
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-5806 single-format-standard wp-custom-logo cookies-set cookies-accepted et_divi_builder et-pb-theme-poseidon et-db elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-5806" class="post-5806 post type-post status-publish format-standard has-post-thumbnail hentry category-devops_beginner category-kubernetes tag-deploy-tomcat-in-kubernetes tag-kubernetes-tomcat-deployment tag-kubernetes-tomcat-yaml tag-tomcat-kubernetes wpautop">
+<header class="entry-header">
+<h1 class="entry-title">How to Deploy Tomcat on Kubernetes Step by Step</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="8:46 pm" rel="bookmark"><time class="entry-date published updated" datetime="November 11, 2022">November 11, 2022</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=How%20to%20Deploy%20Tomcat%20on%20Kubernetes%20Step%20by%20Step&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdeploy-tomcat-kubernetes%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="5806" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=How+to+Deploy+Tomcat+on+Kubernetes+Step+by+Step&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdeploy-tomcat-kubernetes%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="5806" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=How%20to%20Deploy%20Tomcat%20on%20Kubernetes%20Step%20by%20Step&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdeploy-tomcat-kubernetes%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="5806" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fdeploy-tomcat-kubernetes%2F&subject=How%20to%20Deploy%20Tomcat%20on%20Kubernetes%20Step%20by%20Step" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="5806" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="5806" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Overview" title="Overview">Overview</a></li><li><a href="#Steps_to_Deploy_Tomcat_in_Kubernetes_on_Google_Cloud" title="Steps to Deploy Tomcat in Kubernetes on Google Cloud">Steps to Deploy Tomcat in Kubernetes on Google Cloud</a><ul><li><a href="#Step1_Creating_a_GKE_Cluster_with_3_nodes" title="Step1: Creating a GKE Cluster with 3 nodes">Step1: Creating a GKE Cluster with 3 nodes</a></li><li><a href="#Step2_Check_the_Context_is_set_to_your_newly_created_cluster" title="Step2: Check the Context is set to your newly created cluster.">Step2: Check the Context is set to your newly created cluster.</a></li><li><a href="#Step3_list_the_nodes_of_the_cluster" title="Step3: list the nodes of the cluster">Step3: list the nodes of the cluster</a></li><li><a href="#Step4_Create_a_K8s_Deployment_to_Deploy_Tomcat_on_Kubernetes" title="Step4: Create a K8s Deployment to Deploy Tomcat on Kubernetes">Step4: Create a K8s Deployment to Deploy Tomcat on Kubernetes</a></li><li><a href="#Step5_List_all_the_deployments" title="Step5: List all the deployments">Step5: List all the deployments</a></li><li><a href="#Step6_List_the_pods_created_by_the_deployment" title="Step6: List the pods created by the deployment">Step6: List the pods created by the deployment</a></li><li><a href="#Step7_ScaleUP_the_deployment" title="Step7: ScaleUP the deployment">Step7: ScaleUP the deployment</a></li><li><a href="#Step8_Validate_if_new_Pods_are_created_after_Scaling_up" title="Step8: Validate if new Pods are created after Scaling up">Step8: Validate if new Pods are created after Scaling up</a></li><li><a href="#Step9_Expose_it_as_a_Service_with_Load_balancing" title="Step9: Expose it as a Service with Load balancing">Step9: Expose it as a Service with Load balancing</a></li><li><a href="#Step10_Access_your_application_using_the_Service_External_IP" title="Step10: Access your application using the Service External IP">Step10: Access your application using the Service External IP</a></li></ul></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Overview">Overview</span></h2>
+<p>In this post, we are going to see how to deploy tomcat on Kubernetes.  How to Deploy Tomcat based web application into Kubernetes. We are taking Google Cloud &#8211; Kubernetes Engine (GKE) for our example and creating our Kubernetes Cluster with 3 nodes</p>
+<p>You can do all these steps and test this with your Free 12 month Google Cloud account itself but make sure you shut down the resources once your setup is completed to avoid charges.</p>
+<p>We are going to use our <a href="../docker-tomcat-example-dockerfile-sample/index.html">Tomcat image we have created in the earlier post.</a> which can be pulled directly from this <a href="https://hub.docker.com/r/saravak/tomcat8">DockerHub</a> using the following command</p>
+<pre>docker pull saravak/tomcat8</pre>
+<h2></h2>
+<p><a href="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg"><img class="alignnone size-full wp-image-6227 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1077.png" alt="Tomcat Kubernetes" width="2560" height="1436" data-src="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" loading="lazy" data-srcset="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg 2560w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-300x168.jpg 300w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-1024x574.jpg 1024w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-768x431.jpg 768w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-1536x862.jpg 1536w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-2048x1149.jpg 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6227" src="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" alt="Tomcat Kubernetes" width="2560" height="1436" srcset="../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg 2560w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-300x168.jpg 300w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-1024x574.jpg 1024w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-768x431.jpg 768w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-1536x862.jpg 1536w, ../../wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-2048x1149.jpg 2048w" sizes="(max-width: 2560px) 100vw, 2560px" data-eio="l" /></noscript></a></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Steps_to_Deploy_Tomcat_in_Kubernetes_on_Google_Cloud">Steps to Deploy Tomcat in Kubernetes on Google Cloud</span></h2>
+<ol>
+<li><a title="Step1: Creating a GKE Cluster with 3 nodes" href="#Step1_Creating_a_GKE_Cluster_with_3_nodes">Creating a GKE Cluster with 3 nodes</a></li>
+<li><a title="Step2: Check the Context is set to your newly created cluster." href="#Step2_Check_the_Context_is_set_to_your_newly_created_cluster">Check the Context is set to your newly created cluster.</a></li>
+<li><a title="Step3: list the nodes of the cluster" href="#Step3_list_the_nodes_of_the_cluster">List the nodes of the cluster</a></li>
+<li><a title="Step4: Create a K8s Deployment to Deploy Tomcat on Kubernetes" href="#Step4_Create_a_K8s_Deployment_to_Deploy_Tomcat_on_Kubernetes">Create a K8s Deployment to Deploy Tomcat on Kubernetes</a></li>
+<li><a title="Step5: List all the deployments" href="#Step5_List_all_the_deployments">List all the deployments</a></li>
+<li><a title="Step6: List the pods created by the deployment" href="#Step6_List_the_pods_created_by_the_deployment">List the pods created by the deployment</a></li>
+<li><a title="Step7: ScaleUP the deployment" href="#Step7_ScaleUP_the_deployment">ScaleUP the deployment</a></li>
+<li><a title="Step8: Validate if new Pods are created after Scaling up" href="#Step8_Validate_if_new_Pods_are_created_after_Scaling_up">Validate if new Pods are created after Scaling up</a></li>
+<li><a title="Step9: Expose it as a Service with Load balancing" href="#Step9_Expose_it_as_a_Service_with_Load_balancing">Expose it as a Service with Load balancing</a></li>
+<li><a title="Step10: Access your application using the Service External IP" href="#Step10_Access_your_application_using_the_Service_External_IP">Access your application using the Service External IP and Test</a></li>
+</ol>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step1_Creating_a_GKE_Cluster_with_3_nodes">Step1: Creating a GKE Cluster with 3 nodes</span></h3>
+<p>in my local machine, I had to install the <a href="https://cloud.google.com/sdk/gcloud">gcloud</a> CLI and setup my access with google cloud once this is done. I have used the <code>gcloud</code> cli command to create a Kubernetes cluster with 3 nodes.</p>
+<p>This is the easiest way to set up Kubernetes.</p>
+<pre>➜  <b>gcloud container clusters create mwik8scluster &#8211; num-nodes 3
+</b>
+This will enable the autorepair feature for nodes. Please see 
+
+https://cloud.google.com/kubernetes-engine/docs/node-auto-repair
+
+for more information on node autorepairs. 
+Creating cluster mwik8scluster in asia-south1-a... 
+Cluster is being health-checked (master is healthy)...done. 
+Created [https://container.googleapis.com/v1/projects/kubernetestest-270009/zones/asia-south1-a/clusters/mwik8scluster]. 
+To inspect the contents of your cluster, go to: 
+https://console.cloud.google.com/kubernetes/workload_/gcloud/asia-south1-a/mwik8scluster?project=kubernetestest-270009</pre>
+<pre>kubeconfig entry generated for mwik8scluster.
+
+NAME           LOCATION       MASTER_VERSION  MASTER_IP     MACHINE_TYPE   NODE_VERSION    NUM_NODES  STATUS
+mwik8scluster  asia-south1-a  1.14.10-gke.27  35.244.39.79  n1-standard-1  1.14.10-gke.27  3          RUNNING</pre>
+<p>&nbsp;</p>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Step2_Check_the_Context_is_set_to_your_newly_created_cluster">Step2: Check the Context is set to your newly created cluster.</span></h3>
+<p>Kubectl is a command-line interface and administration tool for managing your Kubernetes cluster, Wheater you are using minikube, EKS or GKE the kubectl remains your command-line interface for Your Kubernetes Cluster</p>
+<p>So make sure you are switching to the right Kubernetes cluster by changing the context to the Google Kubernetes Engine and to the cluster you have created in the previous step.</p>
+<pre># To Change the Context
+➜  <b>kubectl config use-context </b>gke_kubernetestest-270009_asia-south1-a_mwik8scluster
+Switched to context "gke_kubernetestest-270009_asia-south1-a_mwik8scluster" 
+
+# To make sure context is changed
+➜  <b>kubectl config current-context</b>
+gke_kubernetestest-270009_asia-south1-a_mwik8scluster</pre>
+
+<h3><span class="ez-toc-section" id="Step3_list_the_nodes_of_the_cluster">Step3: list the nodes of the cluster</span></h3>
+<p>In the first step we have created a Kubernetes cluster with gcloud command line with 3 nodes (or) worker nodes.  Let us list the nodes and make sure they are available.</p>
+<p><code>kubectl get nodes</code> command would show the list of nodes available in our cluster</p>
+<pre>➜  <b>kubectl get nodes</b>
+NAME                                           STATUS   ROLES    AGE     VERSION
+gke-mwik8scluster-default-pool-04115284-3tsb   Ready    &lt;none&gt;   4m16s   v1.14.10-gke.27
+gke-mwik8scluster-default-pool-04115284-kv9b   Ready    &lt;none&gt;   4m16s   v1.14.10-gke.27
+gke-mwik8scluster-default-pool-04115284-sz9l   Ready    &lt;none&gt;   4m16s   v1.14.10-gke.27</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step4_Create_a_K8s_Deployment_to_Deploy_Tomcat_on_Kubernetes">Step4: Create a K8s Deployment to Deploy Tomcat on Kubernetes</span></h3>
+<p>Deployment is a Declarative approach to create and manage pods, when you are creating deployments, replica sets ( new gen replication controller) would be created by default and pods would be managed through this <code>replicaset</code>.</p>
+<p>ReplicaSet is responsible to maintain the pod count and make sure the desired count of pods running for any deployment. By default, the replicaset would create a single pod when you are creating a deployment which can be scaled up or down later.</p>
+<p>Besides that, Kubernetes Deployments would make your deployment and rolling update and recreation tasks easy and efficient. Deploying a container directly as a pod is not a production approach and deployment is the standard way of deploying any service/app into Kubernetes.</p>
+<p>To Create deployments, you can either use <code>yaml</code> file or use the <code>kubectl create deployment </code>command.</p>
+<p><strong>Note*:</strong>  We are not defining any namespace here so the default namespace would be taken</p>
+<p><strong><span style="color: #003366;">Using CLI</span></strong></p>
+<pre>➜  <b>kubectl create deployment tomcatinfra &#8211; image=saravak/tomcat8</b>
+deployment.apps/tomcatinfra created</pre>
+
+<p><span style="color: #003366;"><strong>Using YAML file</strong></span></p>
+<p>Save this file as <code>tomcatinfra.yml</code></p>
+<pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #eaeef3 none repeat scroll 0% 0%; color: #00193a;"><span class="hljs-attr">apiVersion:</span> apps/v1
+<span class="hljs-attr">kind:</span> Deployment
+<span class="hljs-attr">metadata:</span>
+<span class="hljs-attr">  name:</span> tomcatinfra
+<span class="hljs-attr">spec:</span>
+<span class="hljs-attr">  replicas:</span> <span class="hljs-number">1</span>
+<span class="hljs-attr">  template:</span>
+<span class="hljs-attr">    metadata:</span>
+<span class="hljs-attr">      name:</span> tomcatinfra
+<span class="hljs-attr">      labels:</span>
+<span class="hljs-attr">        app:</span> tomcatinfra
+<span class="hljs-attr">    spec:</span>
+<span class="hljs-attr">      containers:</span>
+<span class="hljs-attr">      - image:</span> saravak/tomcat8
+<span class="hljs-attr">        name:</span> tomcatapp</pre>
+<p>Execute the <code>kubectl apply</code> command</p>
+<pre>➜  <b>kubectl apply -f tomcatinfra.yml</b>
+deployment.apps/tomcatinfra created</pre>
+<p>Now we have successfully created the deployment, this would also create a replica set automatically behind the screen</p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step5_List_all_the_deployments">Step5: List all the deployments</span></h3>
+<p>Once the deployment has been created using CLI or YAML file.  Let us validate if the deployments are created properly and ready</p>
+<pre>➜  <b>kubectl get deployments</b>
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+tomcatinfra   1/1     1            1           24s</pre>
+<p>You can see here the deployment we have created in the last step is present with the age of 24seconds (created recently) and in a READY state.</p>
+<p>If you are wondering what is 1/1 &#8211; It represents the number of pods created by the <code>replicaset</code> as explained earlier the default number of pods created by replica set is one. it can be scaled up and down<code></code></p>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step6_List_the_pods_created_by_the_deployment">Step6: List the pods created by the deployment</span></h3>
+<p>Make sure that your pods are running, By default, a replica set would create only one pod and it can be scalable at any time using the scale command.</p>
+<p>If you have increased the <code>replicas</code> value during the Deployment task. You would see a different number of pods than mine.</p>
+<pre>➜   <b>kubectl get pods</b>
+NAME                           READY   STATUS    RESTARTS   AGE
+tomcatinfra-7dddd9bcf4-ksbtm   1/1     Running   0          30s</pre>
+
+<h3><span class="ez-toc-section" id="Step7_ScaleUP_the_deployment">Step7: ScaleUP the deployment</span></h3>
+<p>Now the production traffic is increasing and we want to quickly scale up the number of pods on this deployment.  We can easily do that with <code>kubectl scale</code> command</p>
+<pre>➜  <b>kubectl scale &#8211; replicas=3 deployment tomcatinfra</b>
+deployment.extensions/tomcatinfra scaled</pre>
+<p>In the preceding command snippet, you can see that we are increasing the replica value from 1 to 3 and it will create two more new pods to match the desired count of 3.</p>
+<p><strong>you can also scale down by decreasing the number</strong> of <code>replicas</code> at any point of time in future.</p>
+<p>If you describe the deployment using <code>kubectl describe deployments</code> command, you can see the <code>NewReplicaSet</code> value is changed to 3</p>
+<pre>➜  <b>kubectl describe deployments tomcatinfra</b>
+
+Name:                   tomcatinfra
+Namespace:              default
+CreationTimestamp:      Sat, 18 Apr 2020 12:35:18 +0530
+Labels:                 app=tomcatinfra
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=tomcatinfra
+Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+Labels:  app=tomcatinfra
+Containers:
+tomcat8:
+Image:        saravak/tomcat8
+Port:         &lt;none&gt;
+Host Port:    &lt;none&gt;
+Environment:  &lt;none&gt;
+Mounts:       &lt;none&gt;
+Volumes:        &lt;none&gt;
+Conditions:
+Type           Status  Reason
+----           &#8211; ----  &#8211; ----
+Progressing    True    NewReplicaSetAvailable
+Available      True    MinimumReplicasAvailable
+OldReplicaSets:  &lt;none&gt;
+<span style="color: #000080;">NewReplicaSet:   tomcatinfra-7dddd9bcf4 (3/3 replicas created)</span>
+Events:          &lt;none&gt;</pre>
+<p>You can also validate this using the <code>kubectl get deployments</code> command</p>
+<pre>➜  <b>kubectl get deploy tomcatinfra</b>
+NAME          READY   UP-TO-DATE   AVAILABLE   AGE
+tomcatinfra   3/3     3            3           5h13m</pre>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Step8_Validate_if_new_Pods_are_created_after_Scaling_up">Step8: Validate if new Pods are created after Scaling up</span></h3>
+<p>Since we have scaled from 1 to 3 in the last step. we should list the pods with the tag <code>app=tomcatinfra</code> which is defined during the creation of deployment.</p>
+<p>You can see that the pod count has been increased from one to three.</p>
+<pre>➜  <b>kubectl get pods -l app=tomcatinfra</b>
+NAME                           READY   STATUS    RESTARTS   AGE
+tomcatinfra-7dddd9bcf4-gcrp2   1/1     Running   0          5h51m
+tomcatinfra-7dddd9bcf4-gpqth   1/1     Running   0          5h51m
+tomcatinfra-7dddd9bcf4-ksbtm   1/1     Running   0          5h55m
+
+</pre>
+
+<h3><span class="ez-toc-section" id="Step9_Expose_it_as_a_Service_with_Load_balancing">Step9: Expose it as a Service with Load balancing</span></h3>
+<p>Now our deployment is ready with three pods. We need to access this from the public and make sure all three are handling the load when a request comes in.</p>
+<p>To achieve this we are exposing our deployment as a service and setting the type as Load Balancer to make the pods handle the load.</p>
+<pre>$ kubectl expose deployment tomcatinfra &#8211; port=80 &#8211; target-port=8080 -type LoadBalancer
+
+service/tomcatinfra exposed</pre>
+<p>Here</p>
+<p><strong>&#8211;port </strong>represents the service listening port for requests to come in</p>
+<p><strong>&#8211;target-port </strong>represents the port where our container is listening. It is defined with in the <code>Dockerfile</code> itself and this is a default port of tomcat</p>
+<p>Now let us know more information about the service we have created using the <code>kubectl describe service</code> command</p>
+<pre>$ kubectl describe svc tomcatinfra
+Name:                     tomcatinfra
+Namespace:                default
+Labels:                   app=tomcatinfra
+Annotations:              &lt;none&gt;
+Selector:                 app=tomcatinfra
+Type:                     LoadBalancer
+IP:                       10.47.255.230
+Port:                     &lt;unset&gt;  80/TCP
+TargetPort:               8080/TCP
+NodepPort:                 &lt;unset&gt;  31710/TCP
+Endpoints:                10.44.1.5:8080,10.44.1.6:8080,10.44.2.5:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:
+Type    Reason                Age   From                Message
+----    &#8211; ----                &#8211; --  &#8211; --                &#8211; -----
+Normal  EnsuringLoadBalancer  14s   service-controller  Ensuring load balancer</pre>
+<p>The preceding snippet shows more details about the service we have just created including the Ports and Endpoints etc.</p>
+<p>&nbsp;</p>
+<h3></h3>
+<h3><span class="ez-toc-section" id="Step10_Access_your_application_using_the_Service_External_IP">Step10: Access your application using the Service External IP</span></h3>
+<p>Now it is time to test the application. To know the public IP address of the service you have created. use the <code>kubectl get svc</code> command and look for the service we have just created and grab the IP shown in the External-IP column.</p>
+<p>In my case, it is 35.200.217.28.</p>
+<p>You can use this IP behind any DNS name or you can manage it with <code>Ingress Controller</code> like nginx with the Domain name like www.example.com</p>
+<p>For now, you can access the application with IP <strong>http://35.200.217.28/SampleWebApp/</strong></p>
+<pre>$ kubectl get svc
+
+NAME          TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+kubernetes    ClusterIP      10.47.240.1     &lt;none&gt;          443/TCP        24m
+tomcatinfra   LoadBalancer   10.47.255.230   <b>35.200.217.28</b>   80:31710/TCP   106s</pre>
+<p>to know more about the Kubernetes ingress and how it works.refer the following article</p>
+<blockquote class="wp-embedded-content" data-secret="AZgQadAnCj"><p><a href="../kubernetes-ingress-example/index.html">Kubernetes Ingress Example on Google Cloud</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" style="position: absolute; clip: rect(1px, 1px, 1px, 1px);" title="&#8220;Kubernetes Ingress Example on Google Cloud&#8221; &#8212; Middleware Inventory" src="../kubernetes-ingress-example/embed/index.html#?secret=AZgQadAnCj" data-secret="AZgQadAnCj" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>Hope this article serves as a quick reference to create and deploy tomcat on Kubernetes. You can use this as a Kubernetes tomcat example setup.</p>
+<p>Though this article is created for GoogleCloud, Except the Cluster creation part with gcloud all other instructions are applicable for minikube and Amazon EKS too.</p>
+<p>If you have any questions or feedback let me know comments</p>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Rumen Lishkov</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Follow me on Linkedin <a href="https://www.linkedin.com/comm/mynetwork/discovery-see-all?usecase=PEOPLE_FOLLOWS&amp;followMember=saravakmwinventory">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#d5bdb0b9b9ba95b2a7bca1b3acfbb6bab8"> <span class="__cf_email__" data-cfemail="f59d9099999ab592879c81938cdb969a98">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1668108733" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="5806" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="bbb2d371ca" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1668108733" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1668108733"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../jenkins-tomcat-deploy-deploying-application-tomcat-using-jenkins/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/07/Screenshot-2019-07-02-at-5.39.23-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/07/Screenshot-2019-07-02-at-5.39.23-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../jenkins-tomcat-deploy-deploying-application-tomcat-using-jenkins/index.html'>Jenkins Tomcat Deploy - Deploying Application to Tomcat using Jenkins</a><p>In this post, we are going to look at the steps required to configure the Jenkins and Tomcat and achieve Continuous Deployment and Continuous Integration. Jenkins Tomcat Deploy We are going to see how to pull the code from the Source Code Management Repository -  GITHUB and deploy it to&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../docker-tomcat-example-dockerfile-sample/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="Docker tomcat Container" data-src="../../wp-content/uploads/2019/04/ContainerSky-150x150.jpeg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/04/ContainerSky-150x150.jpeg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="Docker tomcat Container" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../docker-tomcat-example-dockerfile-sample/index.html'>Docker Tomcat Example - Dockerfile for Tomcat, Docker Tomcat Image</a><p>In this post, we are going to learn how to install a Tomcat Application Server or Web Container on Docker and Deploy web applications into the Tomcat running inside Docker.  This post is all about Docker Tomcat and deploying war web application into tomcat docker, Sample Docker Tomcat image, Dockerfile&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../deploy-docker-image-to-kubernetes/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/10/Screenshot-2020-02-27-at-4.45.47-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/10/Screenshot-2020-02-27-at-4.45.47-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../deploy-docker-image-to-kubernetes/index.html'>How to Deploy docker image to Kubernetes</a><p>In this post, we are going to see the Steps to create a Docker Image and Deploy to Kubernetes in 8 easy steps.  This post is about the title of this post which is "How to Deploy docker image to kubernetes" For this post, we have used minikube cluster and&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../set-heapmemory-jvm-arguments-tomcat/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-31-at-3.46.40-PM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2019/01/Screen-Shot-2019-01-31-at-3.46.40-PM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../set-heapmemory-jvm-arguments-tomcat/index.html'>How to set HeapMemory or JVM Arguments in Tomcat</a><p>The Overview In this post, we are going to explore how and where to configure the heap memory in tomcat servlet container ( application server).  How and where to set the XMX and XMS values for your Tomcat JVM and where to configure the different GC policies like Parallel GC, Concurrent&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../sample-web-application-form-based-authentication-step-step/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/06/SampleApplicationLogin-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/06/SampleApplicationLogin-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../sample-web-application-form-based-authentication-step-step/index.html'>Sample Web Application with Form-Based Authentication - Step by Step</a><p>Designing WEB Applications with Web Browser based security is very common. There are three types of Authentication methods generally being used as follows Basic Authentication Form-Based Authentication Client Cert Authentication Most of the Web Applications are using Form Based Authentication method where the user will be submitting their credentials through&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<div class="entry-tags clearfix">
+<span class="meta-tags">
+<a href="../tag/deploy-tomcat-in-kubernetes/index.html" rel="tag">deploy tomcat in kubernetes</a><a href="../tag/kubernetes-tomcat-deployment/index.html" rel="tag">Kubernetes Tomcat Deployment</a><a href="../tag/kubernetes-tomcat-yaml/index.html" rel="tag">Kubernetes Tomcat yaml</a><a href="../tag/tomcat-kubernetes/index.html" rel="tag">Tomcat Kubernetes</a> </span>
+</div>
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../oracle-weblogic-deployments/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>How to perform Oracle Weblogic Deployments &#8211; Console</a></div><div class="nav-next"><a href="../how-to-decrypt-https-traffic/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>How to decrypt HTTPS traffic using SSL Proxy</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (67)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (31)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (2)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-454"><a href="../category/devops_beginner/index.html">DevOps_Beginner</a> (13)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (24)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (8)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (9)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"5806 https:\/\/www.middlewareinventory.com\/?p=5806","disqusShortname":"mwinventory","disqusTitle":"How to Deploy Tomcat on Kubernetes Step by Step","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/deploy-tomcat-kubernetes\/","postId":"5806"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"ef6e91b292"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"a59fcb65ed","post_id":"5806"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"c968eefe51","ip":"178.168.51.184","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script src="../../wp-content/cache/minify/00a3c.js"></script>
+<script type='text/javascript' id='divi-builder-custom-script-js-extra'>
+/* <![CDATA[ */
+var et_builder_utils_params = {"condition":{"diviTheme":false,"extraTheme":false},"scrollLocations":["app","top"],"builderScrollLocations":{"desktop":"app","tablet":"app","phone":"app"},"onloadScrollLocation":"app","builderType":"fe"};
+var et_frontend_scripts = {"builderCssContainerPrefix":"#et-boc","builderCssLayoutPrefix":"#et-boc .et-l"};
+var et_pb_custom = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/themes\/poseidon\/images","builder_images_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/images","et_frontend_nonce":"4672157d30","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"fcf8610b63","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","wrong_checkbox":"Checkbox","ignore_waypoints":"no","is_divi_theme_used":"","widget_search_selector":".widget_search","ab_tests":[],"is_ab_testing_active":"","page_id":"5806","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":"https:\/\/www.middlewareinventory.com\/wp-content\/plugins\/divi-builder\/includes\/builder\/frontend-builder\/assets\/vendors","waypoints_options":{"context":[".pum-overlay"]}};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/2bf13.js"></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/5ee99.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/b5030.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 0;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1668108733;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>

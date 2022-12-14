@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.middlewareinventory.com/xmlrpc.php">
+
+<title>JMX Monitoring Then and Now - SRE Tools | Devops Junction</title>
+<meta name="description" content="JMX Monitoring Then and Now and the Evolution of JMX Monitoring. Introduction to Jolokia and Hawt.io and How it can be useful for your JMX monitoring requirement." />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<link rel="canonical" href="index.html" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="JMX Monitoring Then and Now - SRE Tools | Devops Junction" />
+<meta property="og:description" content="JMX Monitoring Then and Now and the Evolution of JMX Monitoring. Introduction to Jolokia and Hawt.io and How it can be useful for your JMX monitoring requirement." />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="article:publisher" content="http://www.facebook.com/devopsjunc" />
+<meta property="article:published_time" content="2021-04-10T00:00:58+00:00" />
+<meta property="article:modified_time" content="2021-04-10T00:15:17+00:00" />
+<meta property="og:image" content="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" />
+<meta property="og:image:width" content="2068" />
+<meta property="og:image:height" content="1194" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:creator" content="@mwinventory" />
+<meta name="twitter:site" content="@mwinventory" />
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#primaryimage","inLanguage":"en-US","url":"../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png","width":2068,"height":1194,"caption":"JMX Monitoring"},{"@type":"WebPage","@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#webpage","url":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/","name":"JMX Monitoring Then and Now - SRE Tools | Devops Junction","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"primaryImageOfPage":{"@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#primaryimage"},"datePublished":"2021-04-10T00:00:58+00:00","dateModified":"2021-04-10T00:15:17+00:00","description":"JMX Monitoring Then and Now and the Evolution of JMX Monitoring. Introduction to Jolokia and Hawt.io and How it can be useful for your JMX monitoring requirement.","inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/"]}]},{"@type":"Article","@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#article","isPartOf":{"@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#webpage"},"author":{"@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147"},"headline":"JMX Monitoring Then and Now &#8211; SRE Tools","datePublished":"2021-04-10T00:00:58+00:00","dateModified":"2021-04-10T00:15:17+00:00","mainEntityOfPage":{"@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#webpage"},"commentCount":0,"publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"image":{"@id":"https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#primaryimage"},"articleSection":"IBM Websphere,Middleware,SRE,tomcat,weblogic,Websphere","inLanguage":"en-US","potentialAction":[{"@type":"CommentAction","name":"Comment","target":["https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/#respond"]}]},{"@type":"Person","@id":"https://www.middlewareinventory.com/#/schema/person/050bf13e27b309d29d1bda45c4eb3147","name":"Rumen Lishkov","image":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#personlogo","inLanguage":"en-US","url":"https://secure.gravatar.com/avatar/c22e4a54d67750291a9892531f94ffb3?s=96&d=mm&r=g","caption":"Rumen Lishkov"}}]}</script>
+
+<link rel='dns-prefetch' href='https://js.stripe.com' />
+<link rel='dns-prefetch' href='https://fonts.googleapis.com' />
+<link rel='dns-prefetch' href='https://s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Feed" href="../../feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; Comments Feed" href="../../comments/feed/index.rss" />
+<link rel="alternate" type="application/rss+xml" title="Middleware Inventory &raquo; JMX Monitoring Then and Now &#8211; SRE Tools Comments Feed" href="feed/index.rss" />
+
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.12.2';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-84162240-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+
+	if ( 'undefined' === typeof gaOptout ) {
+		function gaOptout() {
+			__gaTrackerOptout();
+		}
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-84162240-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'displayfeatures');
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+
+
+<script type="text/javascript" data-cfasync="false">
+			window.google_analytics_uacct = 'UA-84162240-1';
+
+        </script>
+
+<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.0.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.middlewareinventory.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.5.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([55357,56424,8205,55356,57212],[55357,56424,8203,55356,57212])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+<style type="text/css">img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/404f7.css" media="all" />
+<style id='ez-toc-inline-css' type='text/css'>div#ez-toc-container p.ez-toc-title {font-size: 120%;}div#ez-toc-container p.ez-toc-title {font-weight: 500;}div#ez-toc-container ul li {font-size: 95%;}div#ez-toc-container {width: 100%;}
+</style>
+<link rel="stylesheet" href="../../wp-content/cache/minify/f854f.css" media="all" />
+<link rel='stylesheet' id='poseidon-default-fonts-css' href='https://fonts.googleapis.com/css?family=Ubuntu%3A400%2C400italic%2C700%2C700italic%7CRaleway%3A400%2C700&amp;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel="stylesheet" href="../../wp-content/cache/minify/88e5e.css" media="all" />
+<script type='text/javascript' id='monsterinsights-frontend-script-js-extra'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,pdf,ppt,zip,xls,docx,pptx,xlsx","inbound_paths":"[{\"path\":\"\\\/go\\\/\",\"label\":\"affiliate\"},{\"path\":\"\\\/recommend\\\/\",\"label\":\"affiliate\"}]","home_url":"https:\/\/www.middlewareinventory.com","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1058f.js"></script>
+<script type='text/javascript' id='cookie-notice-front-js-extra'>
+/* <![CDATA[ */
+var cnArgs = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","hideEffect":"fade","onScroll":"no","onScrollOffset":"100","cookieName":"cookie_notice_accepted","cookieValue":"true","cookieTime":"2592000","cookiePath":"\/","cookieDomain":"","redirection":"","cache":"1","refuse":"yes","revoke_cookies":"0","revoke_cookies_opt":"automatic","secure":"1"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/545b0.js"></script>
+<script type='text/javascript' id='email-subscribers-js-extra'>
+/* <![CDATA[ */
+var es_data = {"messages":{"es_empty_email_notice":"Please enter email address","es_rate_limit_notice":"You need to wait for sometime before subscribing again","es_single_optin_success_message":"Successfully Subscribed.","es_email_exists_notice":"Email Address already exists!","es_unexpected_error_notice":"Oops.. Unexpected error occurred.","es_invalid_email_notice":"Invalid email address","es_try_later_notice":"Please try after some time"},"es_ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/1de0a.js"></script>
+<script type='text/javascript' id='ssb-front-js-js-extra'>
+/* <![CDATA[ */
+var SSB = {"ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","fb_share_nonce":"3d8661396b"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/268e7.js"></script>
+<!--[if lt IE 9]>
+<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<![endif]-->
+<script type='text/javascript' id='poseidon-post-slider-js-extra'>
+/* <![CDATA[ */
+var poseidon_slider_params = {"animation":"slide","speed":"7000"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/51af3.js"></script>
+<script type='text/javascript' id='eio-lazy-load-js-extra'>
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/28f5b.js"></script>
+<link rel="https://api.w.org/" href="../../wp-json/index.json" /><link rel="alternate" type="application/json" href="../../wp-json/wp/v2/posts/6859.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="../../xmlrpc.php-rsd.xml" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.middlewareinventory.com/wp-includes/wlwmanifest.xml" />
+<meta name="generator" content="WordPress 5.5.6" />
+<link rel='shortlink' href='index.html' />
+<link rel="alternate" type="application/json+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-jmx-monitoring-sre-tools-.json" />
+<link rel="alternate" type="text/xml+oembed" href="../../wp-json/oembed/1.0/embed-url=https---www.middlewareinventory.com-blog-jmx-monitoring-sre-tools-&amp;format=xml.xml" />
+<script>
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/" + ";secure;";
+    document.cookie = "cookie_notice_accepted=true;max-age=" + 3600*24*365 + "; path=/";
+    if ( ! /(^|;)\s*cca_is_eu=/.test(document.cookie) ) {  // if check prevents reload loop
+		  document.cookie = "cca_is_eu=false;max-age=" + 3600*24*364 + "; path=/";
+      var ccaURL = window.location.protocol + '//',
+      hostname = window.location.host + '/' + window.location.pathname;
+			if ( '0' === '1' ) {
+        window.location.reload( true );
+      }
+   }
+</script>
+<link href='https://fonts.googleapis.com/css?family=Strait:100,200,300,400,500,600,700,800,900&amp;subset=arabic,vietnamese,hebrew,thai,bengali,latin,latin-ext,cyrillic,cyrillic-ext,greek' rel='stylesheet' type='text/css'><style>a.idcore-button,a.idcore-button:visited{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:hover,a.idcore-button:focus{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}a.idcore-button:active{font-family:'Strait','arial';font-size:20px;color:#ffffff;font-weight:normal;font-style:normal;text-decoration:none !important;text-transform:uppercase;padding-top:16px;padding-bottom:16px;padding-left:32px;padding-right:32px;background-color:rgba(212, 7, 72, 1);background-image:linear-gradient(to bottom,rgba(255,255,255,.05) 0,rgba(255,255,255,.05) 50%,rgba(0,0,0,.05) 51%,rgba(0,0,0,.05) 100%);border-width:1px;border-style:solid;border-color:#d4150b;border-radius:3px;box-shadow: 2px 2px 0px 0px rgba(68, 68, 68, 0.2);}</style><script>var idcore_ajax_url = "https://www.middlewareinventory.com/wp-admin/admin-ajax.php";</script> <style media="screen">/*inline margin*/
+	
+	
+	
+	
+	
+	
+			 /*margin-digbar*/
+
+	
+	
+	
+	
+	   div[class*="simplesocialbuttons-float"].simplesocialbuttons.simplesocial-round-icon button{
+	 margin: ;
+   }
+	
+	
+	
+</style>
+
+<meta property="og:title" content="JMX Monitoring Then and Now &#8211; SRE Tools - Middleware Inventory" />
+<meta property="og:description" content="Evolution of JMX monitoring
+
+
+Monitoring is an essential part of Site Reliability Engineering and Infrastructure Services.
+
+I have started my career a decade ago when there was no many JMX monitoring tools and APMs(Application Performance Monitoring) available.
+
+I have worked on my fair share of J2EE Application servers and Servlet Containers starting from Jetty, Tomcat along with enterprise leaders weblogic, Websphere etc.
+
+There was" />
+<meta property="og:url" content="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" />
+<meta property="og:site_name" content="Middleware Inventory" />
+<meta property="og:image" content="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:description" content="Evolution of JMX monitoring
+
+
+Monitoring is an essential part of Site Reliability Engineering and Infrastructure Services.
+
+I have started my career a decade ago when there was no many JMX monitoring tools and APMs(Application Performance Monitoring) available.
+
+I have worked on my fair share of J2EE Application servers and Servlet Containers starting from Jetty, Tomcat along with enterprise leaders weblogic, Websphere etc.
+
+There was" />
+<meta name="twitter:title" content="JMX Monitoring Then and Now &#8211; SRE Tools - Middleware Inventory" />
+<meta property="twitter:image" content="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" />
+<style type='text/css'>.rp4wp-related-posts ul{width:100%;padding:0;margin:0;float:left;}
+.rp4wp-related-posts ul>li{list-style:none;padding:0;margin:0;padding-bottom:20px;clear:both;}
+.rp4wp-related-posts ul>li>p{margin:0;padding:0;}
+.rp4wp-related-post-image{width:35%;padding-right:25px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;}</style>
+<noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
+@media screen and (max-width: 480px) {
+    #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+      font-size: 20px !important;
+      color: #333 !important;
+      line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li a
+    {
+    	font-size: 20px !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+  #afc_sidebar_4348 
+{
+  height: 8vh; 
+  max-height: 8vh; 
+  background-color: transparent;
+}
+}
+
+/* for Desktop */
+@media screen and (min-width: 500px) {
+#afc_sidebar_4348 
+{
+  height: 10vh; 
+  max-height: 10vh; 
+  background-color: transparent;
+}
+  #text-23 {
+        display:none !important;
+    }
+	p,li
+    {
+        font-size: 20px !important;
+        color: #333 !important;
+        line-height: 1.68 !important;;
+    }
+    .article-inner
+    {
+    	padding-right: 5% !important;
+    	padding-left: 5% !important;
+    }
+    ul.related_post li
+    {
+    	width: 100% !important;
+    }
+    ul.related_post li small {
+    font-size: 100%;
+    }
+  
+
+}
+
+.es_lablebox {
+    padding-bottom: 3px;
+    color: steelblue !important;
+    font-weight: bold !important;
+}
+.widget-title span {
+    line-height: 2.2;
+    color: steelblue !important;
+}
+.sidey {
+	padding: 0;
+}
+.sumome-contactform 
+{
+  display: none;
+}
+code { 
+    font-family: courier;
+    font-size: 18px;
+    padding: 2px;
+    background-color: #f1f1f1;
+    /*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+    
+}
+
+.syntaxhighlighter {
+    font-size: 14px !important;
+}
+
+pre {
+ font-family: Menlo, Monaco, Consolas, "Courier New", monospace !important;
+}
+
+.black-red-border
+{
+    border-left: 3px solid;
+    background-color: black;
+    color: ghostwhite;
+    border-left-color: red;
+} 
+}
+
+#wpdevar_comment_1 span
+{
+  font-family:  "Open Sans", Helvetica, Arial, sans-serif !important;
+  font-size: 20px !important;
+  color: #1495b5 !important;
+}
+
+#wpdevar_comment_1 
+{
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+summary
+{
+ color: steelblue; 
+}
+
+blockquote
+{
+  border-left-color: #cc0f77 !important;
+  border-left-width: 4px !important;
+  border-left-style: solid !important;
+  background-color: #f5f5f5 !important;
+}
+
+.rp4wp-related-post-image{ width: auto !important; }
+
+.main-navigation-menu
+{
+  float: none !important;
+}
+
+.primary-navigation
+{
+  float: none !important
+}
+
+body,html{
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+.page-title, .entry-title, .site-title, .main-navigation-menu a, .widget-title
+{
+  /*font-family: 'Poppins', sans-serif; */
+  font-family: "Source Sans Pro","Arial",sans-serif
+}
+
+#postfollow {
+  background: whitesmoke;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  padding-left: 2%;
+}
+div#ez-toc-container p.ez-toc-title {
+    font-weight: bold;
+    font-size: 24px !important;
+}
+div#ez-toc-container {
+    margin-bottom: 15%;
+}
+
+</style><link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
+<link rel="icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
+<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<style type="text/css" id="wp-custom-css">.site-title
+{
+   font-size: 24px !important;
+}		</style>
+</head>
+<body class="post-template-default single single-post postid-6859 single-format-standard wp-custom-logo cookies-not-set elementor-default">
+<div id="page" class="hfeed site">
+<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+<div id="header-top" class="header-bar-wrap"></div>
+<header id="masthead" class="site-header clearfix" role="banner">
+<div class="header-main container clearfix">
+<div id="logo" class="site-branding clearfix">
+<a href="../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<p class="site-title"></p>
+</div>
+<nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
+<ul id="menu-primary-menu" class="main-navigation-menu"><li id="menu-item-172" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-172"><a href="../../about/index.html">About Us</a></li>
+<li id="menu-item-3206" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-has-children menu-item-3206"><a href="../category/middleware/index.html">Middleware</a>
+<ul class="sub-menu">
+<li id="menu-item-1518" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1518"><a href="../category/weblogic/index.html">weblogic</a></li>
+<li id="menu-item-3207" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3207"><a href="../category/was/index.html">WAS</a></li>
+<li id="menu-item-3208" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-3208"><a href="../category/websphere/index.html">Websphere</a></li>
+<li id="menu-item-3209" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3209"><a href="../category/wlst/index.html">wlst</a></li>
+<li id="menu-item-3210" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3210"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a></li>
+<li id="menu-item-3211" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3211"><a href="../category/jms/index.html">JMS</a></li>
+<li id="menu-item-3212" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3212"><a href="../category/activemq/index.html">ActiveMQ</a></li>
+<li id="menu-item-3213" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3213"><a href="../category/troubleshooting/index.html">Troubleshooting</a></li>
+<li id="menu-item-3214" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3214"><a href="../category/apache/index.html">Apache</a></li>
+<li id="menu-item-3215" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3215"><a href="../category/best-practice/index.html">Best Practice</a></li>
+<li id="menu-item-3222" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3222"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a></li>
+</ul>
+</li>
+<li id="menu-item-3157" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-3157"><a href="../../devops-junction/index.html">Devops</a>
+<ul class="sub-menu">
+<li id="menu-item-1513" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1513"><a href="../category/ansible/index.html">Ansible</a></li>
+<li id="menu-item-3216" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3216"><a href="../category/aws/index.html">AWS</a></li>
+<li id="menu-item-3217" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3217"><a href="../category/docker/index.html">Docker</a></li>
+<li id="menu-item-3218" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3218"><a href="../category/packer/index.html">Packer</a></li>
+<li id="menu-item-3219" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3219"><a href="../category/splunk/index.html">Splunk</a></li>
+<li id="menu-item-3220" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3220"><a href="../category/terraform/index.html">Terraform</a></li>
+<li id="menu-item-3221" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3221"><a href="../category/vagrant/index.html">Vagrant</a></li>
+<li id="menu-item-3223" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-3223"><a href="../category/kubernetes/index.html">Kubernetes</a></li>
+</ul>
+</li>
+<li id="menu-item-8820" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8820"><a href="../../newsletter/index.html">Newsletter</a></li>
+<li id="menu-item-8821" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-8821"><a href="https://rumen.free.bg/#contact">Book a Consultation</a></li>
+</ul> </nav>
+</div>
+</header>
+<div id="content" class="site-content container clearfix">
+<section id="primary" class="content-area">
+<main id="main" class="site-main" role="main">
+
+<article id="post-6859" class="post-6859 post type-post status-publish format-standard has-post-thumbnail hentry category-ibm-websphere category-middleware category-sre category-tomcat category-weblogic category-websphere wpautop">
+<header class="entry-header">
+<h1 class="entry-title">JMX Monitoring Then and Now &#8211; SRE Tools</h1>
+<div class="entry-meta"><span class="meta-date"> Updated on: <a href="index.html" title="5:30 am" rel="bookmark"><time class="entry-date published updated" datetime="April 10, 2021">April 10, 2021</time></a></span><span class="meta-author"> <span class="author vcard"><a class="url fn n" href="../author/admin/index.html" title="View all posts by Rumen Lishkov" rel="author">Rumen Lishkov</a></span></span></div>
+</header>
+<div class="entry-content clearfix">
+<div class="ss-inline-share-wrapper ss-left-inline-content ss-small-icons ss-with-spacing ss-rounded-icons">
+<div class="ss-inline-share-content">
+<ul class="ss-social-icons-container">
+<li class="">
+<a href="#" data-ss-ss-link="https://www.facebook.com/sharer.php?t=JMX%20Monitoring%20Then%20and%20Now%20%E2%80%93%20SRE%20Tools&u=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fjmx-monitoring-sre-tools%2F" class="ss-facebook-color" rel="nofollow" data-ss-ss-network-id="facebook" data-ss-ss-post-id="6859" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" data-ss-ss-type="share" data-has-api="true">
+<span class="ss-share-network-content">
+<i class="ss ss-facebook"></i>
+<span class="ss-network-count">
+0
+</span>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://twitter.com/intent/tweet?text=JMX+Monitoring+Then+and+Now+%E2%80%93+SRE+Tools&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fjmx-monitoring-sre-tools%2F" class="ss-twitter-color" rel="nofollow" data-ss-ss-network-id="twitter" data-ss-ss-post-id="6859" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-twitter"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="https://www.linkedin.com/shareArticle?title=JMX%20Monitoring%20Then%20and%20Now%20%E2%80%93%20SRE%20Tools&url=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fjmx-monitoring-sre-tools%2F&mini=true" class="ss-linkedin-color" rel="nofollow" data-ss-ss-network-id="linkedin" data-ss-ss-post-id="6859" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-linkedin"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="mailto:?body=https%3A%2F%2Fwww.middlewareinventory.com%2Fblog%2Fjmx-monitoring-sre-tools%2F&subject=JMX%20Monitoring%20Then%20and%20Now%20%E2%80%93%20SRE%20Tools" class="ss-envelope-color" rel="nofollow" data-ss-ss-network-id="envelope" data-ss-ss-post-id="6859" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-envelope"></i>
+</span>
+</a>
+</li>
+<li class="">
+<a href="#" data-ss-ss-link="#" class="ss-copy-color" rel="nofollow" data-ss-ss-network-id="copy" data-ss-ss-post-id="6859" data-ss-ss-location="inline_content" data-ss-ss-permalink="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" data-ss-ss-type="share">
+<span class="ss-share-network-content">
+<i class="ss ss-copy"></i>
+</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="ez-toc-container" class="counter-hierarchy counter-decimal ez-toc-grey">
+<div class="ez-toc-title-container">
+<p class="ez-toc-title">Table of Contents</p>
+<span class="ez-toc-title-toggle"><a class="ez-toc-pull-right ez-toc-btn ez-toc-btn-xs ez-toc-btn-default ez-toc-toggle"><i class="ez-toc-glyphicon ez-toc-icon-toggle"></i></a></span></div>
+<nav><ul class="ez-toc-list"><li><a href="#Evolution_of_JMX_monitoring" title="Evolution of JMX monitoring">Evolution of JMX monitoring</a></li><li><a href="#My_Favourite_JMX_Monitoring_tools_of_a_Decade_THEN" title="My Favourite JMX Monitoring tools of a Decade. &#8211; THEN">My Favourite JMX Monitoring tools of a Decade. &#8211; THEN</a></li><li><a href="#Whats_new_NOW" title="What&#8217;s new? &#8211; NOW">What&#8217;s new? &#8211; NOW</a><ul><li><a href="#Jolokia_This_one_is_cool_not_spicy" title="Jolokia &#8211; This one is cool, not spicy">Jolokia &#8211; This one is cool, not spicy</a></li><li><a href="#Hawtio_A_Better_GUI_for_Jolokia" title="Hawt.io &#8211; A Better GUI for Jolokia
+">Hawt.io &#8211; A Better GUI for Jolokia
+</a></li></ul></li><li><a href="#Conclusion" title="Conclusion">Conclusion</a></li></ul></nav></div>
+<h2><span class="ez-toc-section" id="Evolution_of_JMX_monitoring">Evolution of <span style="color: #ed0e51;">JMX monitoring</span></span></h2>
+<p><a href="../../wp-content/uploads/2021/04/jmx-monitoring.png"><img class="alignnone size-full wp-image-6880 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1160.png" alt="" width="1920" height="1160" data-src="../../wp-content/uploads/2021/04/jmx-monitoring.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/04/jmx-monitoring.png 1920w, ../../wp-content/uploads/2021/04/jmx-monitoring-300x181.png 300w, ../../wp-content/uploads/2021/04/jmx-monitoring-1024x619.png 1024w, ../../wp-content/uploads/2021/04/jmx-monitoring-768x464.png 768w, ../../wp-content/uploads/2021/04/jmx-monitoring-1536x928.png 1536w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6880" src="../../wp-content/uploads/2021/04/jmx-monitoring.png" alt="" width="1920" height="1160" srcset="../../wp-content/uploads/2021/04/jmx-monitoring.png 1920w, ../../wp-content/uploads/2021/04/jmx-monitoring-300x181.png 300w, ../../wp-content/uploads/2021/04/jmx-monitoring-1024x619.png 1024w, ../../wp-content/uploads/2021/04/jmx-monitoring-768x464.png 768w, ../../wp-content/uploads/2021/04/jmx-monitoring-1536x928.png 1536w" sizes="(max-width: 1920px) 100vw, 1920px" data-eio="l" /></noscript></a></p>
+<p>Monitoring is an essential part of Site Reliability Engineering and Infrastructure Services.</p>
+<p>I have started my career a decade ago when there was no many JMX monitoring tools and APMs(Application Performance Monitoring) available.</p>
+<p>I have worked on my fair share of J2EE Application servers and Servlet Containers starting from Jetty, Tomcat along with enterprise leaders weblogic, Websphere etc.</p>
+<p>There was only <a href="https://en.wikipedia.org/wiki/Wily_Technology">Wily Introscope</a> available in the APM sector. A former engineer of that project ( Sanjay Bansal) have later ventured to create <a href="https://www.appdynamics.com/">App Dynamics</a> and it was a big hit.</p>
+<p>and there are a lot of products right now for JMX monitoring like Dynatrace, DataDog, Splunk APM but these are all in the Enterprise sector.</p>
+<p>But what products are for Small and medium companies and what OpenSource product options available for JMX monitoring and APM solutions?</p>
+<p>Well, I am going to write few articles on the journey I had on these open-source JMX and APM products which served really well for me and hope it would help you too.</p>
+<p>Stay Connected and Subscribed for further articles.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="My_Favourite_JMX_Monitoring_tools_of_a_Decade_THEN">My Favourite JMX Monitoring tools of a Decade. &#8211; <span style="color: #e32d58;">THEN</span></span></h2>
+<p>Irrespective of the Application server I chose, when something goes wrong. I used to go on a pursuit of these JMX monitoring tools to check the internals.</p>
+<p>So you can presume here that I was not always blessed with these Super APM tools and these manual or semi-automated tools taught me a lot of troubleshooting</p>
+<p>Here are some of my favourites</p>
+<ol>
+<li><a href="https://github.com/jiaqi/jmxterm">jmxterm &#8211; CLI based JMX monitoring tool</a></li>
+<li><a href="https://visualvm.github.io/">visualvm</a> &#8211; From Oracle</li>
+<li><a href="https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html">Jconsole</a> &#8211; From Oracle bundled with JDKs</li>
+<li><a href="https://www.oracle.com/middleware/technologies/jrockit/jrockit-mission-control.html">JRockit Mission Control  </a>&#8211; Renamed to <a href="https://www.oracle.com/java/technologies/jdk-mission-control.html">JDK Mission Control</a></li>
+</ol>
+<p>While these are my top favourites on the list, there are more I might have used once or twice.</p>
+<p><img class="alignnone lazyload" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 901 328'%3E%3C/svg%3E" alt="JMX Monitoring" width="901" height="328" data-src="https://visualvm.github.io/images/visualvm_screenshot_20.png" loading="lazy" /><noscript><img class="alignnone" src="https://visualvm.github.io/images/visualvm_screenshot_20.png" alt="JMX Monitoring" width="901" height="328" data-eio="l" /></noscript></p>
+<p>This is a quick video of Java Mission Control and its capabilities.</p>
+<p><iframe title="Java Mission Control demo" width="840" height="473" src="https://www.youtube.com/embed/qytuEgVmhsI?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Whats_new_NOW">What&#8217;s new? &#8211; <span style="color: #e32d58;">NOW</span></span></h2>
+<p>I have recently had a chance to explore two wonderful JMX monitoring tools that I want to write about.</p>
+<p>These JMX monitoring tools are well advanced and can easily be integrated into your infrastructure and help you automating various monitoring requirements of your JVM or application server.</p>
+<ol>
+<li>Connection Pool monitoring</li>
+<li>HeapSize monitoring</li>
+<li>Session monitoring</li>
+<li>Thread monitoring</li>
+<li>Application Profiling</li>
+<li>Custom matrics</li>
+</ol>
+<blockquote><p>the installation or integration of these tools are as simple as dropping the war files into your autodeploy directory and start using it.</p></blockquote>
+<p>It does not leave a large footprint as well on the JVM so no worries.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Jolokia_This_one_is_cool_not_spicy"><strong><span style="color: #e32d58;">Jolokia</span> &#8211; This one is cool, not spicy</strong></span></h3>
+<p><a href="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM.png"><img class="alignnone size-full wp-image-6876 lazyload" src="../../wp-content/ewww/lazy/placeholder-730x250.png" alt="JMX Monitoring" width="730" height="250" data-src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM.png 730w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM-300x103.png 300w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6876" src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM.png" alt="JMX Monitoring" width="730" height="250" srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM.png 730w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.34.29-AM-300x103.png 300w" sizes="(max-width: 730px) 100vw, 730px" data-eio="l" /></noscript></a></p>
+<p><a href="https://jolokia.org/">Jolokia</a> is a simple WAR or JAR file type of implementation. you can install it as an agent by adding the agent JAR into the classpath.</p>
+<p>Or dropping the WAR file and auto-deploy. the latter one is my choice.</p>
+<p>I prefer to have API endpoints to monitor the status of my application and that&#8217;s what Jolokia does</p>
+<p>This is how they are defining themselves.</p>
+<p>Jolokia is a JMX-HTTP bridge giving an alternative to JSR-160 connectors. It is an agent-based approach with support for many platforms. In addition to basic JMX operations, it enhances JMX remoting with unique features like bulk requests and fine-grained security policies.</p>
+<p>here is a quick snapshot of the JSON result of Jolokia.</p>
+<p><a href="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM.png"><img class="alignnone size-full wp-image-6863 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x163.png" alt="" width="3840" height="326" data-src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM.png 3840w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-300x25.png 300w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-1024x87.png 1024w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-768x65.png 768w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-1536x130.png 1536w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-2048x174.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6863" src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM.png" alt="" width="3840" height="326" srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM.png 3840w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-300x25.png 300w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-1024x87.png 1024w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-768x65.png 768w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-1536x130.png 1536w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.01.33-AM-2048x174.png 2048w" sizes="(max-width: 3840px) 100vw, 3840px" data-eio="l" /></noscript></a></p>
+<p>You can process these data to get what you want. It supports Bean invocation over REST API as well. so you can get all the matrics you want and monitor them.</p>
+<p>Here is a sample REST API URL to get the Heap Memory Usage</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">https://sampleapp.gritfy.com/jolokia/read/java.lang:type=Memory/HeapMemoryUsage</pre>
+<p>The result would be something like this</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic">{"request":{"mbean":"java.lang:type=Memory","attribute":"HeapMemoryUsage","type":"read"},"value":{"init":1585446912,"committed":1546649600,"max":1546649600,"used":680788288},"timestamp":1618011377,"status":200}</pre>
+<p>Refer to the following screenshot</p>
+<p><a href="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM.png"><img class="alignnone size-full wp-image-6864 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x123.png" alt="" width="3314" height="212" data-src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM.png 3314w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-300x19.png 300w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-1024x66.png 1024w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-768x49.png 768w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-1536x98.png 1536w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-2048x131.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6864" src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM.png" alt="" width="3314" height="212" srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM.png 3314w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-300x19.png 300w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-1024x66.png 1024w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-768x49.png 768w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-1536x98.png 1536w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.07.32-AM-2048x131.png 2048w" sizes="(max-width: 3314px) 100vw, 3314px" data-eio="l" /></noscript></a></p>
+<p>while this is suitable for most of your monitoring solutions like <a href="https://nagios.org">nagios</a> and advanced. It has no GUI and our next product comes to solve the same.</p>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-3398911159151128" data-ad-slot="1946393371"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<p>&nbsp;</p>
+<h3><span class="ez-toc-section" id="Hawtio_A_Better_GUI_for_Jolokia"><strong><span style="color: #e32d58;">Hawt.io</span> &#8211; A Better GUI for Jolokia<br />
+</strong></span></h3>
+<p>As they claim. <a href="https://hawt.io/">Hawt.io</a> is a modular web console for managing your java application and they are precise about it.</p>
+<p>A Single image could explain it better than I can put it in words.</p>
+<p><a href="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png"><img class="alignnone size-full wp-image-6875 lazyload" src="../../wp-content/ewww/lazy/placeholder-1920x1109.png" alt="JMX Monitoring" width="2068" height="1194" data-src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" loading="lazy" data-srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png 2068w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-300x173.png 300w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-1024x591.png 1024w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-768x443.png 768w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-1536x887.png 1536w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-2048x1182.png 2048w" data-sizes="auto" /><noscript><img class="alignnone size-full wp-image-6875" src="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png" alt="JMX Monitoring" width="2068" height="1194" srcset="../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM.png 2068w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-300x173.png 300w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-1024x591.png 1024w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-768x443.png 768w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-1536x887.png 1536w, ../../wp-content/uploads/2021/04/Screenshot-2021-04-10-at-5.33.12-AM-2048x1182.png 2048w" sizes="(max-width: 2068px) 100vw, 2068px" data-eio="l" /></noscript></a></p>
+<p>There you go. that&#8217;s what you get after few minutes of dropping the hawt.io WAR package in your <code>webapps</code> or auto-deploy directory of your application server</p>
+<p>It can be Tomcat, weblogic, Websphere, Liberty whatever. It works <code>Splendid</code></p>
+<p>I must highlight that it is built on top of <code>Jolokia</code> and also supports Jolokia API endpoints we discussed earlier section.</p>
+<p>In a Single WAR file, you get both GUI and API endpoints.</p>
+<p>&nbsp;</p>
+<h2><span class="ez-toc-section" id="Conclusion">Conclusion</span></h2>
+<p>As I have mentioned earlier of this article. I am planning to write SRE tools series in DevopsJunction and this is a nice start I believe and I hope these tools are helpful to you.</p>
+<p>Do you have any JMX monitoring tools that I must know. Please comment.</p>
+<p>Sharing is Caring. Don&#8217;t you know 🙂</p>
+<p>&nbsp;</p>
+<p>Cheers<br />
+Sarav</p>
+<div id="postfollow">
+<a href='https://ko-fi.com/O4O51FG7C' target='_blank'><img height='46' style='border:0px;height:46px;width: 186px' src='data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' border='0' alt='Buy Me a Coffee at ko-fi.com' data-src="https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2" loading="lazy" class="lazyload" /><noscript><img height='46' style='border:0px;height:46px;width: 186px' src='https://az743702.vo.msecnd.net/cdn/kofi3.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' data-eio="l" /></noscript></a>
+<p>Follow us on<a href="https://www.facebook.com/rumenlishkov">Facebook</a> or<a href="https://www.twitter.com/mwinventory">Twitter</a>
+</br>
+For more practical videos and tutorials. <a href="https://www.youtube.com/kiss2mark">Subscribe to our channel</a>
+</br>
+Find me on Linkedin <a href="https://www.linkedin.com/in/rumen-lishkov/">My Profile</a>
+</br>
+</i>For any Consultation or to hire us <a href="../../cdn-cgi/l/email-protection.html#6e060b0202012e091c071a0817400d0103"> <span class="__cf_email__" data-cfemail="9df5f8f1f1f2ddfaeff4e9fbe4b3fef2f0">[email&#160;protected]</span></a>
+</br>
+If you like this article. Show your Support! <a href="https://ko-fi.com/middlewareinventory">Buy me a Coffee.</a>
+</br>
+</p>
+<p style="color: palevioletred !important;">Signup for Exclusive "Subscriber-only" Content</p>
+<div class="emaillist">
+<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1657193333" data-source="ig-es">
+<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
+<input type="hidden" name="es_email_page" value="6859" />
+<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" />
+<input type="hidden" name="status" value="Unconfirmed" />
+<input type="hidden" name="es-subscribe" id="es-subscribe" value="915ddf1a10" />
+<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value="" /></label>
+<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1657193333" value="Subscribe" />
+<span class="es_spinner_image" id="spinner-image"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Loading" data-src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" loading="lazy" class="lazyload" /><noscript><img src="../../wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading" data-eio="l" /></noscript></span>
+</form>
+<span class="es_subscription_message" id="es_subscription_message_1657193333"></span>
+</div>
+</div>
+<hr>
+<div class='rp4wp-related-posts'>
+<h3>More from Middleware Inventory</h3>
+<ul>
+<li><div class='rp4wp-related-post-image'>
+<a href='../websphere-connection-pool-monitoring-wsadmin-python-scrip/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/06/websphere-application-server-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/06/websphere-application-server-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../websphere-connection-pool-monitoring-wsadmin-python-scrip/index.html'>Websphere Connection Pool Monitoring - wsadmin script</a><p>In this post we are providing WebSphere&nbsp;connection pool monitoring - wsadmin script.&nbsp; Its written in Python/Jython&nbsp;and can be used for WebSphere application server 6+ versions How the script is designed It will find all the running server instances registered with Websphere Application server DMGR (cell) and take a list of&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../how-to-enable-jmx-port-in-weblogic-10-11g-12c/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/07/Screen-Shot-2018-07-13-at-10.42.28-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/07/Screen-Shot-2018-07-13-at-10.42.28-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../how-to-enable-jmx-port-in-weblogic-10-11g-12c/index.html'>How to Enable JMX port in weblogic 10, 11g, 12c</a><p>Weblogic 12c application server is more similar to weblogic 11g in terms of configuring the JMX port. To Enable the JMX port and configuration in weblogic, we have to update the jmxremote flags into setDomainEnv.sh (or) setDomainEnv.cmd file JMX monitoring is essential for better proactive monitoring and to perform diagnosis&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-tenant-monitoring-use-step-step/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/02/Screen-Shot-2018-02-11-at-3.49.42-AM-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/02/Screen-Shot-2018-02-11-at-3.49.42-AM-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-tenant-monitoring-use-step-step/index.html'>What is weblogic tenant monitoring and how to use it - Step by Step</a><p>Weblogic Tenant monitoring is a predominant feature in weblogic REST API management services.&nbsp; Tenant monitoring enables you to monitor the weblogic resources&nbsp;fast and effective way.&nbsp; Tenant monitoring feature is available in both legacy 12.1 and 12.2 versions. Weblogic Tenant monitoring requires weblogic RESTful management services enabled at the weblogic domain.&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../snmp-monitoring-in-weblogic-step-by-step-example/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-150x150.jpg" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2018/01/SNMP-Manager-to-Agent-150x150.jpg" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../snmp-monitoring-in-weblogic-step-by-step-example/index.html'>Weblogic SNMP Monitoring Setup - Step By Step</a><p>The Objective of this post is cover the Weblogic SNMP monitoring in a practical manner. This post will have both theoretical and practical information and a video to help you understand things better. Let's start!. &nbsp; What is SNMP and How it works SNMP - Simple Network Management Protocol&nbsp;is a&hellip;</p></div>
+</li>
+<li><div class='rp4wp-related-post-image'>
+<a href='../weblogic-config-xml-reader/index.html'><img width="150" height="150" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 150'%3E%3C/svg%3E" class="attachment-thumbnail size-thumbnail wp-post-image lazyload" alt="" data-src="../../wp-content/uploads/2016/11/wls_01-150x150.png" loading="lazy" /><noscript><img width="150" height="150" src="../../wp-content/uploads/2016/11/wls_01-150x150.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" data-eio="l" /></noscript></a></div>
+<div class='rp4wp-related-post-content'>
+<a href='../weblogic-config-xml-reader/index.html'>Weblogic Config XML reader</a><p>Have you ever wanted to get the server configuration information of WebLogic directly from config.xml without using WLST. I recently had the same requirement and spent a little time ( I think ) to create this simple XML parser in python which helped me in reading the config.xml file's content&hellip;</p></div>
+</li>
+</ul>
+</div>
+</div>
+<footer class="entry-footer">
+<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+<h2 class="screen-reader-text">Post navigation</h2>
+<div class="nav-links"><div class="nav-previous"><a href="../aws-vpc-peering-tutorial/index.html" rel="prev"><span class="screen-reader-text">Previous Post:</span>How to create AWS VPC Peering &#8211; Step by Step Tutorial</a></div><div class="nav-next"><a href="../ansible-firewalld/index.html" rel="next"><span class="screen-reader-text">Next Post:</span>Ansible FirewallD Example &#8211; Managing Firewall Rules</a></div></div>
+</nav>
+</footer>
+</article>
+<div id="disqus_thread"></div>
+</main>
+</section>
+<section id="secondary" class="sidebar widget-area clearfix" role="complementary">
+<aside id="custom_html-18" class="widget_text widget widget_custom_html clearfix"><div class="textwidget custom-html-widget"><script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3398911159151128" crossorigin="anonymous"></script>
+
+<ins class="adsbygoogle" style="display:inline-block;width:270px;height:400px" data-ad-client="ca-pub-3398911159151128" data-ad-slot="5950599981"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="search-3" class="widget widget_search clearfix">
+<form role="search" method="get" class="search-form" action="../../index.html">
+<label>
+<span class="screen-reader-text">Search for:</span>
+<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+</label>
+<button type="submit" class="search-submit">
+<span class="genericon-search"></span>
+<span class="screen-reader-text">Search</span>
+</button>
+</form>
+</aside><aside id="categories-8" class="widget widget_categories clearfix"><div class="widget-header"><h3 class="widget-title">Categories</h3></div>
+<ul>
+<li class="cat-item cat-item-61"><a href="../category/activemq/index.html">ActiveMQ</a> (4)
+</li>
+<li class="cat-item cat-item-98"><a href="../category/ansible/index.html">Ansible</a> (65)
+</li>
+<li class="cat-item cat-item-10"><a href="../category/apache/index.html">Apache</a> (8)
+</li>
+<li class="cat-item cat-item-234"><a href="../category/aws/index.html">AWS</a> (28)
+</li>
+<li class="cat-item cat-item-452"><a href="../category/azure/index.html">Azure</a> (1)
+</li>
+<li class="cat-item cat-item-8"><a href="../category/best-practice/index.html">Best Practice</a> (5)
+</li>
+<li class="cat-item cat-item-390"><a href="../category/bitbucket/index.html">BitBucket</a> (1)
+</li>
+<li class="cat-item cat-item-426"><a href="../category/boto/index.html">Boto</a> (1)
+</li>
+<li class="cat-item cat-item-399"><a href="../category/cloud/index.html" title="Cloud is not only a concept but also a practice of using a network of remote servers hosted on the Internet to store, manage, and process data.">Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-397"><a href="../category/database/index.html">Database</a> (1)
+</li>
+<li class="cat-item cat-item-95"><a href="../category/development/index.html">Development</a> (3)
+</li>
+<li class="cat-item cat-item-152"><a href="../category/docker/index.html">Docker</a> (11)
+</li>
+<li class="cat-item cat-item-422"><a href="../category/efk/index.html">EFK</a> (1)
+</li>
+<li class="cat-item cat-item-423"><a href="../category/elastic-search/index.html">Elastic Search</a> (1)
+</li>
+<li class="cat-item cat-item-59"><a href="../category/f5-big-ip/index.html">F5-Big-IP</a> (6)
+</li>
+<li class="cat-item cat-item-419"><a href="../category/fluentd/index.html">FluentD</a> (2)
+</li>
+<li class="cat-item cat-item-424"><a href="../category/gcp-googlecloud/index.html">GCP &#8211; GoogleCloud</a> (1)
+</li>
+<li class="cat-item cat-item-450"><a href="../category/github-actions/index.html">Github Actions</a> (1)
+</li>
+<li class="cat-item cat-item-428"><a href="../category/grafana/index.html">Grafana</a> (1)
+</li>
+<li class="cat-item cat-item-275"><a href="../category/graphite/index.html">Graphite</a> (1)
+</li>
+<li class="cat-item cat-item-441"><a href="../category/ibm-cloud/index.html">IBM Cloud</a> (1)
+</li>
+<li class="cat-item cat-item-401"><a href="../category/ibm-websphere/index.html" title="IBM® WebSphere® Application Server provides a range of flexible and secure runtime for Java enterprise applications, lightweight web applications and microservices. You can create new applications and enhance and optimize existing application infrastructure on premises or across any public, private or hybrid cloud. In addition, by utilizing IBM Cloud Private, you can create on-premises cloud capabilities similar to public clouds to accelerate app development. The platform is built on the open source Kubernetes-based container architecture and supports both Docker containers and Cloud Foundry.">IBM Websphere</a> (2)
+</li>
+<li class="cat-item cat-item-354"><a href="../category/ihs-and-apache/index.html">IHS and Apache</a> (10)
+</li>
+<li class="cat-item cat-item-353"><a href="../category/iis/index.html">IIS</a> (4)
+</li>
+<li class="cat-item cat-item-388"><a href="../category/javascript/index.html">JavaScript</a> (3)
+</li>
+<li class="cat-item cat-item-286"><a href="../category/jenkins/index.html">Jenkins</a> (4)
+</li>
+<li class="cat-item cat-item-15"><a href="../category/joomla/index.html">Joomla</a> (1)
+</li>
+<li class="cat-item cat-item-151"><a href="../category/kubernetes/index.html">Kubernetes</a> (16)
+</li>
+<li class="cat-item cat-item-191"><a href="../category/middleware/index.html">Middleware</a> (3)
+</li>
+<li class="cat-item cat-item-322"><a href="../category/network-troubleshooting/index.html">Network Troubleshooting</a> (1)
+</li>
+<li class="cat-item cat-item-413"><a href="../category/networking/index.html">Networking</a> (1)
+</li>
+<li class="cat-item cat-item-273"><a href="../category/nodejs/index.html">NodeJS</a> (2)
+</li>
+<li class="cat-item cat-item-396"><a href="../category/office365/index.html">Office365</a> (1)
+</li>
+<li class="cat-item cat-item-148"><a href="../category/opensource/index.html">OpenSource</a> (2)
+</li>
+<li class="cat-item cat-item-417"><a href="../category/oracle-db/index.html">Oracle DB</a> (3)
+</li>
+<li class="cat-item cat-item-404"><a href="../category/oracle-weblogic/index.html" title="WebLogic is a leading Application Server product most widely used for e-commerce online transaction processing (OLTP) platform application, developed to connect users in a distributed computing environment and to facilitate the integration of mainframe applications with distributed corporate data and applications.">Oracle Weblogic</a> (2)
+</li>
+<li class="cat-item cat-item-232"><a href="../category/packer/index.html">Packer</a> (2)
+</li>
+<li class="cat-item cat-item-146"><a href="../category/perl/index.html">Perl</a> (1)
+</li>
+<li class="cat-item cat-item-60"><a href="../category/php/index.html">PHP</a> (1)
+</li>
+<li class="cat-item cat-item-453"><a href="../category/postgresql/index.html">PostgreSQL</a> (1)
+</li>
+<li class="cat-item cat-item-343"><a href="../category/powershell/index.html">PowerShell</a> (1)
+</li>
+<li class="cat-item cat-item-31"><a href="../category/weblogic/problemsolution/index.html">problem/solution</a> (8)
+</li>
+<li class="cat-item cat-item-427"><a href="../category/prometheus/index.html">Prometheus</a> (1)
+</li>
+<li class="cat-item cat-item-445"><a href="../category/pulumi/index.html">Pulumi</a> (1)
+</li>
+<li class="cat-item cat-item-285"><a href="../category/python-flask/index.html">Python Flask</a> (1)
+</li>
+<li class="cat-item cat-item-22"><a href="../category/python_scripts/index.html">python_scripts</a> (7)
+</li>
+<li class="cat-item cat-item-446"><a href="../category/redis/index.html">Redis</a> (1)
+</li>
+<li class="cat-item cat-item-451"><a href="../category/serverless/index.html">Serverless</a> (1)
+</li>
+<li class="cat-item cat-item-12"><a href="../category/shell-scripting/index.html">Shell Scripting</a> (6)
+</li>
+<li class="cat-item cat-item-125"><a href="../category/soap-web-services/index.html">SOAP Web Services</a> (1)
+</li>
+<li class="cat-item cat-item-13"><a href="../category/splunk/index.html">Splunk</a> (1)
+</li>
+<li class="cat-item cat-item-425"><a href="../category/sre/index.html">SRE</a> (1)
+</li>
+<li class="cat-item cat-item-274"><a href="../category/statsd/index.html">StatsD</a> (1)
+</li>
+<li class="cat-item cat-item-233"><a href="../category/terraform/index.html">Terraform</a> (12)
+</li>
+<li class="cat-item cat-item-35"><a href="../category/tomcat/index.html">tomcat</a> (7)
+</li>
+<li class="cat-item cat-item-147"><a href="../category/tools/index.html">tools</a> (5)
+</li>
+<li class="cat-item cat-item-391"><a href="../category/traefik/index.html">Traefik</a> (1)
+</li>
+<li class="cat-item cat-item-124"><a href="../category/troubleshooting/index.html">Troubleshooting</a> (3)
+</li>
+<li class="cat-item cat-item-1"><a href="../category/uncategorized/index.html">Uncategorized</a> (5)
+</li>
+<li class="cat-item cat-item-7"><a href="../category/unix/index.html">Unix</a> (5)
+</li>
+<li class="cat-item cat-item-99"><a href="../category/vagrant/index.html">Vagrant</a> (4)
+</li>
+<li class="cat-item cat-item-389"><a href="../category/vuejs/index.html">VueJS</a> (2)
+</li>
+<li class="cat-item cat-item-356"><a href="../category/vulnerabilities-fixes/index.html">Vulnerabilities &amp; Fixes</a> (21)
+</li>
+<li class="cat-item cat-item-21"><a href="../category/weblogic/index.html">weblogic</a> (51)
+</li>
+<li class="cat-item cat-item-9"><a href="../category/webserver/index.html">Webserver</a> (1)
+</li>
+<li class="cat-item cat-item-92"><a href="../category/websphere/index.html">Websphere</a> (8)
+</li>
+<li class="cat-item cat-item-321"><a href="../category/windows-server/index.html">Windows Server</a> (5)
+</li>
+<li class="cat-item cat-item-55"><a href="../category/wlst/index.html">wlst</a> (7)
+</li>
+<li class="cat-item cat-item-36"><a href="../category/wordpress/index.html">wordpress</a> (2)
+</li>
+<li class="cat-item cat-item-4"><a href="../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
+</li>
+</ul>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</section>
+</div>
+<div id="footer" class="footer-wrap">
+<footer id="colophon" class="site-footer container clearfix" role="contentinfo">
+
+<div id="footer-text" class="site-info">
+<span class="credit-link">Powered by <a href="../../index.html" title="Rumen Lishkov">Rumen Lishkov</a> and <a href="https://rumen.free.bg/" title="Studio-1">Studio1 Sofia</a> </span>
+</div>
+</footer>
+</div>
+</div>
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mwinventory" />
+<meta name="twitter:creator" content="@mwinventory" />
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><div class="simplesocialbuttons simplesocial-round-icon simplesocialbuttons-float-left-center post-6859 post  ssb_counter-activate simplesocialbuttons-slide-bottom-in">
+<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
+<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=JMX+Monitoring+Then+and+Now+%E2%80%93+SRE+Tools&url=https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
+<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
+<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=JMX+Monitoring+Then+and+Now+%E2%80%93+SRE+Tools&body=https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/"><span class="simplesocialtxt">Email</span></button>
+<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://web.whatsapp.com/send?text=https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/"><span class="simplesocialtxt">WhatsApp</span></button>
+</div>
+<script type="text/javascript">
+		/* MonsterInsights Scroll Tracking */
+			if ( typeof(jQuery) !== 'undefined' ) {
+				jQuery( document ).ready(function(){
+					function monsterinsights_scroll_tracking_load() {
+						if ( typeof(__gaTracker) !== 'undefined' && __gaTracker && __gaTracker.hasOwnProperty( "loaded" ) && __gaTracker.loaded == true ) {
+							(function(factory) {
+								factory(jQuery);
+							}(function($) {
+
+								/* Scroll Depth */
+								"use strict";
+								var defaults = {
+									percentage: true
+								};
+
+								var $window = $(window),
+									cache = [],
+									scrollEventBound = false,
+									lastPixelDepth = 0;
+
+								/*
+								 * Plugin
+								 */
+
+								$.scrollDepth = function(options) {
+
+									var startTime = +new Date();
+
+									options = $.extend({}, defaults, options);
+
+									/*
+									 * Functions
+									 */
+
+									function sendEvent(action, label, scrollDistance, timing) {
+
+										var fieldsArray = {
+											hitType       : 'event',
+											eventCategory : 'Scroll Depth',
+											eventAction   : action,
+											eventLabel    : label,
+											eventValue    : 1,
+											nonInteraction: 1
+										};
+
+										if ( 'undefined' === typeof MonsterInsightsObject || 'undefined' === typeof MonsterInsightsObject.sendEvent ) {
+											return;
+										}
+
+										MonsterInsightsObject.sendEvent( fieldsArray );
+										if (arguments.length > 3) {
+											fieldsArray = {
+												hitType        : 'timing',
+												timingCategory : 'Scroll Depth',
+												timingVar      : action,
+												timingValue    : timing,
+												timingLabel    : label,
+												nonInteraction: 1
+											};
+											MonsterInsightsObject.sendEvent( fieldsArray );
+										}
+									}
+
+									function calculateMarks(docHeight) {
+										return {
+											'25%' : parseInt(docHeight * 0.25, 10),
+											'50%' : parseInt(docHeight * 0.50, 10),
+											'75%' : parseInt(docHeight * 0.75, 10),
+											/* Cushion to trigger 100% event in iOS */
+											'100%': docHeight - 5
+										};
+									}
+
+									function checkMarks(marks, scrollDistance, timing) {
+										/* Check each active mark */
+										$.each(marks, function(key, val) {
+											if ( $.inArray(key, cache) === -1 && scrollDistance >= val ) {
+												sendEvent('Percentage', key, scrollDistance, timing);
+												cache.push(key);
+											}
+										});
+									}
+
+									function rounded(scrollDistance) {
+										/* Returns String */
+										return (Math.floor(scrollDistance/250) * 250).toString();
+									}
+
+									function init() {
+										bindScrollDepth();
+									}
+
+									/*
+									 * Public Methods
+									 */
+
+									/* Reset Scroll Depth with the originally initialized options */
+									$.scrollDepth.reset = function() {
+										cache = [];
+										lastPixelDepth = 0;
+										$window.off('scroll.scrollDepth');
+										bindScrollDepth();
+									};
+
+									/* Add DOM elements to be tracked */
+									$.scrollDepth.addElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.merge(options.elements, elems);
+
+										/* If scroll event has been unbound from window, rebind */
+										if (!scrollEventBound) {
+											bindScrollDepth();
+										}
+
+									};
+
+									/* Remove DOM elements currently tracked */
+									$.scrollDepth.removeElements = function(elems) {
+
+										if (typeof elems == "undefined" || !$.isArray(elems)) {
+											return;
+										}
+
+										$.each(elems, function(index, elem) {
+
+											var inElementsArray = $.inArray(elem, options.elements);
+											var inCacheArray = $.inArray(elem, cache);
+
+											if (inElementsArray != -1) {
+												options.elements.splice(inElementsArray, 1);
+											}
+
+											if (inCacheArray != -1) {
+												cache.splice(inCacheArray, 1);
+											}
+
+										});
+
+									};
+
+									/*
+									 * Throttle function borrowed from:
+									 * Underscore.js 1.5.2
+									 * http://underscorejs.org
+									 * (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+									 * Underscore may be freely distributed under the MIT license.
+									 */
+
+									function throttle(func, wait) {
+										var context, args, result;
+										var timeout = null;
+										var previous = 0;
+										var later = function() {
+											previous = new Date;
+											timeout = null;
+											result = func.apply(context, args);
+										};
+										return function() {
+											var now = new Date;
+											if (!previous) previous = now;
+											var remaining = wait - (now - previous);
+											context = this;
+											args = arguments;
+											if (remaining <= 0) {
+												clearTimeout(timeout);
+												timeout = null;
+												previous = now;
+												result = func.apply(context, args);
+											} else if (!timeout) {
+												timeout = setTimeout(later, remaining);
+											}
+											return result;
+										};
+									}
+
+									/*
+									 * Scroll Event
+									 */
+
+									function bindScrollDepth() {
+
+										scrollEventBound = true;
+
+										$window.on('scroll.scrollDepth', throttle(function() {
+											/*
+											 * We calculate document and window height on each scroll event to
+											 * account for dynamic DOM changes.
+											 */
+
+											var docHeight = $(document).height(),
+												winHeight = window.innerHeight ? window.innerHeight : $window.height(),
+												scrollDistance = $window.scrollTop() + winHeight,
+
+												/* Recalculate percentage marks */
+												marks = calculateMarks(docHeight),
+
+												/* Timing */
+												timing = +new Date - startTime;
+
+											checkMarks(marks, scrollDistance, timing);
+										}, 500));
+
+									}
+
+									init();
+								};
+
+								/* UMD export */
+								return $.scrollDepth;
+
+							}));
+
+							jQuery.scrollDepth();
+						} else {
+							setTimeout(monsterinsights_scroll_tracking_load, 200);
+						}
+					}
+					monsterinsights_scroll_tracking_load();
+				});
+			}
+		/* End MonsterInsights Scroll Tracking */
+		
+</script><script type='text/javascript' id='disqus_count-js-extra'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"mwinventory"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f8767.js"></script>
+<script type='text/javascript' id='disqus_embed-js-extra'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.22"},"disqusIdentifier":"6859 https:\/\/www.middlewareinventory.com\/?p=6859","disqusShortname":"mwinventory","disqusTitle":"JMX Monitoring Then and Now \u2013 SRE Tools","disqusUrl":"https:\/\/www.middlewareinventory.com\/blog\/jmx-monitoring-sre-tools\/","postId":"6859"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/bccbc.js"></script>
+<script type='text/javascript' id='dae-download-js-extra'>
+/* <![CDATA[ */
+var objDaeDownload = {"ajaxUrl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"2019084a26"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/8510d.js"></script>
+<script type='text/javascript' id='socialsnap-js-js-extra'>
+/* <![CDATA[ */
+var socialsnap_script = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","on_media_width":"250","on_media_height":"250","nonce":"b4d440853b","post_id":"6859"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/fef55.js"></script>
+<script type='text/javascript' id='aicp-js-extra'>
+/* <![CDATA[ */
+var AICP = {"ajaxurl":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-ajax.php","nonce":"0b980bed5f","ip":"88.218.47.199","clickLimit":"1","clickCounterCookieExp":"3","banDuration":"7","countryBlockCheck":"No","banCountryList":"RU"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/ff9fe.js"></script>
+<script type='text/javascript' src='https://js.stripe.com/v3/?ver=2.03' id='stripe-js'></script>
+<script type='text/javascript' id='q2w3_fixed_widget-js-extra'>
+/* <![CDATA[ */
+var q2w3_sidebar_options = [{"sidebar":"q2w3-default-sidebar","margin_top":10,"margin_bottom":0,"stop_id":"","screen_max_width":1026,"screen_max_height":0,"width_inherit":true,"refresh_interval":1500,"window_load_hook":false,"disable_mo_api":false,"widgets":["text-32"]}];
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/f2bcf.js"></script>
+<script type='text/javascript' id='enlighterjs-js-after'>
+!function(e,n){if("undefined"!=typeof EnlighterJS){var o={"selectors":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"options":{"indent":4,"ampersandCleanup":true,"linehover":true,"rawcodeDbclick":false,"textOverflow":"break","linenumbers":true,"theme":"enlighter","language":"generic","retainCssClasses":false,"collapse":false,"toolbarOuter":"","toolbarTop":"{BTN_RAW}{BTN_COPY}{BTN_WINDOW}{BTN_WEBSITE}","toolbarBottom":""}};(e.EnlighterJSINIT=function(){EnlighterJS.init(o.selectors.block,o.selectors.inline,o.options)})()}else{(n&&(n.error||n.log)||function(){})("Error: EnlighterJS resources not loaded yet!")}}(window,console);
+</script>
+<script src="../../wp-content/cache/minify/129c2.js"></script>
+<script type='text/javascript' id='ez-toc-js-js-extra'>
+/* <![CDATA[ */
+var ezTOC = {"smooth_scroll":"1","visibility_hide_by_default":"","width":"100%","scroll_offset":"30"};
+/* ]]> */
+</script>
+<script src="../../wp-content/cache/minify/0c713.js"></script>
+<div id="ss-copy-popup" class="ss-popup-overlay">
+<div class="ss-popup">
+<div class="ss-popup-heading">
+<span>Copy link</span>
+<a href="#" id="ss-close-share-networks-modal" class="ss-close-modal" rel="nofollow"><i class="ss ss-close"></i></a>
+</div>
+<div class="ss-popup-content">
+<div class="ss-copy-action">
+<input type="text" readonly="readonly" value="https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/" class="ss-copy-action-field" />
+<a href="#" class="ss-button" rel="nofollow">Copy<span class="ss-share-network-tooltip">Copied</span></a>
+<i class="ss ss-copy"></i>
+</div>
+<div class="ss-powered-by">Powered by <a href="https://socialsnap.com/?utm_source=WordPress&amp;utm_medium=link&amp;utm_campaign=inthewild" target="_blank" rel="nofollow noopener"><i class="ss ss-socialsnap"></i>Social Snap</a></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", function() {
+			var if_ssb_exist = document.getElementsByClassName( "simplesocialbuttons" ).length > 0;
+			if (if_ssb_exist) {
+				var ssb_admin_ajax = 'https://www.middlewareinventory.com/wp-admin/admin-ajax.php';
+				var ssb_post_id = 6859 ;
+				var ssb_post_url = 'https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/';
+				var ssb_alternate_post_url = 'https://www.middlewareinventory.com/blog/jmx-monitoring-sre-tools/';
+				jQuery( document ).ready(function(){
+				var is_ssb_used = jQuery('.simplesocialbuttons');
+				if( is_ssb_used ) {
+
+					var data = {
+					'action': 'ssb_fetch_data',
+					'postID': ssb_post_id
+				};
+					jQuery.post(ssb_admin_ajax, data, function(data, textStatus, xhr) {
+						var array = JSON.parse(data);
+						jQuery.each( array, function( index, value ){
+
+							if( index == 'total' ){
+								jQuery('.ssb_'+ index +'_counter').html(value + '<span>Shares</span>');
+							}else{
+								jQuery('.ssb_'+ index +'_counter').html(value);
+							}
+						});
+
+					});
+				}
+				})
+
+			//ssbPlugin.fetchFacebookShares();
+			}
+		});
+
+		</script><script type='text/javascript'>function initTwitCount(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://static1.twitcount.com/js/twitcount.js';fjs.parentNode.insertBefore(js,fjs)}}
+        var ssb_twit_count_init=!1;addEventListener('mouseover',function(event){if(!ssb_twit_count_init){initTwitCount(document,'script','twitcount_plugins')
+        ssb_twit_count_init=!0}})</script> 
+<script type="text/javascript">
+
+			var SocialSnapURL 				= window.location.href;
+			var SocialSnapShareCacheExpired = 1;
+				
+			if ( -1 !== SocialSnapURL.indexOf('?ss_cache_refresh') ) {
+
+				SocialSnapShareCacheExpired = true;
+
+			} else {
+
+				var SocialSnapServerTimestamp 	= 1657193334;
+				var SocialSnapBrowserTimestamp 	= Date.now();
+
+				if ( ! SocialSnapBrowserTimestamp ) {
+					SocialSnapBrowserTimestamp = new Date().getTime();
+				}
+
+				SocialSnapBrowserTimestamp = Math.floor( SocialSnapBrowserTimestamp / 1000 );
+
+				SocialSnapShareCacheExpired = SocialSnapShareCacheExpired && ( SocialSnapBrowserTimestamp - SocialSnapServerTimestamp < 60 );
+			}
+
+		</script>
+
+<div id="cookie-notice" role="banner" class="cn-bottom bootstrap" style="color: #fff; background-color: #000;"><div class="cookie-notice-container"><span id="cn-notice-text">We use cookies to ensure that we give you the best experience on our website. The Cookies collected are used only to Show customized Ads. We Hope you are fine with it.</span><a href="#" id="cn-accept-cookie" data-cookie-set="accept" class="cn-set-cookie cn-button bootstrap button">Ok</a><a href="../../cookie-policy/index.html" target="_blank" id="cn-more-info" class="cn-more-info cn-button bootstrap button">Privacy policy</a>
+</div>
+</div>
+</body>
+</html>
