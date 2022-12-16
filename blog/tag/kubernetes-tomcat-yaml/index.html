@@ -12,11 +12,11 @@
 <meta property="og:locale" content="en_US" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="Kubernetes Tomcat yaml" />
-<meta property="og:url" content="https://www.middlewareinventory.com/blog/tag/kubernetes-tomcat-yaml/" />
+<meta property="og:url" content="https://airdata.gitlab.io/blog/blog/tag/kubernetes-tomcat-yaml/" />
 <meta property="og:site_name" content="Middleware Inventory" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@mwinventory" />
-<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["http://www.facebook.com/devopsjunc","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"CollectionPage","@id":"https://www.middlewareinventory.com/blog/tag/kubernetes-tomcat-yaml/#webpage","url":"https://www.middlewareinventory.com/blog/tag/kubernetes-tomcat-yaml/","name":"Kubernetes Tomcat yaml","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://www.middlewareinventory.com/blog/tag/kubernetes-tomcat-yaml/"]}]}]}</script>
+<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.middlewareinventory.com/#organization","name":"Middleware Inventory","url":"https://www.middlewareinventory.com/","sameAs":["https://www.facebook.com/rumenlishkov","https://www.youtube.com/channel/UCRuqBFM6ioWwviNJkgOjeWw","https://twitter.com/mwinventory"],"logo":{"@type":"ImageObject","@id":"https://www.middlewareinventory.com/#logo","inLanguage":"en-US","url":"https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-18-at-3.49.40-AM.jpg","width":300,"height":107,"caption":"Middleware Inventory"},"image":{"@id":"https://www.middlewareinventory.com/#logo"}},{"@type":"WebSite","@id":"https://www.middlewareinventory.com/#website","url":"https://www.middlewareinventory.com/","name":"Devops Junction","description":"An inventory of [i]nformation, Middleware and much more.","publisher":{"@id":"https://www.middlewareinventory.com/#organization"},"potentialAction":[{"@type":"SearchAction","target":"https://www.middlewareinventory.com/?s={search_term_string}","query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"CollectionPage","@id":"https://airdata.gitlab.io/blog/blog/tag/kubernetes-tomcat-yaml/#webpage","url":"https://airdata.gitlab.io/blog/blog/tag/kubernetes-tomcat-yaml/","name":"Kubernetes Tomcat yaml","isPartOf":{"@id":"https://www.middlewareinventory.com/#website"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://airdata.gitlab.io/blog/blog/tag/kubernetes-tomcat-yaml/"]}]}]}</script>
 
 <link rel='dns-prefetch' href='https://js.stripe.com' />
 <link rel='dns-prefetch' href='https://fonts.googleapis.com' />
@@ -83,7 +83,7 @@ var SSB = {"ajax_url":"https:\/\/www.middlewareinventory.com\/wp-admin\/admin-aj
 </script>
 <script src="../../../wp-content/cache/minify/268e7.js"></script>
 <!--[if lt IE 9]>
-<script type='text/javascript' src='https://www.middlewareinventory.com/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
+<script type='text/javascript' src='https://airdata.gitlab.io/blog/wp-content/themes/poseidon/js/html5shiv.min.js?ver=3.7.3' id='html5shiv-js'></script>
 <![endif]-->
 <script type='text/javascript' id='poseidon-post-slider-js-extra'>
 /* <![CDATA[ */
@@ -126,16 +126,16 @@ var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":"0"};
 In this post, we are going to see how to deploy tomcat on Kubernetes.  How to Deploy Tomcat based web application into Kubernetes. We are taking Google Cloud - Kubernetes Engine (GKE) for our example and creating our Kubernetes Cluster with 3 nodes
 
 You can do all these steps and test this with your Free 12 month Google Cloud account itself" />
-<meta property="og:url" content="https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" />
+<meta property="og:url" content="https://airdata.gitlab.io/blog/blog/deploy-tomcat-kubernetes/" />
 <meta property="og:site_name" content="Middleware Inventory" />
-<meta property="og:image" content="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" />
+<meta property="og:image" content="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:description" content="Overview
 In this post, we are going to see how to deploy tomcat on Kubernetes.  How to Deploy Tomcat based web application into Kubernetes. We are taking Google Cloud - Kubernetes Engine (GKE) for our example and creating our Kubernetes Cluster with 3 nodes
 
 You can do all these steps and test this with your Free 12 month Google Cloud account itself" />
 <meta name="twitter:title" content="How to Deploy Tomcat on Kubernetes Step by Step - Middleware Inventory" />
-<meta property="twitter:image" content="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" />
+<meta property="twitter:image" content="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-29-at-8.55.24-PM-scaled.jpg" />
 <noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style type="text/css" id="sns_global_styles">/* for mobile */
 @media screen and (max-width: 480px) {
     #text-23 {
@@ -313,7 +313,7 @@ div#ez-toc-container {
 </style><link rel="icon" href="../../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png" sizes="32x32" />
 <link rel="icon" href="../../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-192x192.png" sizes="192x192" />
 <link rel="apple-touch-icon" href="../../../wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-180x180.png" />
-<meta name="msapplication-TileImage" content="https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
+<meta name="msapplication-TileImage" content="https://airdata.gitlab.io/blog/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-270x270.png" />
 <style type="text/css" id="wp-custom-css">.site-title
 {
    font-size: 24px !important;
@@ -326,7 +326,7 @@ div#ez-toc-container {
 <header id="masthead" class="site-header clearfix" role="banner">
 <div class="header-main container clearfix">
 <div id="logo" class="site-branding clearfix">
-<a href="../../../index.html" class="custom-logo-link" rel="home"><img width="300" height="107" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="300" height="107" src="../../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
+<a href="../../../index.html" class="custom-logo-link" rel="home"><img width="150" height="120" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 107'%3E%3C/svg%3E" class="custom-logo lazyload" alt="Middleware Inventory" data-src="../../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" loading="lazy" /><noscript><img width="150" height="120" src="../../../wp-content/uploads/2020/09/cropped-Screenshot-2020-09-18-at-3.49.40-AM.jpg" class="custom-logo" alt="Middleware Inventory" data-eio="l" /></noscript></a>
 <p class="site-title"></p>
 </div>
 <nav id="main-navigation" class="primary-navigation navigation clearfix" role="navigation">
@@ -531,7 +531,7 @@ div#ez-toc-container {
 <li class="cat-item cat-item-4"><a href="../../category/wsadmin-scripts/index.html">wsadmin scripts</a> (1)
 </li>
 </ul>
-</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 100%; height: auto;" data-src="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 100%; height: auto;" srcset="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
+</aside><aside id="media_image-5" class="widget widget_media_image clearfix"><img width="267" height="400" src="../../../wp-content/ewww/lazy/placeholder-267x400.png" class="image wp-image-8825  attachment-full size-full lazyload" alt="write for devopsjunction" style="max-width: 75%; height: auto;" data-src="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" loading="lazy" data-srcset="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" data-sizes="auto" /><noscript><img width="267" height="400" src="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png" class="image wp-image-8825  attachment-full size-full" alt="write for devopsjunction" style="max-width: 75%; height: auto;" srcset="../../../wp-content/uploads/2022/07/write-for-us-devopsjunction.png 267w, ../../../wp-content/uploads/2022/07/write-for-us-devopsjunction-200x300.png 200w" sizes="(max-width: 267px) 100vw, 267px" data-eio="l" /></noscript></aside>
 </section>
 </div>
 <div id="footer" class="footer-wrap">
@@ -547,11 +547,11 @@ Powered by <a href="../../../index.html" title="MiddlewareInventory">Rumen Lishk
 <meta name="twitter:site" content="@mwinventory" />
 <meta name="twitter:creator" content="@mwinventory" />
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&amp;display=swap" rel="stylesheet"><div class="simplesocialbuttons simplesocial-round-icon simplesocialbuttons-float-left-center post-5806 post  ssb_counter-activate simplesocialbuttons-slide-bottom-in">
-<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
-<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=How+to+Deploy+Tomcat+on+Kubernetes+Step+by+Step&url=https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
-<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
-<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=How+to+Deploy+Tomcat+on+Kubernetes+Step+by+Step&body=https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/"><span class="simplesocialtxt">Email</span></button>
-<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://web.whatsapp.com/send?text=https://www.middlewareinventory.com/blog/deploy-tomcat-kubernetes/"><span class="simplesocialtxt">WhatsApp</span></button>
+<button class="simplesocial-fb-share" target="_blank" data-href="https://www.facebook.com/sharer/sharer.php?u=https://airdata.gitlab.io/blog/blog/deploy-tomcat-kubernetes/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Facebook </span> <span class="ssb_counter ssb_fbshare_counter">0</span></button>
+<button class="simplesocial-twt-share" data-href="https://twitter.com/share?text=How+to+Deploy+Tomcat+on+Kubernetes+Step+by+Step&url=https://airdata.gitlab.io/blog/blog/deploy-tomcat-kubernetes/" rel="nofollow" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">Twitter</span> <span class="ssb_counter ssb_twitter_counter">0</span></button>
+<button target="popup" class="simplesocial-linkedin-share" data-href="https://www.linkedin.com/cws/share?url=https://airdata.gitlab.io/blog/blog/deploy-tomcat-kubernetes/" onclick="javascript:window.open(this.dataset.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><span class="simplesocialtxt">LinkedIn</span></button>
+<button onclick="javascript:window.location.href = this.dataset.href;return false;" class="simplesocial-email-share" data-href="mailto:?subject=How+to+Deploy+Tomcat+on+Kubernetes+Step+by+Step&body=https://airdata.gitlab.io/blog/blog/deploy-tomcat-kubernetes/"><span class="simplesocialtxt">Email</span></button>
+<button onclick="javascript:window.open(this.dataset.href, '_blank' );return false;" class="simplesocial-whatsapp-share" data-href="https://web.whatsapp.com/send?text=https://airdata.gitlab.io/blog/blog/deploy-tomcat-kubernetes/"><span class="simplesocialtxt">WhatsApp</span></button>
 </div>
 <script type="text/javascript">
 		/* MonsterInsights Scroll Tracking */

@@ -21,7 +21,7 @@
 	<generator>https://wordpress.org/?v=5.5.6</generator>
 
 <image>
-	<url>https://www.middlewareinventory.com/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png</url>
+	<url>https://airdata.gitlab.io/blog/wp-content/uploads/2017/12/cropped-Screen-Shot-2017-12-22-at-12.16.54-PM-3-32x32.png</url>
 	<title>Search Results for &#8220;Parse yaml&#8221; &#8211; Middleware Inventory</title>
 	<link>https://www.middlewareinventory.com</link>
 	<width>32</width>
@@ -29,8 +29,8 @@
 </image> 
 	<item>
 		<title>Ansible Retry Examples &#8211; Retry a task until condition met &#124;  DevopsJunction</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-retry-examples/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-retry-examples/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-retry-examples/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-retry-examples/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Sun, 01 May 2022 10:14:21 +0000</pubDate>
@@ -38,13 +38,13 @@
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=8203</guid>
 
 					<description><![CDATA[<p>in this article, we are going to see how to retry an ansible task until it meets a certain condition or validation. It is more like do sometask until somecondition kind of setup available in all the programming and scripting languages Ansible lets you execute a task until a condition[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-retry-examples/">Ansible Retry Examples &#8211; Retry a task until condition met |  DevopsJunction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-retry-examples/">Ansible Retry Examples &#8211; Retry a task until condition met |  DevopsJunction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<p>in this article, we are going to see how to retry an ansible task until it meets a certain condition or validation.</p>
 <p>It is more like <code>do sometask until somecondition</code> kind of setup available in all the programming and scripting languages</p>
 <p>Ansible lets you execute a task until a condition is met or satisfied. using <code>retry until</code> specification.</p>
 <p>&nbsp;</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry.jpg"><img class="post-img alignnone wp-image-8408 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry.jpg" alt="Ansible retry" width="1748" height="1240" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry.jpg 1748w, https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry-300x213.jpg 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry-1024x726.jpg 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry-768x545.jpg 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry-1536x1090.jpg 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/05/ansible-retry-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry.jpg"><img class="post-img alignnone wp-image-8408 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry.jpg" alt="Ansible retry" width="1748" height="1240" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry.jpg 1748w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry-300x213.jpg 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry-1024x726.jpg 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry-768x545.jpg 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry-1536x1090.jpg 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/05/ansible-retry-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
 <p>&nbsp;</p>
 <h2>Ansible Retry until file exists &#8211; A Quick example to Ansible Retry</h2>
 <p>In this quick example, you can see that we are trying to validate if the file is created at a certain path.</p>
@@ -63,7 +63,7 @@
       delay: 10</pre>
 <p>This is how it looks like when the file is not created even after 10 retries with a delay of 10 seconds.</p>
 <p>by default the value you are giving for <code>delay</code> would be considered in seconds.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png"><img class="post-img alignnone wp-image-8323 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png" alt="ansible retry until" width="1652" height="1206" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png 1652w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-300x219.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1024x748.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-768x561.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1536x1121.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-90x65.png 90w" sizes="(max-width: 1652px) 100vw, 1652px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png"><img class="post-img alignnone wp-image-8323 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png" alt="ansible retry until" width="1652" height="1206" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM.png 1652w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-300x219.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1024x748.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-768x561.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-1536x1121.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-07-at-2.50.14-AM-90x65.png 90w" sizes="(max-width: 1652px) 100vw, 1652px" /></a></p>
 <p>The task would be marked as <code>failed</code></p>
 <p>you can write your task with any module and make it retry until a certain condition is met.</p>
 <p>Here I have used <code>Shell</code> module of ansible and running <code>ls -lrt</code> command. you can do the same with <code>file</code> module too</p>
@@ -117,7 +117,7 @@
 </div>
 <p>&nbsp;</p>
 <p>Here is the execution output of this playbook ( on the right)</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png"><img class="post-img alignnone wp-image-8329 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png" alt="Ansible Retry until" width="3390" height="988" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png 3390w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-300x87.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1024x298.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-768x224.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1536x448.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-2048x597.png 2048w" sizes="(max-width: 3390px) 100vw, 3390px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png"><img class="post-img alignnone wp-image-8329 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png" alt="Ansible Retry until" width="3390" height="988" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM.png 3390w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-300x87.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1024x298.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-768x224.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-1536x448.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-17-at-1.07.55-AM-2048x597.png 2048w" sizes="(max-width: 3390px) 100vw, 3390px" /></a></p>
 <p>You can see, Despite having the retries set to 10 the task did not re-run.  this would be the result of using retries without until conditional validation</p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
@@ -133,8 +133,8 @@
 <p>If you have been practising Ansible for some time then you might have got this question already in your mind.</p>
 <p>How it is different from the Ansible wait_for module.</p>
 <p>For those who do not know what is ansible wait_for please read our dedicated ansible wait_for article and return here</p>
-<blockquote class="wp-embedded-content" data-secret="ISxTRBjvWn"><p><a href="https://www.middlewareinventory.com/blog/ansible-wait_for-examples/">Ansible wait_for module examples &#8211; How to | Devops Junction</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible wait_for module examples &#8211; How to | Devops Junction&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/ansible-wait_for-examples/embed/#?secret=ISxTRBjvWn" data-secret="ISxTRBjvWn" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="ISxTRBjvWn"><p><a href="https://airdata.gitlab.io/blog/blog/ansible-wait_for-examples/">Ansible wait_for module examples &#8211; How to | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible wait_for module examples &#8211; How to | Devops Junction&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/ansible-wait_for-examples/embed/#?secret=ISxTRBjvWn" data-secret="ISxTRBjvWn" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <p>While ansible wait_for helps in a similar use case and makes the task wait until a certain condition is met.</p>
 <p>There are few major differences between ansible wait_for and ansible retry until</p>
 <p>Here I tried to summarize a few of them</p>
@@ -176,7 +176,7 @@
 <p>The execution output of this playbook has been given below.</p>
 <p>As you can see,  It simply waits for the condition in the background and once the timeout is elapsed it fails.</p>
 <p>So both ansible retries until and wait_for do their tasks in different manner/approach.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png"><img class="post-img alignnone wp-image-8330 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png" alt="Ansible retry until " width="3380" height="1032" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png 3380w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-300x92.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1024x313.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-768x234.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1536x469.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-2048x625.png 2048w" sizes="(max-width: 3380px) 100vw, 3380px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png"><img class="post-img alignnone wp-image-8330 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png" alt="Ansible retry until " width="3380" height="1032" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM.png 3380w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-300x92.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1024x313.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-768x234.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-1536x469.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-18-at-12.13.23-AM-2048x625.png 2048w" sizes="(max-width: 3380px) 100vw, 3380px" /></a></p>
 <h2></h2>
 <p>Here are some more examples we collected about Ansible retries until.</p>
 <p>As we have already mentioned you can use retries with any module and make it retry until a certain condition is met</p>
@@ -204,11 +204,11 @@
     delay: 10</pre>
 <p>Here is the execution result along with the simple server node js code I have used to setup my server which returns a message <code>Completed</code></p>
 <p>If the message is present. the job would immediately become successful at the first time as shown in the following snapshot</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png"><img class="post-img alignnone wp-image-8389 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png" alt="ansible retry" width="3584" height="1676" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png 3584w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-300x140.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1024x479.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-768x359.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1536x718.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-2048x958.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png"><img class="post-img alignnone wp-image-8389 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png" alt="ansible retry" width="3584" height="1676" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM.png 3584w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-300x140.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1024x479.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-768x359.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-1536x718.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.01.29-PM-2048x958.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" /></a></p>
 <p>If the message is not present. the job would retry for the specified number of times before eventually failing.</p>
 <p>Refer to the following snapshot where we have changed the message in the server.js to <code>InProgress</code></p>
 <p>We have also changed the retries to <code>10</code> and as you can see on the right side. It fails after trying for 10 times.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png"><img class="post-img alignnone wp-image-8390 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png" alt="" width="3584" height="1694" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png 3584w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-300x142.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1024x484.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-768x363.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1536x726.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-2048x968.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png"><img class="post-img alignnone wp-image-8390 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png" alt="" width="3584" height="1694" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM.png 3584w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-300x142.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1024x484.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-768x363.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-1536x726.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-28-at-8.47.59-PM-2048x968.png 2048w" sizes="(max-width: 3584px) 100vw, 3584px" /></a></p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -298,7 +298,7 @@
 <p>In case of failure, it would invoke the failure notification message.</p>
 <p>Both are done using the <code>when: result is failed</code> or <code>not failed</code> validation</p>
 <p>Here is a simple Slack notification that has been generated and received in our slack channel.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png"><img class="post-img alignnone wp-image-8406 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png" alt="Ansible retry include_tasks" width="2824" height="652" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png 2824w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-300x69.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1024x236.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-768x177.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1536x355.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-2048x473.png 2048w" sizes="(max-width: 2824px) 100vw, 2824px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png"><img class="post-img alignnone wp-image-8406 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png" alt="Ansible retry include_tasks" width="2824" height="652" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM.png 2824w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-300x69.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1024x236.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-768x177.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-1536x355.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/04/Screenshot-2022-04-30-at-11.41.18-PM-2048x473.png 2048w" sizes="(max-width: 2824px) 100vw, 2824px" /></a></p>
 <p>&nbsp;</p>
 <h2>Ansible Retry until with include_tasks &#8211; Ansible Infinite Retry</h2>
 <p>As I have mentioned earlier, there is a way to make ansible retry to go infinite</p>
@@ -393,7 +393,7 @@
 <li>How to make Ansible retry to run infinite without a timeout</li>
 </ul>
 <p>hope this helps.  If you are looking for professional DevOps support for your company or individually do reach out to us at <a href="mailto:rumenlishkoff@gmail.com">rumenlishkoff@gmail.com</a></p>
-<a href="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
+<a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
 <p>&nbsp;</p>
 <p>Cheers<br />
 Rumen Lishkov</p>
@@ -416,14 +416,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576713" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="8203"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-retry-examples/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/ansible-retry-examples/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576713" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -433,18 +433,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		
 </div>
 <hr>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-retry-examples/">Ansible Retry Examples &#8211; Retry a task until condition met |  DevopsJunction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-retry-examples/">Ansible Retry Examples &#8211; Retry a task until condition met |  DevopsJunction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-retry-examples/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-retry-examples/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Ansible Pre Tasks and Post Tasks Example &#124; Devops Junction</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Wed, 19 Jan 2022 06:17:52 +0000</pubDate>
@@ -452,10 +452,10 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=6982</guid>
 
 					<description><![CDATA[<p>In this article, we are going to see how to use ansible pre tasks and post tasks with examples. What is Ansible pre_tasks? Ansible pretask is a conditional execution block that runs before running the play. It can be a task with some prerequisites check (or) validation Some examples we[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/">Ansible Pre Tasks and Post Tasks Example | Devops Junction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/">Ansible Pre Tasks and Post Tasks Example | Devops Junction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<p>In this article, we are going to see how to use ansible pre tasks and post tasks with examples.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks.jpg"><img class="post-img alignnone wp-image-8054 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks.jpg" alt="ansible pre tasks" width="1748" height="1240" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks.jpg 1748w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks-300x213.jpg 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks-1024x726.jpg 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks-768x545.jpg 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks-1536x1090.jpg 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/ansible_pre_tasks-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks.jpg"><img class="post-img alignnone wp-image-8054 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks.jpg" alt="ansible pre tasks" width="1748" height="1240" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks.jpg 1748w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks-300x213.jpg 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks-1024x726.jpg 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks-768x545.jpg 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks-1536x1090.jpg 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/ansible_pre_tasks-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
 <h2><strong>What is Ansible pre_tasks?</strong></h2>
 <p>Ansible pretask is a conditional execution block that runs before running the play. It can be a task with some prerequisites check (or) validation</p>
 <p>Some examples we can think where ansible pre-task would be helpful</p>
@@ -616,9 +616,9 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <p>&nbsp;</p>
 <p>You can see how we are using <code>pre_tasks</code> and <code>post_tasks</code> in this playbook</p>
 <p>we are using <code>pre_tasks</code> to run a task that installs necessary components and packages like node, npm etc</p>
-<p>Learn more about, <a href="https://www.middlewareinventory.com/blog/ansible-apt-examples/">how to use apt with ansible</a>.</p>
+<p>Learn more about, <a href="https://airdata.gitlab.io/blog/blog/ansible-apt-examples/">how to use apt with ansible</a>.</p>
 <p>and using <code>post_tasks</code> to send a notification to the Slack channel upon Task completion using the ansible slack module and webhook. I will try to cover this slack integration in detail in my next article</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/01/slack-notification-ansible.png"><img class="post-img alignnone wp-image-8049 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2022/01/slack-notification-ansible.png" alt="ansible post_task" width="1402" height="422" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/01/slack-notification-ansible.png 1402w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/slack-notification-ansible-300x90.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/slack-notification-ansible-1024x308.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/slack-notification-ansible-768x231.png 768w" sizes="(max-width: 1402px) 100vw, 1402px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/slack-notification-ansible.png"><img class="post-img alignnone wp-image-8049 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/slack-notification-ansible.png" alt="ansible post_task" width="1402" height="422" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/slack-notification-ansible.png 1402w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/slack-notification-ansible-300x90.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/slack-notification-ansible-1024x308.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/slack-notification-ansible-768x231.png 768w" sizes="(max-width: 1402px) 100vw, 1402px" /></a></p>
 <p>&nbsp;</p>
 <p>Here is the output of this playbook</p>
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4">$ ansible-playbook install-nodejs-app.yaml -i hosts &#8211; ask-vault-password
@@ -745,16 +745,16 @@ testserver                 : ok=13   changed=6    unreachable=0    failed=0    s
 <p>We have also learned how to send slack notifications using ansible post_task in this article along with a few more tricks like</p>
 <ul>
 <li>Ansible Assertion</li>
-<li><a href="https://www.middlewareinventory.com/blog/ansible-git-example/">Ansible Git</a></li>
-<li><a href="https://www.middlewareinventory.com/blog/ansible-wait_for-examples/">How to use ansible wait_for</a></li>
-<li><a href="https://www.middlewareinventory.com/blog/ansible-apt-examples/">how to install packages with Ansible apt</a></li>
-<li><a href="https://www.middlewareinventory.com/blog/ansible-shell-examples/">Ansible Shell</a>.</li>
+<li><a href="https://airdata.gitlab.io/blog/blog/ansible-git-example/">Ansible Git</a></li>
+<li><a href="https://airdata.gitlab.io/blog/blog/ansible-wait_for-examples/">How to use ansible wait_for</a></li>
+<li><a href="https://airdata.gitlab.io/blog/blog/ansible-apt-examples/">how to install packages with Ansible apt</a></li>
+<li><a href="https://airdata.gitlab.io/blog/blog/ansible-shell-examples/">Ansible Shell</a>.</li>
 <li>How to use Ansible Vault and secrets in the playbook</li>
 </ul>
 <p>We have around 50+ articles dedicatedly for each of these modules. in DevopsJunction.</p>
 <p>Please refer to the following article and make use of it.</p>
-<blockquote class="wp-embedded-content" data-secret="bBgfQnsMUO"><p><a href="https://www.middlewareinventory.com/blog/ansible-playbook-example/">Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/ansible-playbook-example/embed/#?secret=bBgfQnsMUO" data-secret="bBgfQnsMUO" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="bBgfQnsMUO"><p><a href="https://airdata.gitlab.io/blog/blog/ansible-playbook-example/">Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible Playbook Examples &#8211; Sample Ansible Playbooks | Devops Junction&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/ansible-playbook-example/embed/#?secret=bBgfQnsMUO" data-secret="bBgfQnsMUO" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <p>&nbsp;</p>
 <p>Cheers<br />
 Rumen Lishkov</p>
@@ -777,14 +777,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="6982"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -794,18 +794,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		
 </div>
 <hr>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/">Ansible Pre Tasks and Post Tasks Example | Devops Junction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/">Ansible Pre Tasks and Post Tasks Example | Devops Junction</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Ansible Copy Examples &#8211; How to copy files and directories with Ansible</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-copy-examples/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-copy-examples/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-copy-examples/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-copy-examples/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Sat, 15 Jan 2022 14:58:49 +0000</pubDate>
@@ -813,12 +813,12 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=7956</guid>
 
 					<description><![CDATA[<p>In this article, we are going to see practical examples of Ansible copy. We will be seeing various examples of ansible copy To keep things simple we have created the playbook that you can test in your localhost itself, In other words, ansible control machine you can change the hosts[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-copy-examples/">Ansible Copy Examples &#8211; How to copy files and directories with Ansible</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-copy-examples/">Ansible Copy Examples &#8211; How to copy files and directories with Ansible</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<p>In this article, we are going to see practical examples of Ansible copy. We will be seeing various examples of ansible copy</p>
 <p>To keep things simple we have created the playbook that you can test in your <code>localhost</code> itself, In other words, ansible control machine</p>
 <p>you can change the hosts variable to a valid remote host group if you would like to try on the remote machines.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy.jpg"><img class="alignnone size-full wp-image-7971" src="https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy.jpg" alt="Ansible Copy" width="1748" height="1240" srcset="https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy.jpg 1748w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy-300x213.jpg 300w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy-1024x726.jpg 1024w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy-768x545.jpg 768w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy-1536x1090.jpg 1536w, https://www.middlewareinventory.com/wp-content/uploads/2022/01/AnsibleCopy-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy.jpg"><img class="alignnone size-full wp-image-7971" src="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy.jpg" alt="Ansible Copy" width="1748" height="1240" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy.jpg 1748w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy-300x213.jpg 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy-1024x726.jpg 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy-768x545.jpg 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy-1536x1090.jpg 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2022/01/AnsibleCopy-90x65.jpg 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
 <h2>Ansible Copy Module</h2>
 <p>The <code>copy</code> module executes a simple copy on the file or directory on the local or on the remote machine.</p>
 <p>You can use an ansible copy for the following requirements</p>
@@ -828,7 +828,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <li>To copy files from a local source to a remote destination</li>
 </ul>
 <p>You can use the <code>fetch</code> module to copy files from the remote source to local on the other hand.</p>
-<p>We will be seeing various examples of Ansible copy in this article. we have <a href="https://www.middlewareinventory.com/blog/ansible-copy-file-or-directory-local-to-remote/">one more article on Ansible copy</a> for you to read and explore.</p>
+<p>We will be seeing various examples of Ansible copy in this article. we have <a href="https://airdata.gitlab.io/blog/blog/ansible-copy-file-or-directory-local-to-remote/">one more article on Ansible copy</a> for you to read and explore.</p>
 <h1></h1>
 <h2>Quick Syntax of Ansible Copy</h2>
 <p>&nbsp;</p>
@@ -1243,18 +1243,18 @@ localhost                  : ok=4    changed=0    unreachable=0    failed=0    s
 <p>The copy was successful as the checksums values are the same before and after copy!</p>
 <p>Cheers<br />
 Sudarshan Seshadri</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-copy-examples/">Ansible Copy Examples &#8211; How to copy files and directories with Ansible</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-copy-examples/">Ansible Copy Examples &#8211; How to copy files and directories with Ansible</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-copy-examples/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-copy-examples/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Ansible selectattr Example &#8211; Filter dictionary and select matching item</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-selectattr-example/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-selectattr-example/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Mon, 25 Oct 2021 18:14:35 +0000</pubDate>
@@ -1262,17 +1262,17 @@ Sudarshan Seshadri</p>
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=7423</guid>
 
 					<description><![CDATA[<p>Ansible selectattr filter is to select matching objects  from the dictionary by applying a test across all the objects in a dictionary/sequence. Ansible selectattr filter is basically an inherited version of Jinja selectattr filter.  As Ansible Quotes in their documentation besides the built-in Ansible filters, all JINJA2 filters can be[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-selectattr-example/">Ansible selectattr Example &#8211; Filter dictionary and select matching item</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/">Ansible selectattr Example &#8211; Filter dictionary and select matching item</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<p>Ansible selectattr filter is to select matching objects  from the dictionary by applying a test across all the objects in a dictionary/sequence.</p>
 <p>Ansible selectattr filter is basically an inherited version of Jinja <code>selectattr</code> filter.  As Ansible Quotes in their documentation besides the built-in Ansible filters, all JINJA2 filters can be used in Ansible playbooks.</p>
-<p>Be informed that, Only Ansible 2.7+ with Jinja2 supports the <code>selectattr</code> for those who are not there yet, you can use <a href="https://www.middlewareinventory.com/blog/ansible_json_query/">ansible json_query. Here is our article that can help</a></p>
+<p>Be informed that, Only Ansible 2.7+ with Jinja2 supports the <code>selectattr</code> for those who are not there yet, you can use <a href="https://airdata.gitlab.io/blog/blog/ansible_json_query/">ansible json_query. Here is our article that can help</a></p>
 <p>To see what version of ansible that you are using and what version of JINJA does it support you can use the <code>ansible &#8211; version</code> command</p>
 <pre class="EnlighterJSRAW" data-enlighter-language="generic" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">⇒ ansible &#8211; version | grep "jinja"
   jinja version = 3.0.2</pre>
 <p>In the preceding output you can see that my ansible supports Jinja <code>3.0.2</code></p>
 <p>Having said that. Let&#8217;s go ahead in to our today topic.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr.png"><img class="post-img alignnone wp-image-7431 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr.png" alt="ansible select_attr" width="1748" height="1240" srcset="https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr.png 1748w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr-300x213.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr-1024x726.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr-768x545.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr-1536x1090.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Ansible_select_attr-90x65.png 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr.png"><img class="post-img alignnone wp-image-7431 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr.png" alt="ansible select_attr" width="1748" height="1240" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr.png 1748w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr-300x213.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr-1024x726.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr-768x545.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr-1536x1090.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Ansible_select_attr-90x65.png 90w" sizes="(max-width: 1748px) 100vw, 1748px" /></a></p>
 <h2>List of Objects / Dictionary we are going to use</h2>
 <p>Consider the following dataset</p>
 <pre class="EnlighterJSRAW" data-enlighter-language="yaml" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">[
@@ -1654,8 +1654,8 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 <h2>Realtime Example for Ansible selectattr &#8211; AWS EFS report</h2>
 <p>The playbook we have designed earlier in this article, is designed to cover all the usage of <code>selectattr</code>  however we thought of giving one more realtime example.</p>
 <p>This playbook we have written a while ago to create AWS EFS report can serve as a one best real time example of <code>selectattr</code> along with <code>map</code> filters. Do take a look.</p>
-<blockquote class="wp-embedded-content" data-secret="WJGOlN3ciP"><p><a href="https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/">Find EC2 instances using EFS &#8211; EFS Usage Report</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Find EC2 instances using EFS &#8211; EFS Usage Report&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/embed/#?secret=WJGOlN3ciP" data-secret="WJGOlN3ciP" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="WJGOlN3ciP"><p><a href="https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/">Find EC2 instances using EFS &#8211; EFS Usage Report</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Find EC2 instances using EFS &#8211; EFS Usage Report&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/embed/#?secret=WJGOlN3ciP" data-secret="WJGOlN3ciP" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <p>&nbsp;</p>
 <h2>Difference between Ansible Select and Selectattr (Additional)</h2>
 <p>Though this is not in the objective of this article, I wanted to go little deeper to give some clarity on this topic</p>
@@ -1718,7 +1718,7 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
           - "{{ numbers | select('ge','20') }}"
 </pre>
 <p>Output of this playbook is given below as an image</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM.png"><img class="post-img alignnone wp-image-7465 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM.png" alt="Ansible Select vs Selectattr" width="3082" height="2154" srcset="https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM.png 3082w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-300x210.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-1024x716.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-768x537.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-1536x1074.png 1536w, https://www.middlewareinventory.com/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-2048x1431.png 2048w" sizes="(max-width: 3082px) 100vw, 3082px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM.png"><img class="post-img alignnone wp-image-7465 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM.png" alt="Ansible Select vs Selectattr" width="3082" height="2154" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM.png 3082w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-300x210.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-1024x716.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-768x537.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-1536x1074.png 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/10/Screenshot-2021-11-21-at-12.19.53-AM-2048x1431.png 2048w" sizes="(max-width: 3082px) 100vw, 3082px" /></a></p>
 <h2></h2>
 <h2>Conclusion</h2>
 <p>Hope this article helps you understand the Ansible selectattr filter and how to use it  along with few other subtopics like</p>
@@ -1731,7 +1731,7 @@ localhost                  : ok=2    changed=0    unreachable=0    failed=0    s
 </ul>
 <p>If you have any more questions or feed back please free to update on the comments section</p>
 <p>If you are looking for any Professional Support in Devops/SRE/Cloud Consider <a href="https://rumen.free.bg">Gritfy</a></p>
-<a href="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
+<a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
 <p>&nbsp;</p>
 <p>Cheers<br />
 Rumen Lishkov</p>
@@ -1754,14 +1754,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="7423"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-selectattr-example/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -1771,18 +1771,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		
 </div>
 <hr>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-selectattr-example/">Ansible selectattr Example &#8211; Filter dictionary and select matching item</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/">Ansible selectattr Example &#8211; Filter dictionary and select matching item</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-selectattr-example/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Find EC2 instances using EFS &#8211; EFS Usage Report</title>
-		<link>https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/</link>
-					<comments>https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Sat, 24 Jul 2021 20:09:51 +0000</pubDate>
@@ -1791,14 +1791,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=7082</guid>
 
 					<description><![CDATA[<p>Let&#8217;s suppose that you have an infrastructure of 1000 hosts and you want to know how many of them use EFS &#8211; Elastic File System or traditionally known as Network File System Or Let&#8217;s just say that you have 100 EFS File systems in your AWS account and you want[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/">Find EC2 instances using EFS &#8211; EFS Usage Report</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/">Find EC2 instances using EFS &#8211; EFS Usage Report</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<p>Let&#8217;s suppose that you have an infrastructure of 1000 hosts and you want to know how many of them use EFS &#8211; Elastic File System or traditionally known as Network File System</p>
 <p>Or Let&#8217;s just say that you have 100 EFS File systems in your AWS account and you want to audit where those EFS file systems are mounted to.</p>
 <p>Both are same requirement from different angle.</p>
 <p>So I had a recent requirement of perfoming such EFS Audit and wanted to <strong>Find EC2 instances using EFS File System</strong> and this is how I did it with Ansible.</p>
 <p>So here it goes. EFS Usage report as CSV</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM.jpg"><img class="post-img alignnone wp-image-7108 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM.jpg" alt="efs mounts ec2" width="2328" height="1310" srcset="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM.jpg 2328w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-300x169.jpg 300w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-1024x576.jpg 1024w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-768x432.jpg 768w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-1536x864.jpg 1536w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-2048x1152.jpg 2048w" sizes="(max-width: 2328px) 100vw, 2328px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM.jpg"><img class="post-img alignnone wp-image-7108 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM.jpg" alt="efs mounts ec2" width="2328" height="1310" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM.jpg 2328w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-300x169.jpg 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-1024x576.jpg 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-768x432.jpg 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-1536x864.jpg 1536w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.18.18-AM-2048x1152.jpg 2048w" sizes="(max-width: 2328px) 100vw, 2328px" /></a></p>
 <p>This article is going to talk about how I have ran a Single Ansible Playbook to collect the EFS mounts of my entire EC2 instances ( Let&#8217;s just say 1000+)</p>
 <p>With no further ado let&#8217;s start with a playbook</p>
 <p>&nbsp;</p>
@@ -1835,7 +1835,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <p>Yeah. It looks simple at first sight, but it took a while to figure out the filters ( at least for me)</p>
 <p>So we have three tasks here in the playbook</p>
 <p>Everything we need to do would be taken care by the <code>gathering_facts</code> stage. All the tasks are just for data processing.</p>
-<p>Read more about  <a href="https://www.middlewareinventory.com/blog/ansible-facts-list-how-to-use-ansible-facts/">Ansible Facts and how to use them here</a></p>
+<p>Read more about  <a href="https://airdata.gitlab.io/blog/blog/ansible-facts-list-how-to-use-ansible-facts/">Ansible Facts and how to use them here</a></p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -1878,7 +1878,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <tbody>
 <tr style="height: 28px;">
 <td style="width: 50%; height: 28px;"><span style="color: #003366;">testvar | default ({})</span></td>
-<td style="width: 50%; height: 28px;"> Declaring a variable named testvar and declaring it as a dictionary. Read more about <a href="https://www.middlewareinventory.com/blog/ansible-dict/">ansible dict here</a></td>
+<td style="width: 50%; height: 28px;"> Declaring a variable named testvar and declaring it as a dictionary. Read more about <a href="https://airdata.gitlab.io/blog/blog/ansible-dict/">ansible dict here</a></td>
 </tr>
 <tr style="height: 28px;">
 <td style="width: 50%; height: 28px;"><span style="color: #003366;">combine ( {</span></td>
@@ -1886,7 +1886,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 </tr>
 <tr style="height: 28px;">
 <td style="width: 50%; height: 28px;"><span style="color: #003366;">inventory_hostname :</span></td>
-<td style="width: 50%; height: 28px;"> <a href="https://www.middlewareinventory.com/blog/ansible-inventory_hostname-ansible_hostname-variables/">inventory_hostname</a> would be replaced with the actual hostname defined on the inventory.</td>
+<td style="width: 50%; height: 28px;"> <a href="https://airdata.gitlab.io/blog/blog/ansible-inventory_hostname-ansible_hostname-variables/">inventory_hostname</a> would be replaced with the actual hostname defined on the inventory.</td>
 </tr>
 <tr style="height: 28px;">
 <td style="width: 50%; height: 28px;"><span style="color: #003366;">(ansible_facts.mounts | selectattr(&#8216;fstype&#8217;, &#8216;in&#8217;, [&#8216;nfs4&#8242;,&#8217;nfs&#8217;]) | list</span></td>
@@ -1969,21 +1969,21 @@ appserver3,fs-ax39g9b9.efs.us-east-1.amazonaws.com:/,/app/workspace</pre>
 <p>&nbsp;</p>
 <h2>The Result CSV data</h2>
 <p>Here is the snippet of what the resulting CSV would look like. you can add more parameters if you want by adding them into the <code>jq</code> filter</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM.png"><img class="post-img alignnone wp-image-7104 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM.png" alt="" width="1170" height="302" srcset="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM.png 1170w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM-300x77.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM-1024x264.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM-768x198.png 768w" sizes="(max-width: 1170px) 100vw, 1170px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM.png"><img class="post-img alignnone wp-image-7104 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM.png" alt="" width="1170" height="302" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM.png 1170w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM-300x77.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM-1024x264.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-12.49.20-AM-768x198.png 768w" sizes="(max-width: 1170px) 100vw, 1170px" /></a></p>
 <p>With little <code>Pivot</code> chart you can also come to know the list EC2 instances using the EFS file systems like this</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM.png"><img class="post-img alignleft wp-image-7110 size-medium" src="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-300x176.png" alt="EFS EC2" width="300" height="176" srcset="https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-300x176.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-1024x602.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-768x451.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM.png 1184w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM.png"><img class="post-img alignleft wp-image-7110 size-medium" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-300x176.png" alt="EFS EC2" width="300" height="176" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-300x176.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-1024x602.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM-768x451.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2021/07/Screenshot-2021-07-25-at-1.34.19-AM.png 1184w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>You might also like this article on listing the EFS using AWS CLI</p>
-<blockquote class="wp-embedded-content" data-secret="olpoqa0T7S"><p><a href="https://www.middlewareinventory.com/blog/aws-cli-list-efs/">AWS CLI List EFS Filesystem sort by Size</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;AWS CLI List EFS Filesystem sort by Size&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/aws-cli-list-efs/embed/#?secret=olpoqa0T7S" data-secret="olpoqa0T7S" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="olpoqa0T7S"><p><a href="https://airdata.gitlab.io/blog/blog/aws-cli-list-efs/">AWS CLI List EFS Filesystem sort by Size</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;AWS CLI List EFS Filesystem sort by Size&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/aws-cli-list-efs/embed/#?secret=olpoqa0T7S" data-secret="olpoqa0T7S" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <p>&nbsp;</p>
 <h2>Conclusion</h2>
 <p>Hope this article helped you understand various filters like <code>map</code> , <code>to_json</code> etc along with data processing tricks using built in variables like <code>hostvars</code> .</p>
 <p>If you have any better way to do this. please share it with us and the world. over the comments section.</p>
-<a href="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
+<a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
 <p>&nbsp;</p>
 <p>Cheers<br />
 Rumen Lishkov</p>
@@ -2006,14 +2006,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="7082"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -2025,18 +2025,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <hr>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/">Find EC2 instances using EFS &#8211; EFS Usage Report</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/">Find EC2 instances using EFS &#8211; EFS Usage Report</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/collect-efs-ec2-ansible/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/collect-efs-ec2-ansible/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Kubernetes Sidecar &#8211; Logging with FluentD to EFK</title>
-		<link>https://www.middlewareinventory.com/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/</link>
-					<comments>https://www.middlewareinventory.com/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Sun, 29 Nov 2020 22:25:08 +0000</pubDate>
@@ -2047,7 +2047,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=5805</guid>
 
 					<description><![CDATA[<p>Introduction Log management in Infrastructure has changed tremendously in recent few years and we are a having wonderful products in the market to manage, parse, analyze log files These tools are being used extensively for incident management, alerting, security analysis and application performance monitoring etc. In the Opensource market, Elastic[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/">Kubernetes Sidecar &#8211; Logging with FluentD to EFK</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/">Kubernetes Sidecar &#8211; Logging with FluentD to EFK</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<h2>Introduction</h2>
 <p>Log management in Infrastructure has changed tremendously in recent few years and we are a having wonderful products in the market to manage, parse, analyze log files</p>
@@ -2070,7 +2070,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <p>With no further ado, let us talk about our objective of implementing the Kubernetes FluentD Sidecar container.</p>
 <p>&nbsp;</p>
 <h2>Our Objective</h2>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png"><img class="post-img alignnone wp-image-6518 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png" alt="Elastic Search Kubernetes FluentD Tomcat" width="979" height="585" srcset="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png 979w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM-300x179.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM-768x459.png 768w" sizes="(max-width: 979px) 100vw, 979px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png"><img class="post-img alignnone wp-image-6518 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png" alt="Elastic Search Kubernetes FluentD Tomcat" width="979" height="585" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM.png 979w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM-300x179.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-10.38.49-PM-768x459.png 768w" sizes="(max-width: 979px) 100vw, 979px" /></a></p>
 <p>We have a tomcat based web application container to be deployed into Kubernetes.</p>
 <p>I would like to collect and ship my tomcat logs and application logs from kubernetes to a remote elastic search server.</p>
 <p>we are going to use the <strong>Elastic FluentD Kibana (EFK)</strong> stack using Kubernetes sidecar container strategy.</p>
@@ -2185,7 +2185,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <h3>Creating our Docker Container Images</h3>
 <p>As discussed earlier, we are going to have two containers in our POD. <code>Tomcat</code> as a primary container with our application pre-deployed and a sidecar container <code>fluentd</code></p>
 <h4><strong>Tomcat Docker file</strong></h4>
-<p>this is the Dockerfile content for our tomcat image and it has been discussed in detail in <a href="https://www.middlewareinventory.com/blog/docker-tomcat-example-dockerfile-sample">our previous article here</a></p>
+<p>this is the Dockerfile content for our tomcat image and it has been discussed in detail in <a href="https://airdata.gitlab.io/blog/blog/docker-tomcat-example-dockerfile-sample">our previous article here</a></p>
 <pre class="EnlighterJSRAW" data-enlighter-language="dockerfile" data-enlighter-theme="bootstrap4" data-enlighter-linenumbers="false">FROM centos
 
 RUN mkdir /opt/tomcat/
@@ -2326,7 +2326,7 @@ CMD ["/opt/tomcat/bin/catalina.sh", "run"]</pre>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 <h3>Volumes and Volume Mounts</h3>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM.png"><img class="post-img alignnone wp-image-6517 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM.png" alt="Kubernetes FluentD Tomcat" width="640" height="427" srcset="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM.png 640w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-300x200.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-120x80.png 120w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-360x240.png 360w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-600x400.png 600w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-480x320.png 480w" sizes="(max-width: 640px) 100vw, 640px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM.png"><img class="post-img alignnone wp-image-6517 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM.png" alt="Kubernetes FluentD Tomcat" width="640" height="427" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM.png 640w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-300x200.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-120x80.png 120w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-360x240.png 360w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-600x400.png 600w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-29-at-9.58.46-PM-480x320.png 480w" sizes="(max-width: 640px) 100vw, 640px" /></a></p>
 <p>Another important item in our deployment manifest YAML file is <code>volumes</code>  and<code>Volume_mounts</code></p>
 <p>you can notice that we are creating three volumes named <code>applog</code>, <code>tomcatlog</code> and <code>fdconf</code></p>
 <ul>
@@ -2552,13 +2552,13 @@ myapp-dpl-5f5bf998c7-m4p79 2/2   Running 0        128d</pre>
 <h3>Validating the arrival of the logs at Elastic</h3>
 <p>Now you can log in to Kibana dashboard and validate if you are able to see the logs coming in</p>
 <p>The hostname on each event would match your POD name</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM.png"><img class="post-img alignnone wp-image-6521 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM.png" alt="Kubernetes FluentD Sidecar" width="1920" height="659" srcset="https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM.png 1920w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-300x103.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-1024x351.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-768x264.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-1536x527.png 1536w" sizes="(max-width: 1920px) 100vw, 1920px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM.png"><img class="post-img alignnone wp-image-6521 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM.png" alt="Kubernetes FluentD Sidecar" width="1920" height="659" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM.png 1920w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-300x103.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-1024x351.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-768x264.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/11/Screenshot-2020-11-30-at-2.11.09-AM-1536x527.png 1536w" sizes="(max-width: 1920px) 100vw, 1920px" /></a></p>
 <p>&nbsp;</p>
 <h2>Conclusion</h2>
 <p>Hope this article helps you to understand a few concepts like Sidecar container and our primary objective of collecting and shipping the logs to Elastic Search has also been achieved.</p>
 <p>Kubernetes FluentD &#8211; EFK logging is really efficient and microservices ready and this would be helpful in various other microservice setups as well.</p>
 <p>If you have any questions or tips to make this article better. Please feel free to let me know in comments</p>
-<a href="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://www.middlewareinventory.com/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
+<a href="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg"><img class="post-img" src="https://airdata.gitlab.io/blog/wp-content/uploads/2021/09/DaaS.svg" alt="gritfy" width="1047" height="415" class="alignnone size-full wp-image-6623" /></a>
 <p>&nbsp;</p>
 <p>Cheers<br />
 Rumen Lishkov</p>
@@ -2581,14 +2581,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="5805"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -2598,18 +2598,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		
 </div>
 <hr>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/">Kubernetes Sidecar &#8211; Logging with FluentD to EFK</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/">Kubernetes Sidecar &#8211; Logging with FluentD to EFK</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/kubernetes-sidecar-logging-with-fluentd-to-efk/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Ansible Dictionary &#8211; How to create and add items to dict</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-dict/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-dict/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-dict/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-dict/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Sun, 13 Sep 2020 23:46:56 +0000</pubDate>
@@ -2617,7 +2617,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=5703</guid>
 
 					<description><![CDATA[<p>Introduction In this post, we are going to see how to create a dictionary in ansible during the playbook execution dynamically and how to add items or elements to a dictionary. Before going further, let us refresh our memory of knowledge on the dictionaries. Especially python dictionaries because Ansible is[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-dict/">Ansible Dictionary &#8211; How to create and add items to dict</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-dict/">Ansible Dictionary &#8211; How to create and add items to dict</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<h2>Introduction</h2>
 <p>In this post, we are going to see how to create a dictionary in ansible during the playbook execution dynamically and how to add items or elements to a dictionary.</p>
@@ -2625,7 +2625,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <p>Dictionaries are a collection of  <code>key: value</code> data sets. changeable, indexed and unordered.</p>
 <p>the difference between a list(array) and a dictionary is in the dictionary every value has a name(key) and not indexed by their positional values like 0,1,2 etc</p>
 <p>Hope the following picture would give a quick idea about the dictionaries.</p>
-<figure id="attachment_5715" aria-describedby="caption-attachment-5715" style="width: 371px" class="wp-caption alignnone"><a href="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration.png"><img class="wp-image-5715 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration.png" alt="" width="371" height="293" srcset="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration.png 371w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration-300x237.png 300w" sizes="(max-width: 371px) 100vw, 371px" /></a><figcaption id="caption-attachment-5715" class="wp-caption-text">Image credits to learn by example</figcaption></figure>
+<figure id="attachment_5715" aria-describedby="caption-attachment-5715" style="width: 371px" class="wp-caption alignnone"><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration.png"><img class="wp-image-5715 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration.png" alt="" width="371" height="293" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration.png 371w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Dictionary-Key-Value-Pairs-Illustration-300x237.png 300w" sizes="(max-width: 371px) 100vw, 371px" /></a><figcaption id="caption-attachment-5715" class="wp-caption-text">Image credits to learn by example</figcaption></figure>
 <p>I am sure, if you are here then you must have an idea about dictionaries anyway. So let&#8217;s proceed.</p>
 <p>&nbsp;</p>
 <h2>How to Create Dictionaries in Ansible</h2>
@@ -2754,8 +2754,8 @@ localhost                  : ok=3    changed=0    unreachable=0    failed=0    s
 <span class="hljs-attr">       debug:</span> var=userdata</pre>
 <p>So we have a list of items (datasets) with key and value stored in our playbook and we are iterating one by one and referring them as <code>item.key</code> and <code>item.value</code> and adding one by one using the <code>combine</code> filter</p>
 <p>at runtime, the items would be appended into the <code>userdata</code> dictionary and we are displaying it using the debug module. Here is the execution result of this playbook</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM.png"><img class="alignnone size-full wp-image-5716" src="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM.png" alt="Ansible Dictionary" width="2136" height="1924" srcset="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM.png 2136w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM-300x270.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM-768x692.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM-1024x922.png 1024w" sizes="(max-width: 2136px) 100vw, 2136px" /></a><br />
-One more best example of this dynamic dictionary creation is in our other article, where JSON data gets processed and created as a phonebook using ansible dictionary. <a href="https://www.middlewareinventory.com/blog/ansible_json_query/#Example4_Parse_json_query_result_in_a_loop_and_access_it_as_variable">Refer the article</a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM.png"><img class="alignnone size-full wp-image-5716" src="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM.png" alt="Ansible Dictionary" width="2136" height="1924" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM.png 2136w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM-300x270.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM-768x692.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-7.50.12-AM-1024x922.png 1024w" sizes="(max-width: 2136px) 100vw, 2136px" /></a><br />
+One more best example of this dynamic dictionary creation is in our other article, where JSON data gets processed and created as a phonebook using ansible dictionary. <a href="https://airdata.gitlab.io/blog/blog/ansible_json_query/#Example4_Parse_json_query_result_in_a_loop_and_access_it_as_variable">Refer the article</a></p>
 <p>Here is the playbook for your quick reference</p>
 <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #eaeef3 none repeat scroll 0% 0%; color: #00193a;"><span class="hljs-meta" style="color: #4c81c9;">---</span>
 <span class="hljs-attr"> - name:</span> JsonQuery Playbook
@@ -2780,7 +2780,7 @@ One more best example of this dynamic dictionary creation is in our other articl
 <p>In this segment, we are going to see how to create a List of dictionaries. To put it in other words, a list with dictionaries in it.</p>
 <p>The following diagram depicts the structure of an idle List of dictionaries.  We have a list of three dictionaries stored inside an array or list.</p>
 <p>&nbsp;</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM.png"><img class="alignnone size-full wp-image-5718" src="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM.png" alt="Ansible List of Dictionaries" width="1672" height="742" srcset="https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM.png 1672w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM-300x133.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM-768x341.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM-1024x454.png 1024w" sizes="(max-width: 1672px) 100vw, 1672px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM.png"><img class="alignnone size-full wp-image-5718" src="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM.png" alt="Ansible List of Dictionaries" width="1672" height="742" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM.png 1672w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM-300x133.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM-768x341.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2020/09/Screenshot-2020-09-11-at-3.36.31-PM-1024x454.png 1024w" sizes="(max-width: 1672px) 100vw, 1672px" /></a></p>
 <p>Let us see how to create this data structure, List of dictionary with Ansible</p>
 <pre class="hljs" style="display: block; overflow-x: auto; padding: 0.5em; background: #eaeef3 none repeat scroll 0% 0%; color: #00193a;"><span class="hljs-meta" style="color: #4c81c9;">---</span>
 <span class="hljs-attr">- name:</span> Dictionary playbook example
@@ -2803,30 +2803,30 @@ One more best example of this dynamic dictionary creation is in our other articl
 <p>I have written various articles on how to process and iterate and filter ansible dictionaries.  We have given the hyperlinks here for you to read further.</p>
 <ol>
 <li>
-<h3><a href="https://www.middlewareinventory.com/blog/ansible-facts-list-how-to-use-ansible-facts/#How_to_Parse_through_the_Dictionary_variable_in_a_loop"><span style="font-size: 14pt;">How to process (or) iterate through the ansible dictionary</span></a></h3>
+<h3><a href="https://airdata.gitlab.io/blog/blog/ansible-facts-list-how-to-use-ansible-facts/#How_to_Parse_through_the_Dictionary_variable_in_a_loop"><span style="font-size: 14pt;">How to process (or) iterate through the ansible dictionary</span></a></h3>
 </li>
 <li>
-<h3><span style="font-size: 14pt;"><a href="https://www.middlewareinventory.com/blog/terraform-import-securitygroup-aws/">A real-time example of a complex Nested List and Dictionaries of Ansible</a></span></h3>
+<h3><span style="font-size: 14pt;"><a href="https://airdata.gitlab.io/blog/blog/terraform-import-securitygroup-aws/">A real-time example of a complex Nested List and Dictionaries of Ansible</a></span></h3>
 </li>
 <li>
-<h3><span style="font-size: 14pt;"><a href="https://www.middlewareinventory.com/blog/ansible_json_query/">A JSON data processing with Dictionary techniques and Json_query ansible</a></span></h3>
+<h3><span style="font-size: 14pt;"><a href="https://airdata.gitlab.io/blog/blog/ansible_json_query/">A JSON data processing with Dictionary techniques and Json_query ansible</a></span></h3>
 </li>
 <li>
-<h3><span style="font-size: 14pt;"><a href="https://www.middlewareinventory.com/blog/ansible-dict-object-has-no-attribute-stdout-or-stderr-how-to-resolve/">How to handle Data processing Errors with Ansible, Dict Object</a></span></h3>
+<h3><span style="font-size: 14pt;"><a href="https://airdata.gitlab.io/blog/blog/ansible-dict-object-has-no-attribute-stdout-or-stderr-how-to-resolve/">How to handle Data processing Errors with Ansible, Dict Object</a></span></h3>
 </li>
 <li>
-<h3><span style="font-size: 14pt;"><a href="https://www.middlewareinventory.com/blog/ansible-selectattr-example/">How to Filter and Select elements from Dictionary using Ansible select_attr</a></span></h3>
+<h3><span style="font-size: 14pt;"><a href="https://airdata.gitlab.io/blog/blog/ansible-selectattr-example/">How to Filter and Select elements from Dictionary using Ansible select_attr</a></span></h3>
 </li>
 <li>
-<h3><span style="font-size: 14pt;"><a href="https://www.middlewareinventory.com/blog/ansible-map/">Ansible Map Examples &#8211; Filter List and Dictionaries</a></span></h3>
+<h3><span style="font-size: 14pt;"><a href="https://airdata.gitlab.io/blog/blog/ansible-map/">Ansible Map Examples &#8211; Filter List and Dictionaries</a></span></h3>
 </li>
 </ol>
 <p>&nbsp;</p>
 <h2>How to work with Ansible List &#8211; Create List, Append items</h2>
 <p>So far we have talked about Ansible Dictionary.  The other famous datatype is Ansible List and you might use both of them together often.</p>
 <p>I have written an article on Ansible List too. Check it out.</p>
-<blockquote class="wp-embedded-content" data-secret="J4Vhi0kDfi"><p><a href="https://www.middlewareinventory.com/blog/ansible-list-examples-how-to-create-and-append-items-to-list/">Ansible List Examples &#8211; How to create and append items to List</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible List Examples &#8211; How to create and append items to List&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/ansible-list-examples-how-to-create-and-append-items-to-list/embed/#?secret=J4Vhi0kDfi" data-secret="J4Vhi0kDfi" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="J4Vhi0kDfi"><p><a href="https://airdata.gitlab.io/blog/blog/ansible-list-examples-how-to-create-and-append-items-to-list/">Ansible List Examples &#8211; How to create and append items to List</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible List Examples &#8211; How to create and append items to List&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/ansible-list-examples-how-to-create-and-append-items-to-list/embed/#?secret=J4Vhi0kDfi" data-secret="J4Vhi0kDfi" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>Cheers<br />
@@ -2850,14 +2850,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="5703"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-dict/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/ansible-dict/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -2867,18 +2867,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		
 </div>
 <hr>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-dict/">Ansible Dictionary &#8211; How to create and add items to dict</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-dict/">Ansible Dictionary &#8211; How to create and add items to dict</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-dict/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-dict/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Ansible Git Example &#8211; Checkout code from Git Repo Securely</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-git-example/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-git-example/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-git-example/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-git-example/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Sat, 05 Oct 2019 11:33:11 +0000</pubDate>
@@ -2893,12 +2893,12 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=4226</guid>
 
 					<description><![CDATA[<p>Introduction Ansible works seamlessly with Git and you might have had a requirement to download your source code or software directly from the Github, Bitbucket, Gitlab etc. In this post, we are going to explore various tits and bits of Ansible Git module and how to use it in real-time[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-git-example/">Ansible Git Example &#8211; Checkout code from Git Repo Securely</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-git-example/">Ansible Git Example &#8211; Checkout code from Git Repo Securely</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<h2>Introduction</h2>
 <p>Ansible works seamlessly with Git and you might have had a requirement to download your source code or software directly from the Github, Bitbucket, Gitlab etc.</p>
 <p>In this post, we are going to explore various tits and bits of Ansible Git module and how to use it in real-time with an example.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM.png"><img class="alignnone size-full wp-image-4241" src="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM.png" alt="Ansible Git Example" width="775" height="605" srcset="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM.png 775w, https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM-300x234.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM-768x600.png 768w" sizes="(max-width: 775px) 100vw, 775px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM.png"><img class="alignnone size-full wp-image-4241" src="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM.png" alt="Ansible Git Example" width="775" height="605" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM.png 775w, https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM-300x234.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.04.13-PM-768x600.png 768w" sizes="(max-width: 775px) 100vw, 775px" /></a></p>
 <h2>Ansible Git Module</h2>
 <p>Ansible Git module can be used only to check out a Source code from the Git repository and deploy it on the server.</p>
 <p>Consider that you have your Node JS web application hosted on the Git hub Repository and you would like to get it deployed during the server provisioning.</p>
@@ -3064,12 +3064,12 @@ I presume that you have taken a look at the screen recording and noticed that we
 <p>If you want more info on the Git hash information. you can use <code>-vv</code>  while you are invoking the playbook</p>
 <pre>ansible-playbook gitexample.yml <span style="color: #e00d6c;">--ask-vault-pass &#8211; vv</span></pre>
 <p>It would show the Git commit hash details along with <strong>before</strong> and <strong>after</strong> GIT information</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM.png"><img class="alignnone size-full wp-image-4230" src="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM.png" alt="" width="1439" height="724" srcset="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM.png 1439w, https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM-300x151.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM-768x386.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM-1024x515.png 1024w" sizes="(max-width: 1439px) 100vw, 1439px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM.png"><img class="alignnone size-full wp-image-4230" src="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM.png" alt="" width="1439" height="724" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM.png 1439w, https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM-300x151.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM-768x386.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-4.29.43-PM-1024x515.png 1024w" sizes="(max-width: 1439px) 100vw, 1439px" /></a></p>
 <p>&nbsp;</p>
 <h3>Step5: Validate the Deployment</h3>
 <p>Hope your Ansible Playbook has run successfully and now it is the time for validation.  You might have figured out that my remote server name is <code>mwiapp01</code> as it is displayed on the preceding snapshot.</p>
 <p>Now let us access the URL <code>http://mwiapp01:5000</code> and test it</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM.png"><img class="alignnone size-full wp-image-4244" src="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM.png" alt="Ansible Git Example" width="672" height="559" srcset="https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM.png 672w, https://www.middlewareinventory.com/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM-300x250.png 300w" sizes="(max-width: 672px) 100vw, 672px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM.png"><img class="alignnone size-full wp-image-4244" src="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM.png" alt="Ansible Git Example" width="672" height="559" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM.png 672w, https://airdata.gitlab.io/blog/wp-content/uploads/2019/10/Screenshot-2019-10-05-at-5.31.56-PM-300x250.png 300w" sizes="(max-width: 672px) 100vw, 672px" /></a></p>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
@@ -3193,8 +3193,8 @@ I presume that you have taken a look at the screen recording and noticed that we
           delegate_to: localhost</pre>
 <p>If you are using this playbook, make sure you are updating your <code>secrets</code> file too, with new variable <code>gittoken</code> with your token value.</p>
 <p>This playbook is covered in detail in the following article.</p>
-<blockquote class="wp-embedded-content" data-secret="8mNkwUi7TG"><p><a href="https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/">Ansible Pre Tasks and Post Tasks Example | Devops Junction</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible Pre Tasks and Post Tasks Example | Devops Junction&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/ansible-pre-tasks-and-post-tasks-example/embed/#?secret=8mNkwUi7TG" data-secret="8mNkwUi7TG" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="8mNkwUi7TG"><p><a href="https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/">Ansible Pre Tasks and Post Tasks Example | Devops Junction</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;Ansible Pre Tasks and Post Tasks Example | Devops Junction&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/ansible-pre-tasks-and-post-tasks-example/embed/#?secret=8mNkwUi7TG" data-secret="8mNkwUi7TG" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <h2></h2>
 <h2>Conclusion</h2>
 <p>Hope you find this article helping. this article was primarily designed to give an overview of how the Ansible Git module can be used to deploy the code from the remote.</p>
@@ -3224,14 +3224,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="4226"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-git-example/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/ansible-git-example/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -3242,18 +3242,18 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 </div>
 <hr>
 <p>&nbsp;</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-git-example/">Ansible Git Example &#8211; Checkout code from Git Repo Securely</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-git-example/">Ansible Git Example &#8211; Checkout code from Git Repo Securely</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-git-example/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-git-example/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
 			</item>
 		<item>
 		<title>Ansible SSH Key transfer from one host to another &#8211; local and remote</title>
-		<link>https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/</link>
-					<comments>https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/#respond</comments>
+		<link>https://airdata.gitlab.io/blog/blog/ansible-ssh-key-exchange/</link>
+					<comments>https://airdata.gitlab.io/blog/blog/ansible-ssh-key-exchange/#respond</comments>
 		
 		<dc:creator><![CDATA[Rumen Lishkov]]></dc:creator>
 		<pubDate>Wed, 12 Sep 2018 22:56:35 +0000</pubDate>
@@ -3265,7 +3265,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		<guid isPermaLink="false">https://www.middlewareinventory.com/?p=1735</guid>
 
 					<description><![CDATA[<p>SSH Key-based authentication setup in LINUX (or) UNIX based OS is one of the major platform services related task and most frequently executed task by Unix admins. Ansible, An IT Automation tool could automate this tedious task as well. SSH Key based authentication is indispensable when it comes to automation. Even[...]</p>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/">Ansible SSH Key transfer from one host to another &#8211; local and remote</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-ssh-key-exchange/">Ansible SSH Key transfer from one host to another &#8211; local and remote</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></description>
 										<content:encoded><![CDATA[<p>SSH Key-based authentication setup in LINUX (or) UNIX based OS is one of the major platform services related task and most frequently executed task by Unix admins. Ansible, An IT Automation tool could automate this tedious task as well.</p>
 <p>SSH Key based authentication is indispensable when it comes to automation. Even some of the Ansible related tasks like SCP and RSYNC(synchronize) requires SSH Key based authentication to be enabled before running the ansible playbook.</p>
@@ -3275,7 +3275,7 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <h2></h2>
 <h2><span style="font-size: 18pt;">The Objective</span></h2>
 <p>I have two Red Hat Enterprise Linux servers named <code>mwiapp01</code> and <code>mwiapp02</code> and I have to enable SSH key based (passwordless) authentication between them, in both directions.</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM.png"><img class="post-img alignnone wp-image-2843 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM.png" alt="" width="1191" height="508" srcset="https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM.png 1191w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM-300x128.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM-768x328.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM-1024x437.png 1024w" sizes="(max-width: 1191px) 100vw, 1191px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM.png"><img class="post-img alignnone wp-image-2843 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM.png" alt="" width="1191" height="508" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM.png 1191w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM-300x128.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM-768x328.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2019-02-01-at-12.25.15-PM-1024x437.png 1024w" sizes="(max-width: 1191px) 100vw, 1191px" /></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h2>Index</h2>
@@ -3295,11 +3295,11 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 <p>We are going to see how to achieve our objective (or) requirement using Ansible <strong>ad-hoc</strong> command and ansible <strong>playbook</strong> with and without SSH <strong>authorized_key</strong> module.</p>
 <p>Now we will see how to do this with both Ansible ad-hoc commands and playbook.</p>
 <p>Let us consider that I have already grouped these servers into a host group  named &#8220;<strong>app</strong>&#8221; in <code>ansible_hosts</code> inventory file</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2018/09/TheObjective.png"><img class="post-img alignnone wp-image-1756 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2018/09/TheObjective.png" alt=" Enable SSH Key based authentication using Ansible" width="741" height="404" srcset="https://www.middlewareinventory.com/wp-content/uploads/2018/09/TheObjective.png 741w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/TheObjective-300x164.png 300w" sizes="(max-width: 741px) 100vw, 741px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/TheObjective.png"><img class="post-img alignnone wp-image-1756 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/TheObjective.png" alt=" Enable SSH Key based authentication using Ansible" width="741" height="404" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/TheObjective.png 741w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/TheObjective-300x164.png 300w" sizes="(max-width: 741px) 100vw, 741px" /></a></p>
 <p>&nbsp;</p>
 <h2></h2>
 <h2><span style="font-size: 18pt;">Ansible AD-HOC Commands &#8211; Ansible SSH Key</span></h2>
-<p>In this method, we are going to use the Ansible ad hoc commands to perform the ssh key exchange and to copy the ssh keys between hosts. to know more about ansible ad hoc command <a href="https://www.middlewareinventory.com/blog/ansible-ad-hoc-commands/">refer to this article</a></p>
+<p>In this method, we are going to use the Ansible ad hoc commands to perform the ssh key exchange and to copy the ssh keys between hosts. to know more about ansible ad hoc command <a href="https://airdata.gitlab.io/blog/blog/ansible-ad-hoc-commands/">refer to this article</a></p>
 <p><span style="font-size: 14pt;"><strong>Step 1: </strong></span> Create SSH Private key using SSH-KEYGEN for the user <code>weblogic</code></p>
 <pre>aksarav@middlewareinventory:~$ ansible app -m shell -a "ssh-keygen -q -b 2048 -t rsa -N '' -C 'creating SSH' -f ~/.ssh/id_rsa creates='~/.ssh/id_rsa'" -i ansible_hosts -b &#8211; become-user=weblogic
 
@@ -3402,7 +3402,7 @@ Linux mwiapp01 3.10.0-514.2.2.el7.x86_64 #1 SMP Wed Nov 16 13:15:13 EST 2016 x86
 <p>&nbsp;</p>
 <h2><span style="font-size: 18pt;">Ansible Playbook  to Exchange keys between hosts</span></h2>
 <h3>Type1: With Ansible <span style="color: #db4861;">Shell </span>module and <span style="color: #db4861;">Typical Commands</span></h3>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod1.png"><img class="alignright wp-image-1751 size-medium" src="https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod1-300x268.png" alt=" How to enable SSH Key based authentication using Ansible" width="300" height="268" srcset="https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod1-300x268.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod1-768x686.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod1-1024x915.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod1.png 1581w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod1.png"><img class="alignright wp-image-1751 size-medium" src="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod1-300x268.png" alt=" How to enable SSH Key based authentication using Ansible" width="300" height="268" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod1-300x268.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod1-768x686.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod1-1024x915.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod1.png 1581w" sizes="(max-width: 300px) 100vw, 300px" /></a></p>
 <p>In this method, We are not going to use any ansible in-built module and every step is done manually by executing the shell command. The Playbook contains the following tasks</p>
 <ol>
 <li><strong>Create</strong> an SSH Private and Public Key using  <code>ssh-keygen</code> command</li>
@@ -3443,7 +3443,7 @@ Linux mwiapp01 3.10.0-514.2.2.el7.x86_64 #1 SMP Wed Nov 16 13:15:13 EST 2016 x86
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h3>Type2: With Ansible <span style="color: #db4861;">authorized_key</span> module</h3>
-<p class="alignnone"><a href="https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod2.png"><img class="alignleft wp-image-1752 size-medium" src="https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod2-300x268.png" alt="" width="300" height="268" srcset="https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod2-300x268.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod2-768x685.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod2-1024x913.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/AnsibleMethod2.png 1582w" sizes="(max-width: 300px) 100vw, 300px" /></a>In this method, we are going to use the ansible built-in module named <code>"authorized_key"</code>.  The following playbook has three steps</p>
+<p class="alignnone"><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod2.png"><img class="alignleft wp-image-1752 size-medium" src="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod2-300x268.png" alt="" width="300" height="268" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod2-300x268.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod2-768x685.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod2-1024x913.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/AnsibleMethod2.png 1582w" sizes="(max-width: 300px) 100vw, 300px" /></a>In this method, we are going to use the ansible built-in module named <code>"authorized_key"</code>.  The following playbook has three steps</p>
 <ol>
 <li><strong>Create</strong> an SSH Private and Public Key using  <code>ssh-keygen</code> command</li>
 <li><strong>Fetch</strong> generated key files from remote servers [mwiapp01,mwiapp02]  to ansible master</li>
@@ -3530,11 +3530,11 @@ Linux mwiapp01 3.10.0-514.2.2.el7.x86_64 #1 SMP Wed Nov 16 13:15:13 EST 2016 x86
 <h3>Playbook execution Output</h3>
 <p>We have saved the Type1 playbook in the name <code>sshkey-exchange-t1.yaml</code> and executed it. and here is the output.</p>
 <p>In the last task. you could see that we successfully initiated an SSH connection  from one another and ran the <code>uname -a</code> command</p>
-<p><a href="https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM.png"><img class="post-img alignnone wp-image-1762 size-full" src="https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM.png" alt=" Enable SSH Key based authentication using Ansible" width="1165" height="835" srcset="https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM.png 1165w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-300x215.png 300w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-768x550.png 768w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-1024x734.png 1024w, https://www.middlewareinventory.com/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-90x65.png 90w" sizes="(max-width: 1165px) 100vw, 1165px" /></a></p>
+<p><a href="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM.png"><img class="post-img alignnone wp-image-1762 size-full" src="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM.png" alt=" Enable SSH Key based authentication using Ansible" width="1165" height="835" srcset="https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM.png 1165w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-300x215.png 300w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-768x550.png 768w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-1024x734.png 1024w, https://airdata.gitlab.io/blog/wp-content/uploads/2018/09/Screen-Shot-2018-09-13-at-3.57.14-AM-90x65.png 90w" sizes="(max-width: 1165px) 100vw, 1165px" /></a></p>
 <p>Hope it helps.</p>
 <p>We recommend the following article in case if you are looking to exchange IP between multiple hosts in Ansible. adding an IP in /etc/hosts file of multiple hosts in Ansible.</p>
-<blockquote class="wp-embedded-content" data-secret="Xz7hIxGOpP"><p><a href="https://www.middlewareinventory.com/blog/ansible-update-etc-hosts-file-across-all-hosts/">ansible update /etc/hosts file with IP of all hosts across all hosts</a></p></blockquote>
-<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;ansible update /etc/hosts file with IP of all hosts across all hosts&#8221; &#8212; Middleware Inventory" src="https://www.middlewareinventory.com/blog/ansible-update-etc-hosts-file-across-all-hosts/embed/#?secret=Xz7hIxGOpP" data-secret="Xz7hIxGOpP" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
+<blockquote class="wp-embedded-content" data-secret="Xz7hIxGOpP"><p><a href="https://airdata.gitlab.io/blog/blog/ansible-update-etc-hosts-file-across-all-hosts/">ansible update /etc/hosts file with IP of all hosts across all hosts</a></p></blockquote>
+<p><iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted" title="&#8220;ansible update /etc/hosts file with IP of all hosts across all hosts&#8221; &#8212; Middleware Inventory" src="https://airdata.gitlab.io/blog/blog/ansible-update-etc-hosts-file-across-all-hosts/embed/#?secret=Xz7hIxGOpP" data-secret="Xz7hIxGOpP" width="600" height="338" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe></p>
 <p>For any questions (or) support. Please feel free to comment</p>
 <p>Rate this article [ratings]</p>
 <p>Cheers,</p>
@@ -3558,14 +3558,14 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 			<form action="#" method="post" class="es_subscription_form es_shortcode_form" id="es_subscription_form_1670576714" data-source="ig-es">
 								<div class="es-field-wrap"><label>Name*<br /><input type="text" name="name" class="ig_es_form_field_name" placeholder="" value="" required="required" /></label></div><div class="es-field-wrap"><label>Email*<br /><input class="es_required_field es_txt_email ig_es_form_field_email" type="email" name="email" value="" placeholder="" required="required" /></label></div><input type="hidden" name="lists[]" value="1" /><input type="hidden" name="form_id" value="3" />
 				<input type="hidden" name="es_email_page" value="1735"/>
-				<input type="hidden" name="es_email_page_url" value="https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/"/>
+				<input type="hidden" name="es_email_page_url" value="https://airdata.gitlab.io/blog/blog/ansible-ssh-key-exchange/"/>
 				<input type="hidden" name="status" value="Unconfirmed"/>
 				<input type="hidden" name="es-subscribe" id="es-subscribe" value="7aebfb1a9b"/>
 				<label style="position:absolute;top:-99999px;left:-99999px;z-index:-99;"><input type="email" name="es_hp_email" class="es_required_field" tabindex="-1" autocomplete="-1" value=""/></label>
 								<input type="submit" name="submit" class="es_subscription_form_submit es_submit_button es_textbox_button" id="es_subscription_form_submit_1670576714" value="Subscribe"/>
 
 				
-				<span class="es_spinner_image" id="spinner-image"><img src="https://www.middlewareinventory.com/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
+				<span class="es_spinner_image" id="spinner-image"><img src="https://airdata.gitlab.io/blog/wp-content/plugins/email-subscribers/lite/public/images/spinner.gif" alt="Loading"/></span>
 
 			</form>
 
@@ -3575,10 +3575,10 @@ If you like this article. Show your Support! <a href="https://ko-fi.com/middlewa
 		
 </div>
 <hr>
-<p>The post <a rel="nofollow" href="https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/">Ansible SSH Key transfer from one host to another &#8211; local and remote</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
+<p>The post <a rel="nofollow" href="https://airdata.gitlab.io/blog/blog/ansible-ssh-key-exchange/">Ansible SSH Key transfer from one host to another &#8211; local and remote</a> appeared first on <a rel="nofollow" href="https://www.middlewareinventory.com">Middleware Inventory</a>.</p>
 ]]></content:encoded>
 					
-					<wfw:commentRss>https://www.middlewareinventory.com/blog/ansible-ssh-key-exchange/feed/</wfw:commentRss>
+					<wfw:commentRss>https://airdata.gitlab.io/blog/blog/ansible-ssh-key-exchange/feed/</wfw:commentRss>
 			<slash:comments>0</slash:comments>
 		
 		
